@@ -41,8 +41,8 @@ body:
     id: type
     attributes:
       label: Request type
-      description: "What type of request is this? Really just starting so these tags will be refined over time... for now feel free to use some of the ones noted in the placeholder below or create your own; please be pithy."
-      placeholder: "(e.g. technical/infrastructure consultation for a grant submission, a dashboard, bespoke visualization, technical brief, website, codebook, blog, interactive document... ETC)"
+      description: "What type of request is this (e.g. technical/infrastructure consultation for a grant submission, a dashboard, bespoke visualization, technical brief, website, codebook, blog, interactive document... ETC)? Really just starting so these tags will be refined over time... for now feel free to use some of the ones noted in the placeholder below or create your own; please be pithy."
+      placeholder: "Grant infrastructure consultation, dashboard, website... ETC"
     validations:
       required: true
   - type: textarea
