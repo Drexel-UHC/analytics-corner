@@ -58,8 +58,6 @@ body:
     attributes:
       label: Example
       description: "Please attach a snip or link to a visual example of what you would like us to work on for you. This greatly helps us understand what you have in mind. You can either copy and paste links or drag and drop files into the input area."
-    validations:
-      required: true
   - type: textarea
     id: data
     attributes:
