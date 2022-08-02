@@ -1,4 +1,4 @@
-name: Request
+name: Request Form
 description: File a request
 body:
   - type: markdown
