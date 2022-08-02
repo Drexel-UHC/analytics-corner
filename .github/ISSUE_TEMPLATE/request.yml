@@ -5,6 +5,9 @@ body:
     attributes:
       value: |
         > The idea of an analytics core is to serve as a centralized analytics resource for the UHC and Dornsife community.  This repository something that is not official in any capacity (yet) and is just something @rl627 is testing to keep things organized as request volume is increasing. Please fill out this form so we can intiate a request. 
+
+        **Don't forget to enter a title in your issue. Also all form inputs that have red asterisks require answers before the issue can be submitted.** 
+
         ---
   - type: input
     id: name
