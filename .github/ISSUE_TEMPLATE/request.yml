@@ -4,11 +4,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        > **Warning** The idea of an analytics core is to serve as a centralized analytics resource for the UHC and Dornsife community.  This repository something that is not official in any capacity (yet) and is just something @rl627 is testing to keep things organized as request volume is increasing. 
-
+        > The idea of an analytics core is to serve as a centralized analytics resource for the UHC and Dornsife community.  This repository something that is not official in any capacity (yet) and is just something @rl627 is testing to keep things organized as request volume is increasing. Please fill out this form so we can intiate a request. 
         ---
-
-        Thank you for taking the time to file a request. We will reach out soon within one or two business days.
   - type: input
     id: name
     attributes:
@@ -64,7 +61,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: date
+    id: data
     attributes:
       label: Data
       description: Note If the data needs to remain private then please just explain the restrictions and we will coordinate alternative methods to handle data transfer. We can always just simulate some data to create the initial POC (Proof of concept).
