@@ -1,21 +1,20 @@
 name: Request Form
 description: File a request
-title: '[Request]: '
+title: '[Request title]: '
 body:
   - type: input
     id: name
     attributes:
       label: Name
       description: 'What is your name'
-      placeholder: 'Samwise Gamgee'
     validations:
       required: true
   - type: input
     id: title
     attributes:
-      label: Title
-      description: 'What is your title'
-      placeholder: 'The real hero'
+      label: Job title
+      description: 'What is your job title at Dornsife?'
+      placeholder: '(Data analyst, assitant professor, etc.)'
     validations:
       required: true
   - type: dropdown
@@ -67,4 +66,5 @@ body:
   - type: markdown
     attributes:
       value: |
-        > ** WARNING: This form cannot be submitted until you have 1) entered a title in your issue (top input box) and 2) fill out all require inputs (red asterisks).**
+        ---
+        **WARNING:** This form cannot be submitted until you have both: **1) entered a [Request title] in the top input box** and **2) fill out all require inputs (red asterisks).**
