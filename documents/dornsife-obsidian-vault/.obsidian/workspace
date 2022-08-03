@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Issue 3 - Help with grant data infrastructure language.md",
+            "file": "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Issue 3 - Help with grant data infrastructure language.md",
+                "file": "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,5 +129,8 @@
     "collapsed": true
   },
   "active": "b4db67783fb245b2",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Templates/Request.md",
+    "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md"
+  ]
 }
