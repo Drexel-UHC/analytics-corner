@@ -1,0 +1,133 @@
+{
+  "main": {
+    "id": "2de9d8aecebc03e9",
+    "type": "split",
+    "children": [
+      {
+        "id": "b4db67783fb245b2",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Issue 3 - Help with grant data infrastructure language.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d2636f9843c21583",
+    "type": "split",
+    "children": [
+      {
+        "id": "cb47d08c86600d49",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dd2176a8d83f51a7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "252d2d530e57eaf2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3479f8e440601d26",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1b48917849be8970",
+    "type": "split",
+    "children": [
+      {
+        "id": "ecec22c0f3b43385",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a2223ece999cf702",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Issue 3 - Help with grant data infrastructure language.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3db115467e4f80ce",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Issue 3 - Help with grant data infrastructure language.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "812e0b6daf95e117",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "cc14aef1dec3e188",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Issue 3 - Help with grant data infrastructure language.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "b4db67783fb245b2",
+  "lastOpenFiles": []
+}
