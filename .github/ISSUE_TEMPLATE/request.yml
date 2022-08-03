@@ -1,28 +1,20 @@
 name: Request Form
 description: File a request
 body:
-  - type: markdown
-    attributes:
-      value: |
-        > The idea of an analytics core is to serve as a centralized analytics resource for the UHC and Dornsife community.  This repository something that is not official in any capacity (yet) and is just something @rl627 is testing to keep things organized as request volume is increasing. Please fill out this form so we can intiate a request. 
-
-        **Don't forget to enter a title in your issue. Also all form inputs that have red asterisks require answers before the issue can be submitted.** 
-
-        ---
   - type: input
     id: name
     attributes:
       label: Name
-      description: "What is your name"
-      placeholder: "Samwise Gamgee"
+      description: 'What is your name'
+      placeholder: 'Samwise Gamgee'
     validations:
       required: true
   - type: input
     id: title
     attributes:
       label: Title
-      description: "What is your title"
-      placeholder: "The real hero"
+      description: 'What is your title'
+      placeholder: 'The real hero'
     validations:
       required: true
   - type: dropdown
@@ -44,23 +36,23 @@ body:
     id: type
     attributes:
       label: Request type
-      description: "What type of request is this (e.g. technical/infrastructure consultation for a grant submission, a dashboard, bespoke visualization, technical brief, website, codebook, blog, interactive document... ETC)? Really just starting so these tags will be refined over time... for now feel free to use some of the ones noted in the placeholder below or create your own; please be pithy."
-      placeholder: "Grant infrastructure consultation, dashboard, website... ETC"
+      description: 'What type of request is this (e.g. technical/infrastructure consultation for a grant submission, a dashboard, bespoke visualization, technical brief, website, codebook, blog, interactive document... ETC)? Really just starting so these tags will be refined over time... for now feel free to use some of the ones noted in the placeholder below or create your own; please be pithy.'
+      placeholder: 'Grant infrastructure consultation, dashboard, website... ETC'
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
       label: Request description
-      description: "Details about your request; please be verbose."
-      placeholder: "Details here."
+      description: 'Details about your request; please be verbose.'
+      placeholder: 'Details here.'
     validations:
       required: true
   - type: textarea
     id: example
     attributes:
       label: Example
-      description: "Please attach a snip or link to a visual example of what you would like us to work on for you. This greatly helps us understand what you have in mind. You can either copy and paste links or drag and drop files into the input area."
+      description: 'Please attach a snip or link to a visual example of what you would like us to work on for you. This greatly helps us understand what you have in mind. You can either copy and paste links or drag and drop files into the input area.'
   - type: textarea
     id: data
     attributes:
@@ -71,3 +63,7 @@ body:
     attributes:
       label: Notes
       description: Anything else you want to tell us?
+  - type: markdown
+    attributes:
+      value: |
+        > ** WARNING: This form cannot be submitted until you have 1) entered a title in your issue (top input box) and 2) fill out all require inputs (red asterisks).**
