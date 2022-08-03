@@ -1,5 +1,6 @@
 name: Request Form
 description: File a request
+title: '[Request]: '
 body:
   - type: input
     id: name
