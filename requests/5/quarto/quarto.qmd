@@ -3,44 +3,68 @@ title: "#3 - Help with grant informatics infrastructure language"
 format: 
   html:
     toc: true
-    toc-location: right
+    toc-location: left
+    df-print: paged
 author: Ran Li
+execute: 
+  warning: false
+  echo: false
+editor_options: 
+  chunk_output_type: console
 ---
 
-# Request
+# Issue
 
-## Issue
+## Description
 
-> <https://github.com/Drexel-UHC/analytics-core/issues/3>
+**URL: https://github.com/Drexel-UHC/analytics-core/issues/7**
+
+> I'm hoping to make a figure that shows different policy statuses of states (abortion ban, proposed abortion ban, no abortion ban; Paid family leave, no paid family leave; paid family leave preemption, no preemption), with the states in the location of the US map...
 >
-> I am working with Ana Diez Roux and Jane Clougherty to write a grant proposing that we at Drexel be the Research Coordinating Center for a Climate Change and Health Community of Practice. The grant would **provide funding to do many of the things that folks at the UHC are doing for SALURBAL**, including providing "high-security-compliant, high-capacity informatics infrastructure suitable for data integration, storage, management, and sharing and ensure that the data meet the FAIR principles: findability, accessibility, interoperability, and reusability." While we are doing this for several projects across our groups, **I am having a hard time describing the first part (high-security-compliant, high-capacity informatics infrastructure suitable for data integration, storage, management, and sharing)**. Ana suggested I reach out to you to see if you could help us draft some language that describes how we do this?
+> I think geofacet mightttt get us close to the figure I'm hoping to make, but not quitee there.
 
-## First Impressions
+## Example
+
+![](images/paste-24B14202.png){width="448"}
+
+## Unpacking
+
+Just a brief breakdown of the plot above from the [original article](https://www.scientificamerican.com/article/graphic-many-states-that-restrict-or-ban-abortion-dont-teach-kids-about-sex-and-pregnancy/). There are two layers: 1) rectangles show abortion policy categories 2) triangles show various degrees of coverage within sexual education by topic (contraception in blue vs abstinence in orange). In other words larger/more-orange triangle at bottom indicates more sexual seduction emphasize abstinence and large/more-blue triangle at top indicates more sexual education emphasis on contraception. In terms of data there each state would have three points: abortion policy categories, coverage of contraception, coverage of abstinence.
+
+Lets take a look at the data sent over along with this request.
+
+```{r}
+library(janitor)
+library(readxl)
+library(tidyverse)
+library(geofacet)
+
+## raw data
+raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset.xlsx",
+                          sheet = 'Sheet2') %>% 
+  drop_na() %>% 
+  select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  
+
+## clean state codes
+xwalk_states = geofacet::state_ranks %>% 
+  select(name, state) %>% 
+  distinct()
+data = raw_data %>% 
+  mutate(name = name %>% recode("Washington DC" = "District of Columbia" )) %>% 
+  left_join(xwalk_states)
+data
+
+```
+
+Adapting this visualization to the table above would give the following features:
+
+1. The rectangle would be similiar with shade mapping to the abortion ban risk
+2. The top blue triangle would map to family leave.
+3. The bottom orange triangle would map to preemption family leave. I am assuming preemption is bad?
 
 
-The key pieces of information that stuck out to me are bold in the request above. The request is for language to describe the following things:
-
-- **high-security-compliant**
-- **high-capacity informatics infrastructure** suitable for data
-  - **integration**
-  - **storage**
-  - **management**
-  - **sharing**
-
-Some random thoughts:
-
-- THe technical jargon may be 
-
-## Action Item
 
 
 
-Below we will document firstly the informatics infrastructure we utilize for SALURBAL and secondly talk about the high security compliance of said infrastructure.
 
-# SALURBAL - Informatic Infratrastructure
 
-What is informatics infrastructure. \## High Capacity informatics infrastructure I think the key thing here is to formalize what we have been doing with SALURBAL which is an ETL pipeline. However I think its best we present this within the scope of perhaps other informatics infrastructures (I'm jsut throwing buzzwords out here: traditional databases, lakes, warehouses); we need to first define them briefly.
-
-## High security compliant
-
-Talking points to mention - ETL pipeline - Already established
