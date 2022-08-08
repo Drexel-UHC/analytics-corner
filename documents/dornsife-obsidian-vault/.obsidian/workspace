@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md",
+            "file": "Zettelkasten/grant informatics infrastructure.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md",
+                "file": "Zettelkasten/grant informatics infrastructure.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -130,7 +130,15 @@
   },
   "active": "b4db67783fb245b2",
   "lastOpenFiles": [
+    "Zettelkasten/Informatics.md",
+    "Zettelkasten/grant informatics infrastructure.md",
+    "Zettelkasten/Serverless Computing.md",
+    "References/Design and development of an informatics-driven implementation research framework for primary care studies.md",
+    "References/An informatics infrastructure for patient safety and evidence-based practice in home healthcare.md",
     "Templates/Request.md",
-    "Zettelkasten/Issue 3 - Help with grant data infrastructure language.md"
+    "Zettelkasten/ETL pipeline.md",
+    "Issue 5/6 - compare Azure and Amzon S3 data storage.md",
+    "Zettelkasten/[[Informatics]].md",
+    "Templates/Refere.md"
   ]
 }

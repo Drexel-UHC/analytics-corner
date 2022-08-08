@@ -1,12 +1,12 @@
 Date: {{date: YYYY-MM-DD}} ({{time:HH:mm}})
 
-Issue id:
+
 Tags:
 Links:
 
 # {{title}}
 
-
+Issue URL:
 
 ___
 # References
