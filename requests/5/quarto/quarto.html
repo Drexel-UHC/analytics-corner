@@ -107,14 +107,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#issue" id="toc-issue" class="nav-link active" data-scroll-target="#issue">Issue</a>
-  <ul class="collapse">
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  <li><a href="#issue" id="toc-issue" class="nav-link active" data-scroll-target="#issue">Issue</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#unpacking" id="toc-unpacking" class="nav-link" data-scroll-target="#unpacking">Unpacking</a></li>
-  </ul></li>
+  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation">Evaluation</a></li>
   <li><a href="#proof-of-concept" id="toc-proof-of-concept" class="nav-link" data-scroll-target="#proof-of-concept">Proof of concept</a></li>
-  <li><a href="#polishing-plot" id="toc-polishing-plot" class="nav-link" data-scroll-target="#polishing-plot">Polishing Plot</a></li>
+  <li><a href="#polishing" id="toc-polishing" class="nav-link" data-scroll-target="#polishing">Polishing</a>
+  <ul class="collapse">
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
+  <li><a href="#legend" id="toc-legend" class="nav-link" data-scroll-target="#legend">Legend</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -146,20 +147,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="issue" class="level1">
 <h1>Issue</h1>
-<section id="description" class="level2">
-<h2 class="anchored" data-anchor-id="description">Description</h2>
 <p><strong>URL: https://github.com/Drexel-UHC/analytics-core/issues/7</strong></p>
 <blockquote class="blockquote">
 <p>I’m hoping to make a figure that shows different policy statuses of states (abortion ban, proposed abortion ban, no abortion ban; Paid family leave, no paid family leave; paid family leave preemption, no preemption), with the states in the location of the US map…</p>
 <p>I think geofacet mightttt get us close to the figure I’m hoping to make, but not quitee there.</p>
 </blockquote>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="example" class="level1">
+<h1>Example</h1>
 <p><img src="images/paste-24B14202.png" class="img-fluid" width="448"></p>
 </section>
-<section id="unpacking" class="level2">
-<h2 class="anchored" data-anchor-id="unpacking">Unpacking</h2>
+<section id="evaluation" class="level1">
+<h1>Evaluation</h1>
 <p>Just a brief breakdown of the plot above from the <a href="https://www.scientificamerican.com/article/graphic-many-states-that-restrict-or-ban-abortion-dont-teach-kids-about-sex-and-pregnancy/">original article</a>. There are two layers: 1) rectangles show abortion policy categories 2) triangles show various degrees of coverage within sexual education by topic (contraception in blue vs abstinence in orange). In other words larger/more-orange triangle at bottom indicates more sexual seduction emphasize abstinence and large/more-blue triangle at top indicates more sexual education emphasis on contraception. In terms of data there each state would have three points: abortion policy categories, coverage of contraception, coverage of abstinence.</p>
 <p>Lets take a look at the data sent over along with this request.</p>
 <div class="cell">
@@ -167,22 +166,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geofacet)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## raw data</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"raw-data/family medical leave preemption dataset.xlsx"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sheet =</span> <span class="st">'Sheet2'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">name =</span> <span class="dv">1</span>, <span class="at">family_leave =</span> <span class="dv">2</span>, <span class="at">preemption =</span> <span class="dv">3</span>, <span class="at">abortion_ban_risk =</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">as.character</span>(.x))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## clean state codes</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>xwalk_states <span class="ot">=</span> geofacet<span class="sc">::</span>state_ranks <span class="sc">%&gt;%</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, state) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> name <span class="sc">%&gt;%</span> <span class="fu">recode</span>(<span class="st">"Washington DC"</span> <span class="ot">=</span> <span class="st">"District of Columbia"</span> )) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(xwalk_states)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## raw data</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"raw-data/family medical leave preemption dataset.xlsx"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sheet =</span> <span class="st">'Sheet2'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">name =</span> <span class="dv">1</span>, <span class="at">family_leave =</span> <span class="dv">2</span>, <span class="at">preemption =</span> <span class="dv">3</span>, <span class="at">abortion_ban_risk =</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">as.character</span>(.x))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## clean state codes</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>xwalk_states <span class="ot">=</span> geofacet<span class="sc">::</span>state_ranks <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, state) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> name <span class="sc">%&gt;%</span> <span class="fu">recode</span>(<span class="st">"Washington DC"</span> <span class="ot">=</span> <span class="st">"District of Columbia"</span> )) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(xwalk_states)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
@@ -198,7 +198,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The top blue triangle would map to family leave.</li>
 <li>The bottom orange triangle would map to preemption family leave. I am assuming preemption is bad?</li>
 </ol>
-</section>
 </section>
 <section id="proof-of-concept" class="level1">
 <h1>Proof of concept</h1>
@@ -256,8 +255,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Great I think this approach is getting us to what we want.</p>
 </section>
-<section id="polishing-plot" class="level1">
-<h1>Polishing Plot</h1>
+<section id="polishing" class="level1">
+<h1>Polishing</h1>
 <p>There are a few things to do to polish it a bit.</p>
 <ul class="task-list">
 <li><input type="checkbox" disabled="" checked="">
@@ -271,6 +270,8 @@ remove facet_wrap strip text/label</li>
 <li><input type="checkbox" disabled="" checked="">
 move the 2 letter state abbrv into the rectangle</li>
 </ul>
+<section id="plot" class="level2">
+<h2 class="anchored" data-anchor-id="plot">Plot</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Set coordinates</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">=</span> <span class="dv">10</span> </span>
@@ -283,74 +284,187 @@ move the 2 letter state abbrv into the rectangle</li>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>rect_ymax <span class="ot">=</span> rect_ymin<span class="sc">*</span><span class="dv">2</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colors for data features</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fill_colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"#e7e8e9"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#c1c2c4"</span>, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#8a8c8f"</span>,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"#5f6062"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#000000"</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"white"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"black"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">"0_family_leave"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1_family_leave"</span> <span class="ot">=</span> <span class="st">"#00aeef"</span>,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                <span class="st">"0_preemption"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1_preemption"</span> <span class="ot">=</span> <span class="st">"#f1592a"</span>)     </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Operationalize data for plot</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>data_processed <span class="ot">=</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Append coordinates to data for geom_polygon</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">top_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymax,rect_ymax,height)),</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymin,rect_ymin,<span class="dv">0</span>))</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">## operationalize colors</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_text =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(abortion_ban_risk)<span class="sc">&gt;</span><span class="dv">2</span>, <span class="st">"white"</span>,<span class="st">"black"</span>),</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">family_leave =</span> <span class="fu">paste0</span>(family_leave,<span class="st">"_family_leave"</span>),</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">preemption =</span> <span class="fu">paste0</span>(preemption,<span class="st">"_preemption"</span>))</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>abortion_colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"#e7e8e9"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#c1c2c4"</span>, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#8a8c8f"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"#5f6062"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#000000"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>xwalk_colors <span class="ot">=</span> <span class="fu">c</span>(abortion_colors,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"white"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"black"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"0_family_leave"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"1_family_leave"</span> <span class="ot">=</span> <span class="st">"#00aeef"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"0_preemption"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"1_preemption"</span> <span class="ot">=</span> <span class="st">"#f1592a"</span>)     </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Operationalize data for plot</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>data_processed <span class="ot">=</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Append coordinates to data for geom_polygon</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">top_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymax,rect_ymax,height)),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymin,rect_ymin,<span class="dv">0</span>))</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="do">## operationalize colors</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_text =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(abortion_ban_risk)<span class="sc">&gt;</span><span class="dv">2</span>, <span class="st">"white"</span>,<span class="st">"black"</span>),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">family_leave =</span> <span class="fu">paste0</span>(family_leave,<span class="st">"_family_leave"</span>),</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">preemption =</span> <span class="fu">paste0</span>(preemption,<span class="st">"_preemption"</span>))</span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## create a function to make basic shapes</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>geom_hex_for_alina <span class="ot">=</span> <span class="cf">function</span>(data){</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>()  <span class="sc">+</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="do">## create a function to make basic shapes</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>geom_hex_for_alina <span class="ot">=</span> <span class="cf">function</span>(gg){</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  gg <span class="sc">+</span></span>
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="do">## add rectangle</span></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rect_xmin, <span class="at">xmax =</span> rect_xmax,   </span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span>rect_ymin, <span class="at">ymax =</span> rect_ymax, </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> rect_ymin, <span class="at">ymax =</span> rect_ymax, </span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> abortion_ban_risk)) <span class="sc">+</span></span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Add state abbrv text</span></span>
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> state, <span class="at">color =</span> state_text),</span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> height<span class="sc">/</span><span class="dv">2</span>, <span class="at">y =</span> height<span class="sc">/</span><span class="dv">2</span>,</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"Courier"</span>)<span class="sc">+</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Top triangle (family leave)</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_triangle_x,<span class="at">y=</span>top_triangle_y, <span class="at">fill =</span> family_leave)) <span class="sc">+</span> </span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Bottom triangle (preemption)</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bottom_triangle_x, <span class="at">y =</span> bottom_triangle_y, <span class="at">fill =</span> preemption)) <span class="sc">+</span>   </span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Manual colors</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> fill_colors) <span class="sc">+</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"state_text"</span>, <span class="at">values =</span> fill_colors) <span class="sc">+</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Remove legend</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">'none'</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> data_processed <span class="sc">%&gt;%</span> </span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state) </span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Top triangle (family leave)</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_triangle_x,<span class="at">y=</span>top_triangle_y, <span class="at">fill =</span> family_leave)) <span class="sc">+</span> </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Bottom triangle (preemption)</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bottom_triangle_x, <span class="at">y =</span> bottom_triangle_y, <span class="at">fill =</span> preemption)) <span class="sc">+</span>   </span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Manual colors</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> xwalk_colors) <span class="sc">+</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"state_text"</span>, <span class="at">values =</span> xwalk_colors) <span class="sc">+</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Remove legend</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">'none'</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> data_processed <span class="sc">%&gt;%</span> </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state, <span class="at">grid =</span> <span class="st">"us_state_grid2"</span>) </span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quarto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="legend" class="level2">
+<h2 class="anchored" data-anchor-id="legend">Legend</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create funciton to layout for legend</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>geom_hex_legend_for_alina <span class="ot">=</span> <span class="cf">function</span>(gg, legend_padding){</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  legend_xmin <span class="ot">=</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    legend_padding <span class="sc">==</span> <span class="st">"left"</span> <span class="sc">~</span> <span class="dv">0</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>height,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    legend_padding <span class="sc">==</span> <span class="st">"right"</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  legend_xmax <span class="ot">=</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    legend_padding <span class="sc">==</span> <span class="st">"left"</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    legend_padding <span class="sc">==</span> <span class="st">"right"</span> <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>height</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  gg <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> legend_xmin, <span class="at">xmax =</span> legend_xmax,   </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> <span class="dv">0</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">*</span>height, <span class="at">ymax =</span> height <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>height),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"white"</span>) </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Hexagon Legend</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span> </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_label</span>(</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Triangles show paid family</span><span class="sc">\n</span><span class="st">leave and preemption policy"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">'bold'</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fl">0.5</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add margin on the left of the drawing canvas,</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># so title is aligned with left edge of first plot</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>legend_hex_1 <span class="ot">=</span> data_processed <span class="sc">%&gt;%</span> </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"PA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_legend_for_alina</span>(<span class="at">gg =</span> ., <span class="at">legend_padding =</span> <span class="st">"left"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>()</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>legend_hex_2 <span class="ot">=</span> data_processed <span class="sc">%&gt;%</span> </span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"OR"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_legend_for_alina</span>(<span class="at">gg =</span> ., <span class="at">legend_padding =</span> <span class="st">"right"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>()</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>hex_legend_row <span class="ot">=</span> <span class="fu">plot_grid</span>(legend_hex_1, legend_hex_2)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>hex_legend <span class="ot">=</span> <span class="fu">plot_grid</span>(</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  title, hex_legend_row,</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="do">## Rectangle Legend</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>side <span class="ot">=</span> <span class="dv">10</span> </span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>padding <span class="ot">=</span> <span class="fl">1.5</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>rect_width <span class="ot">=</span>  (side <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>padding)<span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>legend_y <span class="ot">=</span> <span class="dv">6</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>legend_height <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>dfa <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">xmin =</span> padding <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span><span class="sc">*</span>rect_width,</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmax =</span> padding <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span><span class="sc">*</span>rect_width,</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>             <span class="at">ymin =</span> legend_y,</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>             <span class="at">ymax =</span> legend_y <span class="sc">+</span> legend_height,</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="fu">unname</span>(abortion_colors))</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>legend_risk <span class="ot">=</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Container (10 by 10)</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">10</span>, </span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">10</span>),</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span> </span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Legend for rectangles</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(dfa, <span class="at">mapping =</span> </span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">xmin =</span> xmin, <span class="at">xmax =</span> xmax, </span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax),</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill =</span> dfa<span class="sc">$</span>fill) <span class="sc">+</span> </span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>  <span class="do">##  Top label </span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="st">"Rectangle show abortion ban risk"</span>),</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> side<span class="sc">/</span><span class="dv">2</span>, <span class="at">y =</span> legend_y <span class="sc">+</span> legend_height <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface  =</span> <span class="st">'bold'</span>)<span class="sc">+</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Left label</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="st">"Less risk"</span>),</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> side<span class="sc">/</span><span class="dv">5</span>, <span class="at">y =</span> legend_y <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Rigth label</span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="st">"More risk"</span>),</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="dv">4</span><span class="sc">*</span>side<span class="sc">/</span><span class="dv">5</span>, <span class="at">y =</span> legend_y <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="do">## Layout</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>legend <span class="ot">=</span> <span class="fu">plot_grid</span>(legend_risk,hex_legend,</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">=</span> <span class="fu">plot_grid</span>(legend,</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>                   <span class="cn">NULL</span>,</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>                   plot,</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">7</span>)) </span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"output/v1.jpeg"</span>,</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot =</span> figure,</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">8</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hi</p>
+</section>
 </section>
 
 </main>
