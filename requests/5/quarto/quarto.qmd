@@ -8,7 +8,7 @@ format:
 author: Ran Li
 execute: 
   warning: false
-  echo: false
+  echo: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -63,8 +63,70 @@ Adapting this visualization to the table above would give the following features
 3. The bottom orange triangle would map to preemption family leave. I am assuming preemption is bad?
 
 
+# Proof of concept
+
+The whole workflow relies on [`geofacet::face_geo()`](https://hafen.github.io/geofacet/). The main function in this package is facet_geo() and its use can be thought of as equivalent to ggplot2’s facet_wrap() except for the output it creates. The first step is to create a function that creates the individual state plots.
 
 
+```{r}
+## Set coordinates
+container_width_height = 10 # a 10 by 10 coordinate system
+rect_width = 6 
+rect_height = 3
+rect_xmin = 2
+rect_xmax = rect_xmin + rect_width
+rect_x_mean = mean(c(rect_xmin,rect_xmax))
+rect_ymin = 4
+rect_ymax = rect_ymin + rect_height 
+ 
+## Append coordinates to data for geom_polygon
+data_w_coords = data %>% 
+  mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
+         top_triangle_y = list(c(rect_ymax,rect_ymax,rect_ymax+rect_height)),
+         bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
+         bottom_triangle_y = list(c(rect_ymin,rect_ymin,rect_ymin-rect_height))
+         ) %>% 
+  unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y))
+  
+
+## create a function to make basic shapes
+geom_hex_for_alina = function(data){
+  data %>% 
+  ggplot()  + 
+  geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
+  geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
+            color = "black", fill = "grey") +
+  geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
+  geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
+  theme_void()
+}
 
 
+## Test function to plot for a single state
+data_w_coords %>% 
+  filter(name == "Alabama") %>% 
+  geom_hex_for_alina()
+
+```
+
+
+Great now let's us this just append a  [`geofacet::face_geo()`](https://hafen.github.io/geofacet/) to do do the by state faceting; note we are now passing all the states data.
+
+
+```{r}
+data_w_coords %>% 
+  geom_hex_for_alina() +
+  facet_geo(~ state) 
+```
+
+
+Great I think this approach is getting us to what we want. There are a few things to do to polish it a bit.
+
+
+- [ ] display triangles based on the data features
+- [ ] display abortion ban risk as shade of triangle
+- [ ] minimize the inidividual plot margins (to make the layout more similiar to our example)
+- [ ] move the 2 letter state abbrv into the rectangle
+
+# Polishing
 
