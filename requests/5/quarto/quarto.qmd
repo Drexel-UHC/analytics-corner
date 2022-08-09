@@ -43,7 +43,8 @@ library(geofacet)
 raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset.xlsx",
                               sheet = 'Sheet2') %>% 
   drop_na() %>% 
-  select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  
+  select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  %>% 
+  mutate_all(~as.character(.x))
 
 ## clean state codes
 xwalk_states = geofacet::state_ranks %>% 
@@ -122,12 +123,12 @@ data_w_coords %>%
 
 Great I think this approach is getting us to what we want.
 
-# Polishing
+# Polishing Plot
 
 There are a few things to do to polish it a bit.
 
-- [ ] display triangles based on the data features
-- [ ] display abortion ban risk as shade of triangle
+- [x] display triangles based on the data features
+- [x] display abortion ban risk as shade of triangle
 - [x] minimize the inidividual plot margins (to make the layout more similiar to our example)
 - [x] remove facet_wrap strip text/label
 - [x] move the 2 letter state abbrv into the rectangle
@@ -144,38 +145,69 @@ rect_x_mean = mean(c(rect_xmin,rect_xmax))
 rect_ymin = height/3
 rect_ymax = rect_ymin*2
 
-## Append coordinates to data for geom_polygon
-data_w_coords = data %>% 
+## Manual colors for data features
+fill_colors = c("0" = "#e7e8e9",
+                "1" = "#c1c2c4", 
+                "2" = "#8a8c8f",
+                "3" = "#5f6062",
+                "4" = "#000000",
+                "white" = "white",
+                "black" = "black",
+                "0_family_leave" = "white",
+                "1_family_leave" = "#00aeef",
+                "0_preemption" = "white",
+                "1_preemption" = "#f1592a")     
+
+## Operationalize data for plot
+data_processed = data %>% 
+  ## Append coordinates to data for geom_polygon
   mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          top_triangle_y = list(c(rect_ymax,rect_ymax,height)),
          bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          bottom_triangle_y = list(c(rect_ymin,rect_ymin,0))
   ) %>% 
-  unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y))
+  unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) %>% 
+  ## operationalize colors
+  mutate(
+    state_text = ifelse(as.numeric(abortion_ban_risk)>2, "white","black"),
+    family_leave = paste0(family_leave,"_family_leave"),
+    preemption = paste0(preemption,"_preemption"))
 
 
 ## create a function to make basic shapes
 geom_hex_for_alina = function(data){
   data %>% 
-    ggplot()  + 
-    geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
-    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
-              color = "black", fill = "grey") +
-    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
-    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
+    ggplot()  +
+    ## add rectangle
+    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,   
+                  ymin =rect_ymin, ymax = rect_ymax, 
+                  fill = abortion_ban_risk)) +
+    ## Add state abbrv text
+    geom_text(aes(label = state, color = state_text),
+              x = height/2, y = height/2,
+              size = 3,
+              family = "Courier")+
+    ## Top triangle (family leave)
+    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y, fill = family_leave)) + 
+    ## Bottom triangle (preemption)
+    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y, fill = preemption)) +   
+    ## Manual colors
+    scale_fill_manual(values = fill_colors) +
+    scale_color_manual(name = "state_text", values = fill_colors) +
     theme_void()+ 
-    geom_text(aes(label = state), x = height/2, y = height/2)+
     theme(
       ## Completely remove facet labels
       strip.background = element_blank(),
-      strip.text.x = element_blank()
+      strip.text.x = element_blank(),
+      ## Remove legend
+      legend.position = 'none'
     )
 }
 
 
 ## Test facet
-data_w_coords %>% 
+plot = data_processed %>% 
   geom_hex_for_alina() +
   facet_geo(~ state) 
-
+plot
 ```

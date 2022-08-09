@@ -114,7 +114,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#unpacking" id="toc-unpacking" class="nav-link" data-scroll-target="#unpacking">Unpacking</a></li>
   </ul></li>
   <li><a href="#proof-of-concept" id="toc-proof-of-concept" class="nav-link" data-scroll-target="#proof-of-concept">Proof of concept</a></li>
-  <li><a href="#polishing" id="toc-polishing" class="nav-link" data-scroll-target="#polishing">Polishing</a></li>
+  <li><a href="#polishing-plot" id="toc-polishing-plot" class="nav-link" data-scroll-target="#polishing-plot">Polishing Plot</a></li>
   </ul>
 </nav>
 </div>
@@ -172,21 +172,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"raw-data/family medical leave preemption dataset.xlsx"</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sheet =</span> <span class="st">'Sheet2'</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">name =</span> <span class="dv">1</span>, <span class="at">family_leave =</span> <span class="dv">2</span>, <span class="at">preemption =</span> <span class="dv">3</span>, <span class="at">abortion_ban_risk =</span> <span class="dv">4</span>)  </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## clean state codes</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>xwalk_states <span class="ot">=</span> geofacet<span class="sc">::</span>state_ranks <span class="sc">%&gt;%</span> </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, state) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> name <span class="sc">%&gt;%</span> <span class="fu">recode</span>(<span class="st">"Washington DC"</span> <span class="ot">=</span> <span class="st">"District of Columbia"</span> )) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(xwalk_states)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">name =</span> <span class="dv">1</span>, <span class="at">family_leave =</span> <span class="dv">2</span>, <span class="at">preemption =</span> <span class="dv">3</span>, <span class="at">abortion_ban_risk =</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">as.character</span>(.x))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## clean state codes</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>xwalk_states <span class="ot">=</span> geofacet<span class="sc">::</span>state_ranks <span class="sc">%&gt;%</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, state) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> name <span class="sc">%&gt;%</span> <span class="fu">recode</span>(<span class="st">"Washington DC"</span> <span class="ot">=</span> <span class="st">"District of Columbia"</span> )) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(xwalk_states)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["family_leave"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["preemption"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["abortion_ban_risk"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["state"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Alabama","2":"0","3":"1","4":"1","5":"AL"},{"1":"Alaska","2":"0","3":"0","4":"0","5":"AK"},{"1":"Arizona","2":"0","3":"0","4":"3","5":"AZ"},{"1":"Arkansas","2":"0","3":"1","4":"1","5":"AR"},{"1":"California","2":"1","3":"0","4":"0","5":"CA"},{"1":"Colorado","2":"1","3":"0","4":"0","5":"CO"},{"1":"Connecticut","2":"1","3":"0","4":"0","5":"CT"},{"1":"Delaware","2":"1","3":"0","4":"0","5":"DE"},{"1":"Florida","2":"0","3":"0","4":"3","5":"FL"},{"1":"Georgia","2":"0","3":"1","4":"2","5":"GA"},{"1":"Hawaii","2":"0","3":"0","4":"0","5":"HI"},{"1":"Idaho","2":"0","3":"0","4":"2","5":"ID"},{"1":"Illinois","2":"0","3":"0","4":"0","5":"IL"},{"1":"Indiana","2":"0","3":"1","4":"0","5":"IN"},{"1":"Iowa","2":"0","3":"1","4":"0","5":"IA"},{"1":"Kansas","2":"0","3":"1","4":"0","5":"KS"},{"1":"Kentucky","2":"0","3":"1","4":"1","5":"KY"},{"1":"Louisiana","2":"0","3":"0","4":"4","5":"LA"},{"1":"Maine","2":"0","3":"0","4":"0","5":"ME"},{"1":"Maryland","2":"1","3":"0","4":"0","5":"MD"},{"1":"Massachusetts","2":"1","3":"0","4":"0","5":"MA"},{"1":"Michigan","2":"0","3":"1","4":"0","5":"MI"},{"1":"Minnesota","2":"0","3":"0","4":"0","5":"MN"},{"1":"Mississippi","2":"0","3":"0","4":"1","5":"MS"},{"1":"Missouri","2":"0","3":"0","4":"1","5":"MO"},{"1":"Montana","2":"0","3":"0","4":"0","5":"MT"},{"1":"Nebraska","2":"0","3":"0","4":"0","5":"NE"},{"1":"Nevada","2":"0","3":"0","4":"0","5":"NV"},{"1":"New Hampshire","2":"1","3":"0","4":"0","5":"NH"},{"1":"New Jersey","2":"1","3":"0","4":"0","5":"NJ"},{"1":"New Mexico","2":"0","3":"0","4":"0","5":"NM"},{"1":"New York","2":"1","3":"0","4":"0","5":"NY"},{"1":"North Carolina","2":"0","3":"0","4":"0","5":"NC"},{"1":"North Dakota","2":"0","3":"0","4":"2","5":"ND"},{"1":"Ohio","2":"0","3":"0","4":"1","5":"OH"},{"1":"Oklahoma","2":"0","3":"1","4":"1","5":"OK"},{"1":"Oregon","2":"1","3":"1","4":"0","5":"OR"},{"1":"Pennsylvania","2":"0","3":"0","4":"0","5":"PA"},{"1":"Rhode Island","2":"1","3":"1","4":"0","5":"RI"},{"1":"South Carolina","2":"0","3":"1","4":"2","5":"SC"},{"1":"South Dakota","2":"0","3":"0","4":"1","5":"SD"},{"1":"Tennessee","2":"0","3":"1","4":"2","5":"TN"},{"1":"Texas","2":"0","3":"0","4":"2","5":"TX"},{"1":"Utah","2":"0","3":"1","4":"4","5":"UT"},{"1":"Vermont","2":"0","3":"0","4":"0","5":"VT"},{"1":"Virginia","2":"0","3":"0","4":"0","5":"VA"},{"1":"Washington","2":"1","3":"0","4":"0","5":"WA"},{"1":"West Virginia","2":"0","3":"0","4":"2","5":"WV"},{"1":"Wisconsin","2":"0","3":"1","4":"1","5":"WI"},{"1":"Wyoming","2":"0","3":"0","4":"0","5":"WY"},{"1":"District of Columbia","2":"1","3":"0","4":"0","5":"DC"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["family_leave"],"name":[2],"type":["chr"],"align":["left"]},{"label":["preemption"],"name":[3],"type":["chr"],"align":["left"]},{"label":["abortion_ban_risk"],"name":[4],"type":["chr"],"align":["left"]},{"label":["state"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Alabama","2":"0","3":"1","4":"1","5":"AL"},{"1":"Alaska","2":"0","3":"0","4":"0","5":"AK"},{"1":"Arizona","2":"0","3":"0","4":"3","5":"AZ"},{"1":"Arkansas","2":"0","3":"1","4":"1","5":"AR"},{"1":"California","2":"1","3":"0","4":"0","5":"CA"},{"1":"Colorado","2":"1","3":"0","4":"0","5":"CO"},{"1":"Connecticut","2":"1","3":"0","4":"0","5":"CT"},{"1":"Delaware","2":"1","3":"0","4":"0","5":"DE"},{"1":"Florida","2":"0","3":"0","4":"3","5":"FL"},{"1":"Georgia","2":"0","3":"1","4":"2","5":"GA"},{"1":"Hawaii","2":"0","3":"0","4":"0","5":"HI"},{"1":"Idaho","2":"0","3":"0","4":"2","5":"ID"},{"1":"Illinois","2":"0","3":"0","4":"0","5":"IL"},{"1":"Indiana","2":"0","3":"1","4":"0","5":"IN"},{"1":"Iowa","2":"0","3":"1","4":"0","5":"IA"},{"1":"Kansas","2":"0","3":"1","4":"0","5":"KS"},{"1":"Kentucky","2":"0","3":"1","4":"1","5":"KY"},{"1":"Louisiana","2":"0","3":"0","4":"4","5":"LA"},{"1":"Maine","2":"0","3":"0","4":"0","5":"ME"},{"1":"Maryland","2":"1","3":"0","4":"0","5":"MD"},{"1":"Massachusetts","2":"1","3":"0","4":"0","5":"MA"},{"1":"Michigan","2":"0","3":"1","4":"0","5":"MI"},{"1":"Minnesota","2":"0","3":"0","4":"0","5":"MN"},{"1":"Mississippi","2":"0","3":"0","4":"1","5":"MS"},{"1":"Missouri","2":"0","3":"0","4":"1","5":"MO"},{"1":"Montana","2":"0","3":"0","4":"0","5":"MT"},{"1":"Nebraska","2":"0","3":"0","4":"0","5":"NE"},{"1":"Nevada","2":"0","3":"0","4":"0","5":"NV"},{"1":"New Hampshire","2":"1","3":"0","4":"0","5":"NH"},{"1":"New Jersey","2":"1","3":"0","4":"0","5":"NJ"},{"1":"New Mexico","2":"0","3":"0","4":"0","5":"NM"},{"1":"New York","2":"1","3":"0","4":"0","5":"NY"},{"1":"North Carolina","2":"0","3":"0","4":"0","5":"NC"},{"1":"North Dakota","2":"0","3":"0","4":"2","5":"ND"},{"1":"Ohio","2":"0","3":"0","4":"1","5":"OH"},{"1":"Oklahoma","2":"0","3":"1","4":"1","5":"OK"},{"1":"Oregon","2":"1","3":"1","4":"0","5":"OR"},{"1":"Pennsylvania","2":"0","3":"0","4":"0","5":"PA"},{"1":"Rhode Island","2":"1","3":"1","4":"0","5":"RI"},{"1":"South Carolina","2":"0","3":"1","4":"2","5":"SC"},{"1":"South Dakota","2":"0","3":"0","4":"1","5":"SD"},{"1":"Tennessee","2":"0","3":"1","4":"2","5":"TN"},{"1":"Texas","2":"0","3":"0","4":"2","5":"TX"},{"1":"Utah","2":"0","3":"1","4":"4","5":"UT"},{"1":"Vermont","2":"0","3":"0","4":"0","5":"VT"},{"1":"Virginia","2":"0","3":"0","4":"0","5":"VA"},{"1":"Washington","2":"1","3":"0","4":"0","5":"WA"},{"1":"West Virginia","2":"0","3":"0","4":"2","5":"WV"},{"1":"Wisconsin","2":"0","3":"1","4":"1","5":"WI"},{"1":"Wyoming","2":"0","3":"0","4":"0","5":"WY"},{"1":"District of Columbia","2":"1","3":"0","4":"0","5":"DC"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -255,13 +256,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Great I think this approach is getting us to what we want.</p>
 </section>
-<section id="polishing" class="level1">
-<h1>Polishing</h1>
+<section id="polishing-plot" class="level1">
+<h1>Polishing Plot</h1>
 <p>There are a few things to do to polish it a bit.</p>
 <ul class="task-list">
-<li><input type="checkbox" disabled="">
+<li><input type="checkbox" disabled="" checked="">
 display triangles based on the data features</li>
-<li><input type="checkbox" disabled="">
+<li><input type="checkbox" disabled="" checked="">
 display abortion ban risk as shade of triangle</li>
 <li><input type="checkbox" disabled="" checked="">
 minimize the inidividual plot margins (to make the layout more similiar to our example)</li>
@@ -281,39 +282,71 @@ move the 2 letter state abbrv into the rectangle</li>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>rect_ymin <span class="ot">=</span> height<span class="sc">/</span><span class="dv">3</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>rect_ymax <span class="ot">=</span> rect_ymin<span class="sc">*</span><span class="dv">2</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Append coordinates to data for geom_polygon</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>data_w_coords <span class="ot">=</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">top_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymax,rect_ymax,height)),</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymin,rect_ymin,<span class="dv">0</span>))</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y))</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## create a function to make basic shapes</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>geom_hex_for_alina <span class="ot">=</span> <span class="cf">function</span>(data){</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>()  <span class="sc">+</span> </span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">10</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">10</span>),  <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span> <span class="co"># 10 by 10 container</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rect_xmin, <span class="at">xmax =</span> rect_xmax,<span class="at">ymin =</span>rect_ymin, <span class="at">ymax =</span> rect_ymax),    <span class="co"># add rectangle</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_triangle_x,<span class="at">y=</span>top_triangle_y), <span class="at">fill =</span> <span class="st">'blue'</span>) <span class="sc">+</span> <span class="co"># top triangle</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bottom_triangle_x, <span class="at">y =</span> bottom_triangle_y),  <span class="at">fill =</span> <span class="st">'red'</span>) <span class="sc">+</span>   <span class="co"># bottom triangle</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> state), <span class="at">x =</span> height<span class="sc">/</span><span class="dv">2</span>, <span class="at">y =</span> height<span class="sc">/</span><span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colors for data features</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fill_colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"#e7e8e9"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#c1c2c4"</span>, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#8a8c8f"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"#5f6062"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#000000"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"white"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"black"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">"0_family_leave"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1_family_leave"</span> <span class="ot">=</span> <span class="st">"#00aeef"</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                <span class="st">"0_preemption"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">"1_preemption"</span> <span class="ot">=</span> <span class="st">"#f1592a"</span>)     </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Operationalize data for plot</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>data_processed <span class="ot">=</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Append coordinates to data for geom_polygon</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">top_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymax,rect_ymax,height)),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_x =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_xmin,rect_xmax,rect_x_mean)),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">bottom_triangle_y =</span> <span class="fu">list</span>(<span class="fu">c</span>(rect_ymin,rect_ymin,<span class="dv">0</span>))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">## operationalize colors</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_text =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(abortion_ban_risk)<span class="sc">&gt;</span><span class="dv">2</span>, <span class="st">"white"</span>,<span class="st">"black"</span>),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">family_leave =</span> <span class="fu">paste0</span>(family_leave,<span class="st">"_family_leave"</span>),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">preemption =</span> <span class="fu">paste0</span>(preemption,<span class="st">"_preemption"</span>))</span>
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>data_w_coords <span class="sc">%&gt;%</span> </span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## create a function to make basic shapes</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>geom_hex_for_alina <span class="ot">=</span> <span class="cf">function</span>(data){</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>()  <span class="sc">+</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="do">## add rectangle</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rect_xmin, <span class="at">xmax =</span> rect_xmax,   </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span>rect_ymin, <span class="at">ymax =</span> rect_ymax, </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> abortion_ban_risk)) <span class="sc">+</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Add state abbrv text</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> state, <span class="at">color =</span> state_text),</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> height<span class="sc">/</span><span class="dv">2</span>, <span class="at">y =</span> height<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"Courier"</span>)<span class="sc">+</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Top triangle (family leave)</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_triangle_x,<span class="at">y=</span>top_triangle_y, <span class="at">fill =</span> family_leave)) <span class="sc">+</span> </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Bottom triangle (preemption)</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bottom_triangle_x, <span class="at">y =</span> bottom_triangle_y, <span class="at">fill =</span> preemption)) <span class="sc">+</span>   </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Manual colors</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> fill_colors) <span class="sc">+</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"state_text"</span>, <span class="at">values =</span> fill_colors) <span class="sc">+</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Remove legend</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">'none'</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> data_processed <span class="sc">%&gt;%</span> </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state) </span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quarto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
