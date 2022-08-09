@@ -130,7 +130,7 @@ There are a few things to do to polish it a bit.
 - [ ] display abortion ban risk as shade of triangle
 - [x] minimize the inidividual plot margins (to make the layout more similiar to our example)
 - [x] remove facet_wrap strip text/label
-- [ ] move the 2 letter state abbrv into the rectangle
+- [x] move the 2 letter state abbrv into the rectangle
 
 
 ```{r}
@@ -164,6 +164,7 @@ geom_hex_for_alina = function(data){
     geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
     geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
     theme_void()+ 
+    geom_text(aes(label = state), x = height/2, y = height/2)+
     theme(
       ## Completely remove facet labels
       strip.background = element_blank(),

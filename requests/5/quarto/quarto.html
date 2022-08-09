@@ -267,7 +267,7 @@ display abortion ban risk as shade of triangle</li>
 minimize the inidividual plot margins (to make the layout more similiar to our example)</li>
 <li><input type="checkbox" disabled="" checked="">
 remove facet_wrap strip text/label</li>
-<li><input type="checkbox" disabled="">
+<li><input type="checkbox" disabled="" checked="">
 move the 2 letter state abbrv into the rectangle</li>
 </ul>
 <div class="cell">
@@ -301,18 +301,19 @@ move the 2 letter state abbrv into the rectangle</li>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_triangle_x,<span class="at">y=</span>top_triangle_y), <span class="at">fill =</span> <span class="st">'blue'</span>) <span class="sc">+</span> <span class="co"># top triangle</span></span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bottom_triangle_x, <span class="at">y =</span> bottom_triangle_y),  <span class="at">fill =</span> <span class="st">'red'</span>) <span class="sc">+</span>   <span class="co"># bottom triangle</span></span>
 <span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> state), <span class="at">x =</span> height<span class="sc">/</span><span class="dv">2</span>, <span class="at">y =</span> height<span class="sc">/</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Completely remove facet labels</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>data_w_coords <span class="sc">%&gt;%</span> </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Test facet</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>data_w_coords <span class="sc">%&gt;%</span> </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex_for_alina</span>() <span class="sc">+</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_geo</span>(<span class="sc">~</span> state) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quarto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
