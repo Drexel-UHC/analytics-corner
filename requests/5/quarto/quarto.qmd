@@ -5,10 +5,11 @@ format:
     toc: true
     toc-location: left
     df-print: paged
+    code-fold: true
+    code-tools: true
 author: Ran Li
 execute: 
   warning: false
-  echo: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -247,7 +248,7 @@ title_rect <- ggdraw() +
     fontface = 'bold',
     x = 0.5,
     hjust = 0.5,
-    size = 12
+    size = 10
   ) +
   theme(
     # add margin on the left of the drawing canvas,
@@ -282,7 +283,7 @@ title_hex_blue <- ggdraw() +
     fontface = 'bold',
     x = 0.5,
     hjust = 0.5,
-    size = 12
+    size = 10
   ) +
   theme( plot.margin = margin(5, 0, 0, 0))
 legend_hex_blue = data_processed %>% 
@@ -311,7 +312,7 @@ title_hex_red <- ggdraw() +
     fontface = 'bold',
     x = 0.5,
     hjust = 0.5,
-    size = 12
+    size = 10
   ) +
   theme(
     plot.margin = margin(5, 0, 0, 0)
@@ -330,25 +331,41 @@ hex_legend_red = plot_grid(
 hex_legend_red
 ```
 
-# Final Product
+# Final Layout
 
-This is saved in "./output/v2.jpeg".
+This is saved in "./output/issue5.jpeg".
 
 ```{r}
+
+title =  ggdraw() + 
+  draw_label(
+    "Abortion, Paid Family Leave and Preemption Policy by U.S. State",
+    fontface = 'bold',
+    x = 0.5,
+    hjust = 0.5,
+    size = 14
+  ) +
+  theme_void()+
+  theme( plot.margin = margin(0, 0, 0, 0),
+         plot.background = element_rect(fill = "#f2f2f2", colour = 'white' ),
+        
+         )
 
 legend = plot_grid(NULL, rect_legend,hex_legend_blue,hex_legend_red,
                    ncol = 4,
                    rel_widths = c(0.2, 1, 1, 1))
 
 
-figure = plot_grid(legend,
+figure = plot_grid(title,
+                   NULL,
+                   legend,
                    NULL,
                    plot,
                    ncol = 1,
-                   rel_heights = c(2,1,7)) 
+                   rel_heights = c(0.5,0.2,2,0.2,7)) 
  
 
-ggsave(filename = "output/v1.jpeg",
+ggsave(filename = "output/issue5.jpeg",
        plot = figure,
        height = 8,
        width = 8
@@ -357,4 +374,4 @@ ggsave(filename = "output/v1.jpeg",
 
 ```
 
-![](output/v1.jpeg){fig-align="center"}
+![](output/issue5.jpeg){fig-align="center"}
