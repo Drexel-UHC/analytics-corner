@@ -41,7 +41,7 @@ library(geofacet)
 
 ## raw data
 raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset.xlsx",
-                          sheet = 'Sheet2') %>% 
+                              sheet = 'Sheet2') %>% 
   drop_na() %>% 
   select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  
 
@@ -78,27 +78,27 @@ rect_xmax = rect_xmin + rect_width
 rect_x_mean = mean(c(rect_xmin,rect_xmax))
 rect_ymin = 4
 rect_ymax = rect_ymin + rect_height 
- 
+
 ## Append coordinates to data for geom_polygon
 data_w_coords = data %>% 
   mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          top_triangle_y = list(c(rect_ymax,rect_ymax,rect_ymax+rect_height)),
          bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          bottom_triangle_y = list(c(rect_ymin,rect_ymin,rect_ymin-rect_height))
-         ) %>% 
+  ) %>% 
   unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y))
-  
+
 
 ## create a function to make basic shapes
 geom_hex_for_alina = function(data){
   data %>% 
-  ggplot()  + 
-  geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
-  geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
-            color = "black", fill = "grey") +
-  geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
-  geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
-  theme_void()
+    ggplot()  + 
+    geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
+    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
+              color = "black", fill = "grey") +
+    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
+    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
+    theme_void()
 }
 
 
@@ -129,6 +129,7 @@ There are a few things to do to polish it a bit.
 - [ ] display triangles based on the data features
 - [ ] display abortion ban risk as shade of triangle
 - [x] minimize the inidividual plot margins (to make the layout more similiar to our example)
+- [x] remove facet_wrap strip text/label
 - [ ] move the 2 letter state abbrv into the rectangle
 
 
@@ -142,34 +143,34 @@ rect_xmax = width + padding_x
 rect_x_mean = mean(c(rect_xmin,rect_xmax))
 rect_ymin = height/3
 rect_ymax = rect_ymin*2
- 
+
 ## Append coordinates to data for geom_polygon
 data_w_coords = data %>% 
   mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          top_triangle_y = list(c(rect_ymax,rect_ymax,height)),
          bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),
          bottom_triangle_y = list(c(rect_ymin,rect_ymin,0))
-         ) %>% 
+  ) %>% 
   unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y))
-  
+
 
 ## create a function to make basic shapes
 geom_hex_for_alina = function(data){
   data %>% 
-  ggplot()  + 
-  geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
-  geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
-            color = "black", fill = "grey") +
-  geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
-  geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
-  theme_void()
+    ggplot()  + 
+    geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
+    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,ymin =rect_ymin, ymax = rect_ymax),    # add rectangle
+              color = "black", fill = "grey") +
+    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y), fill = 'blue') + # top triangle
+    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y),  fill = 'red') +   # bottom triangle
+    theme_void()+ 
+    theme(
+      ## Completely remove facet labels
+      strip.background = element_blank(),
+      strip.text.x = element_blank()
+    )
 }
 
-
-## Test function to plot for a single state
-data_w_coords %>% 
-  filter(name == "Alabama") %>% 
-  geom_hex_for_alina()
 
 ## Test facet
 data_w_coords %>% 
