@@ -8,13 +8,12 @@ format:
 author: Ran Li
 execute: 
   warning: false
-  echo: true
+  echo: false
 editor_options: 
   chunk_output_type: console
 ---
 
-
-# Issue 
+# Issue
 
 **URL: https://github.com/Drexel-UHC/analytics-core/issues/7**
 
@@ -24,7 +23,7 @@ editor_options:
 
 # Example
 
-![](images/paste-24B14202.png){width="448"}
+![](images/paste-24B14202.png){fig-align="center"}
 
 # Evaluation
 
@@ -59,15 +58,13 @@ data
 
 Adapting this visualization to the table above would give the following features:
 
-1. The rectangle would be similiar with shade mapping to the abortion ban risk
-2. The top blue triangle would map to family leave.
-3. The bottom orange triangle would map to preemption family leave. I am assuming preemption is bad?
-
+1.  The rectangle would be similiar with shade mapping to the abortion ban risk
+2.  The top blue triangle would map to family leave.
+3.  The bottom orange triangle would map to preemption family leave. I am assuming preemption is bad?
 
 # Proof of concept
 
-The whole workflow relies on [`geofacet::face_geo()`](https://hafen.github.io/geofacet/). The main function in this package is facet_geo() and its use can be thought of as equivalent to ggplot2’s facet_wrap() except for the output it creates. The first step is to create a function that creates the individual state plots.
-
+The whole workflow relies on [`geofacet::face_geo()`](https://hafen.github.io/geofacet/). The main function in this package is facet_geo() and its use can be thought of as equivalent to ggplot2's facet_wrap() except for the output it creates. The first step is to create a function that creates the individual state plots.
 
 ```{r}
 ## Set coordinates
@@ -110,9 +107,7 @@ data_w_coords %>%
 
 ```
 
-
-Great now let's us this just append a  [`geofacet::face_geo()`](https://hafen.github.io/geofacet/) to do do the by state faceting; note we are now passing all the states data.
-
+Great now let's us this just append a [`geofacet::face_geo()`](https://hafen.github.io/geofacet/) to do do the by state faceting; note we are now passing all the states data.
 
 ```{r}
 data_w_coords %>% 
@@ -120,19 +115,17 @@ data_w_coords %>%
   facet_geo(~ state) 
 ```
 
-
 Great I think this approach is getting us to what we want.
 
-# Polishing 
-
+# Ggplot code
 
 There are a few things to do to polish it a bit.
 
-- [x] display triangles based on the data features
-- [x] display abortion ban risk as shade of triangle
-- [x] minimize the inidividual plot margins (to make the layout more similiar to our example)
-- [x] remove facet_wrap strip text/label
-- [x] move the 2 letter state abbrv into the rectangle
+-   [x] display triangles based on the data features
+-   [x] display abortion ban risk as shade of triangle
+-   [x] minimize the inidividual plot margins (to make the layout more similiar to our example)
+-   [x] remove facet_wrap strip text/label
+-   [x] move the 2 letter state abbrv into the rectangle
 
 ## Plot
 
@@ -209,72 +202,20 @@ geom_hex_for_alina = function(gg){
 plot = data_processed %>% 
   ggplot()  %>% 
   geom_hex_for_alina() +
-  facet_geo(~ state, grid = "us_state_grid2") 
+  facet_geo(~ state, grid = "us_state_grid2") +
+  theme(plot.margin = margin(1, 1, 1, 1, "cm"))
 plot
 ```
 
-## Legend
+## Legend 1: Rectangle
 
 ```{r}
-## Create funciton to layout for legend
-geom_hex_legend_for_alina = function(gg, legend_padding){
-  legend_xmin = case_when(
-    legend_padding == "left" ~ 0 - 2*height,
-    legend_padding == "right" ~ 0
-  )
-  legend_xmax = case_when(
-    legend_padding == "left" ~ 0,
-    legend_padding == "right" ~ 0 + 3*height
-  )
-  
-  gg +
-    geom_rect(aes(xmin = legend_xmin, xmax = legend_xmax,   
-                  ymin = 0 - 1*height, ymax = height + 1*height),
-              fill = "white") 
-  
-}
 
-## Hexagon Legend
-title <- ggdraw() + 
-  draw_label(
-    "Triangles show paid family\nleave and preemption policy",
-    fontface = 'bold',
-    x = 0.5,
-    hjust = 0.5
-  ) +
-  theme(
-    # add margin on the left of the drawing canvas,
-    # so title is aligned with left edge of first plot
-    plot.margin = margin(5, 0, 0, 0)
-  )
-
-legend_hex_1 = data_processed %>% 
-  filter(state == "PA") %>% 
-  mutate(state = "") %>% 
-  ggplot()  %>% 
-  geom_hex_legend_for_alina(gg = ., legend_padding = "left") %>% 
-  geom_hex_for_alina()
-
-legend_hex_2 = data_processed %>% 
-  filter(state == "OR") %>% 
-  mutate(state = "") %>% 
-  ggplot()  %>% 
-  geom_hex_legend_for_alina(gg = ., legend_padding = "right") %>% 
-  geom_hex_for_alina()
-
-hex_legend_row = plot_grid(legend_hex_1, legend_hex_2)
-hex_legend = plot_grid(
-  title, hex_legend_row,
-  ncol = 1,
-  rel_heights = c(3, 7)
-)
-
-## Rectangle Legend
 side = 10 
 padding = 1.5
 rect_width =  (side - 2*padding)/5
 legend_y = 6
-legend_height = 1
+legend_height = 1.5
 dfa = tibble(xmin = padding + 0:4*rect_width,
              xmax = padding + 1:5*rect_width,
              ymin = legend_y,
@@ -290,11 +231,6 @@ legend_risk = ggplot() +
               aes(xmin = xmin, xmax = xmax, 
                   ymin = ymin, ymax = ymax),
             fill = dfa$fill) + 
-  ##  Top label 
-  geom_text(aes(label = "Rectangle show abortion ban risk"),
-            x = side/2, y = legend_y + legend_height + 1,
-            size = 4,
-            fontface  = 'bold')+
   ## Left label
   geom_text(aes(label = "Less risk"),
             x = side/5, y = legend_y - 1,
@@ -305,10 +241,104 @@ legend_risk = ggplot() +
             size = 3) +
   theme_void()
 
-## Layout
-legend = plot_grid(legend_risk,hex_legend,
-                   ncol = 2,
-                   rel_widths = c(2, 2))
+title_rect <- ggdraw() + 
+  draw_label(
+    "Rectangle show \n abortion ban risk",
+    fontface = 'bold',
+    x = 0.5,
+    hjust = 0.5,
+    size = 12
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(5, 0, 0, 0)
+  )
+rect_legend = plot_grid(
+  title_rect, legend_risk,
+  ncol = 1,
+  rel_heights = c(2, 8)
+)
+
+rect_legend
+
+```
+
+## Legend 2: Paid family leave
+
+```{r}
+## Create funciton to layout for legend
+geom_hex_legend_for_alina = function(gg){
+  gg +
+    geom_rect(aes(xmin =  0 - 1*height, xmax = height + 1*height,   
+                  ymin = 0 - 1*height, ymax = height + 1*height),
+              fill = "white") 
+}
+
+## Legend 2: Blue triangle
+title_hex_blue <- ggdraw() + 
+  draw_label(
+    "Blue Triangles show \n paid family policy",
+    fontface = 'bold',
+    x = 0.5,
+    hjust = 0.5,
+    size = 12
+  ) +
+  theme( plot.margin = margin(5, 0, 0, 0))
+legend_hex_blue = data_processed %>% 
+  filter(state == "WA") %>% 
+  mutate(state = "") %>% 
+  ggplot()  %>% 
+  geom_hex_legend_for_alina() %>% 
+  geom_hex_for_alina()
+hex_legend_blue = plot_grid(
+  title_hex_blue, legend_hex_blue,
+  ncol = 1,
+  rel_heights = c(2, 8)
+)
+
+hex_legend_blue
+```
+
+## Legend 3: Preemption
+
+```{r}
+
+## Legend 3: Red triangle
+title_hex_red <- ggdraw() + 
+  draw_label(
+    "Blue Triangles show \n preemption policy",
+    fontface = 'bold',
+    x = 0.5,
+    hjust = 0.5,
+    size = 12
+  ) +
+  theme(
+    plot.margin = margin(5, 0, 0, 0)
+  )
+legend_hex_red = data_processed %>% 
+  filter(state == "MI") %>% 
+  mutate(state = "") %>% 
+  ggplot()  %>% 
+  geom_hex_legend_for_alina() %>% 
+  geom_hex_for_alina()
+hex_legend_red = plot_grid(
+  title_hex_red, legend_hex_red,
+  ncol = 1,
+  rel_heights = c(2, 8)
+)
+hex_legend_red
+```
+
+# Final Product
+
+This is saved in "./output/v2.jpeg".
+
+```{r}
+
+legend = plot_grid(NULL, rect_legend,hex_legend_blue,hex_legend_red,
+                   ncol = 4,
+                   rel_widths = c(0.2, 1, 1, 1))
 
 
 figure = plot_grid(legend,
@@ -324,7 +354,7 @@ ggsave(filename = "output/v1.jpeg",
        width = 8
        )
 
+
 ```
 
-
-Hi
+![](output/v1.jpeg){fig-align="center"}
