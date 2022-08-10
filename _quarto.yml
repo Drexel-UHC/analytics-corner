@@ -2,8 +2,11 @@ project:
   type: website
 
 website:
-  title: "ran"
+  title: "UHC Analytics"
+  image: "uhc.png"
   navbar:
+    background: light
+    logo: uhc.png
     left:
       - href: index.qmd
         text: Home
