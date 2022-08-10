@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Zettelkasten/grant informatics infrastructure.md",
+            "file": "Zettelkasten/website.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Zettelkasten/grant informatics infrastructure.md",
+                "file": "Zettelkasten/website.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -130,8 +130,8 @@
   },
   "active": "b4db67783fb245b2",
   "lastOpenFiles": [
-    "Zettelkasten/Informatics.md",
     "Zettelkasten/grant informatics infrastructure.md",
+    "Zettelkasten/Informatics.md",
     "Zettelkasten/Serverless Computing.md",
     "References/Design and development of an informatics-driven implementation research framework for primary care studies.md",
     "References/An informatics infrastructure for patient safety and evidence-based practice in home healthcare.md",
