@@ -22,10 +22,10 @@ website:
         menu:
           - text: "Submit an Issue"
             icon: "patch-question"
-            href: "https://github.com/quarto-dev/quarto-cli/issues"
+            href: "https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&labels=&template=request.yml&title=%5BRequest+title%5D%3A+"
           - text: "Quarto Discussions"
             icon: "chat-right-text"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+            href: "https://github.com/Drexel-UHC/analytics-core/discussions"
           - text: "FAQ"
             icon: "question-circle"
             href: docs/faq/index.qmd
