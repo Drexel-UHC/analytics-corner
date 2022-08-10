@@ -1,0 +1,12 @@
+---
+title: "Get Started"
+subtitle: "Core values and foundamental skills"
+pagetitle: "Analytics Corner - Get Started"
+page-layout: full
+title-block-banner: "#EDF3F9"
+title-block-banner-color: body
+---
+
+:::{.callout-note}
+COMING SOON
+:::

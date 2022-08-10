@@ -1,5 +1,41 @@
 ---
-title: "Home"
+pagetitle: "UHC Analytics"
+page-layout: custom
+section-divs: false
+toc: false
+css: index.css
+editor: source
+description: | 
+  Quarto® is an open-source scientific and technical publishing system built on Pandoc.
+image: /images/hero_right.png
 ---
+ 
+::: {.hero-banner}    
+  
+::: {.hero-image .hero-image-left}
+![](images/hero-hex-2.png){fig-alt="hexagon background"}
+:::
 
-Hello!
+::: {.content-block}
+
+# Welcome to the UHC Analytics Corner
+
+### Build bridges at the UHC by open sourcing your analytic problems
+
+- [Wide range of solutions](docs/gallery/) are support including technology recommendations, custom visualizations, dashboards, websites, packages
+- Submit your analytics problem challenges by [submitting an issues](https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&labels=&template=request.yml&title=%5BRequest+title%5D%3A+) 
+- Rapid prototyping to provide custom solutions 
+- [Solutions](docs/blog/) are all made accessible to everyone
+
+::: {.hero-buttons}
+[Get Started](docs/get-started/){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
+[Guide](docs/guide/){#btn-guide .btn-action .btn .btn-info .btn-lg role="button"}
+::: 
+
+:::
+
+::: {.hero-image .hero-image-right}
+![](images/hero-hex-2.png){fig-alt="hexagon background"} 
+:::
+
+:::

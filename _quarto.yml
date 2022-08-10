@@ -12,18 +12,18 @@ website:
     left:
       - text: "Overview"
         href: index.qmd
-      - text: "Welcome"
+      - text: "Get Started"
         href: docs/get-started/index.qmd
       - text: "Blog"
-        href: docs/get-started/index.qmd
+        href: docs/blog/index.qmd
       - text: "Gallery"
-        href: docs/get-started/index.qmd
+        href: docs/gallery/index.qmd
       - text: "Help"
         menu:
           - text: "Submit an Issue"
             icon: "patch-question"
             href: "https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&labels=&template=request.yml&title=%5BRequest+title%5D%3A+"
-          - text: "Quarto Discussions"
+          - text: "View Discussions"
             icon: "chat-right-text"
             href: "https://github.com/Drexel-UHC/analytics-core/discussions"
           - text: "FAQ"
