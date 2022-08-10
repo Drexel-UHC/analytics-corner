@@ -1,7 +1,7 @@
 ---
 author: Ran Li
 date: "8/8/2022"
-title: "Help with grant informatics infrastructure language"
+title: "Grant informatics infrastructure language"
 description: "Draft language for a grant to describe high-capacity informatics infrastructure "
 image: img/thumbnail.jpg
 categories:
