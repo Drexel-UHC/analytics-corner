@@ -38,9 +38,12 @@ website:
         aria-label: Quarto GitHub
 format:
   html:
-    theme: cosmo
-    css: styles.css
     toc: true
+    theme:
+      light: [cosmo, theme.scss]
+    code-copy: true
+    code-overflow: wrap
+    css: styles.css
 
 
 
