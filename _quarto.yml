@@ -45,5 +45,4 @@ format:
     code-overflow: wrap
     css: styles.css
 
-
-
+freeze: true
