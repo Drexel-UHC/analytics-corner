@@ -7,11 +7,35 @@ website:
   navbar:
     background: light
     logo: uhc.png
+    logo-alt: "Drexel dragon logo."
+    collapse-below: lg
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-
+      - text: "Overview"
+        href: index.qmd
+      - text: "Welcome"
+        href: docs/get-started/index.qmd
+      - text: "Blog"
+        href: docs/get-started/index.qmd
+      - text: "Gallery"
+        href: docs/get-started/index.qmd
+      - text: "Help"
+        menu:
+          - text: "Submit an Issue"
+            icon: "patch-question"
+            href: "https://github.com/quarto-dev/quarto-cli/issues"
+          - text: "Quarto Discussions"
+            icon: "chat-right-text"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+          - text: "FAQ"
+            icon: "question-circle"
+            href: docs/faq/index.qmd
+    right:
+      - icon: twitter
+        href: https://twitter.com/drexeluhc
+        aria-label: Quarto Twitter
+      - icon: github
+        href: https://github.com/Drexel-UHC/analytics-core
+        aria-label: Quarto GitHub
 format:
   html:
     theme: cosmo
