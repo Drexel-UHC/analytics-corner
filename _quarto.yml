@@ -2,15 +2,16 @@ project:
   type: website
 
 website:
-  title: "UHC Analytics"
+  title: "Analytics Corner"
   image: "uhc.png"
+  favicon: "favicon.png"
   navbar:
     background: light
     logo: uhc.png
     logo-alt: "Drexel dragon logo."
     collapse-below: lg
     left:
-      - text: "Overview"
+      - text: "Overview" 
         href: index.qmd
       - text: "Get Started"
         href: docs/get-started/index.qmd
