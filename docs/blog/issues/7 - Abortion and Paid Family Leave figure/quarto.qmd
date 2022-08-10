@@ -1,5 +1,11 @@
 ---
-title: "#3 - Help with grant informatics infrastructure language"
+author: Ran Li
+date: "8/10/2022"
+title: "Visualization faceted by state"
+description: "Prototype a Abortion and Paid Family Leave Figure using geofacet"
+categories:
+  - visualization 
+  - infographic
 format: 
   html:
     toc: true
@@ -7,7 +13,6 @@ format:
     df-print: paged
     code-fold: true
     code-tools: true
-author: Ran Li
 execute: 
   warning: false
 editor_options: 
