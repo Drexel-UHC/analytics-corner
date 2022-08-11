@@ -5,6 +5,8 @@ website:
   title: "Analytics Corner"
   image: "uhc.png"
   favicon: "favicon.png"
+  repo-url: https://github.com/Drexel-UHC/analytics-corner
+  repo-actions: [edit, issue]
   navbar:
     background: light
     logo: uhc.png
