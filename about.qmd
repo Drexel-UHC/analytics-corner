@@ -1,9 +1,39 @@
 ---
-title: "About"
+title: "About UHC Analytics Corner"
+subtitle: "Open source analytic solutions to build bridges at the UHC"
 ---
 
-About this site
 
-```{r}
-1 + 1
-```
+:::{.callout-note}
+The analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.
+:::
+
+## Goals
+
+The overarching goal of Quarto is to build bridges across working groups at Dornsife and the UHC by making the process of collaborating on problems and sharing technical expertise dramatically better. We hope to do this in several dimensions:
+
+- A automated way for community members to submit issues/requests
+- An accessible website where we can share solutions. Analytic problems are often not unique and solutions may benefit others.
+- Provide training for how to collaborative code.
+
+Everything here is open source software licensed under the [MIT](license.qmd) license. We believe that analytic problems are not unique and it's better for everyone if the tools, issues and solutions used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science.
+
+## Project
+
+The core technologies that drive this project including:
+
+- [Quarto](https://quarto.org/) is an open-source scientific and technical publishing system built on Pandoc. It allows us to authoer documents as plain text mardkwon or Jupyter notebooks and render high-quality articles, reports, presentations, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.
+
+-  [GitHub](https://github.com/) is a only developer platform which we utilize to open source our codebase, mangage projects, allow issue submissions, have discussions and host our website. The majority of GitHub features are free for academics.
+
+-  [Tidyverse](https://tidyverse.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. We use these packages and other packages within this ecosystem to do solve problems that involve data management, visualization, dashboards and build packages. 
+ 
+
+## Contribute
+
+You can contribute in many ways. More details will come but the general idea is:
+
+-   By opening issues to provide feedback and share ideas.
+-   By submitting Pull Request (PR) to fix opened issues
+-   By submitting Pull Request (PR) to suggest new features (it is considered good practice to open an issue for discussion before working on a pull request for a new feature).
+ 
