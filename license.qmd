@@ -1,0 +1,17 @@
+---
+title: "Open Source License"
+---
+
+
+:::{.callout-note}
+The language in this license page is adapted directly from [Quarto's license page](https://quarto.org/license.html). We admire the job that Quarto has done building an open-source community and hope that this policy will help us do the same.
+:::
+
+UHC Analytics Corner is open source software licensed under the [MIT](https://opensource.org/licenses/MIT) license. We believe that it's better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science.
+
+This project also makes use of several other open-source projects including:
+
+| Project                                                       | License                                                            |
+|---------------------------------------------------------------|--------------------------------------------------------------------|
+| [Quarto](https://quarto.org/)                                 | [GNU GPL v2](https://quarto.org/license.html) |
+| [tidyverse](https://tidyverse.tidyverse.org/)           | [MIT](https://cran.r-project.org/web/packages/tidyverse/index.html)       |
