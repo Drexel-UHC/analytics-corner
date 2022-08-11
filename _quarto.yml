@@ -39,6 +39,22 @@ website:
       - icon: github
         href: https://github.com/Drexel-UHC/analytics-core
         aria-label: Quarto GitHub
+  page-footer:
+    center:
+      - text: 'About'
+        href: about.qmd
+      - text: 'FAQ'
+        href: docs/faq/index.qmd
+      - text: 'License'
+        href: license.qmd
+    right:
+      - icon: twitter
+        href: https://twitter.com/drexeluhc
+        aria-label: Quarto Twitter
+      - icon: github
+        href: https://github.com/Drexel-UHC/analytics-core
+        aria-label: Quarto GitHub
+
 format:
   html:
     toc: true
