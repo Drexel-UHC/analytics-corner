@@ -2,8 +2,11 @@
 title: "Open Source License"
 ---
 
-
 :::{.callout-note}
+The analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.
+:::
+
+:::{.callout-tip}
 The language in this license page is adapted directly from [Quarto's license page](https://quarto.org/license.html). We admire the job that Quarto has done building an open-source community and hope that this policy will help us do the same.
 :::
 
