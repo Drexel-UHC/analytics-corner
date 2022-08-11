@@ -29,7 +29,7 @@ image: /images/hero_right.png
 
 ::: {.hero-buttons}
 [Get Started](docs/get-started/){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
-[Guide](docs/guide/){#btn-guide .btn-action .btn .btn-info .btn-lg role="button"}
+[Solutions](docs/blog/){#btn-guide .btn-action .btn .btn-info .btn-lg role="button"}
 ::: 
 
 :::
