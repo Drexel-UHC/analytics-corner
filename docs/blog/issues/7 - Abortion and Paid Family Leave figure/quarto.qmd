@@ -45,7 +45,7 @@ library(geofacet)
 library(cowplot)
 
 ## raw data
-raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset.xlsx",
+raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset 8-11-22.xlsx",
                               sheet = 'Sheet2') %>% 
   drop_na() %>% 
   select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  %>% 
@@ -56,7 +56,9 @@ xwalk_states = geofacet::state_ranks %>%
   select(name, state) %>% 
   distinct()
 data = raw_data %>% 
-  mutate(name = name %>% recode("Washington DC" = "District of Columbia" )) %>% 
+  mutate(name = name %>% 
+           recode("Washington DC" = "District of Columbia",
+                  "New Hampshire*" = "New Hampshire"),) %>% 
   left_join(xwalk_states)
 data
 
@@ -94,7 +96,7 @@ data_w_coords = data %>%
 
 
 ## create a function to make basic shapes
-geom_hex_for_alina = function(data){
+geom_hex_for_alina_poc = function(data){
   data %>% 
     ggplot()  + 
     geom_rect(aes(xmin = 0, xmax = 10, ymin = 0, ymax = 10),  fill = "white") + # 10 by 10 container
@@ -109,7 +111,7 @@ geom_hex_for_alina = function(data){
 ## Test function to plot for a single state
 data_w_coords %>% 
   filter(name == "Alabama") %>% 
-  geom_hex_for_alina()
+  geom_hex_for_alina_poc()
 
 ```
 
@@ -117,7 +119,7 @@ Great now let's us this just append a [`geofacet::face_geo()`](https://hafen.git
 
 ```{r}
 data_w_coords %>% 
-  geom_hex_for_alina() +
+  geom_hex_for_alina_poc() +
   facet_geo(~ state) 
 ```
 
@@ -148,10 +150,8 @@ rect_ymax = rect_ymin*2
 
 ## Manual colors for data features
 abortion_colors = c("0" = "#e7e8e9",
-                    "1" = "#c1c2c4", 
-                    "2" = "#8a8c8f",
-                    "3" = "#5f6062",
-                    "4" = "#000000")
+                    "1" = "#8a8c8f", 
+                    "2" = "#000000")
 xwalk_colors = c(abortion_colors,
                  "white" = "white",
                  "black" = "black",
@@ -171,7 +171,7 @@ data_processed = data %>%
   unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) %>% 
   ## operationalize colors
   mutate(
-    state_text = ifelse(as.numeric(abortion_ban_risk)>2, "white","black"),
+    state_text = ifelse(as.numeric(abortion_ban_risk)>1, "white","black"),
     family_leave = paste0(family_leave,"_family_leave"),
     preemption = paste0(preemption,"_preemption"))
 
@@ -219,11 +219,11 @@ plot
 
 side = 10 
 padding = 1.5
-rect_width =  (side - 2*padding)/5
+rect_width =  (side - 2*padding)/3
 legend_y = 6
 legend_height = 1.5
-dfa = tibble(xmin = padding + 0:4*rect_width,
-             xmax = padding + 1:5*rect_width,
+dfa = tibble(xmin = padding + 0:2*rect_width,
+             xmax = padding + 1:3*rect_width,
              ymin = legend_y,
              ymax = legend_y + legend_height,
              fill = unname(abortion_colors))
@@ -356,9 +356,9 @@ title =  ggdraw() +
         
          )
 
-legend = plot_grid(NULL, rect_legend,hex_legend_blue,hex_legend_red,
-                   ncol = 4,
-                   rel_widths = c(0.2, 1, 1, 1))
+legend = plot_grid(rect_legend,hex_legend_blue,hex_legend_red,
+                   ncol = 3,
+                   rel_widths = c(1, 1, 1))
 
 
 figure = plot_grid(title,
