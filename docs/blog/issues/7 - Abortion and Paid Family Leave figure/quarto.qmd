@@ -253,7 +253,7 @@ legend_risk = ggplot() +
 
 title_rect <- ggdraw() + 
   draw_label(
-    "Rectangle show \n abortion ban risk",
+    "Rectangle show state\nattitude towards abortion",
     fontface = 'bold',
     x = 0.5,
     hjust = 0.5,
@@ -379,7 +379,7 @@ ggsave(filename = "output/issue5.jpeg",
        height = 8,
        width = 8
        )
-
+ 
 
 ```
 
