@@ -238,12 +238,16 @@ legend_risk = ggplot() +
                   ymin = ymin, ymax = ymax),
             fill = dfa$fill) + 
   ## Left label
-  geom_text(aes(label = "Less risk"),
-            x = side/5, y = legend_y - 1,
+  geom_text(aes(label = "Accessible"),
+            x = 1.5, y = legend_y - 1,
+            size = 3) +
+  ## Center label
+  geom_text(aes(label = "Hostile"),
+            x = 5, y = legend_y - 1,
             size = 3) +
   ## Rigth label
-  geom_text(aes(label = "More risk"),
-            x = 4*side/5, y = legend_y -1,
+  geom_text(aes(label = "Illegal"),
+            x =8.5, y = legend_y -1,
             size = 3) +
   theme_void()
 
@@ -276,7 +280,7 @@ rect_legend
 ## Create funciton to layout for legend
 geom_hex_legend_for_alina = function(gg){
   gg +
-    geom_rect(aes(xmin =  0 - 1*height, xmax = height + 1*height,   
+    geom_rect(aes(xmin =  0 - 1*height*1.4, xmax = height + 1*height*1.4,   
                   ymin = 0 - 1*height, ymax = height + 1*height),
               fill = "white") 
 }
@@ -310,10 +314,10 @@ hex_legend_blue
 
 ```{r}
 
-## Legend 3: Red triangle
+## Legend 3: Red triangle 
 title_hex_red <- ggdraw() + 
   draw_label(
-    "Blue Triangles show \n preemption policy",
+    "Red triangles show state preemption\nof paid family policies",
     fontface = 'bold',
     x = 0.5,
     hjust = 0.5,
@@ -323,7 +327,7 @@ title_hex_red <- ggdraw() +
     plot.margin = margin(5, 0, 0, 0)
   )
 legend_hex_red = data_processed %>% 
-  filter(state == "MI") %>% 
+  filter(state == "FL") %>% 
   mutate(state = "") %>% 
   ggplot()  %>% 
   geom_hex_legend_for_alina() %>% 
