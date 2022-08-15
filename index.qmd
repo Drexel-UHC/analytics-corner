@@ -28,7 +28,7 @@ image: /images/hero_right.png
 - [Solutions](docs/blog/) are all made accessible to everyone
 
 ::: {.hero-buttons}
-[Get Started](docs/get-started/){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
+[Submit a Request](https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&labels=&template=request.yml&title=%5BRequest+title%5D%3A+){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
 [Solutions](docs/blog/){#btn-guide .btn-action .btn .btn-info .btn-lg role="button"}
 ::: 
 
