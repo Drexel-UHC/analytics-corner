@@ -4,6 +4,6 @@ title: "Core values"
 subtitle: What are our values?
 ---
 
-# Hello
-
-# World
+:::{.callout-note}
+Coming soon!
+:::
