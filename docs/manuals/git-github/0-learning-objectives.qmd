@@ -1,0 +1,27 @@
+---
+title: "0. Learning objectives"
+subtitle: Workshop Overview
+---
+
+::: {.callout-note}
+
+This manual was heavily inspired by [chapter 8](https://ngs-docs.github.io/2021-august-remote-computing/keeping-track-of-your-files-with-version-control.html#learning-objectives-1) of Introduction to [Remote Computing](https://ngs-docs.github.io/2021-august-remote-computing/) by Titus Brown's group at UC Davice DataLab. The main difference in this manual is that we try to teach git through a graphical user interface (GitHub Desktop) rather than through using the command line. 
+
+We are very thankful for their open sourcing of their training material and aim to adapt it for a one hour basic version control workshop using git and GitHub.
+:::
+
+# Hello
+
+
+::: {.callout-tip collapse=true}
+
+## Pay Attention
+
+Using callouts is an effective way to highlight content that your reader give special consideration or attention.
+
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+
+:::
