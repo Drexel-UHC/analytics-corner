@@ -7,6 +7,7 @@ website:
   favicon: "favicon.png"
   repo-url: https://github.com/Drexel-UHC/analytics-corner
   repo-actions: [edit, issue]
+  page-navigation: true
   navbar:
     background: light
     logo: uhc.png
@@ -15,8 +16,12 @@ website:
     left:
       - text: "Overview" 
         href: index.qmd
-      - text: "Get Started"
-        href: docs/get-started/index.qmd
+      - text: Manuals
+        menu:
+        - href: docs/manuals/welcome/1-about.qmd
+          text: "Welcome"
+        - href: docs/manuals/git-github/1-what-is-version-control.qmd
+          text: "Git and GitHub"
       - text: "Blog"
         href: docs/blog/index.qmd
       - text: "Gallery"
@@ -39,6 +44,7 @@ website:
       - icon: github
         href: https://github.com/Drexel-UHC/analytics-core
         aria-label: Quarto GitHub
+        
   page-footer:
     center:
       - text: 'About'
@@ -54,6 +60,24 @@ website:
       - icon: github
         href: https://github.com/Drexel-UHC/analytics-core
         aria-label: Quarto GitHub
+        
+  sidebar:
+    - id: git-github
+      contents:
+        - section: 'Manual: Git and GitHub'
+          contents:
+          - text: '1. What is version control'
+            href: docs/manuals/git-github/1-what-is-version-control.qmd
+          - text: '2. Intro to GitHub Desktop'
+            href: docs/manuals/git-github/2-git-github.qmd
+    - id: welcome
+      contents:
+        - section: 'Manual: Welcome'
+          contents:
+          - text: '1. About'
+            href: docs/manuals/welcome/1-about.qmd
+          - text: '2. Core values'
+            href: docs/manuals/welcome/2-core-values.qmd
 
 format:
   html:
