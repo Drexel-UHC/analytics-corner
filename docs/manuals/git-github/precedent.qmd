@@ -1,0 +1,51 @@
+---
+title: "Who else uses Git/GitHub"
+subtitle: "Many data driven organizations use Git and GitHub to collaborate and share their work" 
+fig-cap-location: top
+bibliography: references.bib
+---
+
+Many of our friends use Git and GitHub to share data and software. Here are some examples.
+
+
+
+## 3.1 NYC Public Health Department
+
+Through the COVID pandemic the NYC health departments was one of the best sources of city level COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub. 
+
+<https://github.com/nychealth>
+
+![](/images/precedent-nyc-health.png){fig-align="center" width="100%"}
+
+
+## 3.2 Johns Hopkins Covid data
+
+Johns Hopkins was one of the best national level data sources for COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub. 
+
+<https://github.com/CSSEGISandData>
+
+![](/images/precedent-jhe.png){fig-align="center" width="100%"}
+
+## 3.3 ESRI
+
+Some of our favorite GIS software is developed with GitHub.
+
+<https://github.com/Esri>
+
+![](/images/precedent-esri.png){fig-align="center" width="100%"}
+
+## 3.4 Tidyverse
+
+Some of our favorite data packages is utilizes GitHub to open-sourced developement.
+
+<https://github.com/tidyverse/tidyverse/releases>
+
+![](/images/precedent-tidyverse.png){fig-align="center" width="100%"}
+
+## 3.5 NASA
+
+🚀🚀🚀🚀🚀🚀
+
+<https://github.com/tidyverse/nasa>
+
+![](/images/precedent-nasa.png){fig-align="center" width="100%"}
