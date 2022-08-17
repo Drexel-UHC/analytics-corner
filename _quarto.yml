@@ -69,8 +69,10 @@ website:
         - text: "---"
         - section: 'Why learn Git/GitHub?'
           contents:
-          - text: '1.1 A Tale of Two Projects'
+          - text: '1. Version Control'
             href: docs/manuals/git-github/case-study-version-control.qmd
+          - text: '2. Project organization'
+            href: docs/manuals/git-github/case-study-project-transition-management.qmd
           - text: ' What is version control'
             href: docs/manuals/git-github/what-is-version-control.qmd
           - text: 'Intro to GitHub Desktop'

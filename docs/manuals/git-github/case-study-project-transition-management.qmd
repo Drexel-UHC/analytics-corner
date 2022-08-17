@@ -1,0 +1,97 @@
+---
+title: "Project managment"
+subtitle: Collaborative coding can get messy especially when you want to do something complex. Git/GitHub was designed to make collaboration easier.
+fig-cap-location: margin
+---
+
+
+## 2.1 Project Challenges 
+
+There are many challenges aspects to building a collaborative coding project
+
+- How to communicate about code changes? 
+- How to keep record of small details in a complex project?
+- How to have longer technical back and forth conversations while maintaining context throughout? 
+- How to handle project transitions between staff changes?
+
+Below we will use a private repository which cleans and synthesizes research from sensitive line level mortality data. A graduate research assistant wrote code to clean years 1990-2018 then graduate and is handed off to another RA to extend not only data range 1960-2020 but also to start synthesizing research. It is a great case study to show how Git/GitHub can help address the challenges above. It is a private repository so I will just show snippets. 
+
+
+## 2.2 GitHub Issues to track changes and details
+
+
+**Scenario:** @isabelderamos has a question about a specific part of the project. 
+
+- How can @isabelderamos communicate this?
+- How can collaborators reply in a way which clearly communicates how and why the codebase was updated?
+
+✨[GitHub issues](https://docs.github.com/en/issues)
+
+
+![@isabelderamos can notify the team of a thing that needs to be done by **creating a GitHub issue**. She error she is getting and provides some context to the source of the problem. GitHub will notify teamates @fig-2](/images/project-management-case-1-1.PNG){#fig-1 fig-align="center" width="100%"}
+
+![](/images/down-arrow.svg){fig-align="center" height="15"} 
+
+![**GitHub will notify all teammates** (@usamabilal and @ran-codes) of a new issue via email. @ran-codes has an idea of what the issue is and pushes some changes to the code, see @fig-3](/images/project-management-case-1-2.PNG){#fig-2 fig-align="center" width="70%"}  
+
+![](/images/down-arrow.svg){fig-align="center" height="15"}
+
+![@ran-codes makes two changes saved as commits with messages detailing progress. Importantly these changes/commits  are linked to this issue and @isabelderamos can click each commit to see exact code changes, see @fig-4.](/images/project-management-case-1-3.PNG){#fig-3 fig-align="center" width="100%"} 
+
+![](/images/down-arrow.svg){fig-align="center" height="15"}
+
+![Clicking the commit shows code differences compared to the previous version. We can see that icd10 code `U02` was manually added to three GHE tiers by **modifying the highlighted lines of code.** Going back to the issue, see @fig-5](/images/project-management-case-1-4.PNG){#fig-4 fig-align="center" width="100%"} 
+
+![](/images/down-arrow.svg){fig-align="center" height="15"}
+
+
+![Right after the commits (@fig-4), **@ran-codes describes the changes he made to provide context** for the code updates above.](/images/project-management-case-1-5.PNG){#fig-5 fig-align="center" width="100%"} 
+
+![](/images/down-arrow.svg){fig-align="center" height="15"}
+
+![@isabelderamos **pulls the changes from GitHub to her local computer.** After **checking code changes resolved error** are fixed, @isabelderamos notifies the team everything is okay and **closes the issue!** ](/images/project-management-case-1-6.PNG){#fig-6 fig-align="center" width="100%"} 
+
+:::{.callout-important} 
+[GitHub issues](https://docs.github.com/en/issues) are a feature designed to describe problems, track code changes related to those problems, stay up to date through email notifications, and facilitate efficient communication through feature rich markdown.
+
+Every project can be broken down many smaller problems. GitHub issues is a workflow that allows us to focus, collaborate and document how we solve these small problems. This really helps keep organized in the context a of a large project which could have hundreds of issues and multiple collaborators.
+:::
+
+
+
+## 2.2 Branches to manage role transitions
+
+
+**Scenario:** @usamabilal is PI. @ran-codes is an RA that wrote code to clean mortality data but is graduating. @isabelderamos is an incoming RA that is tasked with extending the functionality of the existing codebase. 
+
+- @usamabilal: mmm how to transition between two RA's. I hope we can make these new changes without breaking the existing project.
+- @isabelderamos 😰 omg... I am kind of new to R. What if I break something?
+- @ran-codes: how can I share my code and remain in touch to answer any questions?
+
+
+✨[Git Branches](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches) allow you to safely experiment with new ideas in a contained area of your repository.
+
+
+ 
+![**Jul 15, 2021** @ran-codes creates a git repository with to track the **main codebase (black line)** and  a branch within the repository aka **duplicate codebase (green line)** for @isabelderamos to work on  without effecting the main codebase.](/images/project-management-case-2-2.PNG){ fig-align="center" width="100%"}
+
+![](/images/down-arrow.svg){fig-align="center" height="15"} 
+
+
+![**Jul 15, 2021 - Jul 20, 2022** @isabelderamos works on the duplicate branch (green-line).](/images/project-management-case-2-3.PNG){ fig-align="center" width="100%"}
+
+![](/images/down-arrow.svg){fig-align="center" height="15"}  
+
+![**Jan, 2 2022** Periodically we will test and validate @isabelderamos contributions and merge changes (green) to the main codebase (black). ](/images/project-management-case-2-4.PNG){ fig-align="center" width="100%"}
+
+![](/images/down-arrow.svg){fig-align="center" height="15"} 
+
+![**Jul 20, 2022** @isabelderamos is graduating and is wrapping up her portion of work. @usamabilal validates merges changes (green) into main codebase (black) and culls/ends the branch. ](/images/project-management-case-2-5.PNG){ fig-align="center" width="100%"}
+
+:::{.callout-important} 
+[Git branches](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches) allow you to develop features, fix bugs, or safely experiment with new ideas in a contained area of your repository. GitHub allow us to implement branches within the context of issues and commits to smooth document project evolution and allow for smooth transitions between collaborators.
+
+Branches may not be require when working alone. They are particularly useful when entry level RA enter a project to relieve pressure on the RA and protect the project from any regressive code changes.
+:::
+
+
