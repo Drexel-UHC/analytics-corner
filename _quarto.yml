@@ -83,12 +83,18 @@ website:
             href: docs/manuals/git-github/teaching-thoughts.qmd
           - text: '2. Learning Objectives'
             href: docs/manuals/git-github/learning-objectives.qmd
-          - text: '3. Git vs GitHub'
+          - text: '3. Git Intro'
+            href: docs/manuals/git-github/git-intro.qmd
+          - text: '4. Basic Git Workflow'
+            href: docs/manuals/git-github/git-basics.qmd
+          - text: '5. Git vs GitHub'
             href: docs/manuals/git-github/git-vs-github.qmd
-          - text: '4. Git vs Github Desktop'
+          - text: '6. Git vs Github Desktop'
             href: docs/manuals/git-github/git-vs-github-desktop.qmd
-          - text: '5. Setup GitHub Desktop'
+          - text: '7. Setup GitHub Desktop'
             href: docs/manuals/git-github/install-github-desktop.qmd
+          - text: '8. Create a new repo on GitHub (init)'
+            href: docs/manuals/git-github/init.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'

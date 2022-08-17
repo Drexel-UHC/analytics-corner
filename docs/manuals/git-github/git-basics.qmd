@@ -1,0 +1,17 @@
+---
+title: "Fundamental Git workflow"
+---
+
+
+**Key Terms**
+
+- `modify-add-commit-push-pull` a basic git workflow that can get you 80% of the benefits of version control.
+
+
+![](/images/git-basic-workflow.png){fig-align="center" width="485"}
+
+1. `modify` aka change files in the working directory (local computer)
+2. `add` changes to a staging area which allows us to control what files to track with Git
+3. `commit` save selected changes as a version onto our local repo (local history)
+4. `push` our new local version to a remote repo (GitHub)
+5. `pull` sync local git repo with a remote repo 

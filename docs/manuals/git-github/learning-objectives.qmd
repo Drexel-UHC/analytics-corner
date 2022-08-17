@@ -1,0 +1,25 @@
+---
+title: "Overview"
+subtitle: The specific learning objectives of this workshop 
+---
+
+
+
+- Learn key terms:
+  - `Git` is a version control software that tracks file changes.
+  - `Repository (repo)` is a folder that contains files tracked by git.
+  - `GitHub` online platform for syncing git repos and project management.
+  - `GitHub Desktop` local software to do git via a graphical user interface.
+  - `modify-add-commit-push-pull` a basic git workflow that can get you 80% of the benefits of version control.
+- Git actions we will learn to do via GitHub Desktop
+  - `init` Create a repo 
+  - `clone` Pulls a remote repo to local machine 
+  - `status` list of files changes relative previous version.
+  - `log` entire history
+  - `diff` show changes in a file compared to previous version.
+  - `add` stage selected changes for next commit
+  - `commit` save  selected changes as a version
+  - `pull` sync local repo with remote repo
+  - `push` push local repo changes to remote repo
+- GitHub features
+  - `Issues` a GitHub feature for organizing commits.

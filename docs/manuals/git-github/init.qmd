@@ -1,0 +1,64 @@
+---
+title: "Create a new repo on GitHub (init)"
+subtitle: "This page shows how you can create a new git repository. You can init a repo either on your computer locally or remotely on GitHub. This apge shows how to init a repo remotely."
+---
+
+
+**Key Terms**
+
+- `Repository (repo)` is a folder that contains files tracked by git.
+- `init` Create a new repo 
+
+
+## 1 Sign into GitHub website
+
+
+1. Open a browser.
+2. Visit <https://github.com/>
+3. Sign in
+
+## 2 Click `New` Repository
+
+
+![](/images/init.png){fig-align="center" width="485"}
+
+## 3. Fill out repository name
+
+Create a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be `my-first-repo`
+
+![](/images/init-repo-name.png){fig-align="center" width="485"}
+
+## 3. Select Visibility Setting
+
+By default I recommend private; unless your goal is to share data or code publicly.
+
+- **Public** means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.
+- **Private** only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo. 
+
+
+![](/images/init-access.png){fig-align="center" width="485"}
+
+## 4. Add a README file
+
+README.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project.
+
+![](/images/init-readme.png){fig-align="center" width="485"}
+
+## 5. Click `Create Repository`
+
+Now that we have configured our settings we can click `Create Repository` to make the repo. 
+
+![](/images/init-create.png){fig-align="center" width="485"}
+
+
+You should now be routed to your new repo on GitHub. 👏👏👏
+
+
+![](/images/init-done.png){fig-align="center" width="485"}
+
+A few observations
+
+- We have only one file the README.md file
+- We only have one version/commit  which is project initialization; this commit is identified by a hash key `d4ff056`.
+
+**Now lets move on to `clone` or pull this repo from the cloud onto our local computer to make some changes with GitHub Desktop**

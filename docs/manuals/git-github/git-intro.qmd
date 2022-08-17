@@ -1,0 +1,22 @@
+---
+title: "Git vs GitHub"
+---
+
+
+**Key Terms**
+
+- **Git** is version control software that allows you to track the iterative changes you make to your code. 
+- **Git repository (repo)** is a folder that contains files tracked by git.
+
+## 3.1 Git track changes
+
+Git allows you track versions of your code. You can access earlier versions and this makes it easy to go back and debug or allow you to experiment with changes knowing you can always revert to a previous version if something doesn't work.
+
+![](/images/git-graphic-changes.png){fig-align="center" width="485"}
+
+## 3.2 Git synchronizes code across collaborators
+
+This is an example of two poeple can make changes to a piece of code at the same time. You can you partner pull the current version from online to own computers. Then each mach changes that same file. Git allows oyu to easily take those changes that you have made independently and merge them back to when you push them back online. And then pull those back down to your own computers so you both have the latest changes; not only what you have changed but also what your partner has change. Ensuring both have the most recent up to date versions. 
+
+![](/images/git-sync.gif){fig-align="center" width="485"}
+
