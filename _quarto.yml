@@ -20,7 +20,7 @@ website:
         menu:
         - href: docs/manuals/welcome/1-about.qmd
           text: "Welcome"
-        - href: docs/manuals/git-github/learning-objectives.qmd
+        - href: docs/manuals/git-github/overview.qmd
           text: "Git and GitHub"
       - text: "Blog"
         href: docs/blog/index.qmd
@@ -65,7 +65,7 @@ website:
     - id: git-github
       contents:
         - text: 'Overview'
-          href: docs/manuals/git-github/learning-objectives.qmd
+          href: docs/manuals/git-github/overview.qmd
         - text: "---"
         - section: 'Why learn Git/GitHub?'
           contents:
