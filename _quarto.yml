@@ -20,7 +20,7 @@ website:
         menu:
         - href: docs/manuals/welcome/1-about.qmd
           text: "Welcome"
-        - href: docs/manuals/git-github/0-learning-objectives.qmd
+        - href: docs/manuals/git-github/learning-objectives.qmd
           text: "Git and GitHub"
       - text: "Blog"
         href: docs/blog/index.qmd
@@ -64,15 +64,17 @@ website:
   sidebar:
     - id: git-github
       contents:
-        - section: 'Manual: Git and GitHub'
+        - text: 'Overview'
+          href: docs/manuals/git-github/learning-objectives.qmd
+        - text: "---"
+        - section: 'Why learn Git/GitHub?'
           contents:
-          - text: "---"
-          - text: '0. Learning Objectives'
-            href: docs/manuals/git-github/0-learning-objectives.qmd
-          - text: '1. What is version control'
-            href: docs/manuals/git-github/1-what-is-version-control.qmd
-          - text: '2. Intro to GitHub Desktop'
-            href: docs/manuals/git-github/2-git-github.qmd
+          - text: '1.1 A Tale of Two Projects'
+            href: docs/manuals/git-github/case-study-version-control.qmd
+          - text: ' What is version control'
+            href: docs/manuals/git-github/what-is-version-control.qmd
+          - text: 'Intro to GitHub Desktop'
+            href: docs/manuals/git-github/git-github.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'

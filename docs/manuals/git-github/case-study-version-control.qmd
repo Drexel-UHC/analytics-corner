@@ -1,0 +1,29 @@
+---
+title: "A Tale of Two Projects"
+subtitle: Having a history of how a manuscript/project develops is useful. Here is a tale of two projects handled version control.
+fig-cap-location: margin
+---
+
+## 1.1 Version pit of doom
+
+![](/images/tale-of-two-projects-diy.png){fig-align="center" width="485"}
+
+Does this look familiar? Then you may understand the value of tracking changes to a project and having a history of previous versions. **You are doing version control!**
+
+## 1.2 Git + GitHub
+
+Below is an example of a version control solution using Git and GitHub.
+
+
+![The [**most recent version**](https://github.com/Drexel-UHC/github-demo) can be found at the GitHub repository page. Importantly we also have access to all previous saved versions of this git project, see @fig-2.](/images/github-demo-home.PNG){#fig-1 fig-align="center" width="600"}
+
+
+![Click the higlighted button to see all saved versions or commits of this git project, see .](/images/github-demo-home-highlight.PNG){#fig-2 fig-align="center" width="600"} 
+
+
+![[This page shows the projects history](https://github.com/Drexel-UHC/github-demo/commits/main). We can see not only what progress occured each individual saved step but also navigate to the state of the project at those individual steps, see @fig-4.](/images/github-demo-history.PNG){#fig-3 fig-align="center" width="600"}
+
+![Click the higlighted button to see the version of the project at the first save point/commit, see @fig-5.](/images/github-demo-history-highlight.PNG){#fig-4 fig-align="center" width="600"}
+
+
+![[This is the first version of the project](https://github.com/Drexel-UHC/github-demo/tree/f21587aece8a58b3e2ab3b777bbcfe0a4c26a695), as you can see it is empty.](/images/github-demo-history-initial.PNG){#fig-5 fig-align="center" width="600"} 
