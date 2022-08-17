@@ -137,7 +137,7 @@
     "href": "docs/manuals/git-github/learning-objectives.html",
     "title": "Overview",
     "section": "",
-    "text": "Overview\nThe workshop will be split into three main sections. 1. Give present some previous use cases to demonstrate why you might want to learn git and GitHub. 2. Teach basics of the three technologies will learn (git, GitHub desktop, GitHub). 3. Live demo where two people collaborate together to finish a R&R.\n\n\nLearning Objectives\nThe specific learning objectives of this workshop are:\n\nLearn the difference between Git, GitHub Desktop and GitHub\nClone a remote repository\nLearn a basic git workflow modify-add-commit\nAdd and track changes with GitHub Desktop\nSave changes by committing with GitHub Desktop\nBest practices for commit messages\nPushing commits to Github with GitHub Desktop"
+    "text": "Learn key terms:\n\nGit is a version control software that tracks file changes.\nRepository (repo) is a folder that contains files tracked by git.\nGitHub online platform for syncing git repos and project management.\nGitHub Desktop local software to do git via a graphical user interface.\nmodify-add-commit-push-pull a basic git workflow that can get you 80% of the benefits of version control.\n\nGit actions we will learn to do via GitHub Desktop\n\ninit Create a repo\nclone Make a clone/copy of an existing remote repo to local machine\nstatus list of files changes relative previous version.\nlog entire history\ndiff show changes in a file compared to previous version.\nadd stage selected changes for next commit\ncommit save selected changes as a version\npull sync local repo with remote repo\npush push local repo changes to remote repo\n\nGitHub features\n\nIssues a GitHub feature for organizing commits."
   },
   {
     "objectID": "docs/manuals/git-github/what-is-version-control.html",
@@ -166,5 +166,453 @@
     "title": "Open Source License",
     "section": "",
     "text": "Tip\n\n\n\nThe language in this license page is adapted directly from Quarto’s license page. We admire the job that Quarto has done building an open-source community and hope that this policy will help us do the same.\n\n\nUHC Analytics Corner is open source software licensed under the MIT license. We believe that it’s better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science.\nThis project also makes use of several other open-source projects including:\n\n\n\nProject\nLicense\n\n\n\n\nQuarto\nGNU GPL v2\n\n\ntidyverse\nMIT"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html",
+    "href": "docs/manuals/git-github/precedent.html",
+    "title": "Who else uses Git/GitHub",
+    "section": "",
+    "text": "Many of our friends use Git and GitHub to share data and software. Here are some examples."
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#git-github",
+    "href": "docs/manuals/git-github/precedent.html#git-github",
+    "title": "Who else uses Git/GitHub",
+    "section": "1.2 Git + GitHub",
+    "text": "1.2 Git + GitHub\nBelow is an example of a version control solution using Git and GitHub.\n\n\n\nFigure 1: The most recent version can be found at the GitHub repository page. Importantly we also have access to all previous saved versions of this git project, see Figure 2.\n\n\n\n\n\nFigure 2: Click the higlighted button to see all saved versions or commits of this git project, see Figure 3 .\n\n\n\n\n\nFigure 3: This page shows the projects history. We can see not only what progress occured each individual saved step but also navigate to the state of the project at those individual steps, see Figure 4.\n\n\n\n\n\nFigure 4: Click the higlighted button to see the version of the project at the first save point/commit, see Figure 5.\n\n\n\n\n\nFigure 5: This is the first version of the project, as you can see it is empty. However as we shown in Figure 3 we have access to the project state at every save point; this makes it easy to reset to a previous point if anything goes wrong."
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#takeaway",
+    "href": "docs/manuals/git-github/precedent.html#takeaway",
+    "title": "Who else uses Git/GitHub",
+    "section": "1.3 Takeaway",
+    "text": "1.3 Takeaway\n\n\n\n\n\n\nImportant\n\n\n\nThis approach of using a version control system (VCS) (Blischak, Davenport, and Wilson 2016) is an industry and academic (Ram 2013) best practice. It is much more ergonomic and reliable than manualy tracking versions."
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#nyc-public-health-department",
+    "href": "docs/manuals/git-github/precedent.html#nyc-public-health-department",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.1 NYC Public Health Department",
+    "text": "3.1 NYC Public Health Department\nThrough the COVID pandemic the NYC health departments was one of the best sources of city level COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/nychealth"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#johns-hopkins-covid-data",
+    "href": "docs/manuals/git-github/precedent.html#johns-hopkins-covid-data",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.2 Johns Hopkins Covid data",
+    "text": "3.2 Johns Hopkins Covid data\nJohns Hopkins was one of the best national level data sources for COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/CSSEGISandData"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#some-of-our-favorite-tools",
+    "href": "docs/manuals/git-github/precedent.html#some-of-our-favorite-tools",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.3 Some of our favorite tools",
+    "text": "3.3 Some of our favorite tools\n\n\nhttps://github.com/Esri"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#esri",
+    "href": "docs/manuals/git-github/precedent.html#esri",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.3 ESRI",
+    "text": "3.3 ESRI\nSome of our favorite GIS software is developed with GitHub.\nhttps://github.com/Esri"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#tidyverse",
+    "href": "docs/manuals/git-github/precedent.html#tidyverse",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.4 Tidyverse",
+    "text": "3.4 Tidyverse\nSome of our favorite data packages is utilizes GitHub to open-sourced developement.\nhttps://github.com/tidyverse/tidyverse/releases"
+  },
+  {
+    "objectID": "docs/manuals/git-github/precedent.html#nasa",
+    "href": "docs/manuals/git-github/precedent.html#nasa",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.5 NASA",
+    "text": "3.5 NASA\n🚀🚀🚀🚀🚀🚀\nhttps://github.com/tidyverse/nasa"
+  },
+  {
+    "objectID": "docs/manuals/git-github/overview.html",
+    "href": "docs/manuals/git-github/overview.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Note\n\n\n\nSomethings to keep in mind before we start\n\nGit is notoriously hard to pick up and also notoriously hard to teach.\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!"
+  },
+  {
+    "objectID": "docs/manuals/git-github/why-summary.html",
+    "href": "docs/manuals/git-github/why-summary.html",
+    "title": "Why Git/GitHub?",
+    "section": "",
+    "text": "Nothing that is committed/saved to version control is ever lost. Its possible to go back in time time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.\nAs we have this record of who made what changes when, we know who to ask if we have questions later on, and, if needed, revert to a previous version, much like the “undo” feature in an editor.\nWhen several people collaborate in the same project, it’s possible to accidentally overlook or overwrite someone’s changes. The version control system automatically detects potential conflicts between one person’s work and another’s and notifies users.\nGitHub issues/projects/branches provide ergonomic solutions to common project management challenges.\n\nGit/GitHub can help us bring software engineering best practices to public health to enable us to better respond to complex public health problems in a manner that is timely, organized, transparent and reproducible."
+  },
+  {
+    "objectID": "docs/manuals/git-github/teaching-thoughts.html",
+    "href": "docs/manuals/git-github/teaching-thoughts.html",
+    "title": "Overview",
+    "section": "",
+    "text": "80/20 rule Focus on teaching a fundamental git workflow modify-add-commit that provides 80% of what you will need without touching on more advanced topics.\nGraphical interface over command line Teaching Git/GitHub has a steep enough learning curve. Teaching to an audience that doesn’t use command line we will teach using GitHub Desktop (a graphical user interface to do Git).\n\nDisclaimer: There are many ways to use and teach Git and and many Git platforms available. This course not meant to be comprehensive. It is just one person sharing how they learned to use version control.\n\n\n\n\nMost git workshops"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-vs-github.html",
+    "href": "docs/manuals/git-github/git-vs-github.html",
+    "title": "Git vs GitHub",
+    "section": "",
+    "text": "Git is a version control system that lets you manage and keep track of your source code history.\nGitHub is a hosting service that is 1 part a cloud backup for git repositories and 1 part social media platform for collaboration."
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-vs-github-desktop.html",
+    "href": "docs/manuals/git-github/git-vs-github-desktop.html",
+    "title": "Git vs GitHub",
+    "section": "",
+    "text": "Git Figure 1 (a) is a command line interface (CLI) tool which require you to interact by typing commands. It is harder to learn for users without CLI experience and the outputs are not as accessible.\nGitHub Desktop Figure 1 (a) a graphical user interface (GUI) tool that allows you to us Git without using the command line. We do Git actions by interacting with a user interface that is designed to be ergonomic and accessible. You can’t do all the things you can with CLI but again 80% of features are here!\n\n\n\n\n\n\n\nImportant\n\n\n\nFor this workshop. We will use GitHub Desktop to do Git."
+  },
+  {
+    "objectID": "docs/manuals/git-github/install-github-desktop.html",
+    "href": "docs/manuals/git-github/install-github-desktop.html",
+    "title": "Setup GitHub desktop",
+    "section": "",
+    "text": "Open a browser.\nVisit https://github.com/join\nChoose a user name (recomendation: closer to your name the better)\nInput a email account(recomendation: choose your work email as GitHub will send you work related notifications)"
+  },
+  {
+    "objectID": "docs/manuals/git-github/install-github-desktop.html#download-github-desktop",
+    "href": "docs/manuals/git-github/install-github-desktop.html#download-github-desktop",
+    "title": "Setup GitHub desktop",
+    "section": "5.2 Download GitHub Desktop",
+    "text": "5.2 Download GitHub Desktop\n\nOpen a browser.\nVisit https://desktop.github.com/\nClick Download for Windows (64bit) or Mac.\nWhen prompted, click Run.\nAllow the installation to download and install."
+  },
+  {
+    "objectID": "docs/manuals/git-github/install-github-desktop.html#sign-in",
+    "href": "docs/manuals/git-github/install-github-desktop.html#sign-in",
+    "title": "Setup GitHub desktop",
+    "section": "5.3 Sign in",
+    "text": "5.3 Sign in\nWhen you open GitHub desktop click “Sign in to GitHub.com” to sign in.\n\nYour browser should open and after you signed in. You should see the below snip and you are ready to go!"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html",
+    "href": "docs/manuals/git-github/git-intro.html",
+    "title": "Git vs GitHub",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html#section",
+    "href": "docs/manuals/git-github/git-intro.html#section",
+    "title": "Git vs GitHub",
+    "section": "3.1",
+    "text": "3.1\n\n\n\n\n\n\nGit is a version control system that lets you manage and keep track of your source code history.\nGitHub is a hosting service that is 1 part a cloud backup for git repositories and 1 part social media platform for collaboration."
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html#track-changes",
+    "href": "docs/manuals/git-github/git-intro.html#track-changes",
+    "title": "Git vs GitHub",
+    "section": "3.1 track changes",
+    "text": "3.1 track changes"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html#git-repositories",
+    "href": "docs/manuals/git-github/git-intro.html#git-repositories",
+    "title": "Git vs GitHub",
+    "section": "3.2 Git repositories",
+    "text": "3.2 Git repositories\nGit Reposi"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html#git-track-changes",
+    "href": "docs/manuals/git-github/git-intro.html#git-track-changes",
+    "title": "Git vs GitHub",
+    "section": "3.1 Git track changes",
+    "text": "3.1 Git track changes\nGit allows you track versions of your code. You can access earlier versions and this makes it easy to go back and debug or allow you to experiment with changes knowing you can always revert to a previous version if something doesn’t work."
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-intro.html#git-synchronizes-code-across-collaborators",
+    "href": "docs/manuals/git-github/git-intro.html#git-synchronizes-code-across-collaborators",
+    "title": "Git vs GitHub",
+    "section": "3.2 Git synchronizes code across collaborators",
+    "text": "3.2 Git synchronizes code across collaborators\nThis is an example of two poeple can make changes to a piece of code at the same time. You can you partner pull the current version from online to own computers. Then each mach changes that same file. Git allows oyu to easily take those changes that you have made independently and merge them back to when you push them back online. And then pull those back down to your own computers so you both have the latest changes; not only what you have changed but also what your partner has change. Ensuring both have the most recent up to date versions."
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-basics.html",
+    "href": "docs/manuals/git-github/git-basics.html",
+    "title": "Fundamental Git workflow",
+    "section": "",
+    "text": "modify-add-commit-push-pull a basic git workflow that can get you 80% of the benefits of version control.\n\n\n\n\n\n\n\nmodify aka change files in the working directory (local computer)\nadd changes to a staging area which allows us to control what files to track with Git\ncommit save selected changes as a version onto our local repo (local history)\npush our new local version to a remote repo (GitHub)\npull sync local git repo with a remote repo"
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-basics.html#big-picture",
+    "href": "docs/manuals/git-github/git-basics.html#big-picture",
+    "title": "Fundamental Git workflow",
+    "section": "4.1 Big picture",
+    "text": "4.1 Big picture\n\n\n\n\n\nGit allows you track versions of your code. You can access earlier versions and this makes it easy to go back and debug or allow you to experiment with changes knowing you can always revert to a previous version if something doesn’t work."
+  },
+  {
+    "objectID": "docs/manuals/git-github/git-basics.html#git-synchronizes-code-across-collaborators",
+    "href": "docs/manuals/git-github/git-basics.html#git-synchronizes-code-across-collaborators",
+    "title": "Git vs GitHub",
+    "section": "3.2 Git synchronizes code across collaborators",
+    "text": "3.2 Git synchronizes code across collaborators\nThis is an example of two poeple can make changes to a piece of code at the same time. You can you partner pull the current version from online to own computers. Then each mach changes that same file. Git allows oyu to easily take those changes that you have made independently and merge them back to when you push them back online. And then pull those back down to your own computers so you both have the latest changes; not only what you have changed but also what your partner has change. Ensuring both have the most recent up to date versions."
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html",
+    "href": "docs/manuals/git-github/init.html",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#sign-into-github-website",
+    "href": "docs/manuals/git-github/init.html#sign-into-github-website",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "1 Sign into GitHub website",
+    "text": "1 Sign into GitHub website\n\nOpen a browser.\nVisit https://github.com/\nSign in"
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#click-new-repository",
+    "href": "docs/manuals/git-github/init.html#click-new-repository",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "2 Click New Repository",
+    "text": "2 Click New Repository"
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#fill-out-repository-name",
+    "href": "docs/manuals/git-github/init.html#fill-out-repository-name",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "3. Fill out repository name",
+    "text": "3. Fill out repository name\nCreate a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be my-first-repo"
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#fill-out-repository-name-1",
+    "href": "docs/manuals/git-github/init.html#fill-out-repository-name-1",
+    "title": "Fundamental Git workflow",
+    "section": "3. Fill out repository name",
+    "text": "3. Fill out repository name"
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#chose-your-repo-visibility",
+    "href": "docs/manuals/git-github/init.html#chose-your-repo-visibility",
+    "title": "Fundamental Git workflow",
+    "section": "3. Chose your repo visibility",
+    "text": "3. Chose your repo visibility\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#chose-visibility-setting",
+    "href": "docs/manuals/git-github/init.html#chose-visibility-setting",
+    "title": "Fundamental Git workflow",
+    "section": "3. Chose Visibility Setting",
+    "text": "3. Chose Visibility Setting\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#select-visibility-setting",
+    "href": "docs/manuals/git-github/init.html#select-visibility-setting",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "3. Select Visibility Setting",
+    "text": "3. Select Visibility Setting\nBy default I recommend private; unless your goal is to share data or code publicly.\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#add-a-readme-file",
+    "href": "docs/manuals/git-github/init.html#add-a-readme-file",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "4. Add a README file",
+    "text": "4. Add a README file\nREADME.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project."
+  },
+  {
+    "objectID": "docs/manuals/git-github/init.html#click-create-repository",
+    "href": "docs/manuals/git-github/init.html#click-create-repository",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "5. Click Create Repository",
+    "text": "5. Click Create Repository\nNow that we have configured our settings we can click Create Repository to make the repo.\n\n\n\n\n\nYou should now be routed to your new repo on GitHub. 👏👏👏\n\n\n\n\n\nA few observations\n\nWe have only one file the README.md file\nWe only have one version/commit which is project initialization; this commit is identified by a hash key d4ff056.\n\nNow lets move on to clone or pull this repo from the cloud onto our local computer to make some changes with GitHub Desktop"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html",
+    "href": "docs/manuals/git-github/clone.html",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#sign-into-github-website",
+    "href": "docs/manuals/git-github/clone.html#sign-into-github-website",
+    "title": "Clone -",
+    "section": "1 Sign into GitHub website",
+    "text": "1 Sign into GitHub website\n\nOpen a browser.\nVisit https://github.com/\nSign in"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#click-new-repository",
+    "href": "docs/manuals/git-github/clone.html#click-new-repository",
+    "title": "Clone -",
+    "section": "2 Click New Repository",
+    "text": "2 Click New Repository"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#fill-out-repository-name",
+    "href": "docs/manuals/git-github/clone.html#fill-out-repository-name",
+    "title": "Clone -",
+    "section": "3. Fill out repository name",
+    "text": "3. Fill out repository name\nCreate a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be my-first-repo"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#select-visibility-setting",
+    "href": "docs/manuals/git-github/clone.html#select-visibility-setting",
+    "title": "Clone -",
+    "section": "3. Select Visibility Setting",
+    "text": "3. Select Visibility Setting\nBy default I recommend private; unless your goal is to share data or code publicly.\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#add-a-readme-file",
+    "href": "docs/manuals/git-github/clone.html#add-a-readme-file",
+    "title": "Clone -",
+    "section": "4. Add a README file",
+    "text": "4. Add a README file\nREADME.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project."
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#click-create-repository",
+    "href": "docs/manuals/git-github/clone.html#click-create-repository",
+    "title": "Clone -",
+    "section": "5. Click Create Repository",
+    "text": "5. Click Create Repository\nNow that we have configured our settings we can click Create Repository to make the repo.\n\n\n\n\n\nYou should now be routed to your new repo on GitHub. 👏👏👏\n\n\n\n\n\nA few observations\n\nWe have only one file the README.md file\nWe only have one version/commit which is project initialization; this commit is identified by a hash key d4ff056.\n\nNow lets move on to clone or pull this repo from the cloud onto our local computer to make some changes with GitHub Desktop"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#open-github-desktop",
+    "href": "docs/manuals/git-github/clone.html#open-github-desktop",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.1 Open GitHub Desktop",
+    "text": "2.1 Open GitHub Desktop\nOpen the GitHub desktop app and click Clone a repository from the internet\n\nNote if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File > Clone repository"
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
+    "href": "docs/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.2 Search for the repo you want to clone",
+    "text": "2.2 Search for the repo you want to clone\nSearch in the highlight input box for the name of your repo. For example, we are can start typing hello-my-first-repo which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices."
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
+    "href": "docs/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.3 Choose a local folder where to copy the repo",
+    "text": "2.3 Choose a local folder where to copy the repo\nYou should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!."
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#click-clone",
+    "href": "docs/manuals/git-github/clone.html#click-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.4 Click clone",
+    "text": "2.4 Click clone\nOnce you have your online repo and local folder selected then you can click Clone to start the cloning process."
+  },
+  {
+    "objectID": "docs/manuals/git-github/clone.html#ready-to-make-local-changes",
+    "href": "docs/manuals/git-github/clone.html#ready-to-make-local-changes",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.5 Ready to make local changes!",
+    "text": "2.5 Ready to make local changes!\nAfter the cloning process. Your GitHub desktop should now show the status of your newly cloned repository."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html",
+    "href": "docs/manuals/git-github/status.html",
+    "title": "3. status - file changes of local repo",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#open-github-desktop",
+    "href": "docs/manuals/git-github/status.html#open-github-desktop",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.1 Open GitHub Desktop",
+    "text": "2.1 Open GitHub Desktop\nOpen the GitHub desktop app and click Clone a repository from the internet\n\nNote if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File > Clone repository"
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#search-for-the-repo-you-want-to-clone",
+    "href": "docs/manuals/git-github/status.html#search-for-the-repo-you-want-to-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.2 Search for the repo you want to clone",
+    "text": "2.2 Search for the repo you want to clone\nSearch in the highlight input box for the name of your repo. For example, we are can start typing hello-my-first-repo which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#choose-a-local-folder-where-to-copy-the-repo",
+    "href": "docs/manuals/git-github/status.html#choose-a-local-folder-where-to-copy-the-repo",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.3 Choose a local folder where to copy the repo",
+    "text": "2.3 Choose a local folder where to copy the repo\nYou should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#click-clone",
+    "href": "docs/manuals/git-github/status.html#click-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.4 Click clone",
+    "text": "2.4 Click clone\nOnce you have your online repo and local folder selected then you can click Clone to start the cloning process."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ready-to-make-local-changes",
+    "href": "docs/manuals/git-github/status.html#ready-to-make-local-changes",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.5 Ready to make local changes!",
+    "text": "2.5 Ready to make local changes!\nAfter the cloning process. Your GitHub desktop should now show the status of your newly cloned repository."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#github-desktop---changes",
+    "href": "docs/manuals/git-github/status.html#github-desktop---changes",
+    "title": "3. status - file changes of local repo",
+    "section": "3.1 GitHub Desktop - changes",
+    "text": "3.1 GitHub Desktop - changes"
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#github-desktop-ui",
+    "href": "docs/manuals/git-github/status.html#github-desktop-ui",
+    "title": "3. status - file changes of local repo",
+    "section": "3.1 GitHub Desktop UI",
+    "text": "3.1 GitHub Desktop UI\nThis is the GitHub user interfacet. Below we will highlight some key features."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---current-repository",
+    "href": "docs/manuals/git-github/status.html#ui---current-repository",
+    "title": "3. status - file changes of local repo",
+    "section": "3.2 UI - current repository",
+    "text": "3.2 UI - current repository\nUnder the top navbar there is a second navbar that displays your current repository. You can click this to navigate between local repositories. But for now we can see the selected repo is test-repo"
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---current-repository-1",
+    "href": "docs/manuals/git-github/status.html#ui---current-repository-1",
+    "title": "3. status - file changes of local repo",
+    "section": "3.3 UI - current repository",
+    "text": "3.3 UI - current repository\nUnder the top navbar there is a second navbar that displays your current repository. You can click this to navigate between local repositories. But for now we can see the selected repo is test-repo"
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---current-brach",
+    "href": "docs/manuals/git-github/status.html#ui---current-brach",
+    "title": "3. status - file changes of local repo",
+    "section": "3.3 UI - current brach",
+    "text": "3.3 UI - current brach\nNext to current repo, there is box that displays the branch you are currently one. We will not worry about branch for this workshop but keep in mind that a branch is one version of the codebase and that you can have multiple branches."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---github-desktop",
+    "href": "docs/manuals/git-github/status.html#ui---github-desktop",
+    "title": "3. status - file changes of local repo",
+    "section": "3.1 UI - GitHub Desktop",
+    "text": "3.1 UI - GitHub Desktop\nThis is the GitHub user interface. Below we will highlight some key features."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---current-branch",
+    "href": "docs/manuals/git-github/status.html#ui---current-branch",
+    "title": "3. status - file changes of local repo",
+    "section": "3.3 UI - current branch",
+    "text": "3.3 UI - current branch\nNext to current repo, there is box that displays the branch you are currently one. We will not worry about branch for this workshop but keep in mind that a branch is one version of the codebase and that you can have multiple branches."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---interact-with-github",
+    "href": "docs/manuals/git-github/status.html#ui---interact-with-github",
+    "title": "3. status - file changes of local repo",
+    "section": "3.4 UI - interact with GitHub",
+    "text": "3.4 UI - interact with GitHub\nTo the right of current branch, is a button to interact with the online GitHub repo. There are several actions that we can do. If there are no commit changes then the default action is fetch which if click will tell you local repository to compare it self to the remote repository and see if there are any changes that need to be synced. We will talk more about this button later."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---interact-with-github-1",
+    "href": "docs/manuals/git-github/status.html#ui---interact-with-github-1",
+    "title": "3. status - file changes of local repo",
+    "section": "3.5 UI - interact with GitHub",
+    "text": "3.5 UI - interact with GitHub\nTo the right of current branch, is a button to interact with the online GitHub repo. There are several actions that we can do. If there are no commit changes then the default action is fetch which if click will tell you local repository to compare it self to the remote repository and see if there are any changes that need to be synced. We will talk more about this button later."
+  },
+  {
+    "objectID": "docs/manuals/git-github/status.html#ui---change-status",
+    "href": "docs/manuals/git-github/status.html#ui---change-status",
+    "title": "3. status - file changes of local repo",
+    "section": "3.5 UI - Change status",
+    "text": "3.5 UI - Change status\ngit status is a list of tracked files that are different than the previous version/commit. We can click the Change tab of GitHub Desktop to see the git status.\n\nAfter clicking the Change tab. We can view the results on the right.\nWe can see that there are no local changes relative to the previous version. This makes complete sense as we have not made any code changes after cloning the remote repository."
   }
 ]

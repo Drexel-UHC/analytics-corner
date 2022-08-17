@@ -1,0 +1,45 @@
+---
+title: "2. Clone - copy online repo to local computer"
+subtitle: "Cloning is just creating a local copy of an online repository."
+---
+
+
+**Key Terms**
+
+- `Repository (repo)` is a folder that contains files tracked by git.
+- `init` Create a new repo 
+- **`clone` Make a clone/copy of an existing remote repo to local machine** 
+
+## 2.1 Open GitHub Desktop 
+
+Open the GitHub desktop app and click `Clone a repository from the internet`
+
+![](/images/clone-start.png){height="300"}
+
+Note if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File > Clone repository
+
+![](/images/clone-start-og.png){height="100"}
+
+## 2.2 Search for the repo you want to clone
+
+Search in the highlight input box for the name of your repo. For example, we are can start typing `hello-my-first-repo` which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices. 
+
+![](/images/clone-search.png){height="300"}
+
+## 2.3 Choose a local folder where to copy the repo
+
+You should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!.
+
+![](/images/clone-path.png){height="300"}
+
+## 2.4 Click clone
+
+Once you have your online repo and local folder selected then you can click `Clone` to start the cloning process.
+
+
+## 2.5 Ready to make local changes!
+
+After the cloning process. Your GitHub desktop should now show the status of your newly cloned repository.
+
+
+![](/images/clone-ready.png){height="300"}
