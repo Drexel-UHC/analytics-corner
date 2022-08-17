@@ -13,7 +13,7 @@ subtitle: The specific learning objectives of this workshop
   - `modify-add-commit-push-pull` a basic git workflow that can get you 80% of the benefits of version control.
 - Git actions we will learn to do via GitHub Desktop
   - `init` Create a repo 
-  - `clone` Pulls a remote repo to local machine 
+  - `clone` Make a clone/copy of an existing remote repo to local machine 
   - `status` list of files changes relative previous version.
   - `log` entire history
   - `diff` show changes in a file compared to previous version.
