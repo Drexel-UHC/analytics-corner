@@ -1,0 +1,21 @@
+---
+title: "Overview"
+subtitle: Workshop Overview
+---
+
+
+A comprehensive Git and GitHub could take days. We are approaching this workshop with the two following ideas
+
+- **80/20 rule** Focus on teaching a fundamental git workflow `modify-add-commit` that provides 80% of what you will need without touching on more advanced topics.
+
+- **Graphical interface over command line** Teaching Git/GitHub has a steep enough learning curve. Teaching to an audience that doesn't use command line we will teach using [GitHub Desktop](https://desktop.github.com/) (a graphical user interface to do Git).
+
+
+**Disclaimer: There are many ways to use and teach Git and and many Git platforms available. This course not meant to be comprehensive. It is just one person sharing how they learned to use version control.**
+
+------
+
+
+
+![**Most git workshops**](/images/bad-workshop.gif){fig-align="left" width="300"}
+

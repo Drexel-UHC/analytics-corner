@@ -77,6 +77,16 @@ website:
             href: docs/manuals/git-github/precedent.qmd
           - text: '4. TLDR'
             href: docs/manuals/git-github/why-summary.qmd
+        - section: 'How to Git/GitHub?'
+          contents:
+          - text: '1. Teaching philosophy'
+            href: docs/manuals/git-github/teaching-thoughts.qmd
+          - text: '2. Learning Objectives'
+            href: docs/manuals/git-github/learning-objectives.qmd
+          - text: '3. Precedent'
+            href: docs/manuals/git-github/precedent.qmd
+          - text: '4. TLDR'
+            href: docs/manuals/git-github/why-summary.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'
