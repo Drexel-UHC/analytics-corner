@@ -75,8 +75,8 @@ website:
             href: docs/manuals/git-github/case-study-project-transition-management.qmd
           - text: '3. Precedent'
             href: docs/manuals/git-github/precedent.qmd
-          - text: 'Intro to GitHub Desktop'
-            href: docs/manuals/git-github/git-github.qmd
+          - text: '4. TLDR'
+            href: docs/manuals/git-github/why-summary.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'

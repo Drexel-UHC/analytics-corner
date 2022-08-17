@@ -1,0 +1,13 @@
+---
+title: "Why Git/GitHub?"
+subtitle: Just to summarize some points before we move on to actual teaching.
+---
+
+Using a well established Git and Git platform (GitHub) is better than tracking versions/files manually because:
+
+- **Nothing that is committed/saved  to version control is ever lost.** Its possible to go back in time time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.
+- As we have this record of who made what changes when, we know who to ask if we have questions later on, and, **if needed, revert to a previous version**, much like the “undo” feature in an editor.
+- When several people collaborate in the same project, it’s possible to accidentally overlook or overwrite someone’s changes. The version control system **automatically detects potential conflicts** between one person’s work and another’s and notifies users.
+- GitHub issues/projects/branches provide **ergonomic solutions to common project management challenges**.
+
+Git/GitHub can help us bring software engineering best practices to public health to enable us to better respond to complex public health problems in a manner that is timely, organized, transparent and reproducible.  
