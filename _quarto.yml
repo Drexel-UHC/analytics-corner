@@ -83,10 +83,12 @@ website:
             href: docs/manuals/git-github/teaching-thoughts.qmd
           - text: '2. Learning Objectives'
             href: docs/manuals/git-github/learning-objectives.qmd
-          - text: '3. Precedent'
-            href: docs/manuals/git-github/precedent.qmd
-          - text: '4. TLDR'
-            href: docs/manuals/git-github/why-summary.qmd
+          - text: '3. Git vs GitHub'
+            href: docs/manuals/git-github/git-vs-github.qmd
+          - text: '4. Git vs Github Desktop'
+            href: docs/manuals/git-github/git-vs-github-desktop.qmd
+          - text: '5. Setup GitHub Desktop'
+            href: docs/manuals/git-github/install-github-desktop.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'

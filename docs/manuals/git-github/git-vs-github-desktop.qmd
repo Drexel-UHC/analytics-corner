@@ -1,0 +1,21 @@
+---
+title: "Git vs GitHub"
+---
+
+::: {#fig-elephants .column-screen-inset-right layout-ncol=2}
+
+![Git](/images/git-cli.png){#fig-git width="100%"}
+
+![Github desktop](/images/github-desktop-hero.png){#fig-gui width="100%"}
+
+Git vs GitHub Desktop
+:::
+
+
+- **Git** @fig-git is a command line interface (CLI) tool which require you to interact by typing commands. It is harder to learn for users without CLI experience and the outputs are not as accessible.
+- **GitHub Desktop** @fig-git a graphical user interface (GUI) tool that allows you to us Git without using the command line. We do Git actions by interacting with a user interface that is designed to be ergonomic and accessible. You can't do all the things you can with CLI but again 80% of features are here!
+
+
+:::{.callout-important}
+For this workshop. We will use GitHub Desktop to do Git.
+:::

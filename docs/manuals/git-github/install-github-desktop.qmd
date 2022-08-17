@@ -1,0 +1,30 @@
+---
+title: "Setup GitHub desktop"
+---
+
+
+## 5.1 Create a GitHub account
+
+1. Open a browser.
+2. Visit <https://github.com/join>
+3. Choose a user name (recomendation: closer to your name the better)
+4. Input a email account(recomendation: choose your work email as GitHub will send you work related notifications)
+
+## 5.2 Download GitHub Desktop
+
+1. Open a browser.
+2. Visit <https://desktop.github.com/>
+3. Click Download for Windows (64bit) or Mac.
+4. When prompted, click Run.
+5. Allow the installation to download and install.
+
+
+## 5.3 Sign in
+
+When you open  GitHub desktop click "Sign in to GitHub.com" to sign in.
+
+![](/images/github-setup-sign-in.png){height="300"}
+
+Your browser should open and after you signed in. You should see the below snip and you are ready to go!
+
+![](/images/github-setup-ready.png){height="300"}
