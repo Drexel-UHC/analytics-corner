@@ -1,0 +1,52 @@
+---
+title: "3. status - file changes of local repo"
+subtitle: "Git status is a view of all changes in the current repository relative to the previous save point/commit. This page will introduce the GitHub Desktop user interface (UI) then show you how to track change status."
+---
+
+
+**Key Terms**
+
+- `Repository (repo)` is a folder that contains files tracked by git.
+- `init` Create a new repo 
+- `clone` Make a clone/copy of an existing remote repo to local machine 
+- **`status` list of files changes relative previous version.**
+
+## 3.1 UI - GitHub Desktop 
+
+This is the GitHub user interface. Below we will highlight some key features.
+
+![](/images/status-app.png){height="300"}
+
+## 3.2 UI - current repository
+
+Under the top navbar there is a second navbar that displays your current repository. You can click this to navigate between local repositories. But for now we can see the selected repo is `test-repo`
+
+
+![](/images/status-nav1.png){height="120"}
+
+
+
+## 3.3 UI - current branch 
+
+Next to current repo, there is box that displays the branch you are currently one. We will not worry about branch for this workshop but keep in mind that a branch is one version of the codebase and that you can have multiple branches. 
+
+
+![](/images/status-nav2.png){height="120"}
+
+
+## 3.4 UI - interact with GitHub
+
+To the right of current branch, is a button to interact with the online GitHub repo. There are several actions that we can do. If there are no commit changes then the default action is `fetch` which if click will tell you local repository to compare it self to the remote repository and see if there are any changes that need to be synced. We will talk more about this button later.
+
+![](/images/status-nav3.png){height="120"}
+
+## 3.5 UI - Change `status`
+
+`git status` is a list of tracked files that are different than the previous version/commit. We can click the `Change` tab of GitHub Desktop to see the `git status`.
+
+![](/images/status-tab-1.png){height="200"}
+
+After clicking the Change tab. We can view the results on the right.
+
+We can see that there are no local changes relative to the previous version. This makes complete sense as we have not made any code changes after cloning the remote repository. 
+

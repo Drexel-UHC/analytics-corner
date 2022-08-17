@@ -97,6 +97,8 @@ website:
             href: docs/manuals/git-github/init.qmd
           - text: '2. clone - copy online repo to local computer'
             href: docs/manuals/git-github/clone.qmd
+          - text: '3. status - file changes of local repo'
+            href: docs/manuals/git-github/status.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'
