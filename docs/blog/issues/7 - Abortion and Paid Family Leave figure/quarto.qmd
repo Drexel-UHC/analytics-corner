@@ -21,7 +21,7 @@ editor_options:
 
 # Issue
 
-**URL: https://github.com/Drexel-UHC/analytics-core/issues/7**
+**<https://github.com/Drexel-UHC/analytics-corner/issues/7>**
 
 > I'm hoping to make a figure that shows different policy statuses of states (abortion ban, proposed abortion ban, no abortion ban; Paid family leave, no paid family leave; paid family leave preemption, no preemption), with the states in the location of the US map...
 >
