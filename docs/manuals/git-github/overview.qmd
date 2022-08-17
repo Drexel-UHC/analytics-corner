@@ -1,33 +1,21 @@
 ---
 title: "Overview"
-subtitle: Workshop Overview
+subtitle: Outline of what this 1 hour workshop will look like.
 ---
 
-::: {.callout-note}
 
-This manual was heavily inspired by [chapter 8](https://ngs-docs.github.io/2021-august-remote-computing/keeping-track-of-your-files-with-version-control.html#learning-objectives-1) of Introduction to [Remote Computing](https://ngs-docs.github.io/2021-august-remote-computing/) by Titus Brown's group at UC Davice DataLab. The main difference in this manual is that we try to teach git through a graphical user interface (GitHub Desktop) rather than through using the command line. 
+1. **Why learn Git/GitHub:** Explains the motivation for learning version control by presenting some previous use cases. 
+2. **How to Git/GitHub** Teach basics of the three technologies will learn (git, GitHub desktop, GitHub) and some fundamental workflows. 
+3. **Lets try Git/GitHub** Live demo where two people collaborate together to finish a R&R.
 
-**We are very thankful for their open sourcing of their training material and aim to adapt it for a one hour basic version control workshop using git and GitHub.**
+---------------
+
+:::{.callout-note}
+**Somethings to keep in mind before we start**
+
+- Git is notoriously hard to pick up and also notoriously hard to teach. 
+
+- The learning/teaching process may be difficult so don't feel like you aren't picking things up quickly enough; this is normal. Be patient with yourself and the instructor.
+
+- Learning this workflow is a case of slowing down to really really speed up. Thanks for being here!
 :::
-
-# Overview
-
-The workshop will be split into three main sections. 
-1. Give present some previous use cases to demonstrate why you might want to learn git and GitHub. 
-2. Teach basics of the three technologies will learn (git, GitHub desktop, GitHub). 
-3. Live demo where two people collaborate together to finish a R&R.
-
-# Learning Objectives
-
-The specific learning objectives of this workshop are:
-
-- Learn the difference between Git, GitHub Desktop and GitHub
-- Clone a remote repository
-- Learn a basic git workflow `modify-add-commit` 
-- Add and track changes with GitHub Desktop
-- Save changes by committing with GitHub Desktop
-- Best practices for commit messages 
-- Pushing commits to Github with GitHub Desktop
-
-
-
