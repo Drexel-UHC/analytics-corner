@@ -220,10 +220,11 @@ plot
 ```{r}
 
 side = 12
-padding = 1 
+padding = 0.5 
 rect_width =  (side - 2*padding)/4
-legend_y = 6
-legend_height = 2
+legend_y = 5
+legend_height = 3.25
+legend_mid = legend_y + legend_height/2
 
 dfa = tibble(xmin = padding + 0:3*rect_width,
              xmax = padding + 1:4*rect_width,
@@ -243,20 +244,22 @@ legend_risk = ggplot() +
             fill = dfa$fill) + 
   ## Left label
   geom_text(aes(label = "Accessible\n(Protected)", x = xmid),
-            x = dfa[1,]$xmid, y = legend_y - 1.3,
+            x = dfa[1,]$xmid, y = legend_mid,
             size = 2.9) +
   ## Center label
   geom_text(aes(label = "Accessible\n(Not protected)"),
-            x = dfa[2,]$xmid, y = legend_y - 1.3,
+            x = dfa[2,]$xmid, y = legend_mid ,
             size = 2.9) +
   ## Rigth label
   geom_text(aes(label = "Hostile"),
-            x = dfa[3,]$xmid, y = legend_y -1,
-            size = 3) +
+            x = dfa[3,]$xmid, y = legend_mid ,
+            size = 3,
+            color = 'white') +
   ## Rigth label
   geom_text(aes(label = "Illegal"),
-            x = dfa[4,]$xmid, y = legend_y -1,
-            size = 3) +
+            x = dfa[4,]$xmid, y = legend_mid,
+            size = 3,
+            color = "white") +
   theme_void()
 
 title_rect <- ggdraw() + 
@@ -370,7 +373,7 @@ title =  ggdraw() +
 
 legend = plot_grid(rect_legend,hex_legend_blue,hex_legend_red,
                    ncol = 3,
-                   rel_widths = c(3, 2, 2))
+                   rel_widths = c(7, 4, 4))
 
 
 figure = plot_grid(title,
