@@ -150,8 +150,10 @@ rect_ymax = rect_ymin*2
 
 ## Manual colors for data features
 abortion_colors = c("0" = "#e7e8e9",
-                    "1" = "#8a8c8f", 
-                    "2" = "#000000")
+                    "1" = "#A6A7AA", 
+                    "2" = "#757679",
+                    "3" = "#000000")
+
 xwalk_colors = c(abortion_colors,
                  "white" = "white",
                  "black" = "black",
