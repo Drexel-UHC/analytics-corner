@@ -45,10 +45,10 @@ library(geofacet)
 library(cowplot)
 
 ## raw data
-raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset 8-11-22.xlsx",
+raw_data = readxl::read_excel(path = "raw-data/family medical leave preemption dataset 9-19-22.xlsx",
                               sheet = 'Sheet2') %>% 
-  drop_na() %>% 
   select(name = 1, family_leave = 2, preemption = 3, abortion_ban_risk = 4)  %>% 
+  drop_na() %>% 
   mutate_all(~as.character(.x))
 
 ## clean state codes
@@ -125,7 +125,7 @@ data_w_coords %>%
 
 Great I think this approach is getting us to what we want.
 
-# Ggplot code
+# Code for Deliverable
 
 There are a few things to do to polish it a bit.
 
@@ -340,7 +340,7 @@ hex_legend_red = plot_grid(
 hex_legend_red
 ```
 
-# Final Layout
+# Deliverable
 
 This is saved in "./output/issue5.jpeg".
 

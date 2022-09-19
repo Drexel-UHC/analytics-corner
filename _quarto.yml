@@ -18,14 +18,14 @@ website:
         href: index.qmd
       - text: Manuals
         menu:
-        - href: docs/manuals/welcome/1-about.qmd
+        - href: pages/manuals/welcome/1-about.qmd
           text: "Welcome"
-        - href: docs/manuals/git-github/overview.qmd
+        - href: pages/manuals/git-github/overview.qmd
           text: "Git and GitHub"
       - text: "Blog"
-        href: docs/blog/index.qmd
+        href: pages/blog/index.qmd
       - text: "Gallery"
-        href: docs/gallery/index.qmd
+        href: pages/gallery/index.qmd
       - text: "Help"
         menu:
           - text: "Submit an Issue"
@@ -36,7 +36,7 @@ website:
             href: "https://github.com/Drexel-UHC/analytics-core/discussions"
           - text: "FAQ"
             icon: "question-circle"
-            href: docs/faq/index.qmd
+            href: pages/faq/index.qmd
     right:
       - icon: twitter
         href: https://twitter.com/drexeluhc
@@ -50,7 +50,7 @@ website:
       - text: 'About'
         href: about.qmd
       - text: 'FAQ'
-        href: docs/faq/index.qmd
+        href: pages/faq/index.qmd
       - text: 'License'
         href: license.qmd
     right:
@@ -65,48 +65,48 @@ website:
     - id: git-github
       contents:
         - text: 'Overview'
-          href: docs/manuals/git-github/overview.qmd
+          href: pages/manuals/git-github/overview.qmd
         - text: "---"
         - section: 'Why learn Git/GitHub?'
           contents:
           - text: '1. Version Control'
-            href: docs/manuals/git-github/case-study-version-control.qmd
+            href: pages/manuals/git-github/case-study-version-control.qmd
           - text: '2. Project organization'
-            href: docs/manuals/git-github/case-study-project-transition-management.qmd
+            href: pages/manuals/git-github/case-study-project-transition-management.qmd
           - text: '3. Precedent'
-            href: docs/manuals/git-github/precedent.qmd
+            href: pages/manuals/git-github/precedent.qmd
           - text: '4. TLDR'
-            href: docs/manuals/git-github/why-summary.qmd
+            href: pages/manuals/git-github/why-summary.qmd
         - section: 'How to Git/GitHub?'
           contents:
           - text: 'Teaching philosophy'
-            href: docs/manuals/git-github/teaching-thoughts.qmd
+            href: pages/manuals/git-github/teaching-thoughts.qmd
           - text: 'Learning Objectives'
-            href: docs/manuals/git-github/learning-objectives.qmd
+            href: pages/manuals/git-github/learning-objectives.qmd
           - text: 'Git Intro'
-            href: docs/manuals/git-github/git-intro.qmd
+            href: pages/manuals/git-github/git-intro.qmd
           - text: 'Basic Git Workflow'
-            href: docs/manuals/git-github/git-basics.qmd
+            href: pages/manuals/git-github/git-basics.qmd
           - text: 'Git vs GitHub'
-            href: docs/manuals/git-github/git-vs-github.qmd
+            href: pages/manuals/git-github/git-vs-github.qmd
           - text: 'Git vs Github Desktop'
-            href: docs/manuals/git-github/git-vs-github-desktop.qmd
+            href: pages/manuals/git-github/git-vs-github-desktop.qmd
           - text: 'Setup GitHub Desktop'
-            href: docs/manuals/git-github/install-github-desktop.qmd
+            href: pages/manuals/git-github/install-github-desktop.qmd
           - text: '1. init - create a new repo remotely'
-            href: docs/manuals/git-github/init.qmd
+            href: pages/manuals/git-github/init.qmd
           - text: '2. clone - copy online repo to local computer'
-            href: docs/manuals/git-github/clone.qmd
+            href: pages/manuals/git-github/clone.qmd
           - text: '3. status - file changes of local repo'
-            href: docs/manuals/git-github/status.qmd
+            href: pages/manuals/git-github/status.qmd
     - id: welcome
       contents:
         - section: 'Manual: Welcome'
           contents:
           - text: '1. About'
-            href: docs/manuals/welcome/1-about.qmd
+            href: pages/manuals/welcome/1-about.qmd
           - text: '2. Core values'
-            href: docs/manuals/welcome/2-core-values.qmd
+            href: pages/manuals/welcome/2-core-values.qmd
 
 format:
   html:
