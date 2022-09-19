@@ -8,3 +8,5 @@
 *_cache/
 /env/
 /_site/
+renv/
+/_freeze/
