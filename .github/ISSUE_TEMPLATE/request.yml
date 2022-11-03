@@ -40,6 +40,18 @@ body:
       placeholder: 'Grant infrastructure consultation, dashboard, website... ETC'
     validations:
       required: true
+  - type: dropdown
+    id: output
+    attributes:
+      label: Output
+      description: What type of output do you want?
+      options:
+        - Reproducible code bundle (data + code)
+        - Image (jpeg, png)
+        - Document
+        - Other
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
