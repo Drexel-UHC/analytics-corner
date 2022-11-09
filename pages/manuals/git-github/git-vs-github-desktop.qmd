@@ -4,7 +4,7 @@ title: "Git vs GitHub"
 
 ::: {#fig-elephants .column-screen-inset-right layout-ncol=2}
 
-![Git](/images/git-cli.PNG){#fig-git width="100%"}
+![Git](/images/git-cli.png){#fig-git width="100%"}
 
 ![Github desktop](/images/github-desktop-hero.PNG){#fig-gui width="100%"}
 
