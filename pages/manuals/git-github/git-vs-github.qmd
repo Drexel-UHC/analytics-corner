@@ -4,7 +4,7 @@ title: "Git vs GitHub"
 
 
 
-![](/images/git-vs-github.png){fig-align="center" width="485"}
+![](/images/git-vs-github.PNG){fig-align="center" width="485"}
 
 - **Git** is a version control system that lets you manage and keep track of your source code history. 
 - **GitHub** is a hosting service that is 1 part a cloud backup for git repositories and 1 part social media platform for collaboration.

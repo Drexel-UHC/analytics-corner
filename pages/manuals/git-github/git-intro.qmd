@@ -12,7 +12,7 @@ title: "Git vs GitHub"
 
 Git allows you track versions of your code. You can access earlier versions and this makes it easy to go back and debug or allow you to experiment with changes knowing you can always revert to a previous version if something doesn't work.
 
-![](/images/git-graphic-changes.png){fig-align="center" width="485"}
+![](/images/git-graphic-changes.PNG){fig-align="center" width="485"}
 
 ## 3.2 Git synchronizes code across collaborators
 

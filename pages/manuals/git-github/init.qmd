@@ -20,13 +20,13 @@ subtitle: "This page shows how you can create a new git repository. You can init
 ## 2 Click `New` Repository
 
 
-![](/images/init.png){fig-align="center" width="485"}
+![](/images/init.PNG){fig-align="center" width="485"}
 
 ## 3. Fill out repository name
 
 Create a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be `my-first-repo`
 
-![](/images/init-repo-name.png){fig-align="center" width="485"}
+![](/images/init-repo-name.PNG){fig-align="center" width="485"}
 
 ## 3. Select Visibility Setting
 
@@ -36,25 +36,25 @@ By default I recommend private; unless your goal is to share data or code public
 - **Private** only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo. 
 
 
-![](/images/init-access.png){fig-align="center" width="485"}
+![](/images/init-access.PNG){fig-align="center" width="485"}
 
 ## 4. Add a README file
 
 README.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project.
 
-![](/images/init-readme.png){fig-align="center" width="485"}
+![](/images/init-readme.PNG){fig-align="center" width="485"}
 
 ## 5. Click `Create Repository`
 
 Now that we have configured our settings we can click `Create Repository` to make the repo. 
 
-![](/images/init-create.png){fig-align="center" width="485"}
+![](/images/init-create.PNG){fig-align="center" width="485"}
 
 
 You should now be routed to your new repo on GitHub. 👏👏👏
 
 
-![](/images/init-done.png){fig-align="center" width="485"}
+![](/images/init-done.PNG){fig-align="center" width="485"}
 
 A few observations
 

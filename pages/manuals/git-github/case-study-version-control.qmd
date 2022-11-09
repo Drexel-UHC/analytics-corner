@@ -11,7 +11,7 @@ bibliography: references.bib
 
 Does this look familiar?
 
-![](/images/tale-of-two-projects-diy.png){fig-align="center" width="485"}
+![](/images/tale-of-two-projects-diy.PNG){fig-align="center" width="485"}
 
 **You are doing version control!** There is value of tracking changes to a project and having a history of previous versions.
 

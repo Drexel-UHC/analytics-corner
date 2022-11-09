@@ -8,7 +8,7 @@ title: "Fundamental Git workflow"
 - `modify-add-commit-push-pull` a basic git workflow that can get you 80% of the benefits of version control.
 
 
-![](/images/git-basic-workflow.png){fig-align="center" width="485"}
+![](/images/git-basic-workflow.PNG){fig-align="center" width="485"}
 
 1. `modify` aka change files in the working directory (local computer)
 2. `add` changes to a staging area which allows us to control what files to track with Git

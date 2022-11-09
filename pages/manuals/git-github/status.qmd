@@ -15,14 +15,14 @@ subtitle: "Git status is a view of all changes in the current repository relativ
 
 This is the GitHub user interface. Below we will highlight some key features.
 
-![](/images/status-app.png){height="300"}
+![](/images/status-app.PNG){height="300"}
 
 ## 3.2 UI - current repository
 
 Under the top navbar there is a second navbar that displays your current repository. You can click this to navigate between local repositories. But for now we can see the selected repo is `test-repo`
 
 
-![](/images/status-nav1.png){height="120"}
+![](/images/status-nav1.PNG){height="120"}
 
 
 
@@ -31,20 +31,20 @@ Under the top navbar there is a second navbar that displays your current reposit
 Next to current repo, there is box that displays the branch you are currently one. We will not worry about branch for this workshop but keep in mind that a branch is one version of the codebase and that you can have multiple branches. 
 
 
-![](/images/status-nav2.png){height="120"}
+![](/images/status-nav2.PNG){height="120"}
 
 
 ## 3.4 UI - interact with GitHub
 
 To the right of current branch, is a button to interact with the online GitHub repo. There are several actions that we can do. If there are no commit changes then the default action is `fetch` which if click will tell you local repository to compare it self to the remote repository and see if there are any changes that need to be synced. We will talk more about this button later.
 
-![](/images/status-nav3.png){height="120"}
+![](/images/status-nav3.PNG){height="120"}
 
 ## 3.5 UI - Change `status`
 
 `git status` is a list of tracked files that are different than the previous version/commit. We can click the `Change` tab of GitHub Desktop to see the `git status`.
 
-![](/images/status-tab-1.png){height="200"}
+![](/images/status-tab-1.PNG){height="200"}
 
 After clicking the Change tab. We can view the results on the right.
 

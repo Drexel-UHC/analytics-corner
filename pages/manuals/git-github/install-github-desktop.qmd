@@ -23,8 +23,8 @@ title: "Setup GitHub desktop"
 
 When you open  GitHub desktop click "Sign in to GitHub.com" to sign in.
 
-![](/images/github-setup-sign-in.png){height="300"}
+![](/images/github-setup-sign-in.PNG){height="300"}
 
 Your browser should open and after you signed in. You should see the below snip and you are ready to go!
 
-![](/images/github-setup-ready.png){height="300"}
+![](/images/github-setup-ready.PNG){height="300"}

@@ -15,7 +15,7 @@ Through the COVID pandemic the NYC health departments was one of the best source
 
 <https://github.com/nychealth>
 
-![](/images/precedent-nyc-health.png){fig-align="center" width="100%"}
+![](/images/precedent-nyc-health.PNG){fig-align="center" width="100%"}
 
 
 ## 3.2 Johns Hopkins Covid data
@@ -24,7 +24,7 @@ Johns Hopkins was one of the best national level data sources for COVID data (br
 
 <https://github.com/CSSEGISandData>
 
-![](/images/precedent-jhe.png){fig-align="center" width="100%"}
+![](/images/precedent-jhe.PNG){fig-align="center" width="100%"}
 
 ## 3.3 ESRI
 
@@ -32,7 +32,7 @@ Some of our favorite GIS software is developed with GitHub.
 
 <https://github.com/Esri>
 
-![](/images/precedent-esri.png){fig-align="center" width="100%"}
+![](/images/precedent-esri.PNG){fig-align="center" width="100%"}
 
 ## 3.4 Tidyverse
 
@@ -40,7 +40,7 @@ Some of our favorite data packages is utilizes GitHub to open-sourced developeme
 
 <https://github.com/tidyverse/tidyverse/releases>
 
-![](/images/precedent-tidyverse.png){fig-align="center" width="100%"}
+![](/images/precedent-tidyverse.PNG){fig-align="center" width="100%"}
 
 ## 3.5 NASA
 
@@ -48,4 +48,4 @@ Some of our favorite data packages is utilizes GitHub to open-sourced developeme
 
 <https://github.com/tidyverse/nasa>
 
-![](/images/precedent-nasa.png){fig-align="center" width="100%"}
+![](/images/precedent-nasa.PNG){fig-align="center" width="100%"}
