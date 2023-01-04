@@ -127,4 +127,11 @@ addPolygons(data = philadelphia_zcta_sf,
 
 ```
 
-Looks great! Now we have boundaries for both the Philadelphia Country as well as all zcta within Philadelphia.
+Looks great! Now we have boundaries for both the Philadelphia Country as well as all zcta within Philadelphia.Lets save them locally so we can we use them some again later. 
+
+```{r}
+#| eval: false
+save(philadelphia_zcta_sf,philadelphia_county_sf, file = "philadelphia_boundaries.rdata")
+st_write(philadelphia_zcta_sf, dsn = 'philadelphia_zcta_sf.shp')
+st_write(philadelphia_county_sf, dsn = 'philadelphia_county_sf.shp')
+```
