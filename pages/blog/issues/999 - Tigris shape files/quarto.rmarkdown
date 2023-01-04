@@ -1,0 +1,142 @@
+---
+author: Ran Li
+date: "01/04/2023"
+title: "How to get Philadelphia zcta boundaries with TIGRIS"
+description: "Using the TIGRIS package it is very easy to get shape files and use them quickly for analysis."
+categories:
+  - visualization 
+  - geography
+  - census
+  - boundaries
+  - tigris
+format: 
+  html:
+    toc: true
+    toc-location: left
+    df-print: paged
+    code-tools: true
+execute: 
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+![](images/tigris.png){fig-align="center"}
+
+# Issue
+
+> do you have acces to the shape files for the philly neighborhoods? and would you be able to share?
+
+# Tigris package
+
+**tigris** is an R package that allows users to directly download and use TIGER/Line shapefiles (https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) from the US Census Bureau. Below are some useful links:
+
+-   **Package repository:** https://github.com/walkerke/tigris
+
+-   **Book chapter from `Analyzing US Data`** **book:** https://walker-data.com/census-r/census-geographic-data-and-applications-in-r.html
+
+-   **Python version of tigris:** https://walker-data.com/pygris/
+
+**Below we will go through how to use the tigris package to get ZIP Code Tabulation Areas** (**ZCTA) boundaries for Philadelphia County (42101).**
+
+# Workflow
+
+We will be using three packages
+
+
+```{r}
+library(tigris)    ## to get shape files
+library(leaflet)   ## making maps
+library(sf)        ## spatial wrangling
+library(tidyverse) ## general utilities
+```
+
+
+Lets first get two boundaries: 1) Philadelphia county and 2) All zcta in Philadelphia county.
+
+
+```{r}
+#| output: false
+#| warning: false
+philadelphia_county_sf = counties("Pennsylvania", 
+                                  cb = TRUE,
+                                  class = "sf") %>% 
+  filter(NAME == "Philadelphia") %>% 
+  select(GEOID, NAME, geometry)
+  
+stg_philadelphia_zcta_sf = zctas(filter_by = philadelphia_county_sf ) %>% 
+  select(ZCTA5CE20, geometry)
+```
+
+
+Lets map our results to make sure we have the correct things.
+
+
+```{r}
+leaflet() %>% 
+  addTiles() %>%
+  addPolygons(data = stg_philadelphia_zcta_sf,
+              fillOpacity = 0,
+              weight = 1,
+              color = "blue",
+              opacity = 1) %>% 
+  addPolygons(data = philadelphia_county_sf,
+              fillOpacity = 0,
+              weight = 3,
+              color = 'black',
+              opacity = 1) 
+```
+
+
+The map above shows Philadelphia County boundaries as black bold line. The CTA boundaries are the blue lines. We are almost there, it seems TIGRIS returned any zcta that is even touching Philadelphia county boundaries including zctas that are just on the edge. Lets get rid of those with some basic spatial wrangling below.
+
+
+```{r}
+
+
+## Calculate overlap between each zcta and philadelphia county
+xwalk_overlap = st_intersection(stg_philadelphia_zcta_sf,
+                                philadelphia_county_sf) %>% 
+  mutate(area_overlap = st_area(geometry)) %>% 
+  as_tibble() %>% 
+  select(ZCTA5CE20,area_overlap )
+
+
+## calculate the proportion of each zcta that is in philadelphia
+int_philadelphia_zcta_sf = stg_philadelphia_zcta_sf %>% 
+  left_join(xwalk_overlap, by = "ZCTA5CE20") %>% 
+  mutate(zcta_area = st_area(geometry),
+         overlap = as.numeric(area_overlap/zcta_area)) 
+
+## We only want to remove those that have very little overlap. Lets keep anything with 
+## greater than 25% overlap
+philadelphia_zcta_sf = int_philadelphia_zcta_sf %>% 
+  filter(overlap > 0.25)
+  
+
+```
+
+
+Let check our spatial wrangling worked.
+
+
+```{r}
+leaflet() %>% 
+  addTiles() %>%
+    addPolygons(data = philadelphia_county_sf,
+              fillOpacity = 0,
+              weight = 5,
+              color = 'black',
+              opacity = 0.4) %>% 
+addPolygons(data = philadelphia_zcta_sf,
+              fillOpacity = 0,
+              weight = 1,
+              color = "blue",
+              opacity = 1) 
+
+```
+
+
+Looks great! Now we have boundaries for both the Philadelphia Country as well as all zcta within Philadelphia.
+
