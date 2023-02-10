@@ -17,7 +17,74 @@
 <width>144</width>
 </image>
 <generator>quarto-1.2.241</generator>
-<lastBuildDate>Mon, 06 Feb 2023 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 10 Feb 2023 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Scrolly initial list</title>
+  <dc:creator>Ran Li</dc:creator>
+  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>It is of interest to tell convey stories within data. Academics usually use models to summarize and capture these stories but models and manuscript are not accessible to the public - ultimately limiting the scope of impact our research has to the academic realm.</p>
+<p>However there is another way to tell stories within the data which is to utilize interactivity and data visualiations. For example, in the digital journalism field a particular long form visulization medium called <code>scrolly-telling</code> or <code>scollies</code> are used to tell data driven stores in an engaging and accessible way</p>
+<p>This document will introduce the various three types of scrollies and some examples. Some focus on pay-persons and utilize interactivity/visualization to tell a story within the story. Some focus on researchers and utilize interactivity/visualization to break down model results. Some are more analytics intensive focusing the ability to select parameters and see various outputs.</p>
+<section id="story-focus" class="level1">
+<h1>Story focus</h1>
+<p>The goal of a data story type scrolly is to tell a specific story within the data in a accessible and engaging medium to <strong>lay-persons (primary audience)</strong> as well as <strong>researchers (secondary audience)</strong>. Some examples include:</p>
+<section id="disparities-in-us-cities" class="level2">
+<h2 class="anchored" data-anchor-id="disparities-in-us-cities">Disparities in US Cities</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-165419763.png" class="img-fluid"></p>
+<p><a href="https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html" class="uri">https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html</a></p>
+</section>
+<section id="eu-regions" class="level2">
+<h2 class="anchored" data-anchor-id="eu-regions">EU Regions</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-1331842843.png" class="img-fluid"></p>
+<p><a href="https://pudding.cool/2019/04/eu-regions/" class="uri">https://pudding.cool/2019/04/eu-regions/</a></p>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+</section>
+<section id="methodsmodel-focus" class="level1">
+<h1>Methods/model focus</h1>
+<p>Models are complex and are sometimes even difficult to digest by fellow researchers. These types of scrollies aim to make our model results more accessible to other researchers (primary audience) as well as lay-persons (secondary audience)</p>
+<section id="hidden-bias-in-ml-models" class="level2">
+<h2 class="anchored" data-anchor-id="hidden-bias-in-ml-models">Hidden Bias in ML Models</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-1939884647.png" class="img-fluid"></p>
+<p><a href="https://pair.withgoogle.com/explorables/hidden-bias/" class="uri">https://pair.withgoogle.com/explorables/hidden-bias/</a></p>
+</section>
+<section id="k-means-clustering-explained" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering-explained">K-means clustering explained</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-1245747916.png" class="img-fluid"></p>
+<p><a href="https://k-means-explorable.vercel.app/" class="uri">https://k-means-explorable.vercel.app/</a></p>
+</section>
+</section>
+<section id="analytics-focus" class="level1">
+<h1>Analytics focus</h1>
+<p>These types of products are more analytics intensive focusing the ability to select parameters and see various outputs. This is targeted towards people who want to explore data themselves and find a story relevant to them (<strong>primary audience policy makers or journalists</strong>) and all others (<strong>secondary audience: researchers/lay-person</strong>).</p>
+<section id="policy-impact-scan-tool" class="level2">
+<h2 class="anchored" data-anchor-id="policy-impact-scan-tool">Policy Impact SCAN Tool</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-64235515.png" class="img-fluid"></p>
+<p><a href="https://ambitiontoaction.net/scan_tool/" class="uri">https://ambitiontoaction.net/scan_tool/</a></p>
+</section>
+<section id="city-access-map" class="level2">
+<h2 class="anchored" data-anchor-id="city-access-map">City Access Map</h2>
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-233582353.png" class="img-fluid"></p>
+<p><a href="https://www.cityaccessmap.com/" class="uri">https://www.cityaccessmap.com/</a></p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Shiny</category>
+  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/index.html</guid>
+  <pubDate>Fri, 10 Feb 2023 05:00:00 GMT</pubDate>
+  <media:content url="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/images/image-165419763.png" medium="image" type="image/png" height="70" width="144"/>
+</item>
 <item>
   <title>Shinyappsio Usage and projected needs</title>
   <dc:creator>Ran Li</dc:creator>
