@@ -1,0 +1,75 @@
+---
+author: Ran Li
+date: "02/10/2023"
+title: "Digital Journalism ideas for UHC"
+description: "Introduction to types of digital journalism content and potential uses for the UHC."
+categories:
+  - Shiny
+format: 
+  html:
+    toc: true
+    toc-location: left
+    df-print: paged
+    code-fold: true
+    code-tools: true
+execute: 
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+It is of interest to tell convey stories within data. Academics usually use models to summarize and capture these stories but models and manuscript are not accessible to the public - ultimately limiting the scope of impact our research has to the academic realm.
+
+However there is another way to tell stories within the data which is to utilize interactivity and data visualiations. For example, in the digital journalism field a particular long form visulization medium called `scrolly-telling` or `scollies` are used to tell data driven stores in an engaging and accessible way
+
+This document will introduce the various three types of scrollies and some examples. Some focus on pay-persons and utilize interactivity/visualization to tell a story within the story. Some focus on researchers and utilize interactivity/visualization to break down model results. Some are more analytics intensive focusing the ability to select parameters and see various outputs.
+
+# Story focus
+
+The goal of a data story type scrolly is to tell a specific story within the data in a accessible and engaging medium to **lay-persons (primary audience)** as well as **researchers (secondary audience)**. Some examples include:
+
+## Disparities in US Cities
+
+![](images/image-165419763.png)
+
+<https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html>
+
+## EU Regions
+
+![](images/image-1331842843.png)
+
+<https://pudding.cool/2019/04/eu-regions/>
+
+## 
+
+# Methods/model focus
+
+Models are complex and are sometimes even difficult to digest by fellow researchers. These types of scrollies aim to make our model results more accessible to other researchers (primary audience) as well as lay-persons (secondary audience)
+
+## Hidden Bias in ML Models
+
+![](images/image-1939884647.png)
+
+<https://pair.withgoogle.com/explorables/hidden-bias/>
+
+## K-means clustering explained
+
+![](images/image-1245747916.png)
+
+<https://k-means-explorable.vercel.app/>
+
+# Analytics focus
+
+These types of products are more analytics intensive focusing the ability to select parameters and see various outputs. This is targeted towards people who want to explore data themselves and find a story relevant to them (**primary audience policy makers or journalists**) and all others (**secondary audience: researchers/lay-person**).
+
+## Policy Impact SCAN Tool
+
+![](images/image-64235515.png)
+
+<https://ambitiontoaction.net/scan_tool/>
+
+## City Access Map
+
+![](images/image-233582353.png)
+
+<https://www.cityaccessmap.com/>
