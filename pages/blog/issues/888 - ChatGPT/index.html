@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ran Li">
-<meta name="dcterms.date" content="2023-02-10">
-<meta name="description" content="Introduction to types of digital journalism content and potential uses for the UHC.">
+<meta name="dcterms.date" content="2023-05-10">
+<meta name="description" content="Introduction to types of digital journalism content and potential uses for research.">
 
-<title>Analytics Corner - Digital Journalism ideas for UHC</title>
+<title>Analytics Corner - ChatGPT and AI: use-cases and potential</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -228,24 +228,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#story-focus" id="toc-story-focus" class="nav-link active" data-scroll-target="#story-focus">Story focus</a>
+  <li><a href="#understanding-chatgpt" id="toc-understanding-chatgpt" class="nav-link active" data-scroll-target="#understanding-chatgpt">Understanding ChatGPT</a></li>
+  <li><a href="#potential-use-cases-for-public-health-research-at-the-drexel-uhc" id="toc-potential-use-cases-for-public-health-research-at-the-drexel-uhc" class="nav-link" data-scroll-target="#potential-use-cases-for-public-health-research-at-the-drexel-uhc">Potential Use Cases for Public Health Research at the Drexel UHC</a>
   <ul class="collapse">
-  <li><a href="#disparities-in-us-cities" id="toc-disparities-in-us-cities" class="nav-link" data-scroll-target="#disparities-in-us-cities">Disparities in US Cities</a></li>
-  <li><a href="#eu-regions" id="toc-eu-regions" class="nav-link" data-scroll-target="#eu-regions">EU Regions</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#rapid-data-analysis-and-interpretation" id="toc-rapid-data-analysis-and-interpretation" class="nav-link" data-scroll-target="#rapid-data-analysis-and-interpretation">1. Rapid Data Analysis and Interpretation</a></li>
+  <li><a href="#automated-coding-of-qualitative-data" id="toc-automated-coding-of-qualitative-data" class="nav-link" data-scroll-target="#automated-coding-of-qualitative-data">2. Automated Coding of Qualitative Data</a></li>
+  <li><a href="#enhancing-health-communication" id="toc-enhancing-health-communication" class="nav-link" data-scroll-target="#enhancing-health-communication">3. Enhancing Health Communication</a></li>
+  <li><a href="#identifying-emerging-trends-and-sentiments" id="toc-identifying-emerging-trends-and-sentiments" class="nav-link" data-scroll-target="#identifying-emerging-trends-and-sentiments">4. Identifying Emerging Trends and Sentiments</a></li>
+  <li><a href="#assisting-in-grant-proposal-writing" id="toc-assisting-in-grant-proposal-writing" class="nav-link" data-scroll-target="#assisting-in-grant-proposal-writing">5. Assisting in Grant Proposal Writing</a></li>
   </ul></li>
-  <li><a href="#methodsmodel-focus" id="toc-methodsmodel-focus" class="nav-link" data-scroll-target="#methodsmodel-focus">Methods/model focus</a>
-  <ul class="collapse">
-  <li><a href="#hidden-bias-in-ml-models" id="toc-hidden-bias-in-ml-models" class="nav-link" data-scroll-target="#hidden-bias-in-ml-models">Hidden Bias in ML Models</a></li>
-  <li><a href="#k-means-clustering-explained" id="toc-k-means-clustering-explained" class="nav-link" data-scroll-target="#k-means-clustering-explained">K-means clustering explained</a></li>
-  </ul></li>
-  <li><a href="#analytics-focus" id="toc-analytics-focus" class="nav-link" data-scroll-target="#analytics-focus">Analytics focus</a>
-  <ul class="collapse">
-  <li><a href="#policy-impact-scan-tool" id="toc-policy-impact-scan-tool" class="nav-link" data-scroll-target="#policy-impact-scan-tool">Policy Impact SCAN Tool</a></li>
-  <li><a href="#city-access-map" id="toc-city-access-map" class="nav-link" data-scroll-target="#city-access-map">City Access Map</a></li>
-  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/blog/issues/888 - Scrollies/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/blog/issues/888 - ChatGPT/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -255,15 +249,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Digital Journalism ideas for UHC</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">ChatGPT and AI: use-cases and potential</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">Shiny</div>
+    <div class="quarto-category">ChatGPT</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Introduction to types of digital journalism content and potential uses for the UHC.
+    Introduction to types of digital journalism content and potential uses for research.
   </div>
 </div>
 
@@ -280,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 10, 2023</p>
+      <p class="date">May 10, 2023</p>
     </div>
   </div>
   
@@ -290,57 +284,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>It is of interest to tell convey stories within data. Academics usually use models to summarize and capture these stories but models and manuscript are not accessible to the public - ultimately limiting the scope of impact our research has to the academic realm.</p>
-<p>However there is another way to tell stories within the data which is to utilize interactivity and data visualiations. For example, in the digital journalism field a particular long form visulization medium called <code>scrolly-telling</code> or <code>scollies</code> are used to tell data driven stores in an engaging and accessible way</p>
-<p>This document will introduce the various three types of scrollies and some examples. Some focus on pay-persons and utilize interactivity/visualization to tell a story within the story. Some focus on researchers and utilize interactivity/visualization to break down model results. Some are more analytics intensive focusing the ability to select parameters and see various outputs.</p>
-<section id="story-focus" class="level1">
-<h1>Story focus</h1>
-<p>The goal of a data story type scrolly is to tell a specific story within the data in a accessible and engaging medium to <strong>lay-persons (primary audience)</strong> as well as <strong>researchers (secondary audience)</strong>. Some examples include:</p>
-<section id="disparities-in-us-cities" class="level2">
-<h2 class="anchored" data-anchor-id="disparities-in-us-cities">Disparities in US Cities</h2>
-<p><img src="images/image-165419763.png" class="img-fluid"></p>
-<p><a href="https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html" class="uri">https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ChatGPT.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>The advent of artificial intelligence (AI) has significantly impacted various fields, including public health research. One of the most promising AI technologies in this context is ChatGPT, developed by OpenAI. This powerful language model, based on the GPT-4 architecture, offers a wide range of potential applications, especially for institutions like the Drexel Urban Health Collaborative (UHC). In this blog post, we will delve into what ChatGPT is and explore its potential use cases for public health research at the UHC.</p>
+<section id="understanding-chatgpt" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-chatgpt">Understanding ChatGPT</h2>
+<p>ChatGPT is an AI-powered language model that excels in understanding and generating human-like text. It can analyze and respond to text inputs, offering contextual understanding and relevant responses. Built on the GPT-4 architecture, it has been trained on vast amounts of data, which enables it to provide insightful and accurate information on various topics. Its impressive capabilities make it a valuable resource in numerous fields, including public health research.</p>
 </section>
-<section id="eu-regions" class="level2">
-<h2 class="anchored" data-anchor-id="eu-regions">EU Regions</h2>
-<p><img src="images/image-1331842843.png" class="img-fluid"></p>
-<p><a href="https://pudding.cool/2019/04/eu-regions/" class="uri">https://pudding.cool/2019/04/eu-regions/</a></p>
+<section id="potential-use-cases-for-public-health-research-at-the-drexel-uhc" class="level2">
+<h2 class="anchored" data-anchor-id="potential-use-cases-for-public-health-research-at-the-drexel-uhc">Potential Use Cases for Public Health Research at the Drexel UHC</h2>
+<section id="rapid-data-analysis-and-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="rapid-data-analysis-and-interpretation">1. Rapid Data Analysis and Interpretation</h3>
+<p>Public health researchers often deal with large datasets that require significant time and effort to analyze. ChatGPT can assist researchers in rapidly interpreting and processing these datasets, providing valuable insights and identifying patterns. By streamlining data analysis, ChatGPT allows researchers to focus more on formulating and implementing data-driven interventions.</p>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="automated-coding-of-qualitative-data" class="level3">
+<h3 class="anchored" data-anchor-id="automated-coding-of-qualitative-data">2. Automated Coding of Qualitative Data</h3>
+<p>Qualitative data is a vital component of public health research, offering nuanced perspectives on people’s experiences and behaviors. However, coding and analyzing qualitative data can be labor-intensive. ChatGPT can automate the coding process, reducing the time and resources required for this task while maintaining high-quality results. Researchers can leverage ChatGPT’s natural language understanding capabilities to identify themes and patterns in qualitative data quickly and accurately.</p>
+</section>
+<section id="enhancing-health-communication" class="level3">
+<h3 class="anchored" data-anchor-id="enhancing-health-communication">3. Enhancing Health Communication</h3>
+<p>Effective health communication is essential for promoting public health awareness and encouraging positive behavior change. ChatGPT can be used to create tailored, engaging, and easy-to-understand health messages for diverse audiences. By utilizing AI-generated content, public health organizations can improve their outreach efforts and better connect with communities.</p>
+</section>
+<section id="identifying-emerging-trends-and-sentiments" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-emerging-trends-and-sentiments">4. Identifying Emerging Trends and Sentiments</h3>
+<p>Social media platforms and online forums are valuable sources of information on public opinions and concerns related to health. ChatGPT can be employed to analyze and monitor these online spaces, identifying emerging trends, and gauging public sentiment on specific health issues. This information can help public health researchers to understand and address community concerns more effectively.</p>
+</section>
+<section id="assisting-in-grant-proposal-writing" class="level3">
+<h3 class="anchored" data-anchor-id="assisting-in-grant-proposal-writing">5. Assisting in Grant Proposal Writing</h3>
+<p>Securing funding is an integral aspect of public health research. ChatGPT can support researchers in writing persuasive grant proposals by offering suggestions and improving the overall quality of the text. This assistance can increase researchers’ chances of obtaining the necessary funds for their projects.</p>
 </section>
 </section>
-<section id="methodsmodel-focus" class="level1">
-<h1>Methods/model focus</h1>
-<p>Models are complex and are sometimes even difficult to digest by fellow researchers. These types of scrollies aim to make our model results more accessible to other researchers (primary audience) as well as lay-persons (secondary audience)</p>
-<section id="hidden-bias-in-ml-models" class="level2">
-<h2 class="anchored" data-anchor-id="hidden-bias-in-ml-models">Hidden Bias in ML Models</h2>
-<p><img src="images/image-1939884647.png" class="img-fluid"></p>
-<p><a href="https://pair.withgoogle.com/explorables/hidden-bias/" class="uri">https://pair.withgoogle.com/explorables/hidden-bias/</a></p>
-</section>
-<section id="k-means-clustering-explained" class="level2">
-<h2 class="anchored" data-anchor-id="k-means-clustering-explained">K-means clustering explained</h2>
-<p><img src="images/image-1245747916.png" class="img-fluid"></p>
-<p><a href="https://k-means-explorable.vercel.app/" class="uri">https://k-means-explorable.vercel.app/</a></p>
-</section>
-</section>
-<section id="analytics-focus" class="level1">
-<h1>Analytics focus</h1>
-<p>These types of products are more analytics intensive focusing the ability to select parameters and see various outputs. This is targeted towards people who want to explore data themselves and find a story relevant to them (<strong>primary audience policy makers or journalists</strong>) and all others (<strong>secondary audience: researchers/lay-person</strong>).</p>
-<section id="policy-impact-scan-tool" class="level2">
-<h2 class="anchored" data-anchor-id="policy-impact-scan-tool">Policy Impact SCAN Tool</h2>
-<p><img src="images/image-64235515.png" class="img-fluid"></p>
-<p><a href="https://ambitiontoaction.net/scan_tool/" class="uri">https://ambitiontoaction.net/scan_tool/</a></p>
-</section>
-<section id="city-access-map" class="level2">
-<h2 class="anchored" data-anchor-id="city-access-map">City Access Map</h2>
-<p><img src="images/image-233582353.png" class="img-fluid"></p>
-<p><a href="https://www.cityaccessmap.com/" class="uri">https://www.cityaccessmap.com/</a></p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>ChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole.</p>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -530,11 +513,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Ran Li</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "02/10/2023"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Digital Journalism ideas for UHC"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Introduction to types of digital journalism content and potential uses for the UHC."</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "05/10/2023"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "ChatGPT and AI: use-cases and potential"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Introduction to types of digital journalism content and potential uses for research."</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - Shiny</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - ChatGPT</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
@@ -548,61 +531,39 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>It is of interest to tell convey stories within data. Academics usually use models to summarize and capture these stories but models and manuscript are not accessible to the public - ultimately limiting the scope of impact our research has to the academic realm.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ChatGPT.jpeg)</span>{fig-align="center"}</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>However there is another way to tell stories within the data which is to utilize interactivity and data visualiations. For example, in the digital journalism field a particular long form visulization medium called <span class="in">`scrolly-telling`</span> or <span class="in">`scollies`</span> are used to tell data driven stores in an engaging and accessible way</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>The advent of artificial intelligence (AI) has significantly impacted various fields, including public health research. One of the most promising AI technologies in this context is ChatGPT, developed by OpenAI. This powerful language model, based on the GPT-4 architecture, offers a wide range of potential applications, especially for institutions like the Drexel Urban Health Collaborative (UHC). In this blog post, we will delve into what ChatGPT is and explore its potential use cases for public health research at the UHC.</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>This document will introduce the various three types of scrollies and some examples. Some focus on pay-persons and utilize interactivity/visualization to tell a story within the story. Some focus on researchers and utilize interactivity/visualization to break down model results. Some are more analytics intensive focusing the ability to select parameters and see various outputs.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Understanding ChatGPT</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># Story focus</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>ChatGPT is an AI-powered language model that excels in understanding and generating human-like text. It can analyze and respond to text inputs, offering contextual understanding and relevant responses. Built on the GPT-4 architecture, it has been trained on vast amounts of data, which enables it to provide insightful and accurate information on various topics. Its impressive capabilities make it a valuable resource in numerous fields, including public health research.</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>The goal of a data story type scrolly is to tell a specific story within the data in a accessible and engaging medium to **lay-persons (primary audience)** as well as **researchers (secondary audience)**. Some examples include:</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Potential Use Cases for Public Health Research at the Drexel UHC</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Disparities in US Cities</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.  Rapid Data Analysis and Interpretation</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-165419763.png)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Public health researchers often deal with large datasets that require significant time and effort to analyze. ChatGPT can assist researchers in rapidly interpreting and processing these datasets, providing valuable insights and identifying patterns. By streamlining data analysis, ChatGPT allows researchers to focus more on formulating and implementing data-driven interventions.</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://jsteele2003.github.io/msdv_thesis/redlining/dist/index.html&gt;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.  Automated Coding of Qualitative Data</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## EU Regions</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Qualitative data is a vital component of public health research, offering nuanced perspectives on people's experiences and behaviors. However, coding and analyzing qualitative data can be labor-intensive. ChatGPT can automate the coding process, reducing the time and resources required for this task while maintaining high-quality results. Researchers can leverage ChatGPT's natural language understanding capabilities to identify themes and patterns in qualitative data quickly and accurately.</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-1331842843.png)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.  Enhancing Health Communication</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://pudding.cool/2019/04/eu-regions/&gt;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>Effective health communication is essential for promoting public health awareness and encouraging positive behavior change. ChatGPT can be used to create tailored, engaging, and easy-to-understand health messages for diverse audiences. By utilizing AI-generated content, public health organizations can improve their outreach efforts and better connect with communities.</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.  Identifying Emerging Trends and Sentiments</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Methods/model focus</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Social media platforms and online forums are valuable sources of information on public opinions and concerns related to health. ChatGPT can be employed to analyze and monitor these online spaces, identifying emerging trends, and gauging public sentiment on specific health issues. This information can help public health researchers to understand and address community concerns more effectively.</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>Models are complex and are sometimes even difficult to digest by fellow researchers. These types of scrollies aim to make our model results more accessible to other researchers (primary audience) as well as lay-persons (secondary audience)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5.  Assisting in Grant Proposal Writing</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hidden Bias in ML Models</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>Securing funding is an integral aspect of public health research. ChatGPT can support researchers in writing persuasive grant proposals by offering suggestions and improving the overall quality of the text. This assistance can increase researchers' chances of obtaining the necessary funds for their projects.</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-1939884647.png)</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://pair.withgoogle.com/explorables/hidden-bias/&gt;</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## K-means clustering explained</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-1245747916.png)</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://k-means-explorable.vercel.app/&gt;</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analytics focus</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>These types of products are more analytics intensive focusing the ability to select parameters and see various outputs. This is targeted towards people who want to explore data themselves and find a story relevant to them (**primary audience policy makers or journalists**) and all others (**secondary audience: researchers/lay-person**).</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Policy Impact SCAN Tool</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-64235515.png)</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://ambitiontoaction.net/scan_tool/&gt;</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## City Access Map</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image-233582353.png)</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.cityaccessmap.com/&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>ChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

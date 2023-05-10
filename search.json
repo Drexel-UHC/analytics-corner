@@ -70,6 +70,34 @@
     "text": "Legend 3: Preemption\n\n\nCode\n## Legend 3: Red triangle \ntitle_hex_red <- ggdraw() + \n  draw_label(\n    \"Red triangles show state\\npreemption of paid\\nfamily policies\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme(\n    plot.margin = margin(5, 0, 0, 0)\n  )\nlegend_hex_red = data_processed %>% \n  filter(state == \"FL\") %>% \n  mutate(state = \"\") %>% \n  ggplot()  %>% \n  geom_hex_legend_for_alina() %>% \n  geom_hex_for_alina()\nhex_legend_red = plot_grid(\n  title_hex_red, legend_hex_red,\n  ncol = 1,\n  rel_heights = c(3, 8)\n)\nhex_legend_red"
   },
   {
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "",
+    "text": "The advent of artificial intelligence (AI) has significantly impacted various fields, including public health research. One of the most promising AI technologies in this context is ChatGPT, developed by OpenAI. This powerful language model, based on the GPT-4 architecture, offers a wide range of potential applications, especially for institutions like the Drexel Urban Health Collaborative (UHC). In this blog post, we will delve into what ChatGPT is and explore its potential use cases for public health research at the UHC."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Understanding ChatGPT",
+    "text": "Understanding ChatGPT\nChatGPT is an AI-powered language model that excels in understanding and generating human-like text. It can analyze and respond to text inputs, offering contextual understanding and relevant responses. Built on the GPT-4 architecture, it has been trained on vast amounts of data, which enables it to provide insightful and accurate information on various topics. Its impressive capabilities make it a valuable resource in numerous fields, including public health research."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Potential Use Cases for Public Health Research at the Drexel UHC",
+    "text": "Potential Use Cases for Public Health Research at the Drexel UHC\n\n1. Rapid Data Analysis and Interpretation\nPublic health researchers often deal with large datasets that require significant time and effort to analyze. ChatGPT can assist researchers in rapidly interpreting and processing these datasets, providing valuable insights and identifying patterns. By streamlining data analysis, ChatGPT allows researchers to focus more on formulating and implementing data-driven interventions.\n\n\n2. Automated Coding of Qualitative Data\nQualitative data is a vital component of public health research, offering nuanced perspectives on people’s experiences and behaviors. However, coding and analyzing qualitative data can be labor-intensive. ChatGPT can automate the coding process, reducing the time and resources required for this task while maintaining high-quality results. Researchers can leverage ChatGPT’s natural language understanding capabilities to identify themes and patterns in qualitative data quickly and accurately.\n\n\n3. Enhancing Health Communication\nEffective health communication is essential for promoting public health awareness and encouraging positive behavior change. ChatGPT can be used to create tailored, engaging, and easy-to-understand health messages for diverse audiences. By utilizing AI-generated content, public health organizations can improve their outreach efforts and better connect with communities.\n\n\n4. Identifying Emerging Trends and Sentiments\nSocial media platforms and online forums are valuable sources of information on public opinions and concerns related to health. ChatGPT can be employed to analyze and monitor these online spaces, identifying emerging trends, and gauging public sentiment on specific health issues. This information can help public health researchers to understand and address community concerns more effectively.\n\n\n5. Assisting in Grant Proposal Writing\nSecuring funding is an integral aspect of public health research. ChatGPT can support researchers in writing persuasive grant proposals by offering suggestions and improving the overall quality of the text. This assistance can increase researchers’ chances of obtaining the necessary funds for their projects."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Conclusion",
+    "text": "Conclusion\nChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole."
+  },
+  {
     "objectID": "pages/blog/issues/888 - Scrollies/index.html",
     "href": "pages/blog/issues/888 - Scrollies/index.html",
     "title": "Digital Journalism ideas for UHC",
@@ -159,6 +187,55 @@
     "title": "Get Started",
     "section": "",
     "text": "Note\n\n\n\nCOMING SOON"
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html",
+    "href": "pages/manuals/dbt/get-started-install.html",
+    "title": "1. Install software",
+    "section": "",
+    "text": "We will lean on a few key technologies for this course"
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#sign-up-for-github",
+    "href": "pages/manuals/dbt/get-started-install.html#sign-up-for-github",
+    "title": "1. Install software",
+    "section": "1.1 Sign up for GitHub",
+    "text": "1.1 Sign up for GitHub\nplease see more about github here: https://drexel-uhc.github.io/analytics-corner/pages/manuals/git-github/overview.html\nSign up for GitHub desktop here: https://github.com/join\nA few recomendations:\nOpen the GitHub desktop app and click Clone a repository from the internet\n\nNote if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File > Clone repository"
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#search-for-the-repo-you-want-to-clone",
+    "href": "pages/manuals/dbt/get-started-install.html#search-for-the-repo-you-want-to-clone",
+    "title": "1. Install software",
+    "section": "2.2 Search for the repo you want to clone",
+    "text": "2.2 Search for the repo you want to clone\nSearch in the highlight input box for the name of your repo. For example, we are can start typing hello-my-first-repo which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices."
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#choose-a-local-folder-where-to-copy-the-repo",
+    "href": "pages/manuals/dbt/get-started-install.html#choose-a-local-folder-where-to-copy-the-repo",
+    "title": "1. Install software",
+    "section": "2.3 Choose a local folder where to copy the repo",
+    "text": "2.3 Choose a local folder where to copy the repo\nYou should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!."
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#click-clone",
+    "href": "pages/manuals/dbt/get-started-install.html#click-clone",
+    "title": "1. Install software",
+    "section": "2.4 Click clone",
+    "text": "2.4 Click clone\nOnce you have your online repo and local folder selected then you can click Clone to start the cloning process."
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#ready-to-make-local-changes",
+    "href": "pages/manuals/dbt/get-started-install.html#ready-to-make-local-changes",
+    "title": "1. Install software",
+    "section": "2.5 Ready to make local changes!",
+    "text": "2.5 Ready to make local changes!\nAfter the cloning process. Your GitHub desktop should now show the status of your newly cloned repository."
+  },
+  {
+    "objectID": "pages/manuals/dbt/overview.html",
+    "href": "pages/manuals/dbt/overview.html",
+    "title": "Datawarehousing with DBT",
+    "section": "",
+    "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Setup\n\nGoal: get softwared installed for everyone\nSetup 1: Virtual Machine via GitHub Codespaces\nSetup 2: Local UHC Machine\nTransition: brain storm on data we want to play with\n\nSession 2 (5/17/23): Basics of DBT\n\nReview key concepts of data pipeline\nData models\nDocumentation\n\nSession 3 (5/24/23): Marts\n\nData modeling and layering\nMarts\n\nSession 4 (5/31/23): Advanced DBT\n\nTesting\nMacros\nCustomizing DBT\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nGit is notoriously hard to pick up and also notoriously hard to teach.\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!"
   },
   {
     "objectID": "pages/manuals/git-github/case-study-project-transition-management.html",

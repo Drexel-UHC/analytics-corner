@@ -2,6 +2,7 @@
   {
     "listing": "/pages/blog/index.html",
     "items": [
+      "/pages/blog/issues/888 - ChatGPT/index.html",
       "/pages/blog/issues/888 - Scrollies/index.html",
       "/pages/blog/issues/888 - Shiny usage Feb 2023/index.html",
       "/pages/blog/issues/999 - Tigris shape files/quarto.html",
