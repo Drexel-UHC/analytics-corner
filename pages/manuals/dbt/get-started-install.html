@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analytics Corner - 1. Install software</title>
+<title>Analytics Corner - 1. local setup</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">1. Install software</h1>
+      <h1 class="quarto-secondary-nav-title">1. local setup</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -199,10 +199,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#sign-up-for-github" id="toc-sign-up-for-github" class="nav-link active" data-scroll-target="#sign-up-for-github">1.1 Sign up for GitHub</a></li>
-  <li><a href="#search-for-the-repo-you-want-to-clone" id="toc-search-for-the-repo-you-want-to-clone" class="nav-link" data-scroll-target="#search-for-the-repo-you-want-to-clone">2.2 Search for the repo you want to clone</a></li>
-  <li><a href="#choose-a-local-folder-where-to-copy-the-repo" id="toc-choose-a-local-folder-where-to-copy-the-repo" class="nav-link" data-scroll-target="#choose-a-local-folder-where-to-copy-the-repo">2.3 Choose a local folder where to copy the repo</a></li>
-  <li><a href="#click-clone" id="toc-click-clone" class="nav-link" data-scroll-target="#click-clone">2.4 Click clone</a></li>
-  <li><a href="#ready-to-make-local-changes" id="toc-ready-to-make-local-changes" class="nav-link" data-scroll-target="#ready-to-make-local-changes">2.5 Ready to make local changes!</a></li>
+  <li><a href="#install-github-desktop" id="toc-install-github-desktop" class="nav-link" data-scroll-target="#install-github-desktop">1.2 Install GitHub desktop</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python">1.3 Install Python</a></li>
+  <li><a href="#install-vs-code" id="toc-install-vs-code" class="nav-link" data-scroll-target="#install-vs-code">1.4 Install VS-code</a></li>
+  <li><a href="#configure-script-running-previleges-for-vs-code" id="toc-configure-script-running-previleges-for-vs-code" class="nav-link" data-scroll-target="#configure-script-running-previleges-for-vs-code">1.5 Configure script running previleges for VS-code</a></li>
+  <li><a href="#clone-template-repository-duckdb-dbt-template" id="toc-clone-template-repository-duckdb-dbt-template" class="nav-link" data-scroll-target="#clone-template-repository-duckdb-dbt-template">1.6 Clone template repository <code>duckdb-dbt-template</code></a></li>
+  <li><a href="#setup-dbt-project-duckdb-dbt-template" id="toc-setup-dbt-project-duckdb-dbt-template" class="nav-link" data-scroll-target="#setup-dbt-project-duckdb-dbt-template">1.7 Setup DBT Project: <code>duckdb-dbt-template</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/dbt/get-started-install.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -211,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">1. Install software</h1>
+<h1 class="title d-none d-lg-block">1. local setup</h1>
 <p class="subtitle lead">Install a few pieces of software to get started</p>
 </div>
 
@@ -229,37 +231,109 @@ ul.task-list li input[type="checkbox"] {
 
 <p>We will lean on a few key technologies for this course</p>
 <ul>
-<li>GitHub</li>
-<li>ChatGPT</li>
+<li><a href="https://drexel-uhc.github.io/analytics-corner/pages/manuals/git-github/overview.html">GitHub</a>: for version control, cloud computing and web hosting.</li>
+<li><a href="https://slack.com/downloads/windows">Slack</a>: for DMs with UHC + DBT groups</li>
+<li><a href="https://drexel-uhc.github.io/analytics-corner/pages/blog/issues/888%20-%20ChatGPT/">ChatGPT</a>: for AI assist, semantic to syntax translations</li>
+<li><a href="https://code.visualstudio.com/download">VS-code</a>: as our primary IDE (Interactive Developement Environment)</li>
+<li><a href="https://duckdb.org/">DuckDB</a>: a modern OLAP database (external materialization, multi-lingual, serverless)</li>
+<li><a href="https://parquet.apache.org/">Apache Parquet</a>: modern open source columnar stoware format designed for analytics.</li>
 </ul>
 <section id="sign-up-for-github" class="level2">
 <h2 class="anchored" data-anchor-id="sign-up-for-github">1.1 Sign up for GitHub</h2>
-<p>please see more about github here: https://drexel-uhc.github.io/analytics-corner/pages/manuals/git-github/overview.html</p>
-<p>Sign up for GitHub desktop here: https://github.com/join</p>
-<p>A few recomendations:</p>
-<p>Open the GitHub desktop app and click <code>Clone a repository from the internet</code></p>
-<p><img src="../../..\images/clone-start.PNG" height="300"></p>
-<p>Note if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File &gt; Clone repository</p>
-<p><img src="../../..\images/clone-start-og.PNG" height="100"></p>
+<p>Sign up for GitHub desktop here: <a href="https://github.com/join" class="uri">https://github.com/join</a></p>
 </section>
-<section id="search-for-the-repo-you-want-to-clone" class="level2">
-<h2 class="anchored" data-anchor-id="search-for-the-repo-you-want-to-clone">2.2 Search for the repo you want to clone</h2>
-<p>Search in the highlight input box for the name of your repo. For example, we are can start typing <code>hello-my-first-repo</code> which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices.</p>
-<p><img src="../../..\images/clone-search.PNG" height="300"></p>
+<section id="install-github-desktop" class="level2">
+<h2 class="anchored" data-anchor-id="install-github-desktop">1.2 Install GitHub desktop</h2>
+<p>(If you want to do Git in a GUI, we recomend this one; if you want to work command line go for it!)</p>
+<p>Install GitHub Desktop here: <a href="https://desktop.github.com/" class="uri">https://desktop.github.com/</a></p>
 </section>
-<section id="choose-a-local-folder-where-to-copy-the-repo" class="level2">
-<h2 class="anchored" data-anchor-id="choose-a-local-folder-where-to-copy-the-repo">2.3 Choose a local folder where to copy the repo</h2>
-<p>You should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!.</p>
-<p><img src="../../..\images/clone-path.PNG" height="300"></p>
+<section id="install-python" class="level2">
+<h2 class="anchored" data-anchor-id="install-python">1.3 Install Python</h2>
+<p><strong>Open the Microsoft store</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-micrsoft-01.PNG" class="img-fluid figure-img" width="365"></p>
+</figure>
+</div>
+<p><strong>Search for Python</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-micrsoft-python.PNG" class="img-fluid figure-img" width="592"></p>
+</figure>
+</div>
+<p><strong>Click Install</strong></p>
 </section>
-<section id="click-clone" class="level2">
-<h2 class="anchored" data-anchor-id="click-clone">2.4 Click clone</h2>
-<p>Once you have your online repo and local folder selected then you can click <code>Clone</code> to start the cloning process.</p>
+<section id="install-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="install-vs-code">1.4 Install VS-code</h2>
+<p><strong>Install VS-code:</strong> <a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></p>
+<p><strong>Open VS-code and navigate to extensions tab:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-extension-01.PNG" class="img-fluid figure-img" width="325"></p>
+</figure>
+</div>
+<p><strong>Install extension requirement 1: Python</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-extension-python.PNG" class="img-fluid figure-img" width="329"></p>
+</figure>
+</div>
+<p><strong>Install extension requirement 2: DBT Power user</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-extension-dbt-power-user-01.PNG" class="img-fluid figure-img" width="321"></p>
+</figure>
+</div>
 </section>
-<section id="ready-to-make-local-changes" class="level2">
-<h2 class="anchored" data-anchor-id="ready-to-make-local-changes">2.5 Ready to make local changes!</h2>
-<p>After the cloning process. Your GitHub desktop should now show the status of your newly cloned repository.</p>
-<p><img src="../../..\images/clone-ready.PNG" height="300"></p>
+<section id="configure-script-running-previleges-for-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="configure-script-running-previleges-for-vs-code">1.5 Configure script running previleges for VS-code</h2>
+<p><strong>Open Windows Power Shell as administrator</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-shell-01.PNG" class="img-fluid figure-img" width="364"></p>
+</figure>
+</div>
+<p><strong>type <code>Set-ExecutionPolicy RemoteSigned</code></strong> <strong>then confirm <code>Y</code></strong></p>
+</section>
+<section id="clone-template-repository-duckdb-dbt-template" class="level2">
+<h2 class="anchored" data-anchor-id="clone-template-repository-duckdb-dbt-template">1.6 Clone template repository <code>duckdb-dbt-template</code></h2>
+<ul>
+<li><p>Open GitHub Desktop</p></li>
+<li><p>File &gt; Clone Repository</p></li>
+<li><p>Choose URL and enter <code>https://github.com/Drexel-UHC/duckdb-dbt-template</code></p></li>
+<li><p>Choose a local directory</p></li>
+<li><p>Click Clone</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-clone.PNG" class="img-fluid figure-img" width="448"></p>
+</figure>
+</div>
+</section>
+<section id="setup-dbt-project-duckdb-dbt-template" class="level2">
+<h2 class="anchored" data-anchor-id="setup-dbt-project-duckdb-dbt-template">1.7 Setup DBT Project: <code>duckdb-dbt-template</code></h2>
+<p><strong>Open Project in VS-code</strong></p>
+<p><img src="images/snip-dbt1-02.PNG" class="img-fluid" width="441"></p>
+<p><strong>Open new command line terminal with <code>cntrl + ~</code></strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-dbt-terminal.PNG" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+<p><strong>Create project specific dependency folder for Python (venv) in the DBT folder</strong></p>
+<pre><code>cd hello 
+python -m venv ./venv/
+.\venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+<p><strong>Check DBT works</strong></p>
+<pre><code>dbt compile</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snip-dbt-compile.PNG" class="img-fluid figure-img" width="642"></p>
+</figure>
+</div>
+<p>---</p>
+<p>😄 then happy modeling!!!</p>
 
 
 </section>
