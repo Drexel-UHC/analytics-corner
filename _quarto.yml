@@ -22,6 +22,8 @@ website:
           text: "Welcome"
         - href: pages/manuals/git-github/overview.qmd
           text: "Git and GitHub"
+        - href: pages/manuals/dbt/overview.qmd
+          text: "Datawarehousing + DBT"
       - text: "Blog"
         href: pages/blog/index.qmd
       - text: "Gallery"
@@ -62,6 +64,15 @@ website:
         aria-label: Quarto GitHub
         
   sidebar:
+    - id: dbt
+      contents:
+        - text: 'Overview'
+          href: pages/manuals/dbt/overview.qmd
+        - text: "---"
+        - section: 'Get started'
+          contents:
+          - text: '1. Get started'
+            href: pages/manuals/dbt/get-started-install.qmd    
     - id: git-github
       contents:
         - text: 'Overview'

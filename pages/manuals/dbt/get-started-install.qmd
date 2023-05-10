@@ -1,0 +1,104 @@
+---
+title: "1. local setup"
+subtitle: "Install a few pieces of software to get started"
+---
+
+We will lean on a few key technologies for this course
+
+-   [GitHub](https://drexel-uhc.github.io/analytics-corner/pages/manuals/git-github/overview.html): for version control, cloud computing and web hosting.
+-   [Slack](https://slack.com/downloads/windows): for DMs with UHC + DBT groups
+-   [ChatGPT](https://drexel-uhc.github.io/analytics-corner/pages/blog/issues/888%20-%20ChatGPT/): for AI assist, semantic to syntax translations
+-   [VS-code](https://code.visualstudio.com/download): as our primary IDE (Interactive Developement Environment)
+-   [DuckDB](https://duckdb.org/): a modern OLAP database (external materialization, multi-lingual, serverless)
+-   [Apache Parquet](https://parquet.apache.org/): modern open source columnar stoware format designed for analytics.
+
+## 1.1 Sign up for GitHub
+
+Sign up for GitHub desktop here: <https://github.com/join>
+
+## 1.2 Install GitHub desktop
+
+(If you want to do Git in a GUI, we recomend this one; if you want to work command line go for it!)
+
+Install GitHub Desktop here: <https://desktop.github.com/>
+
+## 1.3 Install Python
+
+**Open the Microsoft store**
+
+![](images/snip-micrsoft-01.PNG){fig-align="center" width="365"}
+
+**Search for Python**
+
+![](images/snip-micrsoft-python.PNG){fig-align="center" width="592"}
+
+**Click Install**
+
+## 1.4 Install VS-code
+
+**Install VS-code:** <https://code.visualstudio.com/download>
+
+**Open VS-code and navigate to extensions tab:**
+
+![](images/snip-extension-01.PNG){fig-align="center" width="325"}
+
+**Install extension requirement 1: Python**
+
+![](images/snip-extension-python.PNG){fig-align="center" width="329"}
+
+**Install extension requirement 2: DBT Power user**
+
+![](images/snip-extension-dbt-power-user-01.PNG){fig-align="center" width="321"}
+
+## 1.5 Configure script running previleges for VS-code
+
+**Open Windows Power Shell as administrator**
+
+![](images/snip-shell-01.PNG){fig-align="center" width="364"}
+
+**type `Set-ExecutionPolicy RemoteSigned`** **then confirm `Y`**
+
+## 1.6 Clone template repository `duckdb-dbt-template`
+
+-   Open GitHub Desktop
+
+-   File \> Clone Repository
+
+-   Choose URL and enter `https://github.com/Drexel-UHC/duckdb-dbt-template`
+
+-   Choose a local directory
+
+-   Click Clone
+
+![](images/snip-clone.PNG){fig-align="center" width="448"}
+
+## 1.7 Setup DBT Project: `duckdb-dbt-template`
+
+**Open Project in VS-code**
+
+![](images/snip-dbt1-02.PNG){width="441"}
+
+**Open new command line terminal with `cntrl + ~`**
+
+![](images/snip-dbt-terminal.PNG){fig-align="center" width="400"}
+
+**Create project specific dependency folder for Python (venv) in the DBT folder**
+
+```         
+cd hello 
+python -m venv ./venv/
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Check DBT works**
+
+```         
+dbt compile
+```
+
+![](images/snip-dbt-compile.PNG){fig-align="center" width="642"}
+
+\-\--
+
+😄 then happy modeling!!!
