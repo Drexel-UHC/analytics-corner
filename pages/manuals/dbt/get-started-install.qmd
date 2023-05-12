@@ -118,7 +118,7 @@ Make sure your Local Environment Python version is **3.10.11.**
 
 ![](images/snip-vscode-command-pallete-activate.PNG)
 
-**Check `dbt` is installed and version by entering `dbt  –-version`** **in terminal**
+**Check `dbt` is installed and version by entering `dbt --version`** **in terminal**
 
 ![](images/snip-dbt-version.PNG)
 
