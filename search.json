@@ -249,7 +249,7 @@
     "href": "pages/manuals/dbt/get-started-install.html#setup-dbt",
     "title": "1. local setup",
     "section": "1.8 Setup DBT",
-    "text": "1.8 Setup DBT\nActivate Python Environment: type .\\.venv\\Scripts\\activate in the terminal and hit enter\n\nCheck dbt is installed and version by entering dbt  –-version in terminal\n\nCheck that DBT can compile models\n\nIf you see done (as shown above) you are ready to start data modeling!! 😄"
+    "text": "1.8 Setup DBT\nActivate Python Environment: type .\\.venv\\Scripts\\activate in the terminal and hit enter\n\nCheck dbt is installed and version by entering dbt --version in terminal\n\nCheck that DBT can compile models\n\nIf you see done (as shown above) you are ready to start data modeling!! 😄"
   },
   {
     "objectID": "pages/manuals/dbt/overview.html",
