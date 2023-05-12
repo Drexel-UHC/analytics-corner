@@ -238,11 +238,18 @@
     "text": "1.6 Clone template repository duckdb-dbt-template\n\nOpen GitHub Desktop\nFile > Clone Repository\nChoose URL and enter https://github.com/Drexel-UHC/duckdb-dbt-template\nChoose a local directory\nClick Clone"
   },
   {
-    "objectID": "pages/manuals/dbt/get-started-install.html#setup-dbt-project-duckdb-dbt-template",
-    "href": "pages/manuals/dbt/get-started-install.html#setup-dbt-project-duckdb-dbt-template",
+    "objectID": "pages/manuals/dbt/get-started-install.html#setup-local-python-environment",
+    "href": "pages/manuals/dbt/get-started-install.html#setup-local-python-environment",
     "title": "1. local setup",
-    "section": "1.7 Setup DBT Project: duckdb-dbt-template",
-    "text": "1.7 Setup DBT Project: duckdb-dbt-template\nOpen Project in VS-code\n\nOpen new command line terminal with cntrl + ~\n\n\n\n\n\nCreate project specific dependency folder for Python (venv) in the DBT folder\ncd hello \npython -m venv ./venv/\n.\\venv\\Scripts\\activate\npip install -r requirements.txt\nCheck DBT works\ndbt compile\n\n\n\n\n\n---\n😄 then happy modeling!!!"
+    "section": "1.7 Setup Local Python Environment",
+    "text": "1.7 Setup Local Python Environment\nOpen Project in VS-code\n\nOpen VS-code Command Palette: Navbar > Help > Show All Commands\n\nIn Command Palette: search for the Python: Create Environment function and click it\n\nClick Venv as the method of creating a python environment\n\nSelect which Python version you want to use: Python 3.10.11\n\nSelect which dependencies to install: select requirements.txt then click Okay\n\nActivate Python Environment: type .\\.venv\\Scripts\\activate in the terminal and hit enter\n\nonce you see the green (.venv) in your terminal, you know your local python environment has been activated\nDouble check Python version: python --version\n\n\n\n\n\n\n\nImportant\n\n\n\nMake sure your Local Environment Python version is 3.10.11."
+  },
+  {
+    "objectID": "pages/manuals/dbt/get-started-install.html#setup-dbt",
+    "href": "pages/manuals/dbt/get-started-install.html#setup-dbt",
+    "title": "1. local setup",
+    "section": "1.8 Setup DBT",
+    "text": "1.8 Setup DBT\nActivate Python Environment: type .\\.venv\\Scripts\\activate in the terminal and hit enter\n\nCheck dbt is installed and version by entering dbt  –-version in terminal\n\nCheck that DBT can compile models\n\nIf you see done (as shown above) you are ready to start data modeling!! 😄"
   },
   {
     "objectID": "pages/manuals/dbt/overview.html",

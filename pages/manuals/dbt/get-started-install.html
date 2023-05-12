@@ -204,7 +204,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#install-vs-code" id="toc-install-vs-code" class="nav-link" data-scroll-target="#install-vs-code">1.4 Install VS-code</a></li>
   <li><a href="#configure-script-running-previleges-for-vs-code" id="toc-configure-script-running-previleges-for-vs-code" class="nav-link" data-scroll-target="#configure-script-running-previleges-for-vs-code">1.5 Configure script running previleges for VS-code</a></li>
   <li><a href="#clone-template-repository-duckdb-dbt-template" id="toc-clone-template-repository-duckdb-dbt-template" class="nav-link" data-scroll-target="#clone-template-repository-duckdb-dbt-template">1.6 Clone template repository <code>duckdb-dbt-template</code></a></li>
-  <li><a href="#setup-dbt-project-duckdb-dbt-template" id="toc-setup-dbt-project-duckdb-dbt-template" class="nav-link" data-scroll-target="#setup-dbt-project-duckdb-dbt-template">1.7 Setup DBT Project: <code>duckdb-dbt-template</code></a></li>
+  <li><a href="#setup-local-python-environment" id="toc-setup-local-python-environment" class="nav-link" data-scroll-target="#setup-local-python-environment">1.7 Setup Local Python Environment</a></li>
+  <li><a href="#setup-dbt" id="toc-setup-dbt" class="nav-link" data-scroll-target="#setup-dbt">1.8 Setup DBT</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/dbt/get-started-install.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -310,30 +311,48 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
-<section id="setup-dbt-project-duckdb-dbt-template" class="level2">
-<h2 class="anchored" data-anchor-id="setup-dbt-project-duckdb-dbt-template">1.7 Setup DBT Project: <code>duckdb-dbt-template</code></h2>
+<section id="setup-local-python-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setup-local-python-environment">1.7 Setup Local Python Environment</h2>
 <p><strong>Open Project in VS-code</strong></p>
 <p><img src="images/snip-dbt1-02.PNG" class="img-fluid" width="441"></p>
-<p><strong>Open new command line terminal with <code>cntrl + ~</code></strong></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/snip-dbt-terminal.PNG" class="img-fluid figure-img" width="400"></p>
-</figure>
+<p><strong>Open VS-code Command Palette: Navbar &gt; Help &gt; Show All Commands</strong></p>
+<p><img src="images/snip-vscode-command-pallete-02.PNG" class="img-fluid"></p>
+<p><strong>In Command Palette: search for the <code>Python: Create Environment</code></strong> <strong>function and click it</strong></p>
+<p><img src="images/snip-vscode-command-pallete-create.PNG" class="img-fluid"></p>
+<p><strong>Click <code>Venv</code></strong> <strong>as the method of creating a python environment</strong></p>
+<p><img src="images/snip-vscode-command-pallete-venv.PNG" class="img-fluid"></p>
+<p><strong>Select which Python version you want to use: <code>Python 3.10.11</code></strong></p>
+<p><img src="images/snip-vscode-command-pallete-python.PNG" class="img-fluid"></p>
+<p><strong>Select which dependencies to install: select <code>requirements.txt</code></strong> <strong>then click Okay</strong></p>
+<p><img src="images/snip-vscode-command-pallete-req-01.PNG" class="img-fluid"></p>
+<p><strong>Activate Python Environment: type <code>.\.venv\Scripts\activate</code></strong> <strong>in the terminal and hit enter</strong></p>
+<p><img src="images/snip-vscode-command-pallete-activate.PNG" class="img-fluid"></p>
+<p>once you see the green <code>(.venv)</code> in your terminal, you know your local python environment has been activated</p>
+<p><strong>Double check Python version: <code>python --version</code></strong></p>
+<p><img src="images/snip-vscode-command-pallete-check-01.PNG" class="img-fluid"></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p><strong>Create project specific dependency folder for Python (venv) in the DBT folder</strong></p>
-<pre><code>cd hello 
-python -m venv ./venv/
-.\venv\Scripts\activate
-pip install -r requirements.txt</code></pre>
-<p><strong>Check DBT works</strong></p>
-<pre><code>dbt compile</code></pre>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/snip-dbt-compile.PNG" class="img-fluid figure-img" width="642"></p>
-</figure>
+<div class="callout-caption-container flex-fill">
+Important
 </div>
-<p>---</p>
-<p>😄 then happy modeling!!!</p>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure your Local Environment Python version is <strong>3.10.11.</strong></p>
+</div>
+</div>
+</section>
+<section id="setup-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="setup-dbt">1.8 Setup DBT</h2>
+<p><strong>Activate Python Environment: type <code>.\.venv\Scripts\activate</code></strong> <strong>in the terminal and hit enter</strong></p>
+<p><img src="images/snip-vscode-command-pallete-activate.PNG" class="img-fluid"></p>
+<p><strong>Check <code>dbt</code> is installed and version by entering <code>dbt  –-version</code></strong> <strong>in terminal</strong></p>
+<p><img src="images/snip-dbt-version.PNG" class="img-fluid"></p>
+<p><strong>Check that DBT can compile models</strong></p>
+<p><img src="images/snip-dbt-compile-01.PNG" class="img-fluid"></p>
+<p><strong>If you see done (as shown above) you are ready to start data modeling!!</strong> 😄</p>
 
 
 </section>
