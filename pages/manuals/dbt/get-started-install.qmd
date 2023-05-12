@@ -72,33 +72,58 @@ Install GitHub Desktop here: <https://desktop.github.com/>
 
 ![](images/snip-clone.PNG){fig-align="center" width="448"}
 
-## 1.7 Setup DBT Project: `duckdb-dbt-template`
+## 1.7 Setup Local Python Environment
 
 **Open Project in VS-code**
 
 ![](images/snip-dbt1-02.PNG){width="441"}
 
-**Open new command line terminal with `cntrl + ~`**
+**Open VS-code Command Palette: Navbar \> Help \> Show All Commands**
 
-![](images/snip-dbt-terminal.PNG){fig-align="center" width="400"}
+![](images/snip-vscode-command-pallete-02.PNG)
 
-**Create project specific dependency folder for Python (venv) in the DBT folder**
+**In Command Palette: search for the `Python: Create Environment`** **function and click it**
 
-```         
-cd hello 
-python -m venv ./venv/
-.\venv\Scripts\activate
-pip install -r requirements.txt
-```
+![](images/snip-vscode-command-pallete-create.PNG)
 
-**Check DBT works**
+**Click `Venv`** **as the method of creating a python environment**
 
-```         
-dbt compile
-```
+![](images/snip-vscode-command-pallete-venv.PNG)
 
-![](images/snip-dbt-compile.PNG){fig-align="center" width="642"}
+**Select which Python version you want to use: `Python 3.10.11`**
 
-\-\--
+![](images/snip-vscode-command-pallete-python.PNG)
 
-😄 then happy modeling!!!
+**Select which dependencies to install: select `requirements.txt`** **then click Okay**
+
+![](images/snip-vscode-command-pallete-req-01.PNG)
+
+**Activate Python Environment: type `.\.venv\Scripts\activate`** **in the terminal and hit enter**
+
+![](images/snip-vscode-command-pallete-activate.PNG)
+
+once you see the green `(.venv)` in your terminal, you know your local python environment has been activated
+
+**Double check Python version: `python --version`**
+
+![](images/snip-vscode-command-pallete-check-01.PNG)
+
+::: callout-important
+Make sure your Local Environment Python version is **3.10.11.**
+:::
+
+## 1.8 Setup DBT
+
+**Activate Python Environment: type `.\.venv\Scripts\activate`** **in the terminal and hit enter**
+
+![](images/snip-vscode-command-pallete-activate.PNG)
+
+**Check `dbt` is installed and version by entering `dbt  –-version`** **in terminal**
+
+![](images/snip-dbt-version.PNG)
+
+**Check that DBT can compile models**
+
+![](images/snip-dbt-compile-01.PNG)
+
+**If you see done (as shown above) you are ready to start data modeling!!** 😄
