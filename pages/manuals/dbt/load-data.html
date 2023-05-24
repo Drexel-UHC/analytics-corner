@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analytics Corner - Git vs GitHub</title>
+<title>Analytics Corner - 2. Load data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../pages/manuals/git-github/git-vs-github-desktop.html" rel="next">
-<link href="../../../pages/manuals/git-github/git-basics.html" rel="prev">
+<link href="../../../pages/manuals/dbt/get-started-install.html" rel="prev">
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -162,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/manuals/git-github/teaching-thoughts.html">How to Git/GitHub?</a></li><li class="breadcrumb-item"><a href="../../../pages/manuals/git-github/git-vs-github.html">Git vs GitHub</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/manuals/dbt/get-started-install.html">Basics</a></li><li class="breadcrumb-item"><a href="../../../pages/manuals/dbt/load-data.html">2. Loading Data</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -176,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../pages/manuals/dbt/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -184,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Why learn Git/GitHub?</span></a>
+ <span class="menu-text">Basics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -192,97 +225,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/case-study-version-control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Version Control</span></a>
+  <a href="../../../pages/manuals/dbt/get-started-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Get started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/case-study-project-transition-management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Project organization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/precedent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Precedent</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/why-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. TLDR</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">How to Git/GitHub?</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/teaching-thoughts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Teaching philosophy</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/learning-objectives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Learning Objectives</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/git-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Git Intro</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Git Workflow</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/git-vs-github.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Git vs GitHub</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/git-vs-github-desktop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Git vs Github Desktop</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/install-github-desktop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Setup GitHub Desktop</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/init.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. init - create a new repo remotely</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/clone.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. clone - copy online repo to local computer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/git-github/status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. status - file changes of local repo</span></a>
+  <a href="../../../pages/manuals/dbt/load-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2. Loading Data</span></a>
   </div>
 </li>
       </ul>
@@ -293,14 +243,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#examine-our-data-sources" id="toc-examine-our-data-sources" class="nav-link active" data-scroll-target="#examine-our-data-sources">1.1 Examine our data sources</a></li>
+  <li><a href="#load-data-sources-into-dbt" id="toc-load-data-sources-into-dbt" class="nav-link" data-scroll-target="#load-data-sources-into-dbt">1.2 Load Data Sources into DBT</a></li>
+  <li><a href="#tell-dbt-about-our-source-tables" id="toc-tell-dbt-about-our-source-tables" class="nav-link" data-scroll-target="#tell-dbt-about-our-source-tables">1.3 Tell DBT about our source tables</a></li>
+  <li><a href="#generate-documentation" id="toc-generate-documentation" class="nav-link" data-scroll-target="#generate-documentation">1.3 Generate documentation</a></li>
+  <li><a href="#create-base-models" id="toc-create-base-models" class="nav-link" data-scroll-target="#create-base-models">1.4 Create base models</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/dbt/load-data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Git vs GitHub</h1>
+<h1 class="title">2. Load data</h1>
+<p class="subtitle lead">Now that we have set up DBT. We can start loading in our data to do data modeling.</p>
 </div>
 
 
@@ -315,17 +276,128 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../..\images/git-vs-github.png" class="img-fluid figure-img" width="485"></p>
-</figure>
+<p>This course does not teach data cleaning so we have simulated some cleaned data which we will load. Also DBT is a highly flexible system that allows us to work either locally or on the cloud. Today’s course will work locally so we can focus on data loading and basics of DBT; working on the cloud will be a topic for the next session.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<ul>
-<li><strong>Git</strong> is a version control system that lets you manage and keep track of your source code history.</li>
-<li><strong>GitHub</strong> is a hosting service that is 1 part a cloud backup for git repositories and 1 part social media platform for collaboration.</li>
+<div class="callout-title-container flex-fill">
+The specific learning goals for today’s session are:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><input type="checkbox">Examine source data</li>
+<li><input type="checkbox">Load source data into DBT</li>
+<li><input type="checkbox">Learn how to generate documentation</li>
+<li><input type="checkbox">Create base models</li>
+<li><input type="checkbox">Document base models</li>
+<li><input type="checkbox">Deploy documentation</li>
 </ul>
+</div>
+</div>
+<section id="examine-our-data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="examine-our-data-sources">1.1 Examine our data sources</h2>
+<p>We have simulated some fake data that align with some of the data that is commonly used at the UHC. The code for simulating this can be found in the <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl"><code>.etl</code> folder</a> of the repository. The outputs can be found in the <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl/clean"><code>.etl/clean/</code> folder</a>. There are several formats available, lets examine <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl/clean/csv">the .CSV formats</a> just because they are more accessible.</p>
+<p>Our ETL pipeline has produced a few tables for us to start modeling with. These include:</p>
+<ul>
+<li><strong>xwalk_spatial</strong>: simulated zcta, county, city relationship file for two fictional states PA/NY</li>
+<li><strong>DEATH_PA_YYYY</strong>: simulate line level mortality data for the state of PA</li>
+<li><strong>HCUP_SID_STATE_YYYY</strong>: simulated in patient hospital records for PA/NY</li>
+<li><strong>NETS</strong>: simulated business data for PA/NY</li>
+<li><strong>acs_zcta</strong>: simulated zcta level indicators</li>
+</ul>
+<p>Our ETL pipeline has produced a few tables in several formats (.csv and .parquet).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+.parquet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can think of .parquet as the next generation of .csv; where it is quickly becoming the gold standard data storage format within the data science world. It has several benefits including storage of metadata (descriptions, column-types), columnar-storage for efficient storage and queries and is highly inter operable with modern analytics workflows.</p>
+</div>
+</div>
+<p><img src="images/snip-etl-clean.JPG" class="img-fluid"></p>
+<p><strong>DuckDB-DBT can read or write in a variety of formats including .csv, .parquet or .json. So the next step is to just copy our source tables into our DuckDB project.</strong></p>
+</section>
+<section id="load-data-sources-into-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="load-data-sources-into-dbt">1.2 Load Data Sources into DBT</h2>
+<p>To load data all we do is copy and paste our files (.csv or .parquet) into a folder and tell DBT where to look. This could be locally on your computer, on the UHC server, or on a cloud storage (S3 bucket) or in a database. We have found a lot of success in using the UHC server as its free and works well across multiple people collaborating; but today we will just focus on working locally to focus on basics of DBT. We will touch on working in the cloud in a future session.</p>
+<p>So to work locally we</p>
+<ul>
+<li><p>created a folder <code>./external-dev/sources/</code> where we can upload our source tables.</p></li>
+<li><p>copy our source tables from our ETL pipeline. So it should <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/external-dev/sources">look like this</a>.</p></li>
+</ul>
+<p>That’s it! Now we can move on to telling DBT about these source tables!</p>
+</section>
+<section id="tell-dbt-about-our-source-tables" class="level2">
+<h2 class="anchored" data-anchor-id="tell-dbt-about-our-source-tables">1.3 Tell DBT about our source tables</h2>
+<p>In DBT the most important folder is <code>./models</code>. The DBT (Data Build Tool) <code>./models</code> folder is like a recipe book for your data: it contains instructions on how to combine and transform raw ingredients (your raw data) into finished dishes (more useful, organized, and analyzed data). Think of each file within the folder as a different recipe, each defining a specific way to cook your data.</p>
+<p>Lets add a group of recipes that tell DBT about our starting ingredients. We do this by making a folder <code>./models/sources.</code> then creating a file in <code>.yml</code> format that tells DBT about each source.</p>
+<p><strong>The <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/models/sources">source folder</a> now looks like this</strong></p>
+<p><img src="images/snip-source.JPG" class="img-fluid"></p>
+<p><strong>An example of an individual source .yml that uses .csv is like this (<a href="https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/sources/NETS.yml">click here</a>)</strong></p>
+<p><img src="images/snip-source-single.JPG" class="img-fluid"></p>
+<p><strong>An example of an individual source .yml that uses .csv is like this (<a href="https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/sources/HCUP_SID_NY_2010.yml">click here</a>)</strong></p>
+<p><img src="images/snip-source-parquet.JPG" class="img-fluid"></p>
+</section>
+<section id="generate-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="generate-documentation">1.3 Generate documentation</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Intro to DBT Documentation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Documentation within a data warehouse is crucial because it ensures transparency, maintainability, and trustworthiness of your data. It’s like a roadmap, explaining how your data is structured, where it comes from, and how it’s been processed and transformed, which is vital when data professionals need to understand or modify data workflows. DBT’s “work as you go” out-of-the-box documentation is incredibly valuable because it auto-generates this roadmap. As you build and transform your data, DBT automatically creates accompanying documentation, ensuring that no step is undocumented and that the whole process is continually up-to-date and ready for team collaboration or audits.</p>
+</div>
+</div>
+<p><strong>Before we go any farther lets introduce documentation in DBT and make sure everything looks as expected</strong> To generate documentation in DBT you run two commands sequentially. First to generate documentation</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dbt docs generate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then to serve the documentation</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dbt docs serve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The log after running these two should look like:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">(.</span><span class="fu">venv</span><span class="op">)</span> <span class="fu">PS</span> D<span class="op">:</span>\git\duckdb<span class="op">-</span>dbt<span class="op">-</span>template<span class="op">&gt;</span> dbt docs generate</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>18  Running with dbt<span class="op">=</span>1<span class="op">.</span><span class="fu">3</span><span class="op">.</span><span class="fu">2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  <span class="op">[</span>WARNING<span class="op">]:</span> Configuration paths exist <span class="kw">in</span> your dbt_project<span class="op">.</span><span class="fu">yml</span> file which <span class="kw">do</span> not apply to any resources<span class="op">.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>There are 1 unused configuration paths<span class="op">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> models<span class="op">.</span><span class="fu">hello</span><span class="op">.</span><span class="fu">example</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  Found 1 model<span class="op">,</span> 0 tests<span class="op">,</span> 0 snapshots<span class="op">,</span> 0 analyses<span class="op">,</span> 292 macros<span class="op">,</span> 0 operations<span class="op">,</span> 0 seed files<span class="op">,</span> 9 sources<span class="op">,</span> 0 exposures<span class="op">,</span> 0 metrics</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  Concurrency<span class="op">:</span> 1 threads <span class="op">(</span>target<span class="op">=</span><span class="st">'dev-local'</span><span class="op">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  Done<span class="op">.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  Building catalog</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>19  Catalog written to D<span class="op">:</span>\git\duckdb<span class="op">-</span>dbt<span class="op">-</span>template\target\catalog<span class="op">.</span><span class="fu">json</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">(.</span><span class="fu">venv</span><span class="op">)</span> <span class="fu">PS</span> D<span class="op">:</span>\git\duckdb<span class="op">-</span>dbt<span class="op">-</span>template<span class="op">&gt;</span> dbt docs serve</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26  Running with dbt<span class="op">=</span>1<span class="op">.</span><span class="fu">3</span><span class="op">.</span><span class="fu">2</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26  Serving docs at 0<span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">0</span><span class="op">:</span>8080</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26  To access <span class="kw">from</span> your browser<span class="op">,</span> navigate to<span class="op">:</span>  http<span class="op">://</span>localhost<span class="op">:</span>8080</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>17<span class="op">:</span>26  Press Ctrl<span class="op">+</span>C to <span class="kw">exit</span><span class="op">.</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>127<span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">1</span> <span class="op">-</span> <span class="op">-</span> <span class="op">[</span>24<span class="op">/</span>May<span class="op">/</span>2023 12<span class="op">:</span>17<span class="op">:</span>27<span class="op">]</span> <span class="st">"GET / HTTP/1.1"</span> 200 <span class="op">-</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>127<span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">1</span> <span class="op">-</span> <span class="op">-</span> <span class="op">[</span>24<span class="op">/</span>May<span class="op">/</span>2023 12<span class="op">:</span>17<span class="op">:</span>27<span class="op">]</span> <span class="st">"GET /manifest.json?cb=1684945047414 HTTP/1.1"</span> 200 <span class="op">-</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>127<span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">1</span> <span class="op">-</span> <span class="op">-</span> <span class="op">[</span>24<span class="op">/</span>May<span class="op">/</span>2023 12<span class="op">:</span>17<span class="op">:</span>27<span class="op">]</span> <span class="st">"GET /catalog.json?cb=1684945047414 HTTP/1.1"</span> 200 <span class="op">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should now see the documentation site pop up in your browser and it looks like the following:</p>
+<p><img src="images/snip-dbt-docs-01.JPG" class="img-fluid"></p>
+<p>Looks about right! we have told DBT that we have of bunch of ingredients/sources and it shows up in the documentation.</p>
+</section>
+<section id="create-base-models" class="level2">
+<h2 class="anchored" data-anchor-id="create-base-models">1.4 Create base models</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -563,14 +635,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../pages/manuals/git-github/git-basics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basic Git Workflow</span>
+      <a href="../../../pages/manuals/dbt/get-started-install.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Get started</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../pages/manuals/git-github/git-vs-github-desktop.html" class="pagination-link">
-        <span class="nav-page-text">Git vs Github Desktop</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -591,7 +660,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <a class="nav-link" href="../../../license.html">License</a>
   </li>  
 </ul>
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/git-github/git-vs-github.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
