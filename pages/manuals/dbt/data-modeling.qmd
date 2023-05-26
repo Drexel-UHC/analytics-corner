@@ -1,0 +1,6 @@
+---
+title: "4. Basic Modeling"
+subtitle: "Now that we have set up DBT, soruces imported and learned docuemtnation. Lets start modeling!"
+--- 
+
+TBD

@@ -1,0 +1,6 @@
+---
+title: "6. Work in cloud"
+subtitle: "Learn how to collaborative do DBT!"
+---
+
+TBD

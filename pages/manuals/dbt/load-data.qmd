@@ -1,0 +1,224 @@
+---
+title: "2. Load data"
+subtitle: "Now that we have set up DBT. We can  start loading in our data to do data modeling."
+---
+
+This course does not teach data cleaning so we have simulated some cleaned data which we will load. Also DBT is a highly flexible system that allows us to work either locally or on the cloud. Today's course will work locally so we can focus on data loading and basics of DBT; working on the cloud will be a topic for the next session.
+
+::: callout-note
+## The specific learning goals for today's session are:
+
+-   [ ] Examine source data
+-   [ ] Load source data into DBT
+-   [ ] Learn how to generate documentation
+-   [ ] Create base models
+-   [ ] Interact with DBT with VS code
+:::
+
+## 1.1 Examine our data sources
+
+We have simulated some fake data that align with some of the data that is commonly used at the UHC. The code for simulating this can be found in the [`.etl` folder](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl) of the repository. The outputs can be found in the [`.etl/clean/` folder](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl/clean). There are several formats available, lets examine [the .CSV formats](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/.etl/clean/csv) just because they are more accessible.
+
+Our ETL pipeline has produced a few tables for us to start modeling with. These include:
+
+-   **xwalk_spatial**: simulated zcta, county, city relationship file for two fictional states PA/NY
+-   **DEATH_PA_YYYY**: simulate line level mortality data for the state of PA
+-   **HCUP_SID_STATE_YYYY**: simulated in patient hospital records for PA/NY
+-   **NETS**: simulated business data for PA/NY
+-   **acs_zcta**: simulated zcta level indicators
+
+Our ETL pipeline has produced a few tables in several formats (.csv and .parquet).
+
+::: callout-tip
+## .parquet
+
+You can think of .parquet as the next generation of .csv; where it is quickly becoming the gold standard data storage format within the data science world. It has several benefits including storage of metadata (descriptions, column-types), columnar-storage for efficient storage and queries and is highly inter operable with modern analytics workflows.
+:::
+
+![](images/snip-etl-clean.JPG)
+
+**DuckDB-DBT can read or write in a variety of formats including .csv, .parquet or .json. So the next step is to just copy our source tables into our DuckDB project.**
+
+## 1.2 Load Data Sources into DBT
+
+To load data all we do is copy and paste our files (.csv or .parquet) into a folder and tell DBT where to look. This could be locally on your computer, on the UHC server, or on a cloud storage (S3 bucket) or in a database. We have found a lot of success in using the UHC server as its free and works well across multiple people collaborating; but today we will just focus on working locally to focus on basics of DBT. We will touch on working in the cloud in a future session.
+
+So to work locally we
+
+-   created a folder `./external-dev/sources/` where we can upload our source tables.
+
+-   copy our source tables from our ETL pipeline. So it should [look like this](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/external-dev/sources).
+
+That's it! Now we can move on to telling DBT about these source tables!
+
+## 1.3 Tell DBT about our source tables
+
+In DBT the most important folder is `./models`. The DBT (Data Build Tool) `./models` folder is like a recipe book for your data: it contains instructions on how to combine and transform raw ingredients (your raw data) into finished dishes (more useful, organized, and analyzed data). Think of each file within the folder as a different recipe, each defining a specific way to cook your data.
+
+Lets add a group of recipes that tell DBT about our starting ingredients. We do this by making a folder `./models/sources.` then creating a file in `.yml` format that tells DBT about each source.
+
+**The [source folder](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/models/sources) now looks like this**
+
+![](images/snip-source.JPG)
+
+**An example of an individual source .yml that uses .csv is like this ([click here](https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/sources/NETS.yml))**
+
+![](images/snip-source-single.JPG)
+
+**An example of an individual source .yml that uses .csv is like this ([click here](https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/sources/HCUP_SID_NY_2010.yml))**
+
+![](images/snip-source-parquet.JPG)
+
+## 1.3 Generate documentation
+
+::: callout-tip
+## Intro to DBT Documentation
+
+Documentation within a data warehouse is crucial because it ensures transparency, maintainability, and trustworthiness of your data. It's like a roadmap, explaining how your data is structured, where it comes from, and how it's been processed and transformed, which is vital when data professionals need to understand or modify data workflows. DBT's "work as you go" out-of-the-box documentation is incredibly valuable because it auto-generates this roadmap. As you build and transform your data, DBT automatically creates accompanying documentation, ensuring that no step is undocumented and that the whole process is continually up-to-date and ready for team collaboration or audits.
+:::
+
+**Before we go any farther lets introduce documentation in DBT and make sure everything looks as expected** To generate documentation in DBT you run two commands sequentially. First to generate documentation
+
+``` powershell
+dbt docs generate
+```
+
+Then to serve the documentation
+
+``` powershell
+dbt docs serve
+```
+
+The log after running these two should look like:
+
+``` powershell
+(.venv) PS D:\git\duckdb-dbt-template> dbt docs generate
+16:17:18  Running with dbt=1.3.2
+16:17:19  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.hello.example
+
+16:17:19  Found 1 model, 0 tests, 0 snapshots, 0 analyses, 292 macros, 0 operations, 0 seed files, 9 sources, 0 exposures, 0 metrics
+16:17:19  
+16:17:19  Concurrency: 1 threads (target='dev-local')
+16:17:19
+16:17:19  Done.
+16:17:19  Building catalog
+16:17:19  Catalog written to D:\git\duckdb-dbt-template\target\catalog.json
+(.venv) PS D:\git\duckdb-dbt-template> dbt docs serve
+16:17:26  Running with dbt=1.3.2
+16:17:26  Serving docs at 0.0.0.0:8080
+16:17:26  To access from your browser, navigate to:  http://localhost:8080
+16:17:26
+16:17:26
+16:17:26  Press Ctrl+C to exit.
+127.0.0.1 - - [24/May/2023 12:17:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [24/May/2023 12:17:27] "GET /manifest.json?cb=1684945047414 HTTP/1.1" 200 -
+127.0.0.1 - - [24/May/2023 12:17:27] "GET /catalog.json?cb=1684945047414 HTTP/1.1" 200 -
+```
+
+You should now see the documentation site pop up in your browser and it looks like the following:
+
+![](images/snip-dbt-docs-01.JPG)
+
+Looks about right! we have told DBT that we have of bunch of ingredients/sources and it shows up in the documentation.
+
+## 1.4 Create base models
+
+### Intro do DBT Project structure
+
+Data modeling in DBT is the process of defining how raw data should be transformed and structured to make it useful and meaningful for analysis, much like a chef deciding how to prepare and combine ingredients to create a dish. Industry convergent best practices (see links in margin) approach this by separating the overall process into component transformation layers.
+
+In DBT, the data transformation process usually unfolds in three steps: staging base models (cleaning and prepping raw data), creating intermediate data marts (combining and transforming the prepped data), and building data models (creating the final structured views of the data), akin to preparing ingredients, cooking them, and plating the final dish in a culinary process.
+
+::: column-margin
+Useful links:
+
+-   [how to structure DBT projects](https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview)
+-   [Layer 1: Base/Staging](https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging)
+-   [Layer 2: Intermediate](https://docs.getdbt.com/guides/best-practices/how-we-structure/3-intermediate)
+-   [Layer 3: Marts](https://docs.getdbt.com/guides/best-practices/how-we-structure/4-marts)
+:::
+
+### Lets create some base layer models
+
+Again lets go back to our `./models` folder. You can organize it any way you want but following best practices you can have a subfolder `./models/base` were we can store out base models. Each model is a `.sql` file. After adding all our base models this folder looks like
+
+**After adding all our [./models/base folder now looks like this](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/models/base)**
+
+![](images/snip-base.JPG)
+
+**An individual data model `.sql` file looks like this ([click here](https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/base/HCUP/HCUP_SID_NY_2010.sql))**
+
+![](images/snip-base-example.JPG)
+
+**The SQL is very minimal. we are just importing the entire table. DBT allows us to use functional programming while writing SQL through jinja templating. In this case anything betwen double brackets `{{  … }}`** will be first compiled by DBT into pure SQL for your database to run. Here we
+
+-   Tell DBT we want to store the results of this table externally
+
+-   Tell DBT which source table to pull from.
+
+### Run DBT
+
+Lets make sure everything runs. The DBT command to run models is
+
+``` powershell
+dbt run 
+```
+
+The log should look like this
+
+``` powershell
+
+(.venv) PS D:\\git\\duckdb-dbt-template\> dbt run
+16:52:44 Running with dbt=1.3.2
+16:52:45 \[WARNING\]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+\- models.hello.example
+16:52:45 Found 8 models, 0 tests, 0 snapshots, 0 analyses, 292 macros, 0 operations, 0 seed files, 9 sources, 0 exposures, 0 metrics
+16:52:45
+16:52:45 Concurrency: 1 threads (target='dev-local')
+16:52:45
+16:52:45 1 of 8 START sql external model parquet.DEATH_PA_2010 .......................... \[RUN\]
+16:52:46 1 of 8 OK created sql external model parquet.DEATH_PA_2010 ..................... \[OK in 0.83s\]
+16:52:46 2 of 8 START sql external model parquet.DEATH_PA_2015 .......................... \[RUN\]
+16:52:47 2 of 8 OK created sql external model parquet.DEATH_PA_2015 ..................... \[OK in 0.70s\]
+16:52:47 3 of 8 START sql external model parquet.HCUP_SID_NY_2010 ....................... \[RUN\]
+16:52:47 3 of 8 OK created sql external model parquet.HCUP_SID_NY_2010 .................. \[OK in 0.70s\]
+16:52:47 4 of 8 START sql external model parquet.HCUP_SID_NY_2015 ....................... \[RUN\]
+16:52:48 4 of 8 OK created sql external model parquet.HCUP_SID_NY_2015 .................. \[OK in 0.70s\]
+16:52:48 5 of 8 START sql external model parquet.HCUP_SID_PA_2010 ....................... \[RUN\]
+16:52:49 5 of 8 OK created sql external model parquet.HCUP_SID_PA_2010 .................. \[OK in 0.69s\]
+16:52:49 6 of 8 START sql external model parquet.HCUP_SID_PA_2015 ....................... \[RUN\]
+16:52:49 6 of 8 OK created sql external model parquet.HCUP_SID_PA_2015 .................. \[OK in 0.67s\]
+16:52:49 7 of 8 START sql external model parquet.NETS ................................... \[RUN\]
+16:52:50 7 of 8 OK created sql external model parquet.NETS .............................. \[OK in 0.49s\]
+16:52:50 8 of 8 START sql external model parquet.acs_zcta ............................... \[RUN\]
+16:52:50 8 of 8 OK created sql external model parquet.acs_zcta .......................... \[OK in 0.51s\]
+16:52:51
+16:52:51 Finished running 8 external models in 0 hours 0 minutes and 6.06 seconds (6.06s).
+16:52:51
+16:52:51 Completed successfully
+16:52:51
+16:52:51 Done. PASS=8 WARN=0 ERROR=0 SKIP=0 TOTAL=8
+```
+
+**Note that DBT selection syntax is very flexible meaning we can specify what models to run, how often to run then and to detect if downstreams models need refreshing; [see here for mdoel selection syntax documentation.](https://docs.getdbt.com/reference/commands/run)**
+
+## 1.5 Interactive with DBT via VS-code
+
+So far we have used DBT like a compiler. But in reality, it takes a lot of interactive development to get your models where you want them. There are two ways to use DBT as an interactive tool: DBT cloud which is the pricier and fancier option and DBT PowerUser on VS code which works and is free!
+
+So lets try the basics of DBT Poweruser to use DBT interactively in VS-Code.
+
+### 1.5.1 Navigate to a `.sql` model in VS-Code
+
+Here we navigate to `./models/base/MORTALITY/DEATH_PA_2010.sql`
+
+![](images/snip-power1-01.JPG)
+
+### 1.5.2 Click anywhere on you `.sql` file then hit `cntr enter` 
+
+![](images/snip-power2.JPG)
+
+Here DBT will give you a preview of what this model looks like! Being able to iterative write your SQL without having to compile and work within your IDE will streamline the data model process greatly and makes for a happier developer experience.

@@ -69,10 +69,20 @@ website:
         - text: 'Overview'
           href: pages/manuals/dbt/overview.qmd
         - text: "---"
-        - section: 'Get started'
+        - section: 'Basics'
           contents:
           - text: '1. Get started'
             href: pages/manuals/dbt/get-started-install.qmd    
+          - text: '2. Loading Data'
+            href: pages/manuals/dbt/load-data.qmd   
+          - text: '3. Documentation'
+            href: pages/manuals/dbt/documentation.qmd    
+          - text: '4. Basic Modeling'
+            href: pages/manuals/dbt/data-modeling.qmd    
+          - text: '5. Macros: DBT functional programming'
+            href: pages/manuals/dbt/functional-programming.qmd    
+          - text: '6. Work in the cloud'
+            href: pages/manuals/dbt/work-in-cloud.qmd    
     - id: git-github
       contents:
         - text: 'Overview'
