@@ -15,9 +15,41 @@ We previously learned how to load data into DBT. Now we can start orchestrating 
 
 ## 3.1 Intro to DBT Project structure
 
-Data modeling in DBT is the process of defining how raw data should be transformed and structured to make it useful and meaningful for analysis, much like a chef deciding how to prepare and combine ingredients to create a dish. Industry convergent best practices (see links in margin) approach this by separating the overall process into component transformation layers.
+This section is a curated copy and paste of [DBT's analytics engineering documentation](https://www.getdbt.com/analytics-engineering/modular-data-modeling-technique/)!
+
+### 3.1.1 Traditional, monolithic data modeling techniques
+
+Before dbt was released, the most reliable way that to model data was SQL scripting.
+
+This often looked like writing one 10,000 line SQL file, or if you want to get fancy, you could split that file into a bunch of separate SQL files or stored procedures that are run in order with a Python script.
+
+Very few people in the org would be aware of my scripts, so that even if someone else was looking to model data in a similar way, they\'d start from source data rather than leveraging what I\'d already built. Not that I didn\'t want to share! There just wasn\'t an easy way to do so.
+
+We could call this a *monolithic* or *traditional* approach to data modeling: each consumer of data would rebuild their own data transformations from raw source data. Visualizing our data model dependencies as a [**DAG**](https://docs.getdbt.com/terms/dag) (a directed acyclic graph), we see a lot of overlapping use of source data:
+
+![](https://www.getdbt.com/ui/img/guides/analytics-engineering/messy_dag_dependencies.jpg)
+
+### 3.1.2 **What is modular data modeling?**
+
+With a modular approach, every producer or consumer of data models in an organization could start from the foundational data modeling work that others have done before them, rather than starting from source data every time.
+
+When I started using dbt as a data modeling framework, I began to think of data models as *components* rather than a monolithic whole:
+
+*What transformations were shared across data models, that I could extract into foundational models and reference in multiple places?*
+
+*Note: in dbt, one data model can reference another using the [**ref function**](https://docs.getdbt.com/reference/dbt-jinja-functions/ref).*
+
+When we reference foundational data models in multiple places, rather than starting from scratch every time, our DAG becomes much easier to follow:
+
+![](https://www.getdbt.com/ui/img/guides/analytics-engineering/modular_data_modeling_technique.png)
+
+### 3.1.3 **How to structure/modularize our transformation?**
 
 In DBT, the data transformation process usually unfolds in three steps: staging base models (cleaning and prepping raw data), creating intermediate data marts (combining and transforming the prepped data), and building data models (creating the final structured views of the data), akin to preparing ingredients, cooking them, and plating the final dish in a culinary process.
+
+![the basic components](https://www.getdbt.com/ui/img/guides/analytics-engineering/intermediate_data_models.png)
+
+![finish product: Fact + dimension tables](https://www.getdbt.com/ui/img/guides/analytics-engineering/data_mart_models_facts_dimensions.png)
 
 ::: column-margin
 Useful links:

@@ -35,13 +35,10 @@ This will be a series of 1 hour collaborative coding sessions where we will lear
 
 -   This course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.
 
-    -   [dbt fundamentals](https://courses.getdbt.com/courses/fundamentals)
-
-    -   [dbt Jinja, Macros, Packages](https://courses.getdbt.com/courses/jinja-macros-packages)
-
-    -   [Refactoring SQL for Modularity](https://courses.getdbt.com/courses/refactoring-sql-for-modularity)
-
     -   [DBT Courses (All)](https://courses.getdbt.com/collections)
-
-    -   Note, these courses DBT cloud but you can use the set up we introduce to practice
+        -   [dbt fundamentals](https://courses.getdbt.com/courses/fundamentals)
+        -   [dbt Jinja, Macros, Packages](https://courses.getdbt.com/courses/jinja-macros-packages)
+        -   Note, these courses DBT cloud but you can use the set up we introduce to practice
+    -   [Analytics Engineering with DBT (Book)](https://www.getdbt.com/analytics-engineering/start-here)
+    -   [Data Modeling Techniques chapter](https://www.getdbt.com/analytics-engineering/modular-data-modeling-technique/)
 :::
