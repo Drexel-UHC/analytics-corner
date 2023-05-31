@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analytics Corner - 3. Basic Modeling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../pages/manuals/dbt/documentation.html" rel="next">
+<link href="../../../pages/manuals/dbt/load-data.html" rel="prev">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../uhc.png" alt="Drexel dragon logo." class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Analytics Corner</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-manuals" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Manuals</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-manuals">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/welcome/1-about.html" rel="" target="">
+ <span class="dropdown-text">Welcome</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/git-github/overview.html" rel="" target="">
+ <span class="dropdown-text">Git and GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/dbt/overview.html" rel="" target="">
+ <span class="dropdown-text">Datawarehousing + DBT</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/gallery/index.html" rel="" target="">
+ <span class="menu-text">Gallery</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&amp;labels=&amp;template=request.yml&amp;title=%5BRequest+title%5D%3A+" rel="" target=""><i class="bi bi-patch-question" role="img">
+</i> 
+ <span class="dropdown-text">Submit an Issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/discussions" rel="" target=""><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">View Discussions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/faq/index.html" rel="" target=""><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc" rel="" target=""><i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core" rel="" target=""><i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/manuals/dbt/get-started-install.html">Basics</a></li><li class="breadcrumb-item"><a href="../../../pages/manuals/dbt/basic-modeling.html">3. Basic Modeling</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/get-started-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Get started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/load-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Loading Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/basic-modeling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3. Basic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Documentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Fundamental DBT</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/data-modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Data Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/functional-programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Macros: DBT functional programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/work-in-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Work in the cloud</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro-to-dbt-project-structure" id="toc-intro-to-dbt-project-structure" class="nav-link active" data-scroll-target="#intro-to-dbt-project-structure">3.1 Intro to DBT Project structure</a>
+  <ul class="collapse">
+  <li><a href="#traditional-monolithic-data-modeling-techniques" id="toc-traditional-monolithic-data-modeling-techniques" class="nav-link" data-scroll-target="#traditional-monolithic-data-modeling-techniques">3.1.1 Traditional, monolithic data modeling techniques</a></li>
+  <li><a href="#what-is-modular-data-modeling" id="toc-what-is-modular-data-modeling" class="nav-link" data-scroll-target="#what-is-modular-data-modeling">3.1.2 <strong>What is modular data modeling?</strong></a></li>
+  <li><a href="#how-to-structuremodularize-our-transformation" id="toc-how-to-structuremodularize-our-transformation" class="nav-link" data-scroll-target="#how-to-structuremodularize-our-transformation">3.1.3 <strong>How to structure/modularize our transformation?</strong></a></li>
+  </ul></li>
+  <li><a href="#create-base-models" id="toc-create-base-models" class="nav-link" data-scroll-target="#create-base-models">3.2 Create base models</a>
+  <ul class="collapse">
+  <li><a href="#lets-create-some-base-layer-models" id="toc-lets-create-some-base-layer-models" class="nav-link" data-scroll-target="#lets-create-some-base-layer-models">3.2.1 Lets create some base layer models</a></li>
+  <li><a href="#run-dbt" id="toc-run-dbt" class="nav-link" data-scroll-target="#run-dbt">3.2.2 Run DBT</a></li>
+  </ul></li>
+  <li><a href="#interactive-with-dbt-via-vs-code" id="toc-interactive-with-dbt-via-vs-code" class="nav-link" data-scroll-target="#interactive-with-dbt-via-vs-code">3.3 Interactive with DBT via VS-code</a>
+  <ul class="collapse">
+  <li><a href="#navigate-to-a-.sql-model-in-vs-code" id="toc-navigate-to-a-.sql-model-in-vs-code" class="nav-link" data-scroll-target="#navigate-to-a-.sql-model-in-vs-code">3.3.1 Navigate to a <code>.sql</code> model in VS-Code</a></li>
+  <li><a href="#click-anywhere-on-you-.sql-file-then-hit-cntr-enter" id="toc-click-anywhere-on-you-.sql-file-then-hit-cntr-enter" class="nav-link" data-scroll-target="#click-anywhere-on-you-.sql-file-then-hit-cntr-enter">3.3.2 Click anywhere on you <code>.sql</code> file then hit <code>cntr enter</code></a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/dbt/basic-modeling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">3. Basic Modeling</h1>
+<p class="subtitle lead">Now that we have set up DBT and loaded our data.</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>We previously learned how to load data into DBT. Now we can start orchestrating transformations using DBT. The goal to today is to introduce best practices for project structure and start with basic modeling.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The specific learning goals for today’s session are:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><input type="checkbox">Introduce DBT structure</li>
+<li><input type="checkbox">Create base models</li>
+<li><input type="checkbox">Interact with DBT with VS code</li>
+</ul>
+</div>
+</div>
+<section id="intro-to-dbt-project-structure" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="intro-to-dbt-project-structure">3.1 Intro to DBT Project structure</h2>
+<p>This section is a curated copy and paste of <a href="https://www.getdbt.com/analytics-engineering/modular-data-modeling-technique/">DBT’s analytics engineering documentation</a>!</p>
+<section id="traditional-monolithic-data-modeling-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="traditional-monolithic-data-modeling-techniques">3.1.1 Traditional, monolithic data modeling techniques</h3>
+<p>Before dbt was released, the most reliable way that to model data was SQL scripting.</p>
+<p>This often looked like writing one 10,000 line SQL file, or if you want to get fancy, you could split that file into a bunch of separate SQL files or stored procedures that are run in order with a Python script.</p>
+<p>Very few people in the org would be aware of my scripts, so that even if someone else was looking to model data in a similar way, they'd start from source data rather than leveraging what I'd already built. Not that I didn't want to share! There just wasn't an easy way to do so.</p>
+<p>We could call this a <em>monolithic</em> or <em>traditional</em> approach to data modeling: each consumer of data would rebuild their own data transformations from raw source data. Visualizing our data model dependencies as a <a href="https://docs.getdbt.com/terms/dag"><strong>DAG</strong></a> (a directed acyclic graph), we see a lot of overlapping use of source data:</p>
+<p><img src="https://www.getdbt.com/ui/img/guides/analytics-engineering/messy_dag_dependencies.jpg" class="img-fluid"></p>
+</section>
+<section id="what-is-modular-data-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-modular-data-modeling">3.1.2 <strong>What is modular data modeling?</strong></h3>
+<p>With a modular approach, every producer or consumer of data models in an organization could start from the foundational data modeling work that others have done before them, rather than starting from source data every time.</p>
+<p>When I started using dbt as a data modeling framework, I began to think of data models as <em>components</em> rather than a monolithic whole:</p>
+<p><em>What transformations were shared across data models, that I could extract into foundational models and reference in multiple places?</em></p>
+<p><em>Note: in dbt, one data model can reference another using the <a href="https://docs.getdbt.com/reference/dbt-jinja-functions/ref"><strong>ref function</strong></a>.</em></p>
+<p>When we reference foundational data models in multiple places, rather than starting from scratch every time, our DAG becomes much easier to follow:</p>
+<p><img src="https://www.getdbt.com/ui/img/guides/analytics-engineering/modular_data_modeling_technique.png" class="img-fluid"></p>
+</section>
+<section id="how-to-structuremodularize-our-transformation" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="how-to-structuremodularize-our-transformation">3.1.3 <strong>How to structure/modularize our transformation?</strong></h3>
+<p>In DBT, the data transformation process usually unfolds in three steps: staging base models (cleaning and prepping raw data), creating intermediate data marts (combining and transforming the prepped data), and building data models (creating the final structured views of the data), akin to preparing ingredients, cooking them, and plating the final dish in a culinary process.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.getdbt.com/ui/img/guides/analytics-engineering/intermediate_data_models.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">the basic components</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.getdbt.com/ui/img/guides/analytics-engineering/data_mart_models_facts_dimensions.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">finish product: Fact + dimension tables</figcaption>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Useful links:</p>
+<ul>
+<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview">how to structure DBT projects</a></li>
+<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging">Layer 1: Base/Staging</a></li>
+<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/3-intermediate">Layer 2: Intermediate</a></li>
+<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/4-marts">Layer 3: Marts</a></li>
+</ul>
+</div></div></section>
+</section>
+<section id="create-base-models" class="level2">
+<h2 class="anchored" data-anchor-id="create-base-models">3.2 Create base models</h2>
+<section id="lets-create-some-base-layer-models" class="level3">
+<h3 class="anchored" data-anchor-id="lets-create-some-base-layer-models">3.2.1 Lets create some base layer models</h3>
+<p>Again lets go back to our <code>./models</code> folder. You can organize it any way you want but following best practices you can have a subfolder <code>./models/base</code> were we can store out base models. Each model is a <code>.sql</code> file. After adding all our base models this folder looks like</p>
+<p><strong>After adding all our <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/models/base">./models/base folder now looks like this</a></strong></p>
+<p><img src="images/snip-base.JPG" class="img-fluid"></p>
+<p><strong>An individual data model <code>.sql</code> file looks like this (<a href="https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/base/HCUP/HCUP_SID_NY_2010.sql">click here</a>)</strong></p>
+<p><img src="images/snip-base-example.JPG" class="img-fluid"></p>
+<p><strong>The SQL is very minimal. we are just importing the entire table. DBT allows us to use functional programming while writing SQL through jinja templating. In this case anything betwen double brackets <code>{{  … }}</code></strong> will be first compiled by DBT into pure SQL for your database to run. Here we</p>
+<ul>
+<li><p>Tell DBT we want to store the results of this table externally</p></li>
+<li><p>Tell DBT which source table to pull from.</p></li>
+</ul>
+</section>
+<section id="run-dbt" class="level3">
+<h3 class="anchored" data-anchor-id="run-dbt">3.2.2 Run DBT</h3>
+<p>Lets make sure everything runs. The DBT command to run models is</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dbt run </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The log should look like this</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">(.</span><span class="fu">venv</span><span class="op">)</span> <span class="fu">PS</span> D<span class="op">:</span>\\git\\duckdb<span class="op">-</span>dbt<span class="op">-</span>template\<span class="op">&gt;</span> dbt run</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>44 Running with dbt<span class="op">=</span>1<span class="op">.</span><span class="fu">3</span><span class="op">.</span><span class="fu">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 \<span class="op">[</span>WARNING\<span class="op">]:</span> Configuration paths exist <span class="kw">in</span> your dbt_project<span class="op">.</span><span class="fu">yml</span> file which <span class="kw">do</span> not apply to any resources<span class="op">.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>There are 1 unused configuration paths<span class="op">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>\<span class="op">-</span> models<span class="op">.</span><span class="fu">hello</span><span class="op">.</span><span class="fu">example</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 Found 8 models<span class="op">,</span> 0 tests<span class="op">,</span> 0 snapshots<span class="op">,</span> 0 analyses<span class="op">,</span> 292 macros<span class="op">,</span> 0 operations<span class="op">,</span> 0 seed files<span class="op">,</span> 9 sources<span class="op">,</span> 0 exposures<span class="op">,</span> 0 metrics</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 Concurrency<span class="op">:</span> 1 threads <span class="op">(</span>target<span class="op">=</span><span class="st">'dev-local'</span><span class="op">)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 1 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2010</span> <span class="op">..........................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>46 1 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2010</span> <span class="op">.....................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">83s</span>\<span class="op">]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>46 2 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2015</span> <span class="op">..........................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 2 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2015</span> <span class="op">.....................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 3 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2010</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 3 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2010</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 4 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2015</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>48 4 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2015</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>48 5 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2010</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 5 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2010</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">69s</span>\<span class="op">]</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 6 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2015</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 6 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2015</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">67s</span>\<span class="op">]</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 7 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">NETS</span> <span class="op">...................................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 7 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">NETS</span> <span class="op">..............................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">49s</span>\<span class="op">]</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 8 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">acs_zcta</span> <span class="op">...............................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 8 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">acs_zcta</span> <span class="op">..........................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">51s</span>\<span class="op">]</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Finished running 8 external models <span class="kw">in</span> 0 hours 0 minutes and 6<span class="op">.</span><span class="fu">06</span> seconds <span class="op">(</span>6<span class="op">.</span><span class="fu">06s</span><span class="op">).</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Completed successfully</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Done<span class="op">.</span> PASS<span class="op">=</span>8 WARN<span class="op">=</span>0 ERROR<span class="op">=</span>0 SKIP<span class="op">=</span>0 TOTAL<span class="op">=</span>8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Note that DBT selection syntax is very flexible meaning we can specify what models to run, how often to run then and to detect if downstreams models need refreshing; <a href="https://docs.getdbt.com/reference/commands/run">see here for mdoel selection syntax documentation.</a></strong></p>
+</section>
+</section>
+<section id="interactive-with-dbt-via-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-with-dbt-via-vs-code">3.3 Interactive with DBT via VS-code</h2>
+<p>So far we have used DBT like a compiler. But in reality, it takes a lot of interactive development to get your models where you want them. There are two ways to use DBT as an interactive tool: DBT cloud which is the pricier and fancier option and DBT PowerUser on VS code which works and is free!</p>
+<p>So lets try the basics of DBT Poweruser to use DBT interactively in VS-Code.</p>
+<section id="navigate-to-a-.sql-model-in-vs-code" class="level3">
+<h3 class="anchored" data-anchor-id="navigate-to-a-.sql-model-in-vs-code">3.3.1 Navigate to a <code>.sql</code> model in VS-Code</h3>
+<p>Here we navigate to <code>./models/base/MORTALITY/DEATH_PA_2010.sql</code></p>
+<p><img src="images/snip-power1-01.JPG" class="img-fluid"></p>
+</section>
+<section id="click-anywhere-on-you-.sql-file-then-hit-cntr-enter" class="level3">
+<h3 class="anchored" data-anchor-id="click-anywhere-on-you-.sql-file-then-hit-cntr-enter">3.3.2 Click anywhere on you <code>.sql</code> file then hit <code>cntr enter</code></h3>
+<p><img src="images/snip-power2.JPG" class="img-fluid"></p>
+<p>Here DBT will give you a preview of what this model looks like! Being able to iterative write your SQL without having to compile and work within your IDE will streamline the data model process greatly and makes for a happier developer experience.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../pages/manuals/dbt/load-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Loading Data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../pages/manuals/dbt/documentation.html" class="pagination-link">
+        <span class="nav-page-text">4. Documentation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../pages/faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../license.html">License</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc">
+      <i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core">
+      <i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

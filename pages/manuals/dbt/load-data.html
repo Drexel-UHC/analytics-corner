@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../pages/manuals/dbt/documentation.html" rel="next">
+<link href="../../../pages/manuals/dbt/basic-modeling.html" rel="next">
 <link href="../../../pages/manuals/dbt/get-started-install.html" rel="prev">
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -238,26 +238,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/dbt/documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Documentation</span></a>
+  <a href="../../../pages/manuals/dbt/basic-modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Basic Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Documentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Fundamental DBT</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/data-modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Basic Modeling</span></a>
+ <span class="menu-text">5. Data Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/functional-programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5. Macros: DBT functional programming</span></a>
+ <span class="menu-text">6. Macros: DBT functional programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/work-in-cloud.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6. Work in the cloud</span></a>
+ <span class="menu-text">7. Work in the cloud</span></a>
   </div>
 </li>
       </ul>
@@ -276,22 +293,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-data-sources-into-dbt" id="toc-load-data-sources-into-dbt" class="nav-link" data-scroll-target="#load-data-sources-into-dbt">1.2 Load Data Sources into DBT</a></li>
   <li><a href="#tell-dbt-about-our-source-tables" id="toc-tell-dbt-about-our-source-tables" class="nav-link" data-scroll-target="#tell-dbt-about-our-source-tables">1.3 Tell DBT about our source tables</a></li>
   <li><a href="#generate-documentation" id="toc-generate-documentation" class="nav-link" data-scroll-target="#generate-documentation">1.3 Generate documentation</a></li>
-  <li><a href="#create-base-models" id="toc-create-base-models" class="nav-link" data-scroll-target="#create-base-models">1.4 Create base models</a>
-  <ul class="collapse">
-  <li><a href="#intro-do-dbt-project-structure" id="toc-intro-do-dbt-project-structure" class="nav-link" data-scroll-target="#intro-do-dbt-project-structure">Intro do DBT Project structure</a></li>
-  <li><a href="#lets-create-some-base-layer-models" id="toc-lets-create-some-base-layer-models" class="nav-link" data-scroll-target="#lets-create-some-base-layer-models">Lets create some base layer models</a></li>
-  <li><a href="#run-dbt" id="toc-run-dbt" class="nav-link" data-scroll-target="#run-dbt">Run DBT</a></li>
-  </ul></li>
-  <li><a href="#interactive-with-dbt-via-vs-code" id="toc-interactive-with-dbt-via-vs-code" class="nav-link" data-scroll-target="#interactive-with-dbt-via-vs-code">1.5 Interactive with DBT via VS-code</a>
-  <ul class="collapse">
-  <li><a href="#navigate-to-a-.sql-model-in-vs-code" id="toc-navigate-to-a-.sql-model-in-vs-code" class="nav-link" data-scroll-target="#navigate-to-a-.sql-model-in-vs-code">1.5.1 Navigate to a <code>.sql</code> model in VS-Code</a></li>
-  <li><a href="#click-anywhere-on-you-.sql-file-then-hit-cntr-enter" id="toc-click-anywhere-on-you-.sql-file-then-hit-cntr-enter" class="nav-link" data-scroll-target="#click-anywhere-on-you-.sql-file-then-hit-cntr-enter">1.5.2 Click anywhere on you <code>.sql</code> file then hit <code>cntr enter</code></a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/manuals/dbt/load-data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -326,8 +332,6 @@ The specific learning goals for today’s session are:
 <li><input type="checkbox">Examine source data</li>
 <li><input type="checkbox">Load source data into DBT</li>
 <li><input type="checkbox">Learn how to generate documentation</li>
-<li><input type="checkbox">Create base models</li>
-<li><input type="checkbox">Interact with DBT with VS code</li>
 </ul>
 </div>
 </div>
@@ -426,92 +430,8 @@ Intro to DBT Documentation
 <p>You should now see the documentation site pop up in your browser and it looks like the following:</p>
 <p><img src="images/snip-dbt-docs-01.JPG" class="img-fluid"></p>
 <p>Looks about right! we have told DBT that we have of bunch of ingredients/sources and it shows up in the documentation.</p>
-</section>
-<section id="create-base-models" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="create-base-models">1.4 Create base models</h2>
-<section id="intro-do-dbt-project-structure" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="intro-do-dbt-project-structure">Intro do DBT Project structure</h3>
-<p>Data modeling in DBT is the process of defining how raw data should be transformed and structured to make it useful and meaningful for analysis, much like a chef deciding how to prepare and combine ingredients to create a dish. Industry convergent best practices (see links in margin) approach this by separating the overall process into component transformation layers.</p>
-<p>In DBT, the data transformation process usually unfolds in three steps: staging base models (cleaning and prepping raw data), creating intermediate data marts (combining and transforming the prepped data), and building data models (creating the final structured views of the data), akin to preparing ingredients, cooking them, and plating the final dish in a culinary process.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>Useful links:</p>
-<ul>
-<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview">how to structure DBT projects</a></li>
-<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging">Layer 1: Base/Staging</a></li>
-<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/3-intermediate">Layer 2: Intermediate</a></li>
-<li><a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/4-marts">Layer 3: Marts</a></li>
-</ul>
-</div></div></section>
-<section id="lets-create-some-base-layer-models" class="level3">
-<h3 class="anchored" data-anchor-id="lets-create-some-base-layer-models">Lets create some base layer models</h3>
-<p>Again lets go back to our <code>./models</code> folder. You can organize it any way you want but following best practices you can have a subfolder <code>./models/base</code> were we can store out base models. Each model is a <code>.sql</code> file. After adding all our base models this folder looks like</p>
-<p><strong>After adding all our <a href="https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/models/base">./models/base folder now looks like this</a></strong></p>
-<p><img src="images/snip-base.JPG" class="img-fluid"></p>
-<p><strong>An individual data model <code>.sql</code> file looks like this (<a href="https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/base/HCUP/HCUP_SID_NY_2010.sql">click here</a>)</strong></p>
-<p><img src="images/snip-base-example.JPG" class="img-fluid"></p>
-<p><strong>The SQL is very minimal. we are just importing the entire table. DBT allows us to use functional programming while writing SQL through jinja templating. In this case anything betwen double brackets <code>{{  … }}</code></strong> will be first compiled by DBT into pure SQL for your database to run. Here we</p>
-<ul>
-<li><p>Tell DBT we want to store the results of this table externally</p></li>
-<li><p>Tell DBT which source table to pull from.</p></li>
-</ul>
-</section>
-<section id="run-dbt" class="level3">
-<h3 class="anchored" data-anchor-id="run-dbt">Run DBT</h3>
-<p>Lets make sure everything runs. The DBT command to run models is</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dbt run </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The log should look like this</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">(.</span><span class="fu">venv</span><span class="op">)</span> <span class="fu">PS</span> D<span class="op">:</span>\\git\\duckdb<span class="op">-</span>dbt<span class="op">-</span>template\<span class="op">&gt;</span> dbt run</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>44 Running with dbt<span class="op">=</span>1<span class="op">.</span><span class="fu">3</span><span class="op">.</span><span class="fu">2</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 \<span class="op">[</span>WARNING\<span class="op">]:</span> Configuration paths exist <span class="kw">in</span> your dbt_project<span class="op">.</span><span class="fu">yml</span> file which <span class="kw">do</span> not apply to any resources<span class="op">.</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>There are 1 unused configuration paths<span class="op">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>\<span class="op">-</span> models<span class="op">.</span><span class="fu">hello</span><span class="op">.</span><span class="fu">example</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 Found 8 models<span class="op">,</span> 0 tests<span class="op">,</span> 0 snapshots<span class="op">,</span> 0 analyses<span class="op">,</span> 292 macros<span class="op">,</span> 0 operations<span class="op">,</span> 0 seed files<span class="op">,</span> 9 sources<span class="op">,</span> 0 exposures<span class="op">,</span> 0 metrics</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 Concurrency<span class="op">:</span> 1 threads <span class="op">(</span>target<span class="op">=</span><span class="st">'dev-local'</span><span class="op">)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>45 1 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2010</span> <span class="op">..........................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>46 1 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2010</span> <span class="op">.....................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">83s</span>\<span class="op">]</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>46 2 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2015</span> <span class="op">..........................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 2 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">DEATH_PA_2015</span> <span class="op">.....................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 3 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2010</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 3 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2010</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>47 4 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2015</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>48 4 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_NY_2015</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">70s</span>\<span class="op">]</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>48 5 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2010</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 5 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2010</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">69s</span>\<span class="op">]</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 6 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2015</span> <span class="op">.......................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 6 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">HCUP_SID_PA_2015</span> <span class="op">..................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">67s</span>\<span class="op">]</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>49 7 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">NETS</span> <span class="op">...................................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 7 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">NETS</span> <span class="op">..............................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">49s</span>\<span class="op">]</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 8 of 8 <span class="fu">START</span> sql external model parquet<span class="op">.</span><span class="fu">acs_zcta</span> <span class="op">...............................</span> \<span class="op">[</span>RUN\<span class="op">]</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>50 8 of 8 OK created sql external model parquet<span class="op">.</span><span class="fu">acs_zcta</span> <span class="op">..........................</span> \<span class="op">[</span>OK <span class="kw">in</span> 0<span class="op">.</span><span class="fu">51s</span>\<span class="op">]</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Finished running 8 external models <span class="kw">in</span> 0 hours 0 minutes and 6<span class="op">.</span><span class="fu">06</span> seconds <span class="op">(</span>6<span class="op">.</span><span class="fu">06s</span><span class="op">).</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Completed successfully</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>16<span class="op">:</span>52<span class="op">:</span>51 Done<span class="op">.</span> PASS<span class="op">=</span>8 WARN<span class="op">=</span>0 ERROR<span class="op">=</span>0 SKIP<span class="op">=</span>0 TOTAL<span class="op">=</span>8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Note that DBT selection syntax is very flexible meaning we can specify what models to run, how often to run then and to detect if downstreams models need refreshing; <a href="https://docs.getdbt.com/reference/commands/run">see here for mdoel selection syntax documentation.</a></strong></p>
-</section>
-</section>
-<section id="interactive-with-dbt-via-vs-code" class="level2">
-<h2 class="anchored" data-anchor-id="interactive-with-dbt-via-vs-code">1.5 Interactive with DBT via VS-code</h2>
-<p>So far we have used DBT like a compiler. But in reality, it takes a lot of interactive development to get your models where you want them. There are two ways to use DBT as an interactive tool: DBT cloud which is the pricier and fancier option and DBT PowerUser on VS code which works and is free!</p>
-<p>So lets try the basics of DBT Poweruser to use DBT interactively in VS-Code.</p>
-<section id="navigate-to-a-.sql-model-in-vs-code" class="level3">
-<h3 class="anchored" data-anchor-id="navigate-to-a-.sql-model-in-vs-code">1.5.1 Navigate to a <code>.sql</code> model in VS-Code</h3>
-<p>Here we navigate to <code>./models/base/MORTALITY/DEATH_PA_2010.sql</code></p>
-<p><img src="images/snip-power1-01.JPG" class="img-fluid"></p>
-</section>
-<section id="click-anywhere-on-you-.sql-file-then-hit-cntr-enter" class="level3">
-<h3 class="anchored" data-anchor-id="click-anywhere-on-you-.sql-file-then-hit-cntr-enter">1.5.2 Click anywhere on you <code>.sql</code> file then hit <code>cntr enter</code></h3>
-<p><img src="images/snip-power2.JPG" class="img-fluid"></p>
-<p>Here DBT will give you a preview of what this model looks like! Being able to iterative write your SQL without having to compile and work within your IDE will streamline the data model process greatly and makes for a happier developer experience.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -755,8 +675,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../pages/manuals/dbt/documentation.html" class="pagination-link">
-        <span class="nav-page-text">3. Documentation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../pages/manuals/dbt/basic-modeling.html" class="pagination-link">
+        <span class="nav-page-text">3. Basic Modeling</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

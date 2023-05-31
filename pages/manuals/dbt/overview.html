@@ -202,26 +202,43 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/manuals/dbt/documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Documentation</span></a>
+  <a href="../../../pages/manuals/dbt/basic-modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Basic Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/dbt/documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Documentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Fundamental DBT</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/data-modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Basic Modeling</span></a>
+ <span class="menu-text">5. Data Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/functional-programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5. Macros: DBT functional programming</span></a>
+ <span class="menu-text">6. Macros: DBT functional programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/manuals/dbt/work-in-cloud.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6. Work in the cloud</span></a>
+ <span class="menu-text">7. Work in the cloud</span></a>
   </div>
 </li>
       </ul>
@@ -257,28 +274,32 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:</p>
 <ul>
-<li>Session 1 (5/10/23): Setup
+<li>Session 1 (5/10/23): <a href="https://drexel-uhc.github.io/analytics-corner/pages/manuals/dbt/get-started-install.html">Get Started + Setup</a>
 <ul>
-<li>Goal: get softwared installed for everyone</li>
-<li>Setup 1: Virtual Machine via GitHub Codespaces</li>
-<li>Setup 2: Local UHC Machine</li>
-<li>Transition: brain storm on data we want to play with</li>
+<li>setup software required for DBT</li>
 </ul></li>
-<li>Session 2 (5/17/23): Basics of DBT
+<li>Session 2 (5/24/23): <a href="https://drexel-uhc.github.io/analytics-corner/pages/manuals/dbt/load-data.html">Loading data into DBT</a>
 <ul>
-<li>Review key concepts of data pipeline</li>
-<li>Data models</li>
-<li>Documentation</li>
+<li>Start with source data (.csv or .parquet or .json)</li>
+<li>Load source data into DBT</li>
+<li>Generate documentation</li>
 </ul></li>
-<li>Session 3 (5/24/23): Marts
+<li>Session 3 (5/31/23): Intro to Modeling
 <ul>
-<li>Data modeling and layering</li>
-<li>Marts</li>
+<li>Intro to structure</li>
+<li>Base models</li>
+<li>Interactive modeling</li>
 </ul></li>
-<li>Session 4 (5/31/23): Advanced DBT
+<li>Session 4 (6/7/23): Data Modeling + Documentation
 <ul>
-<li>Testing</li>
+<li>Intermediate and Mart layers</li>
+<li>Documentation with doc blocks</li>
+</ul></li>
+<li>Session 5 (6/14/23): Intermediate Features
+<ul>
 <li>Macros</li>
+<li>Testing</li>
+<li>Working on the cloud</li>
 <li>Customizing DBT</li>
 </ul></li>
 </ul>
@@ -295,9 +316,19 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>Somethings to keep in mind before we start</strong></p>
 <ul>
-<li><p>Git is notoriously hard to pick up and also notoriously hard to teach.</p></li>
 <li><p>The learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.</p></li>
 <li><p>Learning this workflow is a case of slowing down to really really speed up. Thanks for being here!</p></li>
+<li><p>This course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.</p>
+<ul>
+<li><a href="https://courses.getdbt.com/collections">DBT Courses (All)</a>
+<ul>
+<li><a href="https://courses.getdbt.com/courses/fundamentals">dbt fundamentals</a></li>
+<li><a href="https://courses.getdbt.com/courses/jinja-macros-packages">dbt Jinja, Macros, Packages</a></li>
+<li>Note, these courses DBT cloud but you can use the set up we introduce to practice</li>
+</ul></li>
+<li><a href="https://www.getdbt.com/analytics-engineering/start-here">Analytics Engineering with DBT (Book)</a></li>
+<li><a href="https://www.getdbt.com/analytics-engineering/modular-data-modeling-technique/">Data Modeling Techniques chapter</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
