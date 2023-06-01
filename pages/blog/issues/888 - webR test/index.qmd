@@ -1,0 +1,28 @@
+---
+author: Ran Li
+date: "06/1/2023"
+title: "WebR: Running R in the Browser!"
+description: "State of WebAssembly (Wasm) based R in 2023; testing out this new development!"
+categories:
+  - WebR
+format: html
+engine: knitr
+filters:
+  - webr 
+webr:
+  packages: ['dplyr']
+---
+
+### Load Dependencies
+
+
+
+``` {webr-r}
+library(dplyr)
+glimpse(mtcars)
+```
+
+``` {webr-r}
+fit = lm(mpg ~ am, data = mtcars)
+summary(fit)
+```
