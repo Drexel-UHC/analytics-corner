@@ -3,4 +3,12 @@ title: "3. Documentation"
 subtitle: "Doc blocks and other docuemntation features"
 --- 
 
-TBD
+To increase the value of our data resoruce it is key to provide clear documentation for columns, tests, tables and any useful information your user may need.
+
+::: callout-note
+## The specific learning goals for today's session are:
+
+-   [ ] Examine basic documentation structure for a DBT model
+-   [ ] Extent basic documentatino with `doc blocks` to not repeat metadata
+-   [ ] Learn how to deploy documentation
+:::

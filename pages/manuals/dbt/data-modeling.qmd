@@ -1,6 +1,17 @@
 ---
 title: "4. Basic Modeling"
 subtitle: "Now that we have set up DBT, soruces imported and learned docuemtnation. Lets start modeling!"
---- 
+---
 
-TBD
+Given our end goal of generating datasets to produce a analytic table ready for analysis on trends of deaths/hospitaliations of hufflepox. We will go through one way of using data layering to apply modularity to our transformations.
+
+::: callout-note
+## The specific learning goals for today's session are:
+
+-   [ ] Intermediate tables
+    - [ ]  Compile base tables
+    - [ ]  Recode Diagnosis Codes
+    - [ ]  Summarize by ZCTA
+-   [ ] Compile into a final table
+-   [ ] Assign practice to volunteers. Maybe brainstorm new tables.
+:::
