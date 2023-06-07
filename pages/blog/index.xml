@@ -19,6 +19,307 @@
 <generator>quarto-1.3.353</generator>
 <lastBuildDate>Thu, 01 Jun 2023 04:00:00 GMT</lastBuildDate>
 <item>
+  <title>Observable + DuckDB test</title>
+  <dc:creator>Ran Li</dc:creator>
+  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - observable test/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Going to try observable</p>
+<section id="data-prep" class="level2">
+<h2 class="anchored" data-anchor-id="data-prep">Data Prep</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 x 9
+   rowid species island    bill_length_mm bill_dep~1 flipp~2 body_~3 sex    year
+   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+ 1     1 Adelie  Torgersen           39.1       18.7     181    3750 male   2007
+ 2     2 Adelie  Torgersen           39.5       17.4     186    3800 fema~  2007
+ 3     3 Adelie  Torgersen           40.3       18       195    3250 fema~  2007
+ 4     4 Adelie  Torgersen           NA         NA        NA      NA &lt;NA&gt;   2007
+ 5     5 Adelie  Torgersen           36.7       19.3     193    3450 fema~  2007
+ 6     6 Adelie  Torgersen           39.3       20.6     190    3650 male   2007
+ 7     7 Adelie  Torgersen           38.9       17.8     181    3625 fema~  2007
+ 8     8 Adelie  Torgersen           39.2       19.6     195    4675 male   2007
+ 9     9 Adelie  Torgersen           34.1       18.1     193    3475 &lt;NA&gt;   2007
+10    10 Adelie  Torgersen           42         20.2     190    4250 &lt;NA&gt;   2007
+# ... with 334 more rows, and abbreviated variable names 1: bill_depth_mm,
+#   2: flipper_length_mm, 3: body_mass_g
+# i Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="pass-to-observable" class="level2">
+<h2 class="anchored" data-anchor-id="pass-to-observable">Pass to Observable</h2>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="35" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb2-35">filtered <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">transpose</span>(data)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(penguin) {</span>
+<span id="cb2-36">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> bill_length_min <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> penguin<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bill_length</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;&amp;</span></span>
+<span id="cb2-37">         islands<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">includes</span>(penguin<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">island</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-38">})</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</section>
+<section id="observable-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="observable-inputs">Observable Inputs</h2>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="45" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 44;"><span id="cb3-45">viewof bill_length_min <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">range</span>(</span>
+<span id="cb3-46">  [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">32</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> </span>
+<span id="cb3-47">  {<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">step</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">label</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Bill length (min):"</span>}</span>
+<span id="cb3-48">)</span>
+<span id="cb3-49">viewof islands <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">checkbox</span>(</span>
+<span id="cb3-50">  [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Torgersen"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Biscoe"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dream"</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> </span>
+<span id="cb3-51">  { <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Torgersen"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Biscoe"</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> </span>
+<span id="cb3-52">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">label</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Islands:"</span></span>
+<span id="cb3-53">  }</span>
+<span id="cb3-54">)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot" class="level2">
+<h2 class="anchored" data-anchor-id="plot">Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="59" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb4-59">Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rectY</span>(filtered<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> </span>
+<span id="cb4-60">  Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binX</span>(</span>
+<span id="cb4-61">    {<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"count"</span>}<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> </span>
+<span id="cb4-62">    {<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"body_mass_g"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">fill</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"species"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">thresholds</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>}</span>
+<span id="cb4-63">  ))</span>
+<span id="cb4-64">  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>({</span>
+<span id="cb4-65">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">facet</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> {</span>
+<span id="cb4-66">      <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">data</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> filtered<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-67">      <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sex"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-68">      <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"species"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-69">      <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">marginRight</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80</span></span>
+<span id="cb4-70">    }<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-71">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">marks</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> [</span>
+<span id="cb4-72">      Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">frame</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-73">    ]</span>
+<span id="cb4-74">  }</span>
+<span id="cb4-75">)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>Observable.js</category>
+  <category>DuckDB</category>
+  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - observable test/index.html</guid>
+  <pubDate>Thu, 01 Jun 2023 04:00:00 GMT</pubDate>
+</item>
+<item>
   <title>WebR: Running R in the Browser!</title>
   <dc:creator>Ran Li</dc:creator>
   <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - webR test/index.html</link>

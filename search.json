@@ -39,7 +39,7 @@
     "href": "pages/blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for research.\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nObservable + DuckDB test\n\n\n\n\n\n\n\nObservable.js\n\n\nDuckDB\n\n\n\n\n\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for research.\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
@@ -103,6 +103,41 @@
     "title": "ChatGPT and AI: use-cases and potential",
     "section": "Conclusion",
     "text": "Conclusion\nChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - observable test/index.html",
+    "href": "pages/blog/issues/888 - observable test/index.html",
+    "title": "Observable + DuckDB test",
+    "section": "",
+    "text": "Going to try observable"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - observable test/index.html#data-prep",
+    "href": "pages/blog/issues/888 - observable test/index.html#data-prep",
+    "title": "Observable + DuckDB test",
+    "section": "Data Prep",
+    "text": "Data Prep\n\n\n# A tibble: 344 x 9\n   rowid species island    bill_length_mm bill_dep~1 flipp~2 body_~3 sex    year\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;\n 1     1 Adelie  Torgersen           39.1       18.7     181    3750 male   2007\n 2     2 Adelie  Torgersen           39.5       17.4     186    3800 fema~  2007\n 3     3 Adelie  Torgersen           40.3       18       195    3250 fema~  2007\n 4     4 Adelie  Torgersen           NA         NA        NA      NA &lt;NA&gt;   2007\n 5     5 Adelie  Torgersen           36.7       19.3     193    3450 fema~  2007\n 6     6 Adelie  Torgersen           39.3       20.6     190    3650 male   2007\n 7     7 Adelie  Torgersen           38.9       17.8     181    3625 fema~  2007\n 8     8 Adelie  Torgersen           39.2       19.6     195    4675 male   2007\n 9     9 Adelie  Torgersen           34.1       18.1     193    3475 &lt;NA&gt;   2007\n10    10 Adelie  Torgersen           42         20.2     190    4250 &lt;NA&gt;   2007\n# ... with 334 more rows, and abbreviated variable names 1: bill_depth_mm,\n#   2: flipper_length_mm, 3: body_mass_g\n# i Use `print(n = ...)` to see more rows"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - observable test/index.html#pass-to-observable",
+    "href": "pages/blog/issues/888 - observable test/index.html#pass-to-observable",
+    "title": "Observable + DuckDB test",
+    "section": "Pass to Observable",
+    "text": "Pass to Observable\n\nfiltered = transpose(data).filter(function(penguin) {\n  return bill_length_min &lt; penguin.bill_length &&\n         islands.includes(penguin.island);\n})"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - observable test/index.html#observable-inputs",
+    "href": "pages/blog/issues/888 - observable test/index.html#observable-inputs",
+    "title": "Observable + DuckDB test",
+    "section": "Observable Inputs",
+    "text": "Observable Inputs\n\nviewof bill_length_min = Inputs.range(\n  [32, 50], \n  {value: 35, step: 1, label: \"Bill length (min):\"}\n)\nviewof islands = Inputs.checkbox(\n  [\"Torgersen\", \"Biscoe\", \"Dream\"], \n  { value: [\"Torgersen\", \"Biscoe\"], \n    label: \"Islands:\"\n  }\n)"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - observable test/index.html#plot",
+    "href": "pages/blog/issues/888 - observable test/index.html#plot",
+    "title": "Observable + DuckDB test",
+    "section": "Plot",
+    "text": "Plot\n\nPlot.rectY(filtered, \n  Plot.binX(\n    {y: \"count\"}, \n    {x: \"body_mass_g\", fill: \"species\", thresholds: 20}\n  ))\n  .plot({\n    facet: {\n      data: filtered,\n      x: \"sex\",\n      y: \"species\",\n      marginRight: 80\n    },\n    marks: [\n      Plot.frame(),\n    ]\n  }\n)"
   },
   {
     "objectID": "pages/blog/issues/888 - Scrollies/index.html",
@@ -242,14 +277,14 @@
     "href": "pages/manuals/dbt/data-modeling.html",
     "title": "4. Basic Modeling",
     "section": "",
-    "text": "TBD"
+    "text": "Given our end goal of generating datasets to produce a analytic table ready for analysis on trends of deaths/hospitaliations of hufflepox. We will go through one way of using data layering to apply modularity to our transformations.\n\n\n\n\n\n\nThe specific learning goals for today’s session are:\n\n\n\n\nIntermediate tables\n\nCompile base tables\nRecode Diagnosis Codes\nSummarize by ZCTA\n\nCompile into a final table\nAssign practice to volunteers. Maybe brainstorm new tables."
   },
   {
     "objectID": "pages/manuals/dbt/documentation.html",
     "href": "pages/manuals/dbt/documentation.html",
     "title": "3. Documentation",
     "section": "",
-    "text": "TBD"
+    "text": "To increase the value of our data resoruce it is key to provide clear documentation for columns, tests, tables and any useful information your user may need.\n\n\n\n\n\n\nThe specific learning goals for today’s session are:\n\n\n\n\nExamine basic documentation structure for a DBT model\nExtent basic documentatino with doc blocks to not repeat metadata\nLearn how to deploy documentation"
   },
   {
     "objectID": "pages/manuals/dbt/functional-programming.html",
@@ -361,7 +396,7 @@
     "href": "pages/manuals/dbt/overview.html",
     "title": "Datawarehousing with DBT",
     "section": "",
-    "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Data Modeling + Documentation\n\nIntermediate and Mart layers\nDocumentation with doc blocks\n\nSession 5 (6/14/23): Intermediate Features\n\nMacros\nTesting\nWorking on the cloud\nCustomizing DBT\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter"
+    "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Data Modeling + Documentation\n\nIntermediate and Mart layers\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nMacros\nTesting\nWorking on the cloud\nCustomizing DBT\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter"
   },
   {
     "objectID": "pages/manuals/dbt/work-in-cloud.html",
