@@ -86,7 +86,10 @@ website:
           - text: '6. Macros: DBT functional programming'
             href: pages/manuals/dbt/functional-programming.qmd    
           - text: '7. Work in the cloud'
-            href: pages/manuals/dbt/work-in-cloud.qmd    
+            href: pages/manuals/dbt/work-in-cloud.qmd   
+        - text: "---"
+        - text: 'Summary'
+          href: pages/manuals/dbt/summary.qmd
     - id: git-github
       contents:
         - text: 'Overview'

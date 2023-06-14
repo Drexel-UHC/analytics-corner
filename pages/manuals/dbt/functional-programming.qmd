@@ -3,5 +3,11 @@ title: "5. Macros: DBT functional programming"
 subtitle: "How to write funcitons in DBT."
 ---
 
-DBT
- 
+::: callout-note
+## The specific learning goals for today's session are:
+
+-   [ ] [Non-macro implementation](https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/intermediate/huf_pox/int__huf_pox__hosp.sql)
+-   [ ] [Create Macro](https://github.com/Drexel-UHC/duckdb-dbt-template/tree/main/macros/dx_recoding)
+-   [ ] [Utilize Macro](https://github.com/Drexel-UHC/duckdb-dbt-template/blob/main/models/intermediate/huf_pox/int__huf_pox__mortality.sql)
+-   [ ] [Macros documentation](https://drexel-uhc.github.io/duckdb-dbt-template/#!/macro/macro.hello.dx_huff_pox) 
+:::

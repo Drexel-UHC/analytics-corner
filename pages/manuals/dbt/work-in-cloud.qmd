@@ -3,4 +3,19 @@ title: "6. Work in cloud"
 subtitle: "Learn how to collaborative do DBT!"
 ---
 
-TBD
+::: callout-note
+## The specific learning goals for today's session are:
+
+-   [ ] Standups
+-   [ ] Introduce profiles.yml
+-   [ ] Cloud options:
+    - Option 1: Work with UHC cloud storage
+    - Option 2: Work with other (Azure, AWS, GCP) cloud storage
+    - Option 3: Work with cloud database (GCP BigQuery, Azure Synapse, Azure SQL)
+-   [ ] Collaborative workflow:
+    - GitHub branches
+    - Branch protection
+    - Issues/discussion
+    - deployment of DBT documentation
+    - ETL pipeline
+:::
