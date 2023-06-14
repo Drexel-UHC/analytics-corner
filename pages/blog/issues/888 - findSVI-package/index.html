@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ran Li">
-<meta name="dcterms.date" content="2023-05-26">
-<meta name="description" content="The data science group at the UHC has been working on a package to dynamically calculate SVI. Let’s try it out.">
+<meta name="dcterms.date" content="2023-02-10">
 
-<title>Analytics Corner - Test run: the DSWG’s findSVI package!</title>
+<title>Analytics Corner - Test findSVI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,9 +95,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-<link href="../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <link rel="stylesheet" href="../../../../styles.css">
@@ -200,13 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#single-state-year-function-call" id="toc-single-state-year-function-call" class="nav-link active" data-scroll-target="#single-state-year-function-call">Single State Year function call</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/blog/issues/888 - findSVI-package/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -217,17 +207,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Test run: the DSWG’s <code>findSVI</code> package!</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Test findSVI</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">ChatGPT</div>
+    <div class="quarto-category">dev</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    The data science group at the UHC has been working on a package to dynamically calculate SVI. Let’s try it out.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -242,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 26, 2023</p>
+      <p class="date">February 10, 2023</p>
     </div>
   </div>
   
@@ -252,135 +237,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'heli-xu/findSVI'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>We have a request for SVI data at the ZCTA level.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_request <span class="ot">=</span> <span class="fu">tribble</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>state, <span class="sc">~</span>year, <span class="sc">~</span>n,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2018</span>, <span class="dv">2</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2019</span>, <span class="dv">3</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FL"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FL"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2018</span>, <span class="dv">2</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2019</span>, <span class="dv">3</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2012</span>, <span class="dv">4</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2012</span>, <span class="dv">4</span>,</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NY"</span>, <span class="dv">2017</span>, <span class="dv">4</span>,</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NY"</span>, <span class="dv">2018</span>, <span class="dv">4</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="single-state-year-function-call" class="level2">
-<h2 class="anchored" data-anchor-id="single-state-year-function-call">Single State Year function call</h2>
-<p>Lets start simple for a single state year.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(findSVI)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> findSVI<span class="sc">::</span><span class="fu">get_census_data</span>(<span class="dv">2018</span>, <span class="st">"zcta"</span>, <span class="st">"AZ"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> findSVI<span class="sc">::</span><span class="fu">get_svi</span>(<span class="dv">2018</span>, data)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 405
-Columns: 60
-$ GEOID      &lt;chr&gt; "85003", "85004", "85006", "85007", "85008", "85009", "8501~
-$ NAME       &lt;chr&gt; "ZCTA5 85003", "ZCTA5 85004", "ZCTA5 85006", "ZCTA5 85007",~
-$ E_TOTPOP   &lt;dbl&gt; 8419, 6552, 28176, 14751, 62992, 49536, 7012, 20902, 27395,~
-$ E_HU       &lt;dbl&gt; 4849, 3572, 10549, 6114, 24001, 14451, 3992, 11206, 14871, ~
-$ E_HH       &lt;dbl&gt; 3912, 2753, 9251, 5157, 21902, 12338, 3560, 9903, 12867, 14~
-$ E_POV      &lt;dbl&gt; 1652, 1857, 10734, 5171, 18107, 17523, 824, 3136, 5190, 126~
-$ E_UNEMP    &lt;dbl&gt; 158, 328, 1169, 473, 2203, 1229, 191, 742, 1072, 1606, 955,~
-$ E_PCI      &lt;dbl&gt; 37766, 31227, 18335, 21958, 18661, 13550, 53630, 41512, 333~
-$ E_NOHSDP   &lt;dbl&gt; 1033, 577, 6383, 2916, 10725, 12469, 193, 1020, 2627, 5856,~
-$ E_AGE65    &lt;dbl&gt; 1003, 647, 1914, 1656, 3573, 3182, 1214, 2529, 3333, 3755, ~
-$ E_AGE17    &lt;dbl&gt; 1007, 455, 7733, 3949, 17190, 14676, 1061, 3568, 4980, 1133~
-$ E_DISABL   &lt;dbl&gt; 1044, 917, 2962, 2002, 5015, 4447, 718, 2799, 3185, 4462, 3~
-$ E_SNGPNT   &lt;dbl&gt; 209, 109, 1348, 742, 3569, 2319, 203, 748, 1258, 2472, 908,~
-$ E_MINRTY   &lt;dbl&gt; 4117, 2749, 20912, 10844, 47257, 43532, 1870, 8098, 12918, ~
-$ E_LIMENG   &lt;dbl&gt; 400, 190, 4487, 1579, 8285, 10016, 18, 367, 1114, 4644, 139~
-$ E_MUNIT    &lt;dbl&gt; 2065, 2165, 1187, 745, 9209, 1188, 1692, 3160, 4222, 5451, ~
-$ E_MOBILE   &lt;dbl&gt; 0, 0, 352, 105, 1123, 1489, 0, 104, 168, 217, 259, 669, 106~
-$ E_CROWD    &lt;dbl&gt; 64, 77, 1249, 505, 2809, 2052, 18, 325, 632, 1600, 752, 243~
-$ E_NOVEH    &lt;dbl&gt; 663, 709, 1537, 1122, 2941, 1875, 375, 1186, 1769, 2950, 16~
-$ E_GROUPQ   &lt;dbl&gt; 993, 1693, 504, 500, 578, 4341, 243, 294, 160, 235, 366, 93~
-$ EP_POV     &lt;dbl&gt; 22.0, 35.0, 38.5, 35.3, 29.0, 38.6, 12.2, 15.1, 19.1, 31.9,~
-$ EP_UNEMP   &lt;dbl&gt; 3.5, 8.4, 8.3, 7.1, 6.3, 6.8, 4.5, 5.8, 6.7, 8.6, 4.6, 7.0,~
-$ EP_PCI     &lt;dbl&gt; 37766, 31227, 18335, 21958, 18661, 13550, 53630, 41512, 333~
-$ EP_NOHSDP  &lt;dbl&gt; 15.3, 14.5, 36.1, 30.6, 28.5, 44.1, 3.4, 6.4, 13.1, 23.7, 1~
-$ EP_AGE65   &lt;dbl&gt; 11.9, 9.9, 6.8, 11.2, 5.7, 6.4, 17.3, 12.1, 12.2, 9.4, 14.6~
-$ EP_AGE17   &lt;dbl&gt; 12.0, 6.9, 27.4, 26.8, 27.3, 29.6, 15.1, 17.1, 18.2, 28.4, ~
-$ EP_DISABL  &lt;dbl&gt; 13.9, 14.0, 10.6, 13.6, 8.0, 9.8, 10.6, 13.4, 11.7, 11.2, 9~
-$ EP_SNGPNT  &lt;dbl&gt; 5.3, 4.0, 14.6, 14.4, 16.3, 18.8, 5.7, 7.6, 9.8, 16.6, 5.5,~
-$ EP_MINRTY  &lt;dbl&gt; 48.9, 42.0, 74.2, 73.5, 75.0, 87.9, 26.7, 38.7, 47.2, 69.6,~
-$ EP_LIMENG  &lt;dbl&gt; 5.0, 2.9, 17.2, 11.5, 14.4, 22.1, 0.3, 1.8, 4.3, 12.7, 4.1,~
-$ EP_MUNIT   &lt;dbl&gt; 42.6, 60.6, 11.3, 12.2, 38.4, 8.2, 42.4, 28.2, 28.4, 31.9, ~
-$ EP_MOBILE  &lt;dbl&gt; 0.0, 0.0, 3.3, 1.7, 4.7, 10.3, 0.0, 0.9, 1.1, 1.3, 1.3, 5.0~
-$ EP_CROWD   &lt;dbl&gt; 1.6, 2.8, 13.5, 9.8, 12.8, 16.6, 0.5, 3.3, 4.9, 10.7, 4.5, ~
-$ EP_NOVEH   &lt;dbl&gt; 16.9, 25.8, 16.6, 21.8, 13.4, 15.2, 10.5, 12.0, 13.7, 19.8,~
-$ EP_GROUPQ  &lt;dbl&gt; 11.8, 25.8, 1.8, 3.4, 0.9, 8.8, 3.5, 1.4, 0.6, 0.6, 1.0, 2.~
-$ EPL_POV    &lt;dbl&gt; 0.6837, 0.8597, 0.8903, 0.8622, 0.7883, 0.8929, 0.3750, 0.4~
-$ EPL_UNEMP  &lt;dbl&gt; 0.1548, 0.6548, 0.6497, 0.5558, 0.4569, 0.5102, 0.2538, 0.4~
-$ EPL_PCI    &lt;dbl&gt; 0.1705, 0.2901, 0.7430, 0.5980, 0.7405, 0.8804, 0.0407, 0.1~
-$ EPL_NOHSDP &lt;dbl&gt; 0.6203, 0.5873, 0.9418, 0.8785, 0.8506, 0.9772, 0.1266, 0.2~
-$ EPL_AGE65  &lt;dbl&gt; 0.3089, 0.2127, 0.0785, 0.2734, 0.0582, 0.0684, 0.5316, 0.3~
-$ EPL_AGE17  &lt;dbl&gt; 0.1620, 0.0937, 0.7013, 0.6734, 0.6937, 0.8000, 0.2608, 0.3~
-$ EPL_DISABL &lt;dbl&gt; 0.4656, 0.4707, 0.2646, 0.4478, 0.0916, 0.1908, 0.2646, 0.4~
-$ EPL_SNGPNT &lt;dbl&gt; 0.3436, 0.2462, 0.8590, 0.8538, 0.9000, 0.9564, 0.3872, 0.4~
-$ EPL_MINRTY &lt;dbl&gt; 0.6405, 0.5848, 0.7823, 0.7747, 0.7848, 0.8430, 0.3570, 0.5~
-$ EPL_LIMENG &lt;dbl&gt; 0.7443, 0.6127, 0.9620, 0.8937, 0.9342, 0.9873, 0.1316, 0.4~
-$ EPL_MUNIT  &lt;dbl&gt; 0.9898, 0.9974, 0.7928, 0.8031, 0.9821, 0.7391, 0.9872, 0.9~
-$ EPL_MOBILE &lt;dbl&gt; 0.0000, 0.0000, 0.2813, 0.2148, 0.3299, 0.4578, 0.0000, 0.1~
-$ EPL_CROWD  &lt;dbl&gt; 0.3026, 0.4538, 0.8538, 0.8000, 0.8410, 0.9026, 0.1667, 0.5~
-$ EPL_NOVEH  &lt;dbl&gt; 0.8872, 0.9744, 0.8846, 0.9462, 0.8231, 0.8615, 0.7641, 0.7~
-$ EPL_GROUPQ &lt;dbl&gt; 0.9418, 0.9671, 0.8051, 0.8658, 0.6886, 0.9291, 0.8709, 0.7~
-$ SPL_theme1 &lt;dbl&gt; 1.6293, 2.3919, 3.2248, 2.8945, 2.8363, 3.2607, 0.7961, 1.2~
-$ SPL_theme2 &lt;dbl&gt; 1.2801, 1.0233, 1.9034, 2.2484, 1.7435, 2.0156, 1.4442, 1.5~
-$ SPL_theme3 &lt;dbl&gt; 1.3848, 1.1975, 1.7443, 1.6684, 1.7190, 1.8303, 0.4886, 1.0~
-$ SPL_theme4 &lt;dbl&gt; 3.1214, 3.3927, 3.6176, 3.6299, 3.6647, 3.8901, 2.7889, 3.1~
-$ RPL_theme1 &lt;dbl&gt; 0.4025, 0.6177, 0.8405, 0.7722, 0.7646, 0.8633, 0.1418, 0.2~
-$ RPL_theme2 &lt;dbl&gt; 0.0684, 0.0380, 0.3722, 0.7266, 0.2506, 0.5063, 0.0962, 0.1~
-$ RPL_theme3 &lt;dbl&gt; 0.7063, 0.6076, 0.9038, 0.8506, 0.8886, 0.9620, 0.2253, 0.5~
-$ RPL_theme4 &lt;dbl&gt; 0.7873, 0.8962, 0.9544, 0.9570, 0.9620, 0.9899, 0.6658, 0.7~
-$ SPL_themes &lt;dbl&gt; 7.4156, 8.0054, 10.4901, 10.4412, 9.9635, 10.9967, 5.5178, ~
-$ RPL_themes &lt;dbl&gt; 0.4911, 0.5848, 0.9089, 0.9013, 0.8532, 0.9595, 0.2582, 0.4~</code></pre>
-</div>
-</div>
-<p>Great lets see the</p>
 
 
 <!-- -->
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -667,85 +527,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">draft:</span><span class="co"> true</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Ran Li</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "05/26/2023"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Test run: the DSWG's `findSVI` package!"</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "The data science group at the UHC has been working on a package to dynamically calculate SVI. Let's try it out."</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - ChatGPT</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: paged</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span><span class="co"> </span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#|  eval: false</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'heli-xu/findSVI'</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>We have a request for SVI data at the ZCTA level.</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>df_request <span class="ot">=</span> <span class="fu">tribble</span>(</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>state, <span class="sc">~</span>year, <span class="sc">~</span>n,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2018</span>, <span class="dv">2</span>,</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AZ"</span>, <span class="dv">2019</span>, <span class="dv">3</span>,</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FL"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FL"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2018</span>, <span class="dv">2</span>,</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GA"</span>, <span class="dv">2019</span>, <span class="dv">3</span>,</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2012</span>, <span class="dv">4</span>,</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KY"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MA"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2012</span>, <span class="dv">4</span>,</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2013</span>, <span class="dv">4</span>,</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2014</span>, <span class="dv">4</span>,</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2015</span>, <span class="dv">8</span>,</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2016</span>, <span class="dv">2</span>,</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NJ"</span>, <span class="dv">2017</span>, <span class="dv">2</span>,</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NY"</span>, <span class="dv">2017</span>, <span class="dv">4</span>,</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NY"</span>, <span class="dv">2018</span>, <span class="dv">4</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Single State Year function call</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>Lets start simple for a single state year.</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(findSVI)</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> findSVI<span class="sc">::</span><span class="fu">get_census_data</span>(<span class="dv">2018</span>, <span class="st">"zcta"</span>, <span class="st">"AZ"</span>)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> findSVI<span class="sc">::</span><span class="fu">get_svi</span>(<span class="dv">2018</span>, data)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(result)</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>Great lets see the</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Ran Li</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">draft:</span><span class="co"> true</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "02/10/2023"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Test findSVI"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - dev</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: paged</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span><span class="co"> </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -765,7 +566,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <a class="nav-link" href="../../../../license.html">License</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Drexel-UHC/analytics-corner/edit/main/pages/blog/issues/888 - findSVI-package/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
