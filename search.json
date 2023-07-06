@@ -235,7 +235,7 @@
     "href": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-results-quarto",
     "title": "Data Science Working Group: Hello",
     "section": "3.3 Communicate results: Quarto",
-    "text": "3.3 Communicate results: Quarto\n\nLiterate Programming is the idea of being able to notebook with text (markdown) and code (R,Python, Julia, Javascript).\nKnitr is an engine that combines R + .md\nJupyter is an engine that combines Python + .md\nQuarto builds onto over various language engines (Knitr, Jupyter) and binds outputs to various formats (web slides, ppt, word, html, websites, books, blogs)\nAllows analysts to rapid share their work in accessible formats.\nIt saves time: no copying into word or ptt. single source of code -&gt; multiple outputs.\nExamples:\n\nDSWG page\nBCHC COVID Inequities Website/Blog\nSALURBAL renovation page\nR and Python Data Cheat Sheet"
+    "text": "3.3 Communicate results: Quarto\n\nLiterate Programming is the idea of being able to notebook with text (markdown) and code (R,Python, Julia, Javascript).\nKnitr is an engine that combines R + .md\nJupyter is an engine that combines Python + .md\nQuarto builds onto over various language engines (Knitr, Jupyter) and binds outputs to various formats (web slides, ppt, word, html, websites, books, blogs)\nAllows analysts to rapid share their work in accessible formats.\nIt saves time: no copying into word or ptt. single source of code -&gt; multiple outputs.\nExamples:\n\nDSWG page\nBCHC COVID Inequities Website/Blog\nSALURBAL renovation page\nR and Python Data Cheat Sheet\nExternal: Royal Statiscal Society"
   },
   {
     "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-analytic-results-dashboards",
