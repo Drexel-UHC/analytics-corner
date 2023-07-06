@@ -39,7 +39,7 @@
     "href": "pages/blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nObservable + DuckDB test\n\n\n\n\n\n\n\nObservable.js\n\n\nDuckDB\n\n\n\n\n\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for research.\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nData Science Working Group: Hello\n\n\nIntroduction to group vision, tooling and next steps.\n\n\n\n\n\n\n\n\n\nJul 6, 2023\n\n\nUsama Bilal, Ran Li\n\n\n\n\n\n\n  \n\n\n\n\nObservable + DuckDB test\n\n\n\n\n\n\n\nObservable.js\n\n\nDuckDB\n\n\n\n\n\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for research.\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
@@ -103,6 +103,167 @@
     "title": "ChatGPT and AI: use-cases and potential",
     "section": "Conclusion",
     "text": "Conclusion\nChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#overview",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#overview",
+    "title": "Data Science Working Group: Hello",
+    "section": "Overview",
+    "text": "Overview\n\nBig Picture Vision\nToolkit\nIntegration"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#big-picture-vision",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#big-picture-vision",
+    "title": "Data Science Working Group: Hello",
+    "section": "Big Picture Vision",
+    "text": "Big Picture Vision"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#context",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#context",
+    "title": "Data Science Working Group: Hello",
+    "section": "Context",
+    "text": "Context\n\nThe DSWG was created to around a directive to think about projects at a ‘system’ level from raw data to deliverable to researchers, policy-makers and community members.\nResearch is 80% data cleaning (Access) and 20% actual research (Understand)\nResearch and data are much more valuable if they can be communicated to stakeholders (other researchers, policy makers, community).\nWe aim to sustain a workflow that is built on software engineering best practices and develop students/staff that to provide this as service to projects both internal and external to UHC."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#toolkit",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#toolkit",
+    "title": "Data Science Working Group: Hello",
+    "section": "Toolkit",
+    "text": "Toolkit\n\nPrinciples\n\nFAIR\nKeep abreast of industry trends\nTool agnostic\n\nAccess\n\nGrammar of data manipulation\nData warehousing\n\nCommunicate\n\nGitHub\nPackages\nLiterate Programming\nDashboards\nWeb development"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#fair",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#fair",
+    "title": "Data Science Working Group: Hello",
+    "section": "1.1 FAIR",
+    "text": "1.1 FAIR\n\nFAIR: Findable, Accessible, Interoperable, Reusable\nCode: web documentation, version control, packaging\nData: metadata, lineage, versioning, web documentation\nResearch: findable, accessible stories told to target audiences."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#innovation-pt-1",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#innovation-pt-1",
+    "title": "Data Science Working Group: Hello",
+    "section": "1.2 Innovation (pt 1)",
+    "text": "1.2 Innovation (pt 1)\n\nNIH create an Office of Data Science Strategy\n\nfindability, interconnectivity, and interoperability of NIH-funded biomedical data sets and resources\nintegration of existing data management tools and development of new ones\nuniversalization of innovative algorithms and tools created by academic scientists into enterprise-ready resources that meet industry standards of ease of use and efficiency of operation\ngrowing costs of data management."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#innovation-pt-2",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#innovation-pt-2",
+    "title": "Data Science Working Group: Hello",
+    "section": "1.2 Innovation (pt 2)",
+    "text": "1.2 Innovation (pt 2)\n\nPharma: Roche and big pharma to default to R as primay language for new trials\nModern Data warehousing: helping data teams work like software engineers with DBT\nFull stack Component based Javascript frameworks. React.js, Next.js, Svelte.js\nJournalism embrace of open source Javascript for story telling (e.g. Rueters graphics patterns\nWeb hosting is free (Azure static web app, GH pages, Netlify, AWS amplify)\nServerless infrastructure is cheap and easy (AWS lambda, Azure function apps)"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#language-agnostic",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#language-agnostic",
+    "title": "Data Science Working Group: Hello",
+    "section": "1.3 Language Agnostic",
+    "text": "1.3 Language Agnostic\n\nMove away from having one solution for how we do promgramming\nThe flexibility to move towards the best tool for solving problems is paramount\nSo tools we are using now are not the destination. Its part of a journey that allows us to constantly shift to what the best tool is best for us in the future.\nEmbrace open source culture of collaboratively building solutions as software developers rather than software consumers."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---grammar-of-data-manipulation",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---grammar-of-data-manipulation",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.1 Dplyr - Grammar of data manipulation",
+    "text": "2.1 Dplyr - Grammar of data manipulation"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---flat-files-.csv",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---flat-files-.csv",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.1 Dplyr - flat files (.csv)",
+    "text": "2.1 Dplyr - flat files (.csv)\n\nSemantics.csv\n\n\n\nResearch Question:Calculate ratio of bill length to depth then calculate rank by species. Return a table whose rows are arranged in order by species and contiaining only relevant columns.\n\n\nUse penguins as the input data\nGroup by species\nCalculate bill length depth ratio\nArrange rows based on rank\nSelect columns: species, rank, ratio\nCalculate rank of ratio_bill\n\n\n\ndata = read.csv(penguins_data_url)\ndata %&gt;%\n  group_by(species) %&gt;%\n  mutate(ratio_bill = bill_length_mm/bill_depth_mm) %&gt;% \n  select(species, ratio_bill ) %&gt;% \n  mutate(rank = rank(desc(ratio_bill ))) %&gt;% \n  arrange(rank)\n\n\n# A tibble: 344 x 3\n# Groups:   species [3]\n   species   ratio_bill  rank\n   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n 1 Adelie          2.45     1\n 2 Gentoo          3.61     1\n 3 Chinstrap       3.26     1\n 4 Adelie          2.44     2\n 5 Gentoo          3.51     2\n 6 Chinstrap       2.93     2\n 7 Adelie          2.43     3\n 8 Gentoo          3.51     3\n 9 Chinstrap       2.88     3\n10 Adelie          2.42     4\n# i 334 more rows"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---flat-files-.csv-1",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---flat-files-.csv-1",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.1 Dplyr - flat files (.csv)",
+    "text": "2.1 Dplyr - flat files (.csv)\n\nSemanticsDplyr + .csv\n\n\n\nResearch Question:Calculate ratio of bill length to depth then calculate rank by species. Return a table whose rows are arranged in order by species and contiaining only relevant columns.\n\n\nUse penguins as the input data\nGroup by species\nCalculate bill length depth ratio\nArrange rows based on rank\nSelect columns: species, rank, ratio\nCalculate rank of ratio_bill\n\n\n\ndata %&gt;%\n  group_by(species) %&gt;%\n  mutate(ratio_bill = bill_length_mm/bill_depth_mm) %&gt;% \n  select(species, ratio_bill ) %&gt;% \n  mutate(rank = rank(desc(ratio_bill ))) %&gt;% \n  arrange(rank)\n\n\n# A tibble: 344 x 3\n# Groups:   species [3]\n   species   ratio_bill  rank\n   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n 1 Adelie          2.45     1\n 2 Gentoo          3.61     1\n 3 Chinstrap       3.26     1\n 4 Adelie          2.44     2\n 5 Gentoo          3.51     2\n 6 Chinstrap       2.93     2\n 7 Adelie          2.43     3\n 8 Gentoo          3.51     3\n 9 Chinstrap       2.88     3\n10 Adelie          2.42     4\n# i 334 more rows"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---databases-e.g.-sqlite",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---databases-e.g.-sqlite",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.1 Dplyr - Databases (e.g. SQLite)",
+    "text": "2.1 Dplyr - Databases (e.g. SQLite)\n\nSemanticsDplyr + DatabaseDplyr + SQL\n\n\n\nResearch Question:Calculate ratio of bill length to depth then calculate rank by species. Return a table whose rows are arranged in order by species and contiaining only relevant columns.\n\n\nUse penguins as the input data\nGroup by species\nCalculate bill length depth ratio\nArrange rows based on rank\nSelect columns: species, rank, ratio\nCalculate rank of ratio_bill\n\n\n\ndatabase  &lt;- memdb_frame(data)\nquery = database %&gt;%\n  group_by(species) %&gt;%\n  mutate(ratio_bill = bill_length_mm/bill_depth_mm) %&gt;% \n  select(species, ratio_bill ) %&gt;% \n  mutate(rank = rank(desc(ratio_bill ))) %&gt;% \n  arrange(rank)\n\nquery %&gt;% collect()\n\n\n# A tibble: 344 x 3\n# Groups:   species [3]\n   species   ratio_bill  rank\n   &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt;\n 1 Adelie          2.45     1\n 2 Chinstrap       3.26     1\n 3 Gentoo          3.61     1\n 4 Adelie          2.44     2\n 5 Chinstrap       2.93     2\n 6 Gentoo          3.51     2\n 7 Adelie          2.43     3\n 8 Chinstrap       2.88     3\n 9 Gentoo          3.51     3\n10 Adelie          2.42     4\n# i 334 more rows\n\n\n\n\nquery %&gt;% show_query()\n\n\n&lt;SQL&gt;\nSELECT\n  *,\n  RANK() OVER (PARTITION BY `species` ORDER BY `ratio_bill` DESC) AS `rank`\nFROM (\n  SELECT `species`, `bill_length_mm` / `bill_depth_mm` AS `ratio_bill`\n  FROM `dbplyr_001`\n)\nORDER BY `rank`"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---columnar-storage-e.g.-parquet",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---columnar-storage-e.g.-parquet",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.1 Dplyr - Columnar storage (e.g. Parquet)",
+    "text": "2.1 Dplyr - Columnar storage (e.g. Parquet)\n\nSemanticsDplyr + parquet\n\n\n\nResearch Question:Calculate ratio of bill length to depth then calculate rank by species. Return a table whose rows are arranged in order by species and contiaining only relevant columns.\n\n\nUse penguins as the input data\nGroup by species\nCalculate bill length depth ratio\nArrange rows based on rank\nSelect columns: species, rank, ratio\nCalculate rank of ratio_bill\n\n\n\n  dataset = open_dataset('penguins.parquet')\n  dataset %&gt;%\n    group_by(species) %&gt;%\n    mutate(ratio_bill = bill_length_mm/bill_depth_mm) %&gt;% \n    select(species, ratio_bill ) %&gt;% \n    collect() %&gt;% \n    mutate(rank = rank(desc(ratio_bill ))) %&gt;% \n    arrange(rank)\n\n\n# A tibble: 344 x 3\n# Groups:   species [3]\n   species   ratio_bill  rank\n   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;\n 1 Adelie          2.45     1\n 2 Gentoo          3.61     1\n 3 Chinstrap       3.26     1\n 4 Adelie          2.44     2\n 5 Gentoo          3.51     2\n 6 Chinstrap       2.93     2\n 7 Adelie          2.43     3\n 8 Gentoo          3.51     3\n 9 Chinstrap       2.88     3\n10 Adelie          2.42     4\n# i 334 more rows"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---multilingual",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---multilingual",
+    "title": "Data Science Working Group: Hello",
+    "section": "1. Dplyr - multilingual",
+    "text": "1. Dplyr - multilingual\n\nR: dplyr, dbplyr\nJavaScript: tidy.js\nPython: Polars\nSQL: PRQL"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---summary",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---summary",
+    "title": "Data Science Working Group: Hello",
+    "section": "1. Dplyr - Summary",
+    "text": "1. Dplyr - Summary\n\nFoundation of R&D is data manipulation\nDplyr work flow focuses on semantics and not syntax. meaning easy onboarding.\nIt is expressive: meaning complex wrangling logic in less code = faster development = less maintenance\nIt is powerful: works with databases and modern data formats.\nSkills translatable to other languages"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#data-warehousing",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#data-warehousing",
+    "title": "Data Science Working Group: Hello",
+    "section": "2.2 Data Warehousing",
+    "text": "2.2 Data Warehousing\n\nWhile dplyr is great for working on specific tasks and projects (e.g. operationalizing a dataset). It does not have the tools required for data warehousing.\nData modeling is like designing the blueprint for a house, but instead of rooms and doors, you’re planning where to store different types of information and how they connect to each other.\nIt is a key tool to implementing FAIR at an organizaiton level, in order to reduce repeated work, handle big data, document data lineage, and make outputs accessible.\nDBT:\n\nHCUP: https://drexel-uhc.github.io/hcup-dbt/\nDBT training: https://drexel-uhc.github.io/analytics-corner/pages/manuals/dbt/overview.html"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-software-github",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-software-github",
+    "title": "Data Science Working Group: Hello",
+    "section": "3.1 Communicate Software (GitHub)",
+    "text": "3.1 Communicate Software (GitHub)\n\nGitHub is a online version control and project management platform\n\ndeveloper features (git, CI/DI, virtual machines)\nproject management features (issues, discussions, projects, teams, emails)\nwebsite host\npackage host\nExample of collaboration\n\nResources:\n\nUHC Github Organization\nDSWG GitHub Manual\nNIH GitHub Resource Center\n\nVersion control is fundamental to reproducibility and effective collaboration."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#reuse-software-r-packages",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#reuse-software-r-packages",
+    "title": "Data Science Working Group: Hello",
+    "section": "3.2 Reuse Software: R Packages",
+    "text": "3.2 Reuse Software: R Packages\n\nR packages are a mature set of best practices, guidelines how how to write R code and the tools to share them.\nThis has led to very influential opens source software ecoystems that are comparable or surpass enterprise solutions.\n\ntidycensus\ntidyverse\n\nInstead email code and writing .doc. R packages give us a easy way to develop custom solutions for our problems, document them and share them.\nA local package ecosystem will help automate so many tasks and they also can be published to increase the impact of the work we do.\nExamples from the DSWG\n\nfindSVI\nshinyUHC\ntidySALURBAL\nHERcrosswalks"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-results-quarto",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-results-quarto",
+    "title": "Data Science Working Group: Hello",
+    "section": "3.3 Communicate results: Quarto",
+    "text": "3.3 Communicate results: Quarto\n\nLiterate Programming is the idea of being able to notebook with text (markdown) and code (R,Python, Julia, Javascript).\nKnitr is an engine that combines R + .md\nJupyter is an engine that combines Python + .md\nQuarto builds onto over various language engines (Knitr, Jupyter) and binds outputs to various formats (web slides, ppt, word, html, websites, books, blogs)\nAllows analysts to rapid share their work in accessible formats.\nIt saves time: no copying into word or ptt. single source of code -&gt; multiple outputs.\nExamples:\n\nDSWG page\nBCHC COVID Inequities Website/Blog\nSALURBAL renovation page\nR and Python Data Cheat Sheet"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-analytic-results-dashboards",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-analytic-results-dashboards",
+    "title": "Data Science Working Group: Hello",
+    "section": "3.4 Communicate analytic results: Dashboards",
+    "text": "3.4 Communicate analytic results: Dashboards\n\nShiny is a multi-lingual (R, Python) tool for building web applications without needing any web development skills\nInteractivity is a must as data becomes more complex and higer volume. A dashboard is much more accessible that a 200 page PDF to communicate analytic results.\nGives analysts the ability to extend their R/Python expertise by adding interactivity.\nThe UHC already has infrastructure to deploy Shiny applications with just a click of a button.\nEasy to learn and fast to develop. Examples\n\nUHC-PDPH Cancer app 2\nSALURBAL Heat Manuscript\nBCHC COVID inequities\nUHC Student’s dashboard"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-results-web-content",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#communicate-results-web-content",
+    "title": "Data Science Working Group: Hello",
+    "section": "3.5 Communicate results: Web content",
+    "text": "3.5 Communicate results: Web content\n\nWhy not dashbaords:\n\nserver based which requires infrastructure and compute costs\ncold starts for consumption plans are not feasible for public facing content\ngreat for communicating analytic results but not telling stories. policy makers and community members don’t have time to click around\nDashboards need a server to run (R/Python) in addition to user brower to run (JS)\n\nWe adopt indsutry trend to move everything to JS with modern JS frameworks: React.js, Next.js, Svelte.js\n\nLow cost\nHighly flexible\nInter operable with many existing service API’s\nHarness open source JS codebases\nUtilize server less computing (lambda/azure-functions) for any computations\n\nExamples:\n\nSALURBAL Data Portal.\nDigital journalism\n\nidea: Digital Journalism for urban health\nexample: The Pudding repository\nadaptation: MAUP Philadelphia"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-rdc",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-rdc",
+    "title": "Data Science Working Group: Hello",
+    "section": "4. Integration with RDC",
+    "text": "4. Integration with RDC\n\nData/backend **\nstatistics\nfront-end\ntraining/Data-Team **"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-other-cores",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-other-cores",
+    "title": "Data Science Working Group: Hello",
+    "section": "4. Integration with Other Cores",
+    "text": "4. Integration with Other Cores\n\nTraining\n\nSummer Institutes FAIR or DS course\n\nPolicy\n\nfront-end\n\nCommunity Engagemet\n\nfront-end"
   },
   {
     "objectID": "pages/blog/issues/888 - observable test/index.html",
@@ -396,7 +557,7 @@
     "href": "pages/manuals/dbt/overview.html",
     "title": "Datawarehousing with DBT",
     "section": "",
-    "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Modeling Fundamentals\n\nData Modeling\nMacros\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nStand-ups\nWorking on the cloud\n\nCloud storage\nCloud database example\n\nSummary\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter"
+    "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Modeling Fundamentals\n\nData Modeling\nMacros\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nStand-ups\nWorking on the cloud\n\nCloud storage\nCloud database example\n\nSummary\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter\nDBT Slack Community (very active)"
   },
   {
     "objectID": "pages/manuals/dbt/summary.html",
@@ -424,7 +585,7 @@
     "href": "pages/manuals/dbt/summary.html#moving-forward",
     "title": "Course Summary",
     "section": "Moving Forward",
-    "text": "Moving Forward\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter"
+    "text": "Moving Forward\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter\nDBT Slack Community (&gt;50k members)"
   },
   {
     "objectID": "pages/manuals/dbt/work-in-cloud.html",
