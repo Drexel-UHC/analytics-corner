@@ -165,7 +165,7 @@
     "href": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---grammar-of-data-manipulation",
     "title": "Data Science Working Group: Hello",
     "section": "2.1 Dplyr - Grammar of data manipulation",
-    "text": "2.1 Dplyr - Grammar of data manipulation"
+    "text": "2.1 Dplyr - Grammar of data manipulation\n\n\n\n\n\n\n\n  rowid species    island bill_length_mm bill_depth_mm flipper_length_mm\n1     1  Adelie Torgersen           39.1          18.7               181\n2     2  Adelie Torgersen           39.5          17.4               186\n3     3  Adelie Torgersen           40.3          18.0               195\n4     4  Adelie Torgersen             NA            NA                NA\n5     5  Adelie Torgersen           36.7          19.3               193\n6     6  Adelie Torgersen           39.3          20.6               190\n  body_mass_g    sex year\n1        3750   male 2007\n2        3800 female 2007\n3        3250 female 2007\n4          NA   &lt;NA&gt; 2007\n5        3450 female 2007\n6        3650   male 2007"
   },
   {
     "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#dplyr---flat-files-.csv",
@@ -252,6 +252,20 @@
     "text": "3.5 Communicate results: Web content\n\nWhy not dashbaords:\n\nserver based which requires infrastructure and compute costs\ncold starts for consumption plans are not feasible for public facing content\ngreat for communicating analytic results but not telling stories. policy makers and community members don’t have time to click around\nDashboards need a server to run (R/Python) in addition to user brower to run (JS)\n\nWe adopt indsutry trend to move everything to JS with modern JS frameworks: React.js, Next.js, Svelte.js\n\nLow cost\nHighly flexible\nInter operable with many existing service API’s\nHarness open source JS codebases\nUtilize server less computing (lambda/azure-functions) for any computations\n\nExamples:\n\nSALURBAL Data Portal.\nDigital journalism\n\nidea: Digital Journalism for urban health\nexample: The Pudding repository\nadaptation: MAUP Philadelphia"
   },
   {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#toolkit-recap",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#toolkit-recap",
+    "title": "Data Science Working Group: Hello",
+    "section": "Toolkit Recap",
+    "text": "Toolkit Recap\n\nPrinciples\n\nFAIR\nKeep abreast of industry trends\nTool agnostic\n\nAccess\n\nGrammar of data manipulation\nData warehousing\n\nCommunicate\n\nGitHub\nPackages\nLiterate Programming\nDashboards\nWeb development"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#it-takes-a-village",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#it-takes-a-village",
+    "title": "Data Science Working Group: Hello",
+    "section": "It takes a village",
+    "text": "It takes a village"
+  },
+  {
     "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-rdc",
     "href": "pages/blog/issues/888 - DSWG intro 1/index.html#integration-with-rdc",
     "title": "Data Science Working Group: Hello",
@@ -264,6 +278,13 @@
     "title": "Data Science Working Group: Hello",
     "section": "4. Integration with Other Cores",
     "text": "4. Integration with Other Cores\n\nTraining\n\nSummer Institutes FAIR or DS course\n\nPolicy\n\nfront-end\n\nCommunity Engagemet\n\nfront-end"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#appendix-rollout",
+    "href": "pages/blog/issues/888 - DSWG intro 1/index.html#appendix-rollout",
+    "title": "Data Science Working Group: Hello",
+    "section": "Appendix: Rollout",
+    "text": "Appendix: Rollout"
   },
   {
     "objectID": "pages/blog/issues/888 - observable test/index.html",
