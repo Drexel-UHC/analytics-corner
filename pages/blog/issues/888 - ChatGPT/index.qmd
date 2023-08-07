@@ -2,7 +2,7 @@
 author: Ran Li
 date: "05/10/2023"
 title: "ChatGPT and AI: use-cases and potential"
-description: "Introduction to types of digital journalism content and potential uses for research."
+description: "AI generate text describing how AI could potentially be used in research at the UHC..."
 categories:
   - ChatGPT
 format: 

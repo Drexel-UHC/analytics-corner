@@ -1,0 +1,95 @@
+---
+author: Ran Li
+title: "SQL playground"
+date: "8/07/2023"
+description: 'A HR database for people to practice SQL! Examine tables in this database then use edit the code blocks and hit run to run your query.'
+image: images/Capture sql.JPG
+categories:
+  - SQL 
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
+---
+
+# SQL Queries
+
+::: {.panel-tabset}
+
+## Example 1
+
+This query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.
+
+``` {.sql .interactive .hr}
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > 10000;
+```
+
+
+## Example 2
+
+This query retrieves the first name, last name, and salary of all employees who work in the "IT" department, ordered by salary in descending order.
+
+``` {.sql .interactive .hr}
+SELECT e.first_name, e.last_name, e.salary
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE d.department_name = 'IT'
+ORDER BY e.salary DESC;
+```
+
+## Example 3
+
+This query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.
+
+``` {.sql .interactive .hr}
+SELECT d.department_name, SUM(e.salary) AS total_salary
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+GROUP BY d.department_name
+HAVING SUM(e.salary) > 20000;
+```
+:::
+
+
+
+
+# Tables in the Database
+
+## Regions
+
+``` {.sql .interactive .hr}
+select * from regions;
+```
+
+## Countries
+
+``` {.sql .interactive .hr}
+select * from countries;
+```
+
+## Departments
+
+``` {.sql .interactive .hr}
+select * from departments ;
+```
+
+## Jobs
+
+``` {.sql .interactive .hr}
+select * from jobs ;
+```
+
+## Employees
+
+``` {.sql .interactive .hr}
+select * from employees ;
+```
+
+## Dependents
+
+``` {.sql .interactive .hr}
+select * from dependents  ;
+```
