@@ -17,7 +17,198 @@
 <width>144</width>
 </image>
 <generator>quarto-1.3.353</generator>
-<lastBuildDate>Thu, 06 Jul 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 07 Aug 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>SQL playground</title>
+  <dc:creator>Ran Li</dc:creator>
+  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/images/Capture sql.JPG" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<section id="sql-queries" class="level1">
+<h1>SQL Queries</h1>
+<section id="query-1" class="level2">
+<h2 class="anchored" data-anchor-id="query-1">Query 1</h2>
+<p>This query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">SELECT</span> first_name, last_name, salary</span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">FROM</span> employees</span>
+<span id="cb1-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">WHERE</span> salary <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>;</span></code></pre></div>
+</div>
+</section>
+<section id="query-2" class="level2">
+<h2 class="anchored" data-anchor-id="query-2">Query 2</h2>
+<p>This query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">SELECT</span> e.first_name, e.last_name, e.salary</span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">FROM</span> employees e</span>
+<span id="cb2-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">JOIN</span> departments d <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ON</span> e.department_id <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> d.department_id</span>
+<span id="cb2-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">WHERE</span> d.department_name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'IT'</span></span>
+<span id="cb2-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ORDER</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">BY</span> e.salary <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">DESC</span>;</span></code></pre></div>
+</div>
+</section>
+<section id="query-3" class="level2">
+<h2 class="anchored" data-anchor-id="query-3">Query 3</h2>
+<p>This query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">SELECT</span> d.department_name, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">SUM</span>(e.salary) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">AS</span> total_salary</span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">FROM</span> employees e</span>
+<span id="cb3-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">JOIN</span> departments d <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ON</span> e.department_id <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> d.department_id</span>
+<span id="cb3-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">GROUP</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">BY</span> d.department_name</span>
+<span id="cb3-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">HAVING</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">SUM</span>(e.salary) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20000</span>;</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="tables-in-the-database" class="level1">
+<h1>Tables in the Database</h1>
+<section id="regions" class="level2">
+<h2 class="anchored" data-anchor-id="regions">Regions</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> regions;</span></code></pre></div>
+</div>
+</section>
+<section id="countries" class="level2">
+<h2 class="anchored" data-anchor-id="countries">Countries</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> countries;</span></code></pre></div>
+</div>
+</section>
+<section id="departments" class="level2">
+<h2 class="anchored" data-anchor-id="departments">Departments</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> departments ;</span></code></pre></div>
+</div>
+</section>
+<section id="jobs" class="level2">
+<h2 class="anchored" data-anchor-id="jobs">Jobs</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> jobs ;</span></code></pre></div>
+</div>
+</section>
+<section id="employees" class="level2">
+<h2 class="anchored" data-anchor-id="employees">Employees</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> employees ;</span></code></pre></div>
+</div>
+</section>
+<section id="dependents" class="level2">
+<h2 class="anchored" data-anchor-id="dependents">Dependents</h2>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">from</span> dependents  ;</span></code></pre></div>
+</div>
+
+
+<sqlime-db name="hr" path="https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"></sqlime-db>
+<sqlime-examples db="hr" selector="div.interactive-sql pre.hr code" editable=""></sqlime-examples>
+</section>
+</section>
+
+ ]]></description>
+  <category>SQL</category>
+  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/index.html</guid>
+  <pubDate>Mon, 07 Aug 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/images/Capture sql.JPG" medium="image"/>
+</item>
 <item>
   <title></title>
   <dc:creator>Usama Bilal</dc:creator>
@@ -26,307 +217,6 @@
   <description><![CDATA[ undefined ]]></description>
   <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - DSWG intro 1/index.html</guid>
   <pubDate>Thu, 06 Jul 2023 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Observable + DuckDB test</title>
-  <dc:creator>Ran Li</dc:creator>
-  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - observable test/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>Going to try observable</p>
-<section id="data-prep" class="level2">
-<h2 class="anchored" data-anchor-id="data-prep">Data Prep</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 344 x 9
-   rowid species island    bill_length_mm bill_dep~1 flipp~2 body_~3 sex    year
-   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;
- 1     1 Adelie  Torgersen           39.1       18.7     181    3750 male   2007
- 2     2 Adelie  Torgersen           39.5       17.4     186    3800 fema~  2007
- 3     3 Adelie  Torgersen           40.3       18       195    3250 fema~  2007
- 4     4 Adelie  Torgersen           NA         NA        NA      NA &lt;NA&gt;   2007
- 5     5 Adelie  Torgersen           36.7       19.3     193    3450 fema~  2007
- 6     6 Adelie  Torgersen           39.3       20.6     190    3650 male   2007
- 7     7 Adelie  Torgersen           38.9       17.8     181    3625 fema~  2007
- 8     8 Adelie  Torgersen           39.2       19.6     195    4675 male   2007
- 9     9 Adelie  Torgersen           34.1       18.1     193    3475 &lt;NA&gt;   2007
-10    10 Adelie  Torgersen           42         20.2     190    4250 &lt;NA&gt;   2007
-# ... with 334 more rows, and abbreviated variable names 1: bill_depth_mm,
-#   2: flipper_length_mm, 3: body_mass_g
-# i Use `print(n = ...)` to see more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="pass-to-observable" class="level2">
-<h2 class="anchored" data-anchor-id="pass-to-observable">Pass to Observable</h2>
-<div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="35" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb2-35">filtered <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">transpose</span>(data)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(<span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(penguin) {</span>
-<span id="cb2-36">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">return</span> bill_length_min <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> penguin<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">bill_length</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;&amp;</span></span>
-<span id="cb2-37">         islands<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">includes</span>(penguin<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">island</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb2-38">})</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-1" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-</section>
-<section id="observable-inputs" class="level2">
-<h2 class="anchored" data-anchor-id="observable-inputs">Observable Inputs</h2>
-<div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="45" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 44;"><span id="cb3-45">viewof bill_length_min <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">range</span>(</span>
-<span id="cb3-46">  [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">32</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">50</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> </span>
-<span id="cb3-47">  {<span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">35</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">step</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">label</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Bill length (min):"</span>}</span>
-<span id="cb3-48">)</span>
-<span id="cb3-49">viewof islands <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">checkbox</span>(</span>
-<span id="cb3-50">  [<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Torgersen"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Biscoe"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Dream"</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> </span>
-<span id="cb3-51">  { <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> [<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Torgersen"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Biscoe"</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> </span>
-<span id="cb3-52">    <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">label</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Islands:"</span></span>
-<span id="cb3-53">  }</span>
-<span id="cb3-54">)</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-2-1" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-2-2" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="plot" class="level2">
-<h2 class="anchored" data-anchor-id="plot">Plot</h2>
-<div class="cell">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="59" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb4-59">Plot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rectY</span>(filtered<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> </span>
-<span id="cb4-60">  Plot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">binX</span>(</span>
-<span id="cb4-61">    {<span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"count"</span>}<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> </span>
-<span id="cb4-62">    {<span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"body_mass_g"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">fill</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"species"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">thresholds</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span>}</span>
-<span id="cb4-63">  ))</span>
-<span id="cb4-64">  <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>({</span>
-<span id="cb4-65">    <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">facet</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> {</span>
-<span id="cb4-66">      <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">data</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> filtered<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span></span>
-<span id="cb4-67">      <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sex"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span></span>
-<span id="cb4-68">      <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"species"</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span></span>
-<span id="cb4-69">      <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">marginRight</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span></span>
-<span id="cb4-70">    }<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span></span>
-<span id="cb4-71">    <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">marks</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> [</span>
-<span id="cb4-72">      Plot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">frame</span>()<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span></span>
-<span id="cb4-73">    ]</span>
-<span id="cb4-74">  }</span>
-<span id="cb4-75">)</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-3" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>Observable.js</category>
-  <category>DuckDB</category>
-  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - observable test/index.html</guid>
-  <pubDate>Thu, 01 Jun 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>WebR: Running R in the Browser!</title>
@@ -3471,190 +3361,6 @@ font-style: inherit;">8</span></span>
   <category>infographic</category>
   <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html</guid>
   <pubDate>Wed, 10 Aug 2022 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>SQL playground</title>
-  <dc:creator>Ran Li</dc:creator>
-  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="sql-queries" class="level1">
-<h1>SQL Queries</h1>
-<section id="query-1" class="level2">
-<h2 class="anchored" data-anchor-id="query-1">Query 1</h2>
-<p>This query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">SELECT</span> first_name, last_name, salary</span>
-<span id="cb1-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">FROM</span> employees</span>
-<span id="cb1-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">WHERE</span> salary <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10000</span>;</span></code></pre></div>
-</div>
-</section>
-<section id="query-2" class="level2">
-<h2 class="anchored" data-anchor-id="query-2">Query 2</h2>
-<p>This query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">SELECT</span> e.first_name, e.last_name, e.salary</span>
-<span id="cb2-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">FROM</span> employees e</span>
-<span id="cb2-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">JOIN</span> departments d <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">ON</span> e.department_id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> d.department_id</span>
-<span id="cb2-4"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">WHERE</span> d.department_name <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'IT'</span></span>
-<span id="cb2-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">ORDER</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">BY</span> e.salary <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">DESC</span>;</span></code></pre></div>
-</div>
-</section>
-<section id="query-3" class="level2">
-<h2 class="anchored" data-anchor-id="query-3">Query 3</h2>
-<p>This query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">SELECT</span> d.department_name, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">SUM</span>(e.salary) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">AS</span> total_salary</span>
-<span id="cb3-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">FROM</span> employees e</span>
-<span id="cb3-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">JOIN</span> departments d <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">ON</span> e.department_id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> d.department_id</span>
-<span id="cb3-4"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">GROUP</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">BY</span> d.department_name</span>
-<span id="cb3-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">HAVING</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">SUM</span>(e.salary) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20000</span>;</span></code></pre></div>
-</div>
-</section>
-</section>
-<section id="tables-in-the-database" class="level1">
-<h1>Tables in the Database</h1>
-<section id="regions" class="level2">
-<h2 class="anchored" data-anchor-id="regions">Regions</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> regions;</span></code></pre></div>
-</div>
-</section>
-<section id="countries" class="level2">
-<h2 class="anchored" data-anchor-id="countries">Countries</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> countries;</span></code></pre></div>
-</div>
-</section>
-<section id="departments" class="level2">
-<h2 class="anchored" data-anchor-id="departments">Departments</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> departments ;</span></code></pre></div>
-</div>
-</section>
-<section id="jobs" class="level2">
-<h2 class="anchored" data-anchor-id="jobs">Jobs</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> jobs ;</span></code></pre></div>
-</div>
-</section>
-<section id="employees" class="level2">
-<h2 class="anchored" data-anchor-id="employees">Employees</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> employees ;</span></code></pre></div>
-</div>
-</section>
-<section id="dependents" class="level2">
-<h2 class="anchored" data-anchor-id="dependents">Dependents</h2>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode sql interactive hr code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">select</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">from</span> dependents  ;</span></code></pre></div>
-</div>
-
-
-<sqlime-db name="hr" path="https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"></sqlime-db>
-<sqlime-examples db="hr" selector="div.interactive-sql pre.hr code" editable=""></sqlime-examples>
-</section>
-</section>
-
- ]]></description>
-  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - SQL playground/index.html</guid>
-  <pubDate>Mon, 07 Aug 2023 21:06:40 GMT</pubDate>
 </item>
 </channel>
 </rss>
