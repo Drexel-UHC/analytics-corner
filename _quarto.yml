@@ -24,6 +24,8 @@ website:
           text: "Git and GitHub"
         - href: pages/manuals/dbt/overview.qmd
           text: "Datawarehousing + DBT"
+        - href: pages/manuals/sql/overview.ipynb
+          text: "SQL"
       - text: "Blog"
         href: pages/blog/index.qmd
       - text: "Gallery"
@@ -64,6 +66,15 @@ website:
         aria-label: Quarto GitHub
         
   sidebar:
+    - id: sql
+      contents:
+        - text: 'Overview'
+          href: pages/manuals/sql/overview.ipynb
+        - text: "---"
+        - section: 'Basics'
+          contents:
+          - text: '1. Introduction'
+            href: pages/manuals/sql/introduction.ipynb    
     - id: dbt
       contents:
         - text: 'Overview'
