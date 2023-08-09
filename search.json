@@ -39,7 +39,7 @@
     "href": "pages/blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nSQL playground\n\n\n\n\n\n\n\nSQL\n\n\n\n\nA HR database for people to practice SQL! Examine tables in this database then use edit the code blocks and hit run to run your query.\n\n\n\n\n\n\nAug 7, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nData Science Working Group: Hello\n\n\nIntroduction to group vision, tooling and next steps.\n\n\n\n\n\n\n\n\n\nJul 6, 2023\n\n\nUsama Bilal, Ran Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nAI generate text describing how AI could potentially be used in research at the UHC…\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nData Science Working Group: Hello\n\n\nIntroduction to group vision, tooling and next steps.\n\n\n\n\n\n\n\n\n\nJul 6, 2023\n\n\nUsama Bilal, Ran Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nAI generate text describing how AI could potentially be used in research at the UHC…\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
@@ -355,55 +355,6 @@
     "title": "Shinyappsio Usage and projected needs",
     "section": "Plots",
     "text": "Plots\nQuick EDA on ShinyAppsio usage to inform plan renewal for 2023. We’ll look at by app daily vs monthly consumption as well as account level monthly consumption.\nLets first pull in some usage data!\n\n\nCode\n## Dependencies\nlibrary(rsconnect)\nlibrary(tidyverse)\nlibrary(purrr)\nlibrary(lubridate)\nlibrary(highcharter)\n\n## Get App names\napps = applications(account = \"drexel-uhc\",\n                    server=\"shinyapps.io\") %&gt;% \n  as_tibble() %&gt;% \n  select(id, name) %&gt;% \n  mutate(id = as.character(id))\n\n### Pull Data\nstart_date = \"2022-10-03\"\nend_date = Sys.Date()\n\napi_result = rsconnect::accountUsage(\n  account = \"drexel-uhc\",\n  server=\"shinyapps.io\",\n  usageType = \"hours\",\n  from = start_date,\n  until  = end_date,\n  interval = \"1d\"\n)\n.x = api_result$points[[1]]\nlist_result = api_result$points %&gt;% \n  map(  ~{\n    hours_tmp = map(.x,2)%&gt;% \n      unlist() \n    tibble(date = seq(ymd(start_date),\n                      ymd(end_date)-1,\n                      by = \"day\") )  %&gt;% \n      mutate(day = row_number()) %&gt;% \n      mutate(hours = hours_tmp)\n  }) \ndf_result = map2_df(list_result,names(list_result),\n                    ~{.x %&gt;% mutate(id_chr = .y)}) %&gt;% \n  mutate(id  = str_remove(id_chr,\"application-\")) %&gt;% \n  left_join(apps) %&gt;% \n  select(name, date, day, hours) %&gt;% \n  arrange(name,date) #%&gt;% \n  # group_by(name) %&gt;% \n  # group_modify(~.x %&gt;% mutate(hours_cum = cumsum(hours))) %&gt;% \n  # ungroup()  %&gt;%\n# mutate(month = month) %&gt;% \n# select(month, everything())\n\ndf_usage_daily = df_result %&gt;% \n  filter(!is.na(name)) %&gt;% \n  rename(app = name) %&gt;% \n  mutate(month = month(date),\n         year = year(date)) %&gt;% \n\n  arrange(app, year, month)\n\n\ndf_useage_monthly = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(app, month, year) %&gt;% \n  summarise(hours = sum(hours)) %&gt;% \n  ungroup()%&gt;% \n  arrange(app, year, month) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\ndf_usage_monthly_overall = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(month, year) %&gt;% \n  summarize(hours = sum(hours)) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\n\n\nBy app\nNote that in highcharted you can click the legend to remove or add back specific lines. or exmaple you can click bchc_covid19 to remove it and rescale the plot.\n\n\nCode\ndf_usage_daily %&gt;%\n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Daily trends over last 90 days by app')\n\n\n\n\n\n\n\n\n\nCode\ndf_useage_monthly %&gt;%\n  filter(month != \"2\") %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Monthly trends over last 90 days by app') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month. ')\n\n\n\n\n\n\n\n\n\nOverall\n\n\nCode\ndf_usage_monthly_overall %&gt;%\n  arrange(date) %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours)) %&gt;% \n  hc_title(text = 'Overall usage over 3 months') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month.') %&gt;% \n  hc_yAxis(min = 0)"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html",
-    "href": "pages/blog/issues/888 - SQL playground/index.html",
-    "title": "SQL playground",
-    "section": "",
-    "text": "Example 1Example 2Example 3\n\n\nThis query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.\n\nSELECT first_name, last_name, salary\nFROM employees\nWHERE salary &gt; 10000;\n\n\n\nThis query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.\n\nSELECT e.first_name, e.last_name, e.salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nWHERE d.department_name = 'IT'\nORDER BY e.salary DESC;\n\n\n\nThis query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.\n\nSELECT d.department_name, SUM(e.salary) AS total_salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nGROUP BY d.department_name\nHAVING SUM(e.salary) &gt; 20000;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#regions",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#regions",
-    "title": "SQL playground",
-    "section": "Regions",
-    "text": "Regions\n\nselect * from regions;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#countries",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#countries",
-    "title": "SQL playground",
-    "section": "Countries",
-    "text": "Countries\n\nselect * from countries;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#departments",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#departments",
-    "title": "SQL playground",
-    "section": "Departments",
-    "text": "Departments\n\nselect * from departments ;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#jobs",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#jobs",
-    "title": "SQL playground",
-    "section": "Jobs",
-    "text": "Jobs\n\nselect * from jobs ;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#employees",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#employees",
-    "title": "SQL playground",
-    "section": "Employees",
-    "text": "Employees\n\nselect * from employees ;"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - SQL playground/index.html#dependents",
-    "href": "pages/blog/issues/888 - SQL playground/index.html#dependents",
-    "title": "SQL playground",
-    "section": "Dependents",
-    "text": "Dependents\n\nselect * from dependents  ;"
   },
   {
     "objectID": "pages/blog/issues/888 - webR test/index.html",
@@ -1062,6 +1013,13 @@
     "title": "Introduction to SQL",
     "section": "Importing Directly into Statistical Software",
     "text": "Importing Directly into Statistical Software\nA lot of the software we use for data analysis can interact directly with SQL databases using the Open Database Connectivity (ODBC) protocol. You can pull directly from the database into an object in the piece of software of your choice. Here are a few examples.\n\nPython\nThere are several options for connecting to a database in python. The below example uses pyodbc, but another common library is SQLAlchemy\nimport pyodbc\n\n# must have the correct ODBC driver installed, this should have been installed automatically when you installed SQL Server Management Studio\ncnxn = pyodbc.connect('{ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\ncn = cnxn.cursor()\n\ncn.execute(\"SELECT * FROM Tract\")\n\nresults = cn.fetchall()\n\n\nR\nlibrary('RODBC')\n\ncnxn &lt;- odbcDriverConnect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\nsqlQuery(cnxn, \"SELECT * FROM Tract\")\n\n\nSAS\nhttps://support.sas.com/en/software/sas-odbc-drivers.html#c1d85777-acb8-4b35-a4cd-0a97a8060229\n\n\nArcGIS Pro\n\nOpen the catalog pane\nRight click databases and select “New Database Connection”\nFill in the dialog box and sign-in when prompted\n\nNow you can add geographic data to a map or export to an attribute table for use in your project."
+  },
+  {
+    "objectID": "pages/manuals/sql/playground.html",
+    "href": "pages/manuals/sql/playground.html",
+    "title": "SQL playground",
+    "section": "",
+    "text": "HR Database Information\n\nSchemaDepartmentsJobsEmployees\n\n\n\n\n\n\nerDiagram\n  departments ||--o{ employees : has\n  jobs ||--o{ employees : has\n  employees ||--o{ employees : manages \n\n  departments {\n    department_id INTEGER\n    department_name STRING\n    location_id INTEGER\n  }\n\n  jobs {\n    job_id INTEGER\n    job_title STRING\n    min_salary DOUBLE\n    max_salary DOUBLE\n  }\n\n  employees {\n    employee_id INTEGER\n    first_name STRING\n    last_name STRING\n    email STRING\n    phone_number STRING\n    hire_date STRING\n    job_id INTEGER\n    salary DOUBLE\n    manager_id INTEGER\n    department_id INTEGER\n  }\n\n\n\n\n\n\n\n\n\n\nselect * from departments ;\n\n\n\n\nselect * from jobs  ;\n\n\n\n\nselect * from employees ;\n\n\n\n\n\n\nSQL Queries\nExamples 1, 2, 3 are example SQL queries. Feel free to edit to play around!\n\nExample 1Example 2Example 3\n\n\nThis query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.\n\nSELECT first_name, last_name, salary\nFROM employees\nWHERE salary &gt; 10000;\n\n\n\nThis query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.\n\nSELECT e.first_name, e.last_name, e.salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nWHERE d.department_name = 'IT'\nORDER BY e.salary DESC;\n\n\n\nThis query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.\n\nSELECT d.department_name, SUM(e.salary) AS total_salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nGROUP BY d.department_name\nHAVING SUM(e.salary) &gt; 20000;"
   },
   {
     "objectID": "pages/manuals/welcome/1-about.html",
