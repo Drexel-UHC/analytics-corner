@@ -1,0 +1,3633 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analytics Corner - Introduction to SQL</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../uhc.png" alt="Drexel dragon logo." class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Analytics Corner</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-manuals" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Manuals</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-manuals">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/welcome/1-about.html" rel="" target="">
+ <span class="dropdown-text">Welcome</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/git-github/overview.html" rel="" target="">
+ <span class="dropdown-text">Git and GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/dbt/overview.html" rel="" target="">
+ <span class="dropdown-text">Datawarehousing + DBT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/sql/overview.html" rel="" target="">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/gallery/index.html" rel="" target="">
+ <span class="menu-text">Gallery</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&amp;labels=&amp;template=request.yml&amp;title=%5BRequest+title%5D%3A+" rel="" target=""><i class="bi bi-patch-question" role="img">
+</i> 
+ <span class="dropdown-text">Submit an Issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/discussions" rel="" target=""><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">View Discussions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/faq/index.html" rel="" target=""><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc" rel="" target=""><i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core" rel="" target=""><i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/manuals/sql/introduction.html">Basics</a></li><li class="breadcrumb-item"><a href="../../../pages/manuals/sql/introduction.html">1. Introduction</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/sql/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/sql/introduction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1. Introduction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#matthew-jannetti" id="toc-matthew-jannetti" class="nav-link active" data-scroll-target="#matthew-jannetti">Matthew Jannetti</a></li>
+  <li><a href="#august-8th-2023" id="toc-august-8th-2023" class="nav-link" data-scroll-target="#august-8th-2023">August 8th, 2023</a></li>
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#relational-databases" id="toc-relational-databases" class="nav-link" data-scroll-target="#relational-databases">Relational Databases</a></li>
+  <li><a href="#advantages-of-relational-databases" id="toc-advantages-of-relational-databases" class="nav-link" data-scroll-target="#advantages-of-relational-databases">Advantages of relational databases</a></li>
+  </ul></li>
+  <li><a href="#what-is-sql" id="toc-what-is-sql" class="nav-link" data-scroll-target="#what-is-sql">What is SQL</a></li>
+  <li><a href="#sql-server-and-azure-sql" id="toc-sql-server-and-azure-sql" class="nav-link" data-scroll-target="#sql-server-and-azure-sql">SQL Server and Azure SQL</a></li>
+  <li><a href="#connecting-to-the-example-database" id="toc-connecting-to-the-example-database" class="nav-link" data-scroll-target="#connecting-to-the-example-database">Connecting to the Example Database</a></li>
+  <li><a href="#connecting-to-the-example-database-1" id="toc-connecting-to-the-example-database-1" class="nav-link" data-scroll-target="#connecting-to-the-example-database-1">Connecting to the Example Database</a></li>
+  <li><a href="#using-the-object-explorer" id="toc-using-the-object-explorer" class="nav-link" data-scroll-target="#using-the-object-explorer">Using the Object Explorer</a></li>
+  <li><a href="#query-writing-ui" id="toc-query-writing-ui" class="nav-link" data-scroll-target="#query-writing-ui">Query Writing UI</a></li>
+  <li><a href="#query-results" id="toc-query-results" class="nav-link" data-scroll-target="#query-results">Query Results</a></li>
+  <li><a href="#how-to-write-a-sql-query" id="toc-how-to-write-a-sql-query" class="nav-link" data-scroll-target="#how-to-write-a-sql-query">How to Write a SQL Query</a></li>
+  <li><a href="#the-clauses" id="toc-the-clauses" class="nav-link" data-scroll-target="#the-clauses">The Clauses</a>
+  <ul class="collapse">
+  <li><a href="#extra-clauses" id="toc-extra-clauses" class="nav-link" data-scroll-target="#extra-clauses">Extra clauses</a></li>
+  <li><a href="#keywords-in-the-select-statement" id="toc-keywords-in-the-select-statement" class="nav-link" data-scroll-target="#keywords-in-the-select-statement">Keywords in the SELECT Statement</a></li>
+  <li><a href="#where-clauses" id="toc-where-clauses" class="nav-link" data-scroll-target="#where-clauses">Where Clauses</a></li>
+  <li><a href="#searching-for-strings" id="toc-searching-for-strings" class="nav-link" data-scroll-target="#searching-for-strings">Searching for Strings</a></li>
+  <li><a href="#other-operators" id="toc-other-operators" class="nav-link" data-scroll-target="#other-operators">Other Operators</a></li>
+  <li><a href="#combining-multiple-conditions" id="toc-combining-multiple-conditions" class="nav-link" data-scroll-target="#combining-multiple-conditions">Combining Multiple Conditions</a></li>
+  <li><a href="#be-careful-with-ors" id="toc-be-careful-with-ors" class="nav-link" data-scroll-target="#be-careful-with-ors">Be careful with ORs</a>
+  <ul class="collapse">
+  <li><a href="#the-first-query-returns-2627-rows-but-the-second-returns-2573.-why" id="toc-the-first-query-returns-2627-rows-but-the-second-returns-2573.-why" class="nav-link" data-scroll-target="#the-first-query-returns-2627-rows-but-the-second-returns-2573.-why">The first query returns 2627 rows but the second returns 2573. Why?</a></li>
+  <li><a href="#hint" id="toc-hint" class="nav-link" data-scroll-target="#hint">Hint</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#joins" id="toc-joins" class="nav-link" data-scroll-target="#joins">Joins</a>
+  <ul class="collapse">
+  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join">Left Join</a></li>
+  <li><a href="#right-join" id="toc-right-join" class="nav-link" data-scroll-target="#right-join">Right Join</a></li>
+  <li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join">Inner Join</a></li>
+  <li><a href="#full-join" id="toc-full-join" class="nav-link" data-scroll-target="#full-join">Full Join</a></li>
+  <li><a href="#chaining-joins" id="toc-chaining-joins" class="nav-link" data-scroll-target="#chaining-joins">Chaining Joins</a></li>
+  <li><a href="#order-by" id="toc-order-by" class="nav-link" data-scroll-target="#order-by">Order By</a></li>
+  <li><a href="#order-by-multiple-columns" id="toc-order-by-multiple-columns" class="nav-link" data-scroll-target="#order-by-multiple-columns">Order By Multiple Columns</a></li>
+  <li><a href="#change-the-sort-direction" id="toc-change-the-sort-direction" class="nav-link" data-scroll-target="#change-the-sort-direction">Change the Sort Direction</a></li>
+  </ul></li>
+  <li><a href="#aggregating-data-group-by" id="toc-aggregating-data-group-by" class="nav-link" data-scroll-target="#aggregating-data-group-by">Aggregating Data (Group By)</a></li>
+  <li><a href="#exporting-data" id="toc-exporting-data" class="nav-link" data-scroll-target="#exporting-data">Exporting Data</a>
+  <ul class="collapse">
+  <li><a href="#importing-directly-into-statistical-software" id="toc-importing-directly-into-statistical-software" class="nav-link" data-scroll-target="#importing-directly-into-statistical-software">Importing Directly into Statistical Software</a>
+  <ul class="collapse">
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#sas" id="toc-sas" class="nav-link" data-scroll-target="#sas">SAS</a></li>
+  <li><a href="#arcgis-pro" id="toc-arcgis-pro" class="nav-link" data-scroll-target="#arcgis-pro">ArcGIS Pro</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/Drexel-UHC/analytics-corner/blob/main/pages/manuals/sql/introduction.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to SQL</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="matthew-jannetti" class="level3">
+<h3 class="anchored" data-anchor-id="matthew-jannetti">Matthew Jannetti</h3>
+</section>
+<section id="august-8th-2023" class="level3">
+<h3 class="anchored" data-anchor-id="august-8th-2023">August 8th, 2023</h3>
+</section>
+<section id="goal" class="level1">
+<h1>Goal</h1>
+<p>The goal of this workshop will be to give you a basic introduction to SQL for the purposes of querying (or extracting data) from a database for use in your projects.</p>
+</section>
+<section id="outline" class="level1">
+<h1>Outline</h1>
+<ol type="1">
+<li>Overview of Relational Databases and SQL</li>
+<li>How to connect to a SQL Database</li>
+<li>Writing SQL Queries</li>
+<li>Exporting data</li>
+<li>Practice and exercises</li>
+</ol>
+<section id="relational-databases" class="level2">
+<h2 class="anchored" data-anchor-id="relational-databases">Relational Databases</h2>
+<p>At it’s core a relational database is just a series of interconnected tables.</p>
+<p>While there is a lot of other functionality of databases, to grasp the basics of querying data you can think of it like a series of:</p>
+<ul>
+<li>excel spreadsheets</li>
+<li>R/Python dataframes</li>
+<li>SAS datasets</li>
+</ul>
+<p>All of the tables in a SQL database will connect to at least one other table in the database. It will be connected by a set of keys. These keys work similarly to ID columns that you might use when merging two datasets in your favorite analytic software.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/7c69df19-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="advantages-of-relational-databases" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-relational-databases">Advantages of relational databases</h2>
+<ol type="1">
+<li>Data can be centrally stored</li>
+<li>Data types and constraints are enforced</li>
+<li>Data is consistent and available to everyone with access</li>
+<li>If the data is relatively large, you can do a lot of the transformations on the database server</li>
+</ol>
+<p>There are plenty of other advantages not discussed here, but they will mostly not come up in this workshop.</p>
+</section>
+</section>
+<section id="what-is-sql" class="level1">
+<h1>What is SQL</h1>
+<p>SQL (Structured Query Language) is a set of standards for interacting with relational databases.</p>
+<p>There are <strong>A LOT</strong> of different versions of SQL, each is slightly different.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/438c77d1-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<p>If you know how to interact with one of these, you can pretty easily figure out the others.</p>
+</section>
+<section id="sql-server-and-azure-sql" class="level1">
+<h1>SQL Server and Azure SQL</h1>
+<p>This workshop will use SQL Server/Azure SQL, which is Microsoft’s version of SQL.</p>
+<ol type="1">
+<li>Drexel and the UHC already uses Azure</li>
+<li>Drexel provides a <a href="https://drexel.edu/it/computers-software/software/software-drexel/">personal liscence</a> to Drexel employees and students.</li>
+<li>We can all use our Drexel credentials to access a remote database set up for this workshop</li>
+</ol>
+<p>There are some differences between SQL Server and Azure SQL but they won’t come up during our exercises. For our purposes, they are essentially interchangeable.</p>
+</section>
+<section id="connecting-to-the-example-database" class="level1">
+<h1>Connecting to the Example Database</h1>
+<ol type="1">
+<li>Open <a href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16">SQL Server Management Studio</a></li>
+<li>Put the name of the server in the “server name” box (uhcdata.database.windows.net)</li>
+<li>Switch the “Authentication” to “Azure Active Directory - Universal wtih MFA”</li>
+<li>Put in your Drexel email in the “User name” field</li>
+<li>Press connect. You will be prompted for your Drexel password. And you will need to have your phone handy for the 2-factor authentication. <img src="introduction_files/figure-html/64a70129-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+</ol>
+</section>
+<section id="connecting-to-the-example-database-1" class="level1">
+<h1>Connecting to the Example Database</h1>
+<p>In the top left corner, select “New Query”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/5d55f15e-2-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<p>Then click the dropdown and select “SQLWorkshop”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/5d55f15e-1-image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-2.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="using-the-object-explorer" class="level1">
+<h1>Using the Object Explorer</h1>
+<p>The object explorer is the left hand pane, it shows the databases on the server. You can also expand the databases to see the tables and the tables to see the columns in each table.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/f7d3a96c-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="query-writing-ui" class="level1">
+<h1>Query Writing UI</h1>
+<p>The top of the main section of the window is where you will write your queries.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/c72d67dd-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<p>When you want to run a query, highlight the portion of the text you want to run and press the execute button up top</p>
+</section>
+<section id="query-results" class="level1">
+<h1>Query Results</h1>
+<p>The bottom half of the main window is where the query results will display.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/646bfa3e-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<p>you can click the “Messages” tab to see messages about status or other console type messages.</p>
+</section>
+<section id="how-to-write-a-sql-query" class="level1">
+<h1>How to Write a SQL Query</h1>
+<ul>
+<li>SQL queries or statements is how you look at and extract data from a SQL server.</li>
+<li>Each query is separated into “clauses”</li>
+</ul>
+<p>Learning the basic clauses and some extra keywords is enough to do the vast majority data manipulation in SQL</p>
+</section>
+<section id="the-clauses" class="level1">
+<h1>The Clauses</h1>
+<ul>
+<li><strong>FROM</strong>: picks which table in the datatable that you are starting with</li>
+<li><strong>SELECT</strong>: picks which columns of the from table and joined tables appear in the result</li>
+<li><strong>WHERE</strong>: filters which rows are included in the result</li>
+<li><strong>JOIN</strong>: merges other tables with the from table</li>
+</ul>
+<section id="extra-clauses" class="level3">
+<h3 class="anchored" data-anchor-id="extra-clauses">Extra clauses</h3>
+<ul>
+<li><strong>ORDER BY</strong>: sort by a column or series of columns (combine with the DESC keyword to control the order)</li>
+<li><strong>GROUP BY</strong>: used to aggregate rows by a given column or series of columns (used with some keywords to produce things like averages and counts)</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> [<span class="kw">table</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> [column1], [column2]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> [<span class="kw">table</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">Tract</th>
+<th data-quarto-table-cell-role="th">FIPS</th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">CountyFP</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">LowPop</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>21329</td>
+<td>10003000100</td>
+<td>000100</td>
+<td>10003</td>
+<td>10</td>
+<td>003</td>
+<td>2000</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>21330</td>
+<td>10003000200</td>
+<td>000200</td>
+<td>10003</td>
+<td>10</td>
+<td>003</td>
+<td>2000</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>21331</td>
+<td>10003000300</td>
+<td>000300</td>
+<td>10003</td>
+<td>10</td>
+<td>003</td>
+<td>2000</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>21332</td>
+<td>10003000400</td>
+<td>000400</td>
+<td>10003</td>
+<td>10</td>
+<td>003</td>
+<td>2000</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>21333</td>
+<td>10003000500</td>
+<td>000500</td>
+<td>10003</td>
+<td>10</td>
+<td>003</td>
+<td>2000</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5327</td>
+<td>26656</td>
+<td>24015030904</td>
+<td>030904</td>
+<td>24015</td>
+<td>24</td>
+<td>015</td>
+<td>2020</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5328</td>
+<td>26657</td>
+<td>24015030700</td>
+<td>030700</td>
+<td>24015</td>
+<td>24</td>
+<td>015</td>
+<td>2020</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5329</td>
+<td>26658</td>
+<td>24015031202</td>
+<td>031202</td>
+<td>24015</td>
+<td>24</td>
+<td>015</td>
+<td>2020</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5330</td>
+<td>26659</td>
+<td>24015031400</td>
+<td>031400</td>
+<td>24015</td>
+<td>24</td>
+<td>015</td>
+<td>2020</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5331</td>
+<td>26660</td>
+<td>24015030503</td>
+<td>030503</td>
+<td>24015</td>
+<td>24</td>
+<td>015</td>
+<td>2020</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5332 rows × 9 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">FIPS</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>10003000100</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10003000200</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>10003000300</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>10003000400</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>10003000500</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5327</td>
+<td>24015030904</td>
+<td>24015</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5328</td>
+<td>24015030700</td>
+<td>24015</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5329</td>
+<td>24015031202</td>
+<td>24015</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5330</td>
+<td>24015031400</td>
+<td>24015</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5331</td>
+<td>24015030503</td>
+<td>24015</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5332 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="keywords-in-the-select-statement" class="level2">
+<h2 class="anchored" data-anchor-id="keywords-in-the-select-statement">Keywords in the SELECT Statement</h2>
+<p>There are plenty of keywords or functions you can use in the select statement to modify the output.</p>
+<p>For example, the <strong>top</strong> keyword will let you pick the first N rows of a query</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> TOP <span class="dv">5</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">FIPS</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>10003000100</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10003000200</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>10003000300</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>10003000400</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>10003000500</td>
+<td>10003</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="where-clauses" class="level2">
+<h2 class="anchored" data-anchor-id="where-clauses">Where Clauses</h2>
+<p>Used for subsetting the table</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PhiladelphiaTract<span class="op">=</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">FIPS</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42101000100</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42101000200</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42101000300</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>42101000400</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>42101000500</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1168</td>
+<td>42101002802</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1169</td>
+<td>42101002701</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1170</td>
+<td>42101980600</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1171</td>
+<td>42101036501</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1172</td>
+<td>42101000801</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>1173 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="searching-for-strings" class="level2">
+<h2 class="anchored" data-anchor-id="searching-for-strings">Searching for Strings</h2>
+<p>In some database systems, string conditionals are case sensitive (but not in the database we are using today).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Neighborhood</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Neighborhood<span class="op">=</span><span class="st">'University City'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">NeighborhoodId</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+<th data-quarto-table-cell-role="th">Shape_Leng</th>
+<th data-quarto-table-cell-role="th">Shape_Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>10</td>
+<td>University City</td>
+<td>11830.311523</td>
+<td>5777707.5</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="other-operators" class="level2">
+<h2 class="anchored" data-anchor-id="other-operators">Other Operators</h2>
+<p>You can also use other operators such as &gt;, &gt;=, &lt;, &lt;=, IS NULL, IS NOT NULL, BETWEEN, and LIKE to filter the results.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Weather</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> AvgTemp <span class="op">&gt;</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WeatherId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">NumMonth</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">TotPpt</th>
+<th data-quarto-table-cell-role="th">MinVP</th>
+<th data-quarto-table-cell-role="th">MaxVP</th>
+<th data-quarto-table-cell-role="th">AvgDPTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>4</td>
+<td>24709</td>
+<td>2005</td>
+<td>April</td>
+<td>4</td>
+<td>12.572927</td>
+<td>19.015528</td>
+<td>6.131508</td>
+<td>127.517159</td>
+<td>0.807038</td>
+<td>14.233975</td>
+<td>3.769631</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5</td>
+<td>24709</td>
+<td>2005</td>
+<td>May</td>
+<td>5</td>
+<td>14.665885</td>
+<td>20.930977</td>
+<td>8.402382</td>
+<td>106.256607</td>
+<td>0.365076</td>
+<td>13.969968</td>
+<td>7.882780</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>6</td>
+<td>24709</td>
+<td>2005</td>
+<td>June</td>
+<td>6</td>
+<td>22.697632</td>
+<td>28.167263</td>
+<td>17.229803</td>
+<td>95.863174</td>
+<td>0.336816</td>
+<td>17.135292</td>
+<td>17.337898</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>7</td>
+<td>24709</td>
+<td>2005</td>
+<td>July</td>
+<td>7</td>
+<td>25.349329</td>
+<td>30.702368</td>
+<td>19.997959</td>
+<td>128.219376</td>
+<td>0.125650</td>
+<td>18.210075</td>
+<td>20.690350</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>8</td>
+<td>24709</td>
+<td>2005</td>
+<td>August</td>
+<td>8</td>
+<td>25.118080</td>
+<td>30.377020</td>
+<td>19.860121</td>
+<td>80.542473</td>
+<td>0.119305</td>
+<td>17.822693</td>
+<td>20.596968</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">184960</td>
+<td>311754</td>
+<td>24553</td>
+<td>2019</td>
+<td>June</td>
+<td>6</td>
+<td>23.078955</td>
+<td>28.078943</td>
+<td>18.079168</td>
+<td>153.255753</td>
+<td>3.321621</td>
+<td>21.594011</td>
+<td>14.780686</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">184961</td>
+<td>311755</td>
+<td>24553</td>
+<td>2019</td>
+<td>July</td>
+<td>7</td>
+<td>26.948427</td>
+<td>31.952065</td>
+<td>21.944790</td>
+<td>141.174179</td>
+<td>3.665261</td>
+<td>26.108957</td>
+<td>19.386669</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">184962</td>
+<td>311756</td>
+<td>24553</td>
+<td>2019</td>
+<td>August</td>
+<td>8</td>
+<td>25.102762</td>
+<td>29.906923</td>
+<td>20.298605</td>
+<td>153.159454</td>
+<td>3.060116</td>
+<td>22.294205</td>
+<td>18.023926</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">184963</td>
+<td>311757</td>
+<td>24553</td>
+<td>2019</td>
+<td>September</td>
+<td>9</td>
+<td>22.068762</td>
+<td>27.830681</td>
+<td>16.307043</td>
+<td>44.442844</td>
+<td>2.469159</td>
+<td>21.502031</td>
+<td>14.588995</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">184964</td>
+<td>311758</td>
+<td>24553</td>
+<td>2019</td>
+<td>October</td>
+<td>10</td>
+<td>15.712886</td>
+<td>20.478088</td>
+<td>10.947883</td>
+<td>118.172073</td>
+<td>1.799570</td>
+<td>12.500401</td>
+<td>9.558785</td>
+</tr>
+</tbody>
+</table>
+
+<p>184965 rows × 12 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Weather</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> NumMonth <span class="kw">BETWEEN</span> <span class="dv">4</span> <span class="kw">AND</span> <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WeatherId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">NumMonth</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">TotPpt</th>
+<th data-quarto-table-cell-role="th">MinVP</th>
+<th data-quarto-table-cell-role="th">MaxVP</th>
+<th data-quarto-table-cell-role="th">AvgDPTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>4</td>
+<td>24709</td>
+<td>2005</td>
+<td>April</td>
+<td>4</td>
+<td>12.572927</td>
+<td>19.015528</td>
+<td>6.131508</td>
+<td>127.517159</td>
+<td>0.807038</td>
+<td>14.233975</td>
+<td>3.769631</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5</td>
+<td>24709</td>
+<td>2005</td>
+<td>May</td>
+<td>5</td>
+<td>14.665885</td>
+<td>20.930977</td>
+<td>8.402382</td>
+<td>106.256607</td>
+<td>0.365076</td>
+<td>13.969968</td>
+<td>7.882780</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>6</td>
+<td>24709</td>
+<td>2005</td>
+<td>June</td>
+<td>6</td>
+<td>22.697632</td>
+<td>28.167263</td>
+<td>17.229803</td>
+<td>95.863174</td>
+<td>0.336816</td>
+<td>17.135292</td>
+<td>17.337898</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>7</td>
+<td>24709</td>
+<td>2005</td>
+<td>July</td>
+<td>7</td>
+<td>25.349329</td>
+<td>30.702368</td>
+<td>19.997959</td>
+<td>128.219376</td>
+<td>0.125650</td>
+<td>18.210075</td>
+<td>20.690350</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>16</td>
+<td>24704</td>
+<td>2005</td>
+<td>April</td>
+<td>4</td>
+<td>12.661152</td>
+<td>18.981770</td>
+<td>6.341870</td>
+<td>117.991402</td>
+<td>0.956501</td>
+<td>14.247961</td>
+<td>3.695716</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103915</td>
+<td>311743</td>
+<td>24468</td>
+<td>2019</td>
+<td>July</td>
+<td>7</td>
+<td>26.938503</td>
+<td>31.664860</td>
+<td>22.212286</td>
+<td>153.382187</td>
+<td>3.600305</td>
+<td>24.800777</td>
+<td>19.531960</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103916</td>
+<td>311752</td>
+<td>24553</td>
+<td>2019</td>
+<td>April</td>
+<td>4</td>
+<td>14.466883</td>
+<td>19.849751</td>
+<td>9.084216</td>
+<td>111.233406</td>
+<td>2.333102</td>
+<td>13.814125</td>
+<td>5.315979</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103917</td>
+<td>311753</td>
+<td>24553</td>
+<td>2019</td>
+<td>May</td>
+<td>5</td>
+<td>18.673878</td>
+<td>23.456200</td>
+<td>13.891560</td>
+<td>199.818741</td>
+<td>2.292322</td>
+<td>15.252146</td>
+<td>11.842346</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103918</td>
+<td>311754</td>
+<td>24553</td>
+<td>2019</td>
+<td>June</td>
+<td>6</td>
+<td>23.078955</td>
+<td>28.078943</td>
+<td>18.079168</td>
+<td>153.255753</td>
+<td>3.321621</td>
+<td>21.594011</td>
+<td>14.780686</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103919</td>
+<td>311755</td>
+<td>24553</td>
+<td>2019</td>
+<td>July</td>
+<td>7</td>
+<td>26.948427</td>
+<td>31.952065</td>
+<td>21.944790</td>
+<td>141.174179</td>
+<td>3.665261</td>
+<td>26.108957</td>
+<td>19.386669</td>
+</tr>
+</tbody>
+</table>
+
+<p>103920 rows × 12 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Weather</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">Month</span> <span class="kw">LIKE</span> <span class="st">'%ber'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WeatherId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">NumMonth</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">TotPpt</th>
+<th data-quarto-table-cell-role="th">MinVP</th>
+<th data-quarto-table-cell-role="th">MaxVP</th>
+<th data-quarto-table-cell-role="th">AvgDPTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>9</td>
+<td>24709</td>
+<td>2005</td>
+<td>September</td>
+<td>9</td>
+<td>21.901575</td>
+<td>28.985405</td>
+<td>14.819284</td>
+<td>12.058510</td>
+<td>0.418603</td>
+<td>21.757061</td>
+<td>15.548416</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10</td>
+<td>24709</td>
+<td>2005</td>
+<td>October</td>
+<td>10</td>
+<td>14.305144</td>
+<td>19.338591</td>
+<td>9.272705</td>
+<td>194.581848</td>
+<td>0.259238</td>
+<td>9.357236</td>
+<td>9.816828</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>11</td>
+<td>24709</td>
+<td>2005</td>
+<td>November</td>
+<td>11</td>
+<td>9.382105</td>
+<td>15.985790</td>
+<td>2.779873</td>
+<td>92.569778</td>
+<td>0.383877</td>
+<td>10.237570</td>
+<td>3.132024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>12</td>
+<td>24709</td>
+<td>2005</td>
+<td>December</td>
+<td>12</td>
+<td>1.201546</td>
+<td>6.182182</td>
+<td>-3.778183</td>
+<td>89.817223</td>
+<td>0.303204</td>
+<td>4.526224</td>
+<td>-4.469576</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>21</td>
+<td>24704</td>
+<td>2005</td>
+<td>September</td>
+<td>9</td>
+<td>22.105551</td>
+<td>28.798840</td>
+<td>15.413923</td>
+<td>11.901628</td>
+<td>0.840519</td>
+<td>21.380234</td>
+<td>15.392494</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103915</td>
+<td>311748</td>
+<td>24468</td>
+<td>2019</td>
+<td>December</td>
+<td>12</td>
+<td>3.495770</td>
+<td>7.363856</td>
+<td>-0.372222</td>
+<td>144.789124</td>
+<td>1.022133</td>
+<td>4.719750</td>
+<td>-2.270247</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103916</td>
+<td>311757</td>
+<td>24553</td>
+<td>2019</td>
+<td>September</td>
+<td>9</td>
+<td>22.068762</td>
+<td>27.830681</td>
+<td>16.307043</td>
+<td>44.442844</td>
+<td>2.469159</td>
+<td>21.502031</td>
+<td>14.588995</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103917</td>
+<td>311758</td>
+<td>24553</td>
+<td>2019</td>
+<td>October</td>
+<td>10</td>
+<td>15.712886</td>
+<td>20.478088</td>
+<td>10.947883</td>
+<td>118.172073</td>
+<td>1.799570</td>
+<td>12.500401</td>
+<td>9.558785</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103918</td>
+<td>311759</td>
+<td>24553</td>
+<td>2019</td>
+<td>November</td>
+<td>11</td>
+<td>6.222103</td>
+<td>11.659143</td>
+<td>0.785063</td>
+<td>46.920822</td>
+<td>1.280842</td>
+<td>7.820876</td>
+<td>-1.232803</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103919</td>
+<td>311760</td>
+<td>24553</td>
+<td>2019</td>
+<td>December</td>
+<td>12</td>
+<td>3.497163</td>
+<td>7.653925</td>
+<td>-0.659598</td>
+<td>141.996704</td>
+<td>0.966673</td>
+<td>4.818423</td>
+<td>-2.022106</td>
+</tr>
+</tbody>
+</table>
+
+<p>103920 rows × 12 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Weather</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">Month</span> <span class="kw">IN</span> (<span class="st">'September'</span>, <span class="st">'October'</span>, <span class="st">'November'</span>, <span class="st">'December'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WeatherId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">NumMonth</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">TotPpt</th>
+<th data-quarto-table-cell-role="th">MinVP</th>
+<th data-quarto-table-cell-role="th">MaxVP</th>
+<th data-quarto-table-cell-role="th">AvgDPTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>9</td>
+<td>24709</td>
+<td>2005</td>
+<td>September</td>
+<td>9</td>
+<td>21.901575</td>
+<td>28.985405</td>
+<td>14.819284</td>
+<td>12.058510</td>
+<td>0.418603</td>
+<td>21.757061</td>
+<td>15.548416</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10</td>
+<td>24709</td>
+<td>2005</td>
+<td>October</td>
+<td>10</td>
+<td>14.305144</td>
+<td>19.338591</td>
+<td>9.272705</td>
+<td>194.581848</td>
+<td>0.259238</td>
+<td>9.357236</td>
+<td>9.816828</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>11</td>
+<td>24709</td>
+<td>2005</td>
+<td>November</td>
+<td>11</td>
+<td>9.382105</td>
+<td>15.985790</td>
+<td>2.779873</td>
+<td>92.569778</td>
+<td>0.383877</td>
+<td>10.237570</td>
+<td>3.132024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>12</td>
+<td>24709</td>
+<td>2005</td>
+<td>December</td>
+<td>12</td>
+<td>1.201546</td>
+<td>6.182182</td>
+<td>-3.778183</td>
+<td>89.817223</td>
+<td>0.303204</td>
+<td>4.526224</td>
+<td>-4.469576</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>21</td>
+<td>24704</td>
+<td>2005</td>
+<td>September</td>
+<td>9</td>
+<td>22.105551</td>
+<td>28.798840</td>
+<td>15.413923</td>
+<td>11.901628</td>
+<td>0.840519</td>
+<td>21.380234</td>
+<td>15.392494</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103915</td>
+<td>311748</td>
+<td>24468</td>
+<td>2019</td>
+<td>December</td>
+<td>12</td>
+<td>3.495770</td>
+<td>7.363856</td>
+<td>-0.372222</td>
+<td>144.789124</td>
+<td>1.022133</td>
+<td>4.719750</td>
+<td>-2.270247</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103916</td>
+<td>311757</td>
+<td>24553</td>
+<td>2019</td>
+<td>September</td>
+<td>9</td>
+<td>22.068762</td>
+<td>27.830681</td>
+<td>16.307043</td>
+<td>44.442844</td>
+<td>2.469159</td>
+<td>21.502031</td>
+<td>14.588995</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103917</td>
+<td>311758</td>
+<td>24553</td>
+<td>2019</td>
+<td>October</td>
+<td>10</td>
+<td>15.712886</td>
+<td>20.478088</td>
+<td>10.947883</td>
+<td>118.172073</td>
+<td>1.799570</td>
+<td>12.500401</td>
+<td>9.558785</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103918</td>
+<td>311759</td>
+<td>24553</td>
+<td>2019</td>
+<td>November</td>
+<td>11</td>
+<td>6.222103</td>
+<td>11.659143</td>
+<td>0.785063</td>
+<td>46.920822</td>
+<td>1.280842</td>
+<td>7.820876</td>
+<td>-1.232803</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">103919</td>
+<td>311760</td>
+<td>24553</td>
+<td>2019</td>
+<td>December</td>
+<td>12</td>
+<td>3.497163</td>
+<td>7.653925</td>
+<td>-0.659598</td>
+<td>141.996704</td>
+<td>0.966673</td>
+<td>4.818423</td>
+<td>-2.022106</td>
+</tr>
+</tbody>
+</table>
+
+<p>103920 rows × 12 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> TractId, CTVNOORA</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Crime</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> CTVNOORA <span class="kw">IS</span> <span class="kw">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">CTVNOORA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24287</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>24287</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>24287</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>24287</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>24287</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">136</td>
+<td>24468</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">137</td>
+<td>24468</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">138</td>
+<td>24468</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">139</td>
+<td>24468</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">140</td>
+<td>24468</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+<p>141 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> TractId, CTVNOORA</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Crime</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> CTVNOORA <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">CTVNOORA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24203</td>
+<td>166.196228</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>24203</td>
+<td>123.891731</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>24203</td>
+<td>177.514786</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>24203</td>
+<td>155.269241</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>24203</td>
+<td>106.817467</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5998</td>
+<td>24553</td>
+<td>193.263397</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5999</td>
+<td>24553</td>
+<td>193.263397</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6000</td>
+<td>24553</td>
+<td>143.567093</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6001</td>
+<td>24553</td>
+<td>226.394257</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6002</td>
+<td>24553</td>
+<td>353.395905</td>
+</tr>
+</tbody>
+</table>
+
+<p>6003 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="combining-multiple-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="combining-multiple-conditions">Combining Multiple Conditions</h2>
+<p>Use <strong>AND</strong> and <strong>OR</strong> operators to combine conditionals together</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PhiladelphiaTract<span class="op">=</span><span class="dv">1</span> <span class="kw">AND</span> LowPop<span class="op">=</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">FIPS</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42101000100</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42101000200</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42101000300</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>42101000400</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>42101000500</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1114</td>
+<td>42101003001</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1115</td>
+<td>42101002802</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1116</td>
+<td>42101002701</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1117</td>
+<td>42101036501</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1118</td>
+<td>42101000801</td>
+<td>42101</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>1119 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="be-careful-with-ors" class="level2">
+<h2 class="anchored" data-anchor-id="be-careful-with-ors">Be careful with ORs</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PhiladelphiaTract<span class="op">=</span><span class="dv">1</span> <span class="kw">OR</span> StateFP<span class="op">=</span><span class="st">'34'</span> <span class="kw">AND</span> LowPop<span class="op">=</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="is-not-equivalent-to" class="level4">
+<h4 class="anchored" data-anchor-id="is-not-equivalent-to"><strong>IS NOT</strong> equivalent to</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> GeoId, FIPS, PhiladelphiaTract</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> (PhiladelphiaTract<span class="op">=</span><span class="dv">1</span> <span class="kw">OR</span> StateFP<span class="op">=</span><span class="st">'34'</span>) <span class="kw">AND</span> LowPop<span class="op">=</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="12">
+<section id="the-first-query-returns-2627-rows-but-the-second-returns-2573.-why" class="level3 cell-output cell-output-display" data-execution_count="12">
+<h3 class="anchored" data-anchor-id="the-first-query-returns-2627-rows-but-the-second-returns-2573.-why">The first query returns 2627 rows but the second returns 2573. Why?</h3>
+</section>
+</div>
+<section id="hint" class="level3">
+<h3 class="anchored" data-anchor-id="hint">Hint</h3>
+<p>The number of New Jersey tracts stays the same in the results, but the number of Pennsylvania census tracts goes down in the second query.</p>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>34</td>
+<td>0</td>
+<td>1454</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>1</td>
+<td>1173</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>34</td>
+<td>0</td>
+<td>1454</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>1</td>
+<td>1119</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="answer" class="level3">
+<h3 class="anchored" data-anchor-id="answer">Answer</h3>
+<p>This conditional pulls all Philadelphia census tracts and only New Jersey census tracts that are not low population.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PhiladelphiaTract<span class="op">=</span><span class="dv">1</span> <span class="kw">OR</span> StateFP<span class="op">=</span><span class="st">'34'</span> <span class="kw">AND</span> LowPop<span class="op">=</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This conditional pulls all low population census tracts in Philadelphia and New Jersey. The second query removes the low population Philadelphia tracts that were included in the first query.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> (PhiladelphiaTract<span class="op">=</span><span class="dv">1</span> <span class="kw">OR</span> StateFP<span class="op">=</span><span class="st">'34'</span>) <span class="kw">AND</span> LowPop<span class="op">=</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+</section>
+<section id="joins" class="level1">
+<h1>Joins</h1>
+<p>If you need to combine multiple tables, joins are how you merge tables.</p>
+<p>There are multiple types of joins:</p>
+<ul>
+<li><strong>LEFT</strong>: Keeps all of the data in the from table and fills the joined with NULL if there is no match on the joined table</li>
+<li><strong>RIGHT</strong>: Keeps all of the data in the joined table and fills the from table will NULL if there is no match</li>
+<li><strong>INNER</strong>: Keeps only records that are in both tables</li>
+<li><strong>FULL</strong>: Keeps all records in both tables and fills both the from and joined table with NULL when there isn’t a match</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/d6422e3d-1-image-3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-3.png</figcaption>
+</figure>
+</div>
+<section id="left-join" class="level3">
+<h3 class="anchored" data-anchor-id="left-join">Left Join</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>From City</th>
+<th>Joined City</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Philadelphia</td>
+<td>Philadelphia</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Pittsburgh</td>
+<td>Pittsburgh</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Baltimore</td>
+<td>NULL</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Newark</td>
+<td>NULL</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Boston</td>
+<td>Boston</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="right-join" class="level3">
+<h3 class="anchored" data-anchor-id="right-join">Right Join</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>From City</th>
+<th>Joined City</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Philadelphia</td>
+<td>Philadelphia</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Pittsburgh</td>
+<td>Pittsburgh</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>NULL</td>
+<td>New York</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>NULL</td>
+<td>Chicago</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Boston</td>
+<td>Boston</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="inner-join" class="level3">
+<h3 class="anchored" data-anchor-id="inner-join">Inner Join</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>From City</th>
+<th>Joined City</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Philadelphia</td>
+<td>Philadelphia</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Pittsburgh</td>
+<td>Pittsburgh</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Boston</td>
+<td>Boston</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="full-join" class="level3">
+<h3 class="anchored" data-anchor-id="full-join">Full Join</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>From City</th>
+<th>Joined City</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Philadelphia</td>
+<td>Philadelphia</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Pittsburgh</td>
+<td>Pittsburgh</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Baltimore</td>
+<td>NULL</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Newark</td>
+<td>NULL</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Boston</td>
+<td>Boston</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>NULL</td>
+<td>New York</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>NULL</td>
+<td>Chicago</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Tract.TractId, Tract.GeoId, Weather.MinTemp, Weather.MaxTemp</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Weather <span class="kw">ON</span> Weather.TractId<span class="op">=</span>Tract.TractId</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-3.866622</td>
+<td>5.283027</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-3.306153</td>
+<td>7.448359</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-0.716506</td>
+<td>9.111247</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>6.131508</td>
+<td>19.015528</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>8.402382</td>
+<td>20.930977</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">311755</td>
+<td>24553</td>
+<td>42101989100</td>
+<td>20.298605</td>
+<td>29.906923</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">311756</td>
+<td>24553</td>
+<td>42101989100</td>
+<td>16.307043</td>
+<td>27.830681</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">311757</td>
+<td>24553</td>
+<td>42101989100</td>
+<td>10.947883</td>
+<td>20.478088</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">311758</td>
+<td>24553</td>
+<td>42101989100</td>
+<td>0.785063</td>
+<td>11.659143</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">311759</td>
+<td>24553</td>
+<td>42101989100</td>
+<td>-0.659598</td>
+<td>7.653925</td>
+</tr>
+</tbody>
+</table>
+
+<p>311760 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.TractId, t.GeoId, w.MinTemp, w.MaxTemp</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract t</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Weather w <span class="kw">ON</span> w.TractId<span class="op">=</span>t.TractId</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-3.866622</td>
+<td>5.283027</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-3.306153</td>
+<td>7.448359</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>-0.716506</td>
+<td>9.111247</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>6.131508</td>
+<td>19.015528</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>24709</td>
+<td>10001040100</td>
+<td>8.402382</td>
+<td>20.930977</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">315355</td>
+<td>22722</td>
+<td>42101010700</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">315356</td>
+<td>24886</td>
+<td>10003002200</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">315357</td>
+<td>25427</td>
+<td>42101001400</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">315358</td>
+<td>25968</td>
+<td>42045404800</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">315359</td>
+<td>26509</td>
+<td>34007605602</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>315360 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="chaining-joins" class="level2">
+<h2 class="anchored" data-anchor-id="chaining-joins">Chaining Joins</h2>
+<p>You can join tables on other tables that have been joined in the query to chain tables together.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.TractId, t.GeoId, n.Neighborhood</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract t</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> CensusTractNeighborhoodMapping ctn <span class="kw">ON</span> ctn.TractId<span class="op">=</span>t.TractId</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Neighborhood n <span class="kw">ON</span> n.NeighborhoodId<span class="op">=</span>ctn.NeighborhoodId</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>21474</td>
+<td>34005700104</td>
+<td>Richmond - Bridesburg</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>21475</td>
+<td>34005700200</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>21492</td>
+<td>34005700603</td>
+<td>Torresdale S. - Pennypack Park</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>21497</td>
+<td>34005700800</td>
+<td>Torresdale S. - Pennypack Park</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>21595</td>
+<td>34007600500</td>
+<td>Center City E</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2746</td>
+<td>26338</td>
+<td>34007610800</td>
+<td>Richmond - Bridesburg</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2747</td>
+<td>26378</td>
+<td>34005700800</td>
+<td>Torresdale S. - Pennypack Park</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2748</td>
+<td>26528</td>
+<td>34007600700</td>
+<td>Center City E</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2749</td>
+<td>26528</td>
+<td>34007600700</td>
+<td>Lower Kensington</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2750</td>
+<td>26528</td>
+<td>34007600700</td>
+<td>Northern Liberties - West Kensington</td>
+</tr>
+</tbody>
+</table>
+
+<p>2751 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="order-by" class="level2">
+<h2 class="anchored" data-anchor-id="order-by">Order By</h2>
+<p>Sort the result of a query by a column or columns</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.TractId, t.GeoId, n.Neighborhood</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract t</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> CensusTractNeighborhoodMapping ctn <span class="kw">ON</span> ctn.TractId<span class="op">=</span>t.TractId</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Neighborhood n <span class="kw">ON</span> n.NeighborhoodId<span class="op">=</span>ctn.NeighborhoodId</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> t.<span class="dt">Year</span><span class="op">=</span><span class="dv">2020</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n.Neighborhood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24997</td>
+<td>42101034502</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>25034</td>
+<td>42101034501</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>25176</td>
+<td>42101980300</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>25177</td>
+<td>42101035500</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>25179</td>
+<td>42101035900</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">996</td>
+<td>26022</td>
+<td>42101031501</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">997</td>
+<td>26154</td>
+<td>34005700303</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">998</td>
+<td>26156</td>
+<td>34005700104</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">999</td>
+<td>26246</td>
+<td>34005700103</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1000</td>
+<td>26324</td>
+<td>34005700200</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+</tbody>
+</table>
+
+<p>1001 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="order-by-multiple-columns" class="level2">
+<h2 class="anchored" data-anchor-id="order-by-multiple-columns">Order By Multiple Columns</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.TractId, t.GeoId, n.Neighborhood</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract t</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> CensusTractNeighborhoodMapping ctn <span class="kw">ON</span> ctn.TractId<span class="op">=</span>t.TractId</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Neighborhood n <span class="kw">ON</span> n.NeighborhoodId<span class="op">=</span>ctn.NeighborhoodId</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> t.<span class="dt">Year</span><span class="op">=</span><span class="dv">2020</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n.Neighborhood, t.GeoId</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>25699</td>
+<td>42091200105</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>26103</td>
+<td>42091201501</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>25975</td>
+<td>42101034200</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>25976</td>
+<td>42101034400</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>25034</td>
+<td>42101034501</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">996</td>
+<td>25111</td>
+<td>42101033000</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">997</td>
+<td>26020</td>
+<td>42101033101</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">998</td>
+<td>25259</td>
+<td>42101038000</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">999</td>
+<td>25597</td>
+<td>42101038100</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1000</td>
+<td>25109</td>
+<td>42101989100</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+</tbody>
+</table>
+
+<p>1001 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="change-the-sort-direction" class="level2">
+<h2 class="anchored" data-anchor-id="change-the-sort-direction">Change the Sort Direction</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.TractId, t.GeoId, n.Neighborhood</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract t</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> CensusTractNeighborhoodMapping ctn <span class="kw">ON</span> ctn.TractId<span class="op">=</span>t.TractId</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> Neighborhood n <span class="kw">ON</span> n.NeighborhoodId<span class="op">=</span>ctn.NeighborhoodId</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> t.<span class="dt">Year</span><span class="op">=</span><span class="dv">2020</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n.Neighborhood <span class="kw">DESC</span>, t.GeoId</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>26246</td>
+<td>34005700103</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>26156</td>
+<td>34005700104</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>26324</td>
+<td>34005700200</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>26154</td>
+<td>34005700303</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>25278</td>
+<td>42101018400</td>
+<td>Wissinoming - Tacony</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">996</td>
+<td>26011</td>
+<td>42101035702</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">997</td>
+<td>25179</td>
+<td>42101035900</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">998</td>
+<td>25180</td>
+<td>42101036000</td>
+<td>Bustleton</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">999</td>
+<td>25569</td>
+<td>42101980200</td>
+<td>Bustleton</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1000</td>
+<td>25176</td>
+<td>42101980300</td>
+<td>Bustleton</td>
+</tr>
+</tbody>
+</table>
+
+<p>1001 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="aggregating-data-group-by" class="level1">
+<h1>Aggregating Data (Group By)</h1>
+<p>Aggregating data to get counts or averages for example are usually done with the GROUP BY statement and keywords that go in the select statment.</p>
+<p>For example, if we wanted to get a count of the number of census tracts in each state and year, we could run this:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24</td>
+<td>2010</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>2000</td>
+<td>1069</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>34</td>
+<td>2000</td>
+<td>451</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>10</td>
+<td>2010</td>
+<td>164</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>34</td>
+<td>2020</td>
+<td>489</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>42</td>
+<td>2010</td>
+<td>1088</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>10</td>
+<td>2000</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>34</td>
+<td>2010</td>
+<td>544</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>24</td>
+<td>2000</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>24</td>
+<td>2020</td>
+<td>21</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>10</td>
+<td>2020</td>
+<td>187</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>42</td>
+<td>2020</td>
+<td>1157</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>When you are aggregating data, generally, every column in the SELECT clause must also be in the GROUP BY clause (except for the aggregated columns themselves).</p>
+<p>This query would result in an error:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP, CountyFP, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Column 'Tract.CountyFP' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But something like this would not:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId), <span class="fu">SUM</span>(LowPop)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can sort by the aggregate column as well.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">3</span> <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42</td>
+<td>2020</td>
+<td>1157</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>2010</td>
+<td>1088</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42</td>
+<td>2000</td>
+<td>1069</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>34</td>
+<td>2010</td>
+<td>544</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>34</td>
+<td>2020</td>
+<td>489</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>34</td>
+<td>2000</td>
+<td>451</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>10</td>
+<td>2020</td>
+<td>187</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>10</td>
+<td>2010</td>
+<td>164</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>10</td>
+<td>2000</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>24</td>
+<td>2020</td>
+<td>21</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>24</td>
+<td>2010</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>24</td>
+<td>2000</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>You might notice that the COUNT column doesn’t have a name in your results table. You can use the AS keyword to name it. You can use the alias in the ORDER BY clause as well</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId) <span class="kw">AS</span> TractCount</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TractCount <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFP</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">TractCount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42</td>
+<td>2020</td>
+<td>1157</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>2010</td>
+<td>1088</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42</td>
+<td>2000</td>
+<td>1069</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>34</td>
+<td>2010</td>
+<td>544</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>34</td>
+<td>2020</td>
+<td>489</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>34</td>
+<td>2000</td>
+<td>451</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>10</td>
+<td>2020</td>
+<td>187</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>10</td>
+<td>2010</td>
+<td>164</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>10</td>
+<td>2000</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>24</td>
+<td>2020</td>
+<td>21</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>24</td>
+<td>2010</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>24</td>
+<td>2000</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>You can rename any column in the query as well, not just aggregate columns.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> StateFP <span class="kw">AS</span> StateFIPS, <span class="dt">Year</span>, <span class="fu">COUNT</span>(GeoId) <span class="kw">AS</span> TractCount</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Tract</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> StateFP, <span class="dt">Year</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TractCount <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">StateFIPS</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">TractCount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42</td>
+<td>2020</td>
+<td>1157</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42</td>
+<td>2010</td>
+<td>1088</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42</td>
+<td>2000</td>
+<td>1069</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>34</td>
+<td>2010</td>
+<td>544</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>34</td>
+<td>2020</td>
+<td>489</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>34</td>
+<td>2000</td>
+<td>451</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>10</td>
+<td>2020</td>
+<td>187</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>10</td>
+<td>2010</td>
+<td>164</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>10</td>
+<td>2000</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>24</td>
+<td>2020</td>
+<td>21</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>24</td>
+<td>2010</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>24</td>
+<td>2000</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>There are several other aggregate functions that you could use to do data analysis:</p>
+<table class="table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AVG</td>
+<td>Average of column/group</td>
+</tr>
+<tr class="even">
+<td>MAX</td>
+<td>Max value of the column/group</td>
+</tr>
+<tr class="odd">
+<td>MIN</td>
+<td>Min value of the column/group</td>
+</tr>
+<tr class="even">
+<td>STDEV</td>
+<td>Sample standard deviation of the values in the column/group</td>
+</tr>
+<tr class="odd">
+<td>STDEVP</td>
+<td>Population standard deviation of the values in the column/group</td>
+</tr>
+<tr class="even">
+<td>STRING_AGG</td>
+<td>Concatenate strings in column/group, separate with deliminator</td>
+</tr>
+<tr class="odd">
+<td>SUM</td>
+<td>Sum values in column/group</td>
+</tr>
+<tr class="even">
+<td>VAR</td>
+<td>Sample variance of values in column/group</td>
+</tr>
+<tr class="odd">
+<td>VARP</td>
+<td>Population variance of values in column/group</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exporting-data" class="level1">
+<h1>Exporting Data</h1>
+<p>If you’ve already run the query you can right click on the table to copy the data or to save the results.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/f9cc828b-3-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<p>If you haven’t run the query, go to the “Query” menu, go to “Results To”, and select “Results to File.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/f9cc828b-1-image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-2.png</figcaption>
+</figure>
+</div>
+<p>Press the execute button and it should open up a file save dialog box. It will try to export it as a .rpt file, but you probably don’t want that. So instead in the “Query” menu select “Query Options.” In the dialog box, you will want to click on “Text” under the “Results” section on the left side.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="introduction_files/figure-html/f9cc828b-2-image-3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-3.png</figcaption>
+</figure>
+</div>
+<p>you can specify the delimiter using the “output format” dropdown menu. Comma delimited or tab delimited will let you save to a .csv or .txt file.</p>
+<section id="importing-directly-into-statistical-software" class="level2">
+<h2 class="anchored" data-anchor-id="importing-directly-into-statistical-software">Importing Directly into Statistical Software</h2>
+<p>A lot of the software we use for data analysis can interact directly with SQL databases using the Open Database Connectivity (ODBC) protocol. You can pull directly from the database into an object in the piece of software of your choice. Here are a few examples.</p>
+<section id="python" class="level3">
+<h3 class="anchored" data-anchor-id="python">Python</h3>
+<p>There are several options for connecting to a database in python. The below example uses pyodbc, but another common library is <a href="https://www.sqlalchemy.org/">SQLAlchemy</a></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyodbc</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># must have the correct ODBC driver installed, this should have been installed automatically when you installed SQL Server Management Studio</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>cnxn <span class="op">=</span> pyodbc.<span class="ex">connect</span>(<span class="st">'{ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;'</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>cn <span class="op">=</span> cnxn.cursor()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>cn.execute(<span class="st">"SELECT * FROM Tract"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> cn.fetchall()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="r" class="level3">
+<h3 class="anchored" data-anchor-id="r">R</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'RODBC'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>cnxn <span class="ot">&lt;-</span> <span class="fu">odbcDriverConnect</span>(<span class="st">'Driver={ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;'</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sqlQuery</span>(cnxn, <span class="st">"SELECT * FROM Tract"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sas" class="level3">
+<h3 class="anchored" data-anchor-id="sas">SAS</h3>
+<p>https://support.sas.com/en/software/sas-odbc-drivers.html#c1d85777-acb8-4b35-a4cd-0a97a8060229</p>
+</section>
+<section id="arcgis-pro" class="level3">
+<h3 class="anchored" data-anchor-id="arcgis-pro">ArcGIS Pro</h3>
+<ol type="1">
+<li>Open the catalog pane</li>
+<li>Right click databases and select “New Database Connection”</li>
+<li>Fill in the dialog box and sign-in when prompted</li>
+</ol>
+<p>Now you can add geographic data to a map or export to an attribute table for use in your project.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../pages/faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../license.html">License</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc">
+      <i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core">
+      <i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
