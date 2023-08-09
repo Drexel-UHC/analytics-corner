@@ -1,0 +1,18 @@
+{
+  "hash": "4437df477f90adbe3a473122c7dce37f",
+  "result": {
+    "markdown": "---\nauthor: Ran Li\ndate: \"9/28/2022\"\ntitle: \"UTF-8 Primer\"\ndescription: \"What is UTF-8, invalid UTF-8 and how to fix UTF-8 bugs.\"\ncategories:\n  - text-processing\nformat: \n  html:\n    toc: true\n    toc-location: left\n    df-print: paged\n    code-fold: true\n    code-tools: true\nexecute: \n  warning: false\neditor_options: \n  chunk_output_type: console\n---\n\n\n# Issue\n\n[**https://github.com/Drexel-UHC/analytics-corner/issues/8**](https://github.com/Drexel-UHC/analytics-corner/issues/8){.uri}\n\n> Our datastore for the SALURBAL web applciation has some invalid UTF-8 characters which are not rendered properly in production (see below)\n>\n> Request is a post that gives a brief primer on text encoding (particualrly UTF-8) and provide a solution of how to detect and fix invalid UTF-8 characters within a data store.\n\n# Example\n\n![](images/192804382-6e58aa55-9f5c-4edf-a032-4fdee3e6128b.png){fig-align=\"center\" width=\"461\" height=\"50\"}\n\n![](images/paste-B01AAD7B.png)\n\nThe three examples above are caused by three types of invalid strings\n\n-   3+ empty spaces together (sometimes present in excell sheet cells)\n\n-   `’` a non-standard apostrophe symbol\n\n-   `½` a word document symbol for 1/2\n\nThe spaces can be dealt with easily with the `str_squish()` from stringr. Lets use `½` and `'` to do some testing of different ways to detect them in strings and recode/normalize them.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n## Unrendered characters\ninvalid1 = '’'\ninvalid2 = '½'\ninvalids  = c(invalid1,invalid2)\n\n## Check if valid Utf8\n# utf8_valid(invalids)\n```\n:::\n\n\nIt turns out these are actually valid utf8 characters. Upon further inspection its not teh rendering where the problem lies but rather during the data store generation. Below we is a snip of the `variables.json` data store item. So the error is actually occurring between JSON generation step that links our data warehouse and the application data store.\n\n![](images/paste-828A2BCB.png)\n\nLets try to reproduce this bug.\n\n::: {.panel-tabset group=\"language\"}\n## R\n\nTab content\n\n## dsaf\nfdsafdsf\n\n## Python\n\nTab content\n:::\n\n::: {.panel-tabset group=\"language\"}\n## R\n\nTab content 2\n\n## Python\n\nTab content 2\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\r\n<script src=\"../../../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "hash": "0984b22868e0c60cd4835893d90e0668",
+  "result": {
+    "markdown": "---\nauthor: Ran Li\ndate: \"06/1/2023\"\ntitle: \"WebR: Running R in the Browser!\"\ndescription: \"State of WebAssembly (Wasm) based R in 2023; testing out this new development!\"\ncategories:\n  - WebR\nformat: html\nengine: knitr\nfilters:\n  - webr \nwebr:\n  packages: ['dplyr']\n---\n\n\n### Load Dependencies\n\n\n\n``` {webr-r}\nlibrary(dplyr)\nglimpse(mtcars)\n```\n\n``` {webr-r}\nfit = lm(mpg ~ am, data = mtcars)\nsummary(fit)\n```\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
