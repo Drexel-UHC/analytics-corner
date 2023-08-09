@@ -68,13 +68,12 @@ website:
   sidebar:
     - id: sql
       contents:
-        - text: 'Overview'
-          href: pages/manuals/sql/overview.ipynb
-        - text: "---"
-        - section: 'Basics'
+        - section: 'SQL'
           contents:
-          - text: '1. Introduction'
-            href: pages/manuals/sql/introduction.ipynb    
+          - text: 'Introduction'
+            href: pages/manuals/sql/introduction.ipynb 
+          - text: 'Playground'
+            href: pages/manuals/sql/playground.qmd
     - id: dbt
       contents:
         - text: 'Overview'

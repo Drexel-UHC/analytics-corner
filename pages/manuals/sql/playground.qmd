@@ -2,7 +2,7 @@
 author: Ran Li
 title: "SQL playground"
 date: "8/07/2023"
-description: 'A HR database for people to practice SQL! Examine tables in this database then use edit the code blocks and hit run to run your query.'
+description: 'A dummy HR database for people to practice SQL! Examine tables in this database then use edit the code blocks and hit run to run your query.'
 image: images/Capture sql.JPG
 categories:
   - SQL 
@@ -13,7 +13,75 @@ databases:
     path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
 ---
 
+
+# HR Database Information
+
+
+::: {.panel-tabset}
+ 
+## Schema
+
+```{mermaid}
+erDiagram
+  departments ||--o{ employees : has
+  jobs ||--o{ employees : has
+  employees ||--o{ employees : manages 
+
+  departments {
+    department_id INTEGER
+    department_name STRING
+    location_id INTEGER
+  }
+
+  jobs {
+    job_id INTEGER
+    job_title STRING
+    min_salary DOUBLE
+    max_salary DOUBLE
+  }
+
+  employees {
+    employee_id INTEGER
+    first_name STRING
+    last_name STRING
+    email STRING
+    phone_number STRING
+    hire_date STRING
+    job_id INTEGER
+    salary DOUBLE
+    manager_id INTEGER
+    department_id INTEGER
+  }
+
+
+```
+
+
+## Departments
+
+``` {.sql .interactive .hr}
+select * from departments ;
+```
+
+## Jobs
+
+``` {.sql .interactive .hr}
+select * from jobs  ;
+```
+
+## Employees
+
+``` {.sql .interactive .hr}
+select * from employees ;
+```
+
+
+:::
+
+
 # SQL Queries
+
+Examples 1, 2, 3 are example SQL queries. Feel free to edit to play around!
 
 ::: {.panel-tabset}
 
@@ -52,44 +120,3 @@ GROUP BY d.department_name
 HAVING SUM(e.salary) > 20000;
 ```
 :::
-
-
-
-
-# Tables in the Database
-
-## Regions
-
-``` {.sql .interactive .hr}
-select * from regions;
-```
-
-## Countries
-
-``` {.sql .interactive .hr}
-select * from countries;
-```
-
-## Departments
-
-``` {.sql .interactive .hr}
-select * from departments ;
-```
-
-## Jobs
-
-``` {.sql .interactive .hr}
-select * from jobs ;
-```
-
-## Employees
-
-``` {.sql .interactive .hr}
-select * from employees ;
-```
-
-## Dependents
-
-``` {.sql .interactive .hr}
-select * from dependents  ;
-```
