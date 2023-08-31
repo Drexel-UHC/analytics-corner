@@ -17,7 +17,208 @@
 <width>144</width>
 </image>
 <generator>quarto-1.3.353</generator>
-<lastBuildDate>Thu, 06 Jul 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 31 Aug 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Working with .XML in R</title>
+  <dc:creator>Ran Li</dc:creator>
+  <link>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - working with xml/quarto.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><img src="https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - working with xml/images/xml-logo.jpg" alt="XML Logo" style="height: 150px; display: block; margin: auto;"></p>
+<section id="basic-read-and-parse-xml-files" class="level2">
+<h2 class="anchored" data-anchor-id="basic-read-and-parse-xml-files">Basic: Read and Parse XML Files</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(xml2)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(XML)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Load </span></span>
+<span id="cb1-5">employee_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_xml</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data.xml"</span>)</span>
+<span id="cb1-6">employee_data</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{xml_document}
+&lt;records&gt;
+[1] &lt;employee&gt;\n  &lt;id&gt;1&lt;/id&gt;\n  &lt;first_name&gt;John&lt;/first_name&gt;\n  &lt;last_name&gt;S ...
+[2] &lt;employee&gt;\n  &lt;id&gt;2&lt;/id&gt;\n  &lt;first_name&gt;Jane&lt;/first_name&gt;\n  &lt;last_name&gt;S ...
+[3] &lt;employee&gt;\n  &lt;id&gt;3&lt;/id&gt;\n  &lt;first_name&gt;Frank&lt;/first_name&gt;\n  &lt;last_name&gt; ...
+[4] &lt;employee&gt;\n  &lt;id&gt;4&lt;/id&gt;\n  &lt;first_name&gt;Judith&lt;/first_name&gt;\n  &lt;last_name ...
+[5] &lt;employee&gt;\n  &lt;id&gt;5&lt;/id&gt;\n  &lt;first_name&gt;Karen&lt;/first_name&gt;\n  &lt;last_name&gt; ...</code></pre>
+</div>
+</div>
+<p>Letss first get a sense of the loaded data whats in it and what we want to parse. We can just see structure with <code>xml_structure()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Get a sense of structure</span></span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">xml_structure</span>(employee_data)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;records&gt;
+  &lt;employee&gt;
+    &lt;id&gt;
+      {text}
+    &lt;first_name&gt;
+      {text}
+    &lt;last_name&gt;
+      {text}
+    &lt;position&gt;
+      {text}
+    &lt;salary&gt;
+      {text}
+    &lt;hire_date&gt;
+      {text}
+    &lt;department&gt;
+      {text}
+  &lt;employee&gt;
+    &lt;id&gt;
+      {text}
+    &lt;first_name&gt;
+      {text}
+    &lt;last_name&gt;
+      {text}
+    &lt;position&gt;
+      {text}
+    &lt;salary&gt;
+      {text}
+    &lt;hire_date&gt;
+      {text}
+    &lt;department&gt;
+      {text}
+  &lt;employee&gt;
+    &lt;id&gt;
+      {text}
+    &lt;first_name&gt;
+      {text}
+    &lt;last_name&gt;
+      {text}
+    &lt;position&gt;
+      {text}
+    &lt;salary&gt;
+      {text}
+    &lt;hire_date&gt;
+      {text}
+    &lt;department&gt;
+      {text}
+  &lt;employee&gt;
+    &lt;id&gt;
+      {text}
+    &lt;first_name&gt;
+      {text}
+    &lt;last_name&gt;
+      {text}
+    &lt;position&gt;
+      {text}
+    &lt;salary&gt;
+      {text}
+    &lt;hire_date&gt;
+      {text}
+    &lt;department&gt;
+      {text}
+  &lt;employee&gt;
+    &lt;id&gt;
+      {text}
+    &lt;first_name&gt;
+      {text}
+    &lt;last_name&gt;
+      {text}
+    &lt;position&gt;
+      {text}
+    &lt;salary&gt;
+      {text}
+    &lt;hire_date&gt;
+      {text}
+    &lt;department&gt;
+      {text}</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Parse Data</span></span>
+<span id="cb5-2">employee_xml <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">xmlParse</span>(employee_data)</span>
+<span id="cb5-3">employee_xml</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;records&gt;
+  &lt;employee&gt;
+    &lt;id&gt;1&lt;/id&gt;
+    &lt;first_name&gt;John&lt;/first_name&gt;
+    &lt;last_name&gt;Smith&lt;/last_name&gt;
+    &lt;position&gt;CEO&lt;/position&gt;
+    &lt;salary&gt;10000&lt;/salary&gt;
+    &lt;hire_date&gt;2022-1-1&lt;/hire_date&gt;
+    &lt;department&gt;Management&lt;/department&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;id&gt;2&lt;/id&gt;
+    &lt;first_name&gt;Jane&lt;/first_name&gt;
+    &lt;last_name&gt;Sense&lt;/last_name&gt;
+    &lt;position&gt;Marketing Associate&lt;/position&gt;
+    &lt;salary&gt;3500&lt;/salary&gt;
+    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;
+    &lt;department&gt;Marketing&lt;/department&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;id&gt;3&lt;/id&gt;
+    &lt;first_name&gt;Frank&lt;/first_name&gt;
+    &lt;last_name&gt;Brown&lt;/last_name&gt;
+    &lt;position&gt;R Developer&lt;/position&gt;
+    &lt;salary&gt;6000&lt;/salary&gt;
+    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;
+    &lt;department&gt;IT&lt;/department&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;id&gt;4&lt;/id&gt;
+    &lt;first_name&gt;Judith&lt;/first_name&gt;
+    &lt;last_name&gt;Rollers&lt;/last_name&gt;
+    &lt;position&gt;Data Scientist&lt;/position&gt;
+    &lt;salary&gt;6500&lt;/salary&gt;
+    &lt;hire_date&gt;2022-3-1&lt;/hire_date&gt;
+    &lt;department&gt;IT&lt;/department&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;id&gt;5&lt;/id&gt;
+    &lt;first_name&gt;Karen&lt;/first_name&gt;
+    &lt;last_name&gt;Switch&lt;/last_name&gt;
+    &lt;position&gt;Accountant&lt;/position&gt;
+    &lt;salary&gt;4000&lt;/salary&gt;
+    &lt;hire_date&gt;2022-1-10&lt;/hire_date&gt;
+    &lt;department&gt;Accounting&lt;/department&gt;
+  &lt;/employee&gt;
+&lt;/records&gt;
+ </code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>tidy data</category>
+  <category>XML</category>
+  <guid>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - working with xml/quarto.html</guid>
+  <pubDate>Thu, 31 Aug 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title></title>
   <dc:creator>Usama Bilal</dc:creator>
