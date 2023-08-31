@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<records>
+    <employee>
+        <id>1</id>
+        <first_name>John</first_name>
+        <last_name>Smith</last_name>
+        <position>CEO</position>
+        <salary>10000</salary>
+        <hire_date>2022-1-1</hire_date>
+        <department>Management</department>
+    </employee>
+    <employee>
+        <id>2</id>
+        <first_name>Jane</first_name>
+        <last_name>Sense</last_name>
+        <position>Marketing Associate</position>
+        <salary>3500</salary>
+        <hire_date>2022-1-15</hire_date>
+        <department>Marketing</department>
+    </employee>
+    <employee>
+        <id>3</id>
+        <first_name>Frank</first_name>
+        <last_name>Brown</last_name>
+        <position>R Developer</position>
+        <salary>6000</salary>
+        <hire_date>2022-1-15</hire_date>
+        <department>IT</department>
+    </employee>
+    <employee>
+        <id>4</id>
+        <first_name>Judith</first_name>
+        <last_name>Rollers</last_name>
+        <position>Data Scientist</position>
+        <salary>6500</salary>
+        <hire_date>2022-3-1</hire_date>
+        <department>IT</department>
+    </employee>
+    <employee>
+        <id>5</id>
+        <first_name>Karen</first_name>
+        <last_name>Switch</last_name>
+        <position>Accountant</position>
+        <salary>4000</salary>
+        <hire_date>2022-1-10</hire_date>
+        <department>Accounting</department>
+    </employee>
+</records>

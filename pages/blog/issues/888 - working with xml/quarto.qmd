@@ -1,0 +1,104 @@
+---
+author: Ran Li
+date: "08/31/2023"
+title: "Working with .XML in R"
+description: "This post discusses how to use R programming language to read, parse, and manipulate XML files, covering two R packages and techniques for accessing elements and converting XML files to R data structures like tibbles and data.frames. In this post we will with two packages xml2 and XML."
+categories:
+  - tidy data
+  - XML
+format: 
+  html:
+    toc: true
+    toc-location: left
+    df-print: paged
+    code-tools: true
+execute: 
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+<img src="images/xml-logo.jpg" alt="XML Logo" style="height: 150px; display: block; margin: auto;"/>
+
+
+## Basic: Read and Parse XML Files
+
+
+```{r}
+library(xml2)
+library(XML)
+library(dplyr)
+
+## Load 
+employee_data <- read_xml("data.xml")
+employee_data
+
+
+
+```
+
+Let's first get a sense of the loaded data whats in it and what we want to parse. We can just see structure with `xml_structure()`.
+
+
+```{r}
+## Get a sense of structure
+xml_structure(employee_data)
+```
+
+
+We can see that there are several tags such as `first_name` or `position`. If we want to just explore values within a specific tag we can use `xml_find_all`. For exemple all values for the `position` tag.
+
+
+```{r}
+xml_find_all(employee_data, ".//position")
+```
+
+taking it one step farther we can start pulling these values into R data objects. For example to get a vector of string of all `positions`.
+
+```{r}
+xml_find_all(employee_data, ".//position") %>% xml_text()
+```
+
+While you can work with vectors. Its best to import XML and convert to dataframes to be able to utilize dplyr for data manipulation and access.
+
+## Convert XML Data to tibble
+
+Here we will build ontop of the logic above. And extract three features of the XML data into a tibble. 
+
+
+```{r}
+# Extract department and salary info
+id <- xml_text(xml_find_all(employee_data, ".//id"))
+dept <- xml_text(xml_find_all(employee_data, ".//department"))
+salary <- xml_integer(xml_find_all(employee_data, ".//salary"))
+
+# Format as a tibble
+df_dept_salary <- tibble(id = id, department = dept, salary = salary)
+df_dept_salary
+```
+
+Now we have a dataframe we can start analyzing, for example to calculate the average salary by deparement.
+
+```{r}
+df_dept_salary %>% 
+  group_by(department) %>% 
+  summarise(salary = mean(salary))
+
+```
+
+
+Another approach to converting the entire XML document into an R data.frame, we can utilize the `xmlToDataFrame()` method from the `XML` package. 
+
+
+```{r}
+df_employees <- xmlToDataFrame(nodes = getNodeSet(employee_xml, "//employee")) %>%
+  as_tibble()
+df_employees
+```
+
+
+## Summary
+
+In conclusion, XML files are increasingly popular as a FAIR (especially interoperable) data format for the exhchange of data/metadata between systems. As a data professional, mastering the manipulation and analysis of XML files is not just an optional skill but a necessity. XML files are pervasive in various sectors, serving as a standard for data exchange. The article highlights that most tasks you'll encounter in R related to XML boil down to three core activities: loading the XML document, parsing its content, and converting it into a more analysis-friendly format like a tibble or data.frame.
+
+The article introduces two R packages that facilitate these tasks, although it doesn't specify their names. These packages are likely equipped with a range of functionalities—from basic XML reading and writing to more advanced operations like XPath querying and namespace management. By leveraging these packages, data professionals can significantly simplify and optimize their workflow when dealing with XML files, making the process more efficient and accurate.
