@@ -39,14 +39,14 @@ employee_data
 
 Let's first get a sense of the loaded data whats in it and what we want to parse. We can just see structure with `xml_structure()`.
 
-
+ 
 ```{r}
 ## Get a sense of structure
-xml_structure(employee_data)
+xml_structure(employee_data)  
 ```
 
 
-We can see that there are several tags such as `first_name` or `position`. If we want to just explore values within a specific tag we can use `xml_find_all`. For exemple all values for the `position` tag.
+We can see that within this XML data there are many employees each with several features such as `first_name` or `position`. If we want to just explore values within a specific feature we can use `xml_find_all`. For exemple all values for the `position` tag.
 
 
 ```{r}
@@ -91,6 +91,11 @@ Another approach to converting the entire XML document into an R data.frame, we 
 
 
 ```{r}
+## parse
+employee_xml <- xmlParse(employee_data)
+employee_xml
+
+## convert to df
 df_employees <- xmlToDataFrame(nodes = getNodeSet(employee_xml, "//employee")) %>%
   as_tibble()
 df_employees
