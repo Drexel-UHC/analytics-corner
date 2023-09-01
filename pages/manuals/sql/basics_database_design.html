@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matthew Jannetti">
+<meta name="dcterms.date" content="2023-08-22">
+
+<title>Analytics Corner - Basics of Database Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../pages/manuals/sql/playground.html" rel="next">
+<link href="../../../pages/manuals/sql/introduction.html" rel="prev">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../uhc.png" alt="Drexel dragon logo." class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Analytics Corner</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-manuals" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Manuals</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-manuals">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/welcome/1-about.html" rel="" target="">
+ <span class="dropdown-text">Welcome</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/git-github/overview.html" rel="" target="">
+ <span class="dropdown-text">Git and GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/dbt/overview.html" rel="" target="">
+ <span class="dropdown-text">Datawarehousing + DBT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/manuals/sql/overview.html" rel="" target="">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/gallery/index.html" rel="" target="">
+ <span class="menu-text">Gallery</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/issues/new?assignees=&amp;labels=&amp;template=request.yml&amp;title=%5BRequest+title%5D%3A+" rel="" target=""><i class="bi bi-patch-question" role="img">
+</i> 
+ <span class="dropdown-text">Submit an Issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/Drexel-UHC/analytics-core/discussions" rel="" target=""><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">View Discussions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/faq/index.html" rel="" target=""><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc" rel="" target=""><i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core" rel="" target=""><i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/manuals/sql/introduction.html">SQL</a></li><li class="breadcrumb-item"><a href="../../../pages/manuals/sql/basics_database_design.html">Basics of Database Design</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">SQL</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/sql/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/sql/basics_database_design.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Basics of Database Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/manuals/sql/playground.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Playground</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#goal" id="toc-goal" class="nav-link active" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">Normalization</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
+  <ul class="collapse">
+  <li><a href="#tract-table" id="toc-tract-table" class="nav-link" data-scroll-target="#tract-table">Tract Table</a></li>
+  <li><a href="#weather-table" id="toc-weather-table" class="nav-link" data-scroll-target="#weather-table">Weather Table</a></li>
+  <li><a href="#crime-table" id="toc-crime-table" class="nav-link" data-scroll-target="#crime-table">Crime Table</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#keys" id="toc-keys" class="nav-link" data-scroll-target="#keys">Keys</a>
+  <ul class="collapse">
+  <li><a href="#primary-keys" id="toc-primary-keys" class="nav-link" data-scroll-target="#primary-keys">Primary Keys</a></li>
+  <li><a href="#foreign-keys" id="toc-foreign-keys" class="nav-link" data-scroll-target="#foreign-keys">Foreign Keys</a></li>
+  </ul></li>
+  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints">Constraints</a></li>
+  <li><a href="#the-schema" id="toc-the-schema" class="nav-link" data-scroll-target="#the-schema">The Schema</a>
+  <ul class="collapse">
+  <li><a href="#columns" id="toc-columns" class="nav-link" data-scroll-target="#columns">Columns</a></li>
+  </ul></li>
+  <li><a href="#data-definition-and-manipulation-language" id="toc-data-definition-and-manipulation-language" class="nav-link" data-scroll-target="#data-definition-and-manipulation-language">Data Definition and Manipulation Language</a>
+  <ul class="collapse">
+  <li><a href="#ddl" id="toc-ddl" class="nav-link" data-scroll-target="#ddl">DDL</a></li>
+  <li><a href="#dml" id="toc-dml" class="nav-link" data-scroll-target="#dml">DML</a></li>
+  </ul></li>
+  <li><a href="#views" id="toc-views" class="nav-link" data-scroll-target="#views">Views</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/Drexel-UHC/analytics-corner/blob/main/pages/manuals/sql/basics_database_design.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Drexel-UHC/analytics-corner/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Basics of Database Design</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matthew Jannetti </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 22, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="goal" class="level1">
+<h1>Goal</h1>
+<p>This portion of the workshop is to give you some grounding in database design principles and describe how to accomplish them.</p>
+</section>
+<section id="outline" class="level1">
+<h1>Outline</h1>
+<ol type="1">
+<li>Normalization</li>
+<li>Keys</li>
+<li>Constraints</li>
+<li>Data Defintion and Maniuplation Language</li>
+<li>Views</li>
+</ol>
+</section>
+<section id="normalization" class="level1">
+<h1>Normalization</h1>
+<p>The process of turning a flat dataset into a series of tables. The primary goal of normalization is to reduce redunancy in the data and increase consistency.</p>
+<p>One big advantage of this consistency is that whenever you need to change the data you only need to update the data once in one place.</p>
+<p>Let’s take a look at an example of how this might work.</p>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>In our database we have tract information and weather information. If we have that information in a flat file prior to processing it for the database it might look something like the table below.</p>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">LowPop</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>April</td>
+<td>14.880681</td>
+<td>9.247916</td>
+<td>20.515867</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>August</td>
+<td>26.294310</td>
+<td>21.673769</td>
+<td>30.915272</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>December</td>
+<td>6.918378</td>
+<td>2.775594</td>
+<td>11.061740</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>February</td>
+<td>3.441863</td>
+<td>-0.572194</td>
+<td>7.456766</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>January</td>
+<td>5.330633</td>
+<td>1.094335</td>
+<td>9.568929</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>July</td>
+<td>27.479420</td>
+<td>22.684456</td>
+<td>32.275227</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>June</td>
+<td>23.696087</td>
+<td>18.939714</td>
+<td>28.453455</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>March</td>
+<td>8.066606</td>
+<td>3.266680</td>
+<td>12.867531</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>May</td>
+<td>18.726263</td>
+<td>13.191011</td>
+<td>24.262665</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>November</td>
+<td>10.846342</td>
+<td>6.812098</td>
+<td>14.881163</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>October</td>
+<td>14.163409</td>
+<td>9.614525</td>
+<td>18.713562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>September</td>
+<td>20.172976</td>
+<td>16.086805</td>
+<td>24.260143</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>April</td>
+<td>10.428053</td>
+<td>5.957427</td>
+<td>14.899525</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>August</td>
+<td>24.970825</td>
+<td>20.111498</td>
+<td>29.831573</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>December</td>
+<td>3.296346</td>
+<td>0.263161</td>
+<td>6.331954</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>February</td>
+<td>-2.388883</td>
+<td>-6.133591</td>
+<td>1.355403</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>January</td>
+<td>3.623262</td>
+<td>-0.261454</td>
+<td>7.508401</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>July</td>
+<td>25.410351</td>
+<td>20.846806</td>
+<td>29.975315</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>June</td>
+<td>23.762081</td>
+<td>18.822567</td>
+<td>28.702440</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>March</td>
+<td>6.773147</td>
+<td>1.507581</td>
+<td>12.041290</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>May</td>
+<td>19.042379</td>
+<td>13.317002</td>
+<td>24.769484</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>November</td>
+<td>8.053829</td>
+<td>4.026049</td>
+<td>12.082455</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>October</td>
+<td>18.499706</td>
+<td>13.852238</td>
+<td>23.148750</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>September</td>
+<td>22.557858</td>
+<td>17.526993</td>
+<td>27.589718</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This is the weather information for one census tract in the years 2006 and 2007. The weather information is defined at the month level and the tract information is defined at the tract level. Because there are two different levels, the tract information is repeated for every month.</p>
+<p>If we store the data in this way, changing the tract information can become onerous. Let’s say that tract <code>42101000100</code> was misclassifed, and that the value of LowPop for that census tract should be 1 instead of 0. To update that information in this table we would need to update each row. Missing even a single row would add inconsistency to the data.</p>
+<p>This becomes more difficult the more data you have. Let’s add the crime data to our example.</p>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">LowPop</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">CTVIOLCN</th>
+<th data-quarto-table-cell-role="th">CTPROPCN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2006</td>
+<td>158</td>
+<td>327</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2007</td>
+<td>126</td>
+<td>342</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The crime data is at the year level. And so now, someone updates the tract information in the weather data but not the crime data, we have an inconsistency.</p>
+<p>The normalizaton process will try to solve this problem.</p>
+<p>There are different levels of normalization. The more normalized the data the more consistent your data becomes but go too far and the database becomes unweidly to use. Most databases target the “3rd Normal Form” which essentially means that every important “level” is attached to a key.</p>
+<p>Each “level” is defined by it’s ability to uniquely identify data (known as candidate keys).</p>
+<p>In our example, the candidate keys are as follows: 1. GeoId for the tract data 2. GeoId, Year, and Month for the weather data 3. GeoId and year for the Crime data</p>
+<p>So we split this up into 3 different tables, each with an ID that can be used to join with other tables</p>
+<section id="tract-table" class="level3">
+<h3 class="anchored" data-anchor-id="tract-table">Tract Table</h3>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">GeoId</th>
+<th data-quarto-table-cell-role="th">LowPop</th>
+<th data-quarto-table-cell-role="th">PhiladelphiaTract</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>24203</td>
+<td>42101000100</td>
+<td>0</td>
+<td>1</td>
+<td>2010</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="weather-table" class="level3">
+<h3 class="anchored" data-anchor-id="weather-table">Weather Table</h3>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WeatherId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">AvgTemp</th>
+<th data-quarto-table-cell-role="th">MinTemp</th>
+<th data-quarto-table-cell-role="th">MaxTemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>36964</td>
+<td>24203</td>
+<td>2006</td>
+<td>April</td>
+<td>14.880681</td>
+<td>9.247916</td>
+<td>20.515867</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>36968</td>
+<td>24203</td>
+<td>2006</td>
+<td>August</td>
+<td>26.294310</td>
+<td>21.673769</td>
+<td>30.915272</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>36972</td>
+<td>24203</td>
+<td>2006</td>
+<td>December</td>
+<td>6.918378</td>
+<td>2.775594</td>
+<td>11.061740</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>36962</td>
+<td>24203</td>
+<td>2006</td>
+<td>February</td>
+<td>3.441863</td>
+<td>-0.572194</td>
+<td>7.456766</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>36961</td>
+<td>24203</td>
+<td>2006</td>
+<td>January</td>
+<td>5.330633</td>
+<td>1.094335</td>
+<td>9.568929</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>36967</td>
+<td>24203</td>
+<td>2006</td>
+<td>July</td>
+<td>27.479420</td>
+<td>22.684456</td>
+<td>32.275227</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>36966</td>
+<td>24203</td>
+<td>2006</td>
+<td>June</td>
+<td>23.696087</td>
+<td>18.939714</td>
+<td>28.453455</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>36963</td>
+<td>24203</td>
+<td>2006</td>
+<td>March</td>
+<td>8.066606</td>
+<td>3.266680</td>
+<td>12.867531</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>36965</td>
+<td>24203</td>
+<td>2006</td>
+<td>May</td>
+<td>18.726263</td>
+<td>13.191011</td>
+<td>24.262665</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>36971</td>
+<td>24203</td>
+<td>2006</td>
+<td>November</td>
+<td>10.846342</td>
+<td>6.812098</td>
+<td>14.881163</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>36970</td>
+<td>24203</td>
+<td>2006</td>
+<td>October</td>
+<td>14.163409</td>
+<td>9.614525</td>
+<td>18.713562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>36969</td>
+<td>24203</td>
+<td>2006</td>
+<td>September</td>
+<td>20.172976</td>
+<td>16.086805</td>
+<td>24.260143</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>57748</td>
+<td>24203</td>
+<td>2007</td>
+<td>April</td>
+<td>10.428053</td>
+<td>5.957427</td>
+<td>14.899525</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>57752</td>
+<td>24203</td>
+<td>2007</td>
+<td>August</td>
+<td>24.970825</td>
+<td>20.111498</td>
+<td>29.831573</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>57756</td>
+<td>24203</td>
+<td>2007</td>
+<td>December</td>
+<td>3.296346</td>
+<td>0.263161</td>
+<td>6.331954</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>57746</td>
+<td>24203</td>
+<td>2007</td>
+<td>February</td>
+<td>-2.388883</td>
+<td>-6.133591</td>
+<td>1.355403</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>57745</td>
+<td>24203</td>
+<td>2007</td>
+<td>January</td>
+<td>3.623262</td>
+<td>-0.261454</td>
+<td>7.508401</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>57751</td>
+<td>24203</td>
+<td>2007</td>
+<td>July</td>
+<td>25.410351</td>
+<td>20.846806</td>
+<td>29.975315</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>57750</td>
+<td>24203</td>
+<td>2007</td>
+<td>June</td>
+<td>23.762081</td>
+<td>18.822567</td>
+<td>28.702440</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>57747</td>
+<td>24203</td>
+<td>2007</td>
+<td>March</td>
+<td>6.773147</td>
+<td>1.507581</td>
+<td>12.041290</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>57749</td>
+<td>24203</td>
+<td>2007</td>
+<td>May</td>
+<td>19.042379</td>
+<td>13.317002</td>
+<td>24.769484</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>57755</td>
+<td>24203</td>
+<td>2007</td>
+<td>November</td>
+<td>8.053829</td>
+<td>4.026049</td>
+<td>12.082455</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>57754</td>
+<td>24203</td>
+<td>2007</td>
+<td>October</td>
+<td>18.499706</td>
+<td>13.852238</td>
+<td>23.148750</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>57753</td>
+<td>24203</td>
+<td>2007</td>
+<td>September</td>
+<td>22.557858</td>
+<td>17.526993</td>
+<td>27.589718</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="crime-table" class="level3">
+<h3 class="anchored" data-anchor-id="crime-table">Crime Table</h3>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CrimeDataId</th>
+<th data-quarto-table-cell-role="th">TractId</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">CTVIOLCN</th>
+<th data-quarto-table-cell-role="th">CTPROPCN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>22838</td>
+<td>24203</td>
+<td>2006</td>
+<td>158</td>
+<td>327</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>22839</td>
+<td>24203</td>
+<td>2007</td>
+<td>126</td>
+<td>342</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now, if you need to change tract information or the number of property crimes in a tract and year, you only need to change the data in one place and when people run queries, that updated data will propogate throughout all future datasets derived from the database automatically.</p>
+</section>
+</section>
+</section>
+<section id="keys" class="level1">
+<h1>Keys</h1>
+<p>Keys are sort of like identifiers. We’ve already briefly touched on one such key, the candidate key.</p>
+<p>A candidate key is defined as the minimum amount of information that you need to uniquely identify an entity in a table. So to identify each unique instance of weather data in the weather table we need to know the Tract, Year, and Month of the weather data.</p>
+<p>A table can have multiple candidate keys. For instance if you collect data about individual people and you collect SSN and email, you might be able use either of those to identify the indiviuals uniquely.</p>
+<p>There are two other remaining types of keys:</p>
+<ol type="1">
+<li>Primary Keys</li>
+<li>Foreign Keys</li>
+</ol>
+<section id="primary-keys" class="level2">
+<h2 class="anchored" data-anchor-id="primary-keys">Primary Keys</h2>
+<p>Primary keys are just a candidate key that you select to be a table identifier in your database. If you have both SSN and email, they are both candidate keys. When you define your table, you select SSN to be the primary key. There can only be 1 primary key per table. A primary key cannot contain NULL values and must be unique.</p>
+</section>
+<section id="foreign-keys" class="level2">
+<h2 class="anchored" data-anchor-id="foreign-keys">Foreign Keys</h2>
+<p>Foreign keys are a type of constraint, a limit on the data that can appear in a given column. A foreign key is a column that references another column (most commonly of another table). Values that appear in the foreign key column must also be in the reference columen (usually the primary key of another table)</p>
+<p>The combination of Primary Keys and Foriegn keys form the basis of relationships between tables in a database. Looking for these in a database can tell you a lot about the structure of the database and how you should query it.</p>
+</section>
+</section>
+<section id="constraints" class="level1">
+<h1>Constraints</h1>
+<p>One other big component of database design are constraints. As mentioned earlier, constraints are limitations that you can place on your data. All the data in a given column or columns must satisfy this constraint. If not you will not be able to insert that data.</p>
+<p>There are several types of constraints in SQL, here are some common ones:</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Constraint</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NOT NULL</td>
+<td>Column cannot contain NULL values</td>
+</tr>
+<tr class="even">
+<td>DEFAULT</td>
+<td>If there is no value for a column provided on an insert, the default value will be inserted</td>
+</tr>
+<tr class="odd">
+<td>UNIQUE</td>
+<td>There can be no repeat values a column or combination of columns</td>
+</tr>
+<tr class="even">
+<td>CHECK</td>
+<td>Defines specific values that are allowed to be in the column. No other values are allowed</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-schema" class="level1">
+<h1>The Schema</h1>
+<p>The schema is everything that defines the structure and data that appears in the database. Everything that we talked about above is part of the schema.</p>
+<p>One last part of the schema to discuss is the column definitions.</p>
+<section id="columns" class="level2">
+<h2 class="anchored" data-anchor-id="columns">Columns</h2>
+<p>When you create a table and it’s columns, you will provide it with a data type. This data type defines how the data is treated and what data can be inserted into it. A numeric column cannot contain string data. You can find the various data types for SQL Server <a href="https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver16">here</a>.</p>
+</section>
+</section>
+<section id="data-definition-and-manipulation-language" class="level1">
+<h1>Data Definition and Manipulation Language</h1>
+<p>Data Defintion (DDL) and Data Maniuplation (DML) Language are two subsets of SQL that focus on creating, inserting, deleting and updating data. Whereas, Data Query Language (DQL), the subset focused on querying and pulling data, is what the first two sessions of this workshop foucused on.</p>
+<section id="ddl" class="level2">
+<h2 class="anchored" data-anchor-id="ddl">DDL</h2>
+<p>Creates, deletes, or alters tables.</p>
+<p>The most common DDL commands are <code>DROP TABLE</code> and <code>CREATE TABLE</code></p>
+<p><code>DROP TABLE</code> deletes or removes a table from the database. The syntax is very simple:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> [tablename]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Depending on your database settings, this table will not be recoverable after deletion. Also the drop will fail if doing so will violate a constraint, like a foreign key.</p>
+<p><code>CREATE TABLE</code> is more complicated. It defines the table name and columns. I have supplied an example of two create table statements below that provide examples of numerous constraints and data types.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Address</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       AddressId               <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> IDENTITY <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       StreetNum               <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       Street                  <span class="dt">NVARCHAR</span>(<span class="dv">60</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       Unit                    <span class="dt">NVARCHAR</span>(<span class="dv">25</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       MultiUnit               BIT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       RandomUnit              BIT <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       UnitChosen              <span class="dt">NVARCHAR</span>(<span class="dv">25</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>       TotalUnits              <span class="dt">INTEGER</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       NeedsReturn             BIT <span class="kw">DEFAULT</span> <span class="dv">1</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       Flag                    <span class="dt">NVARCHAR</span>(<span class="dv">200</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       ReturnedLetterCode      <span class="dt">NVARCHAR</span>(<span class="dv">2</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       FinalOutcome            <span class="dt">INTEGER</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       FinalOutcomeCompleted   BIT <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>       RemovedBeforeMailing    BIT,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>       SamplingRound           <span class="dt">INTEGER</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>       <span class="dt">Zone</span>                    <span class="dt">INTEGER</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       Route                   <span class="dt">INTEGER</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>       AM                      BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>       PM                      BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>       SAT                     BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>       Anytime                 BIT,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>       Wave1_Visited           BIT,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>       Wave1_Targeted          BIT,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>       Wave1_Survey            BIT,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>       Wave2_Visited           BIT,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>       Wave2_Targeted          BIT,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>       Wave2_Survey            BIT,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>       cwk_id                  <span class="dt">NVARCHAR</span>(<span class="dv">50</span>),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>       valid_sample            BIT <span class="kw">DEFAULT</span> <span class="dv">1</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>       In_PN                   BIT <span class="kw">DEFAULT</span> <span class="dv">1</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>       UniqueAddrIdx           <span class="kw">AS</span> <span class="fu">CONCAT</span>(StreetNum, <span class="fu">LOWER</span>(Street), <span class="fu">LOWER</span>(ISNULL(UnitChosen, ISNULL(Unit, <span class="st">'unit num'</span>)))),</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="kw">CHECK</span> ((RandomUnit<span class="op">=</span><span class="dv">0</span> <span class="kw">AND</span> UnitChosen <span class="kw">IS</span> <span class="kw">NULL</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                <span class="kw">OR</span> (RandomUnit<span class="op">=</span><span class="dv">1</span> <span class="kw">AND</span> UnitChosen <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>)),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="kw">CHECK</span> (ReturnedLetterCode <span class="kw">IN</span> (<span class="st">'VA'</span>, <span class="st">'NDAA'</span>, <span class="st">'ANK'</span>, <span class="st">'NSN'</span>, <span class="st">'STUDENT'</span>, <span class="st">'REF'</span>, <span class="st">'No Apt Num'</span>, <span class="kw">NULL</span>)),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="kw">CHECK</span> ((Unit <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> MultiUnit<span class="op">=</span><span class="dv">0</span>) <span class="kw">OR</span> (Unit <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> MultiUnit<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    );</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CREATE</span> <span class="kw">UNIQUE</span> <span class="kw">INDEX</span> UQ_address_idx <span class="kw">ON</span> Address (UniqueAddrIdx);</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Visit</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    (VisitId <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> IDENTITY <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    AddressId <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    DateVisited DATETIME <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    Surveyor1Id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    Surveyor2Id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    Outcome <span class="dt">NVARCHAR</span>(<span class="dv">50</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    DidScreener BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    Kids <span class="dt">NVARCHAR</span>(<span class="dv">50</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    Notes <span class="dt">NVARCHAR</span>(<span class="dv">300</span>),</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    DateEntered DATETIME <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="fu">CURRENT_TIMESTAMP</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    Scheduled DATETIME,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    NeedsReview BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    AddedBy <span class="dt">NVARCHAR</span>(<span class="dv">50</span>),</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    Attempt BIT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">1</span>,</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    FinishedReview BIT,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> FK_Address_Visit <span class="kw">FOREIGN</span> <span class="kw">KEY</span>(AddressId) <span class="kw">REFERENCES</span> Address (AddressId),</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> FK_Surveyor1_Visit <span class="kw">FOREIGN</span> <span class="kw">KEY</span>(Surveyor1Id) <span class="kw">REFERENCES</span> Surveyor (SurveyorId),</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> FK_Surveyor2_Visit <span class="kw">FOREIGN</span> <span class="kw">KEY</span>(Surveyor2Id) <span class="kw">REFERENCES</span> Surveyor (SurveyorId),</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_DateVisited <span class="kw">CHECK</span>(DateVisited <span class="op">&lt;=</span> <span class="fu">CURRENT_TIMESTAMP</span>),</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_ScheduledOutcome <span class="kw">CHECK</span>   (Scheduled <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> Outcome <span class="op">=</span> <span class="st">'Scheduled Survey'</span> <span class="kw">OR</span> (Scheduled <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> Outcome <span class="op">&lt;&gt;</span> <span class="st">'Scheduled Survey'</span>)),</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_KidsOutcome <span class="kw">CHECK</span> ((Kids <span class="op">=</span> <span class="st">'Did not speak with anyone'</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">AND</span> Outcome <span class="kw">IN</span> (<span class="st">'Not Home'</span>, <span class="st">'Non-Residential'</span>, <span class="st">'Non-Existent'</span>, <span class="st">'Housing Type Ineligible'</span>, <span class="st">'No Matching Unit'</span>, <span class="st">'Partial Address'</span>, <span class="st">'Unable to Access'</span>, <span class="st">'Vacant'</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                                                                        <span class="st">'Follow Up Letter'</span>, <span class="st">'Missing Visit Info'</span>, <span class="st">'Letter Response'</span>, <span class="st">'Random Selection Form'</span>))</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">OR</span> (Kids <span class="op">=</span> <span class="st">'Spoke with someone but did not confirm'</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>                                                      <span class="kw">AND</span> Outcome <span class="kw">IN</span> (<span class="st">'Not Interested'</span>, <span class="st">'No Adult English Speaker'</span>, <span class="st">'No Caregiver Available'</span>, <span class="st">'Follow Up Letter'</span>, <span class="st">'Missing Visit Info'</span>, <span class="st">'Letter Response'</span>))</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">OR</span> (Kids <span class="op">=</span> <span class="st">'Confirmed no kids live in home'</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                                                      <span class="kw">AND</span> Outcome <span class="kw">IN</span> (<span class="st">'Not Eligible'</span>, <span class="st">'No Caregiver Available'</span>, <span class="st">'No Adult English Speaker'</span>, <span class="st">'Missing Visit Info'</span>, <span class="st">'Housing Type Ineligible'</span>, <span class="st">'Letter Response'</span>))</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">OR</span> (Kids <span class="op">=</span> <span class="st">'Confirmed kids live in home'</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>                                                      <span class="kw">AND</span> Outcome <span class="kw">IN</span> (<span class="st">'Did Survey'</span>, <span class="st">'Not Interested'</span>, <span class="st">'No Caregiver Available'</span>, <span class="st">'No Adult English Speaker'</span>, <span class="st">'Unable to Complete Survey'</span>, <span class="st">'Follow Up Letter'</span>,</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                                                                            <span class="st">'Scheduled Survey'</span>, <span class="st">'Missing Visit Info'</span>, <span class="st">'Letter Response'</span>))</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">OR</span> (Kids <span class="op">=</span> <span class="st">'Missing Visit Info'</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>                                                  <span class="kw">OR</span> (Outcome <span class="op">=</span> <span class="st">'Missing Visit Info'</span>)),</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_Outcome <span class="kw">CHECK</span> (Outcome <span class="kw">IN</span> (<span class="st">'Did Survey'</span>, <span class="st">'Unable to Complete Survey'</span>, <span class="st">'Scheduled Survey'</span>, <span class="st">'Not Interested'</span>, <span class="st">'Not Eligible'</span>, <span class="st">'No Caregiver Available'</span>, <span class="st">'No Adult English Speaker'</span>,</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                                                               <span class="st">'Not Home'</span>, <span class="st">'Non-Residential'</span>, <span class="st">'Housing Type Ineligible'</span>, <span class="st">'Non-Existent'</span>, <span class="st">'Vacant'</span>, <span class="st">'Unable to Access'</span>, <span class="st">'Partial Address'</span>, <span class="st">'No Matching Unit Number'</span>,</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>                                                               <span class="st">'Follow Up Letter'</span>, <span class="st">'Missing Visit Info'</span>, <span class="st">'Letter Response'</span>, <span class="st">'Random Selection Form'</span>)),</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_Kids <span class="kw">CHECK</span> (Kids <span class="kw">IN</span> (<span class="st">'Confirmed kids live in home'</span>, <span class="st">'Confirmed no kids live in home'</span>, <span class="st">'Spoke with someone but did not confirm'</span>, <span class="st">'Did not speak with anyone'</span>, <span class="st">'Missing Visit Info'</span>)),</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_Surveyors <span class="kw">CHECK</span> (Surveyor1Id <span class="op">&lt;&gt;</span> Surveyor2Id),</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> CK_Visit_Scheduled <span class="kw">CHECK</span> (<span class="fu">CONVERT</span>(DATETIME, Scheduled) <span class="op">&gt;</span> <span class="fu">CONVERT</span>(DATETIME, DateVisited)),</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CONSTRAINT</span> UQ_Visit_AddressId_DateVisited <span class="kw">UNIQUE</span>(AddressId, DateVisited));</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>GO</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dml" class="level2">
+<h2 class="anchored" data-anchor-id="dml">DML</h2>
+<p>Adds, edits, or deletes rows of data within tables</p>
+<p>The most common commands are <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code>.</p>
+<p><code>INSERT</code> reads data into a database table:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Tract (GeoId, LowPop, PhiladelphiaTract)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'42101000100'</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>DELETE</code> removes data from a table:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> tract</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> GeoId<span class="op">=</span><span class="st">'42101000100'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>UPDATE</code> edits data in a table</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> Tract</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> LowPop<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> GeoId<span class="op">=</span><span class="st">'42101000100'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="views" class="level1">
+<h1>Views</h1>
+<p>Views are a predefined query that you can interact with like a table. They are often used for more complicated queries or for queries that are run partciulary often.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> ReviewVisits</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SELECT</span> a.AddressId,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>          a.StreetNum,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          a.Street,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>          a.Unit,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>          v.VisitId,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>          v.DateVisited,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>          CONCAT_WS(<span class="st">' '</span>, s.FirstName, s.LastName) <span class="kw">AS</span> Surveyor1,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>          CONCAT_WS(<span class="st">' '</span>, s2.FirstName, s2.LastName) <span class="kw">AS</span> Surveyor2,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>          v.Outcome,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>          v.Kids,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>          v.Notes,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>          v.DateEntered,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>          v.Scheduled,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>          v.AddedBy</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> Address a</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>          <span class="kw">INNER</span> <span class="kw">JOIN</span> Visit v <span class="kw">ON</span> v.AddressId <span class="op">=</span> a.AddressId</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>          <span class="kw">INNER</span> <span class="kw">JOIN</span> Surveyor s <span class="kw">ON</span> v.Surveyor1Id <span class="op">=</span> s.SurveyorId</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>          <span class="kw">INNER</span> <span class="kw">JOIN</span> Surveyor s2 <span class="kw">ON</span> v.Surveyor2Id <span class="op">=</span> s2.SurveyorId</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> v.NeedsReview <span class="op">=</span> <span class="dv">1</span> <span class="kw">AND</span> (v.FinishedReview <span class="op">&lt;&gt;</span> <span class="dv">1</span> <span class="kw">or</span> v.FinishedReview <span class="kw">IS</span> <span class="kw">NULL</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then once the view is created you can run the query by just doing</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ReviewVisits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can even use the view in joins.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../pages/manuals/sql/introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../pages/manuals/sql/playground.html" class="pagination-link">
+        <span class="nav-page-text">Playground</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../pages/faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../license.html">License</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/drexeluhc">
+      <i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Drexel-UHC/analytics-core">
+      <i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
