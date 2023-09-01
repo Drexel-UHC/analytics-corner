@@ -72,6 +72,8 @@ website:
           contents:
           - text: 'Introduction'
             href: pages/manuals/sql/introduction.ipynb 
+          - text: 'Basics of Database Design'
+            href: pages/manuals/sql/basics_database_design.ipynb
           - text: 'Playground'
             href: pages/manuals/sql/playground.qmd
     - id: dbt
