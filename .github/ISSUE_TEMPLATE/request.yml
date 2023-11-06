@@ -49,6 +49,7 @@ body:
         - Reproducible code bundle (data + code)
         - Image (jpeg, png)
         - Document
+        - Training
         - Other
     validations:
       required: true
