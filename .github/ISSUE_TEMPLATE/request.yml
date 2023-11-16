@@ -50,6 +50,7 @@ body:
         - Image (jpeg, png)
         - Document
         - Training
+        - Technical consultation       
         - Other
     validations:
       required: true
