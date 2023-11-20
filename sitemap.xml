@@ -1,191 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/welcome/2-core-values.html</loc>
-    <lastmod>2023-09-01T13:32:42.534Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/playground.html</loc>
-    <lastmod>2023-09-01T13:32:41.782Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/introduction.html</loc>
-    <lastmod>2023-09-01T13:32:40.921Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/why-summary.html</loc>
-    <lastmod>2023-09-01T13:32:35.691Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/teaching-thoughts.html</loc>
-    <lastmod>2023-09-01T13:32:34.858Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/precedent.html</loc>
-    <lastmod>2023-09-01T13:32:33.992Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/learning-objectives.html</loc>
-    <lastmod>2023-09-01T13:32:33.100Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/init.html</loc>
-    <lastmod>2023-09-01T13:32:32.185Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-vs-github-desktop.html</loc>
-    <lastmod>2023-09-01T13:32:31.279Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-github.html</loc>
-    <lastmod>2023-09-01T13:32:30.420Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/clone.html</loc>
-    <lastmod>2023-09-01T13:32:29.659Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/case-study-project-transition-management.html</loc>
-    <lastmod>2023-09-01T13:32:28.701Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/summary.html</loc>
-    <lastmod>2023-09-01T13:32:27.670Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/load-data.html</loc>
-    <lastmod>2023-09-01T13:32:26.763Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/functional-programming.html</loc>
-    <lastmod>2023-09-01T13:32:25.701Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/data-modeling.html</loc>
-    <lastmod>2023-09-01T13:32:24.873Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/get-started/index.html</loc>
-    <lastmod>2023-09-01T13:32:23.904Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/faq/index.html</loc>
-    <lastmod>2023-09-01T13:32:23.127Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - working with xml/quarto.html</loc>
-    <lastmod>2023-09-01T13:32:21.638Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Shiny usage Feb 2023/index.html</loc>
-    <lastmod>2023-09-01T13:32:20.248Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - DSWG intro 1/index.html</loc>
-    <lastmod>2023-09-01T13:32:18.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html</loc>
-    <lastmod>2023-09-01T13:32:13.888Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/index.html</loc>
-    <lastmod>2023-09-01T13:32:12.029Z</lastmod>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/about.html</loc>
+    <lastmod>2023-11-20T15:43:22.853Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/index.html</loc>
-    <lastmod>2023-09-01T13:32:10.435Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Drexel-UHC.github.io/analytics-corner/about.html</loc>
-    <lastmod>2023-09-01T13:32:09.717Z</lastmod>
+    <lastmod>2023-11-20T15:43:23.601Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/license.html</loc>
-    <lastmod>2023-09-01T13:32:10.874Z</lastmod>
+    <lastmod>2023-11-20T15:43:23.989Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/index.html</loc>
+    <lastmod>2023-11-20T15:43:25.094Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html</loc>
+    <lastmod>2023-11-20T15:43:26.917Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - ChatGPT/index.html</loc>
-    <lastmod>2023-09-01T13:32:14.560Z</lastmod>
+    <lastmod>2023-11-20T15:43:27.535Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - DSWG intro 1/index.html</loc>
+    <lastmod>2023-11-20T15:43:31.300Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Scrollies/index.html</loc>
-    <lastmod>2023-09-01T13:32:19.123Z</lastmod>
+    <lastmod>2023-11-20T15:43:31.836Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - Shiny usage Feb 2023/index.html</loc>
+    <lastmod>2023-11-20T15:43:32.882Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - webR test/index.html</loc>
-    <lastmod>2023-09-01T13:32:20.794Z</lastmod>
+    <lastmod>2023-11-20T15:43:33.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/888 - working with xml/quarto.html</loc>
+    <lastmod>2023-11-20T15:43:34.305Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/999 - Tigris shape files/quarto.html</loc>
-    <lastmod>2023-09-01T13:32:22.732Z</lastmod>
+    <lastmod>2023-11-20T15:43:35.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/blog/issues/999 - working with gdb/index.html</loc>
+    <lastmod>2023-11-20T15:43:36.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/faq/index.html</loc>
+    <lastmod>2023-11-20T15:43:37.263Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/gallery/index.html</loc>
-    <lastmod>2023-09-01T13:32:23.513Z</lastmod>
+    <lastmod>2023-11-20T15:43:37.602Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/get-started/index.html</loc>
+    <lastmod>2023-11-20T15:43:37.939Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/basic-modeling.html</loc>
-    <lastmod>2023-09-01T13:32:24.482Z</lastmod>
+    <lastmod>2023-11-20T15:43:38.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/data-modeling.html</loc>
+    <lastmod>2023-11-20T15:43:38.962Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/documentation.html</loc>
-    <lastmod>2023-09-01T13:32:25.279Z</lastmod>
+    <lastmod>2023-11-20T15:43:39.336Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/functional-programming.html</loc>
+    <lastmod>2023-11-20T15:43:39.763Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/get-started-install.html</loc>
-    <lastmod>2023-09-01T13:32:26.185Z</lastmod>
+    <lastmod>2023-11-20T15:43:40.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/load-data.html</loc>
+    <lastmod>2023-11-20T15:43:40.755Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/overview.html</loc>
-    <lastmod>2023-09-01T13:32:27.216Z</lastmod>
+    <lastmod>2023-11-20T15:43:41.242Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/summary.html</loc>
+    <lastmod>2023-11-20T15:43:41.757Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/dbt/work-in-cloud.html</loc>
-    <lastmod>2023-09-01T13:32:28.080Z</lastmod>
+    <lastmod>2023-11-20T15:43:42.161Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/case-study-project-transition-management.html</loc>
+    <lastmod>2023-11-20T15:43:42.765Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/case-study-version-control.html</loc>
-    <lastmod>2023-09-01T13:32:29.232Z</lastmod>
+    <lastmod>2023-11-20T15:43:43.304Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/clone.html</loc>
+    <lastmod>2023-11-20T15:43:43.717Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-basics.html</loc>
-    <lastmod>2023-09-01T13:32:30.045Z</lastmod>
+    <lastmod>2023-11-20T15:43:44.081Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-github.html</loc>
+    <lastmod>2023-11-20T15:43:44.430Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-intro.html</loc>
-    <lastmod>2023-09-01T13:32:30.857Z</lastmod>
+    <lastmod>2023-11-20T15:43:44.816Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-vs-github-desktop.html</loc>
+    <lastmod>2023-11-20T15:43:45.221Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/git-vs-github.html</loc>
-    <lastmod>2023-09-01T13:32:31.685Z</lastmod>
+    <lastmod>2023-11-20T15:43:45.589Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/init.html</loc>
+    <lastmod>2023-11-20T15:43:46.100Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/install-github-desktop.html</loc>
-    <lastmod>2023-09-01T13:32:32.607Z</lastmod>
+    <lastmod>2023-11-20T15:43:46.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/learning-objectives.html</loc>
+    <lastmod>2023-11-20T15:43:46.916Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/overview.html</loc>
-    <lastmod>2023-09-01T13:32:33.498Z</lastmod>
+    <lastmod>2023-11-20T15:43:47.303Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/precedent.html</loc>
+    <lastmod>2023-11-20T15:43:47.785Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/status.html</loc>
-    <lastmod>2023-09-01T13:32:34.467Z</lastmod>
+    <lastmod>2023-11-20T15:43:48.245Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/teaching-thoughts.html</loc>
+    <lastmod>2023-11-20T15:43:48.682Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/what-is-version-control.html</loc>
-    <lastmod>2023-09-01T13:32:35.247Z</lastmod>
+    <lastmod>2023-11-20T15:43:49.073Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/git-github/why-summary.html</loc>
+    <lastmod>2023-11-20T15:43:49.498Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/basics_database_design.html</loc>
-    <lastmod>2023-09-01T13:32:37.190Z</lastmod>
+    <lastmod>2023-11-20T15:43:50.819Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/introduction.html</loc>
+    <lastmod>2023-11-20T15:43:54.514Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/overview.html</loc>
-    <lastmod>2023-09-01T13:32:41.279Z</lastmod>
+    <lastmod>2023-11-20T15:43:54.847Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/sql/playground.html</loc>
+    <lastmod>2023-11-20T15:43:55.490Z</lastmod>
   </url>
   <url>
     <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/welcome/1-about.html</loc>
-    <lastmod>2023-09-01T13:32:42.170Z</lastmod>
+    <lastmod>2023-11-20T15:43:55.832Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Drexel-UHC.github.io/analytics-corner/pages/manuals/welcome/2-core-values.html</loc>
+    <lastmod>2023-11-20T15:43:56.160Z</lastmod>
   </url>
 </urlset>

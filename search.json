@@ -1,437 +1,108 @@
 [
   {
-    "objectID": "pages/manuals/welcome/2-core-values.html",
-    "href": "pages/manuals/welcome/2-core-values.html",
-    "title": "Core values",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About UHC Analytics Corner",
     "section": "",
-    "text": "Note\n\n\n\nComing soon!"
+    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue."
   },
   {
-    "objectID": "pages/manuals/sql/playground.html",
-    "href": "pages/manuals/sql/playground.html",
-    "title": "SQL playground",
+    "objectID": "about.html#goals",
+    "href": "about.html#goals",
+    "title": "About UHC Analytics Corner",
+    "section": "Goals",
+    "text": "Goals\nThe overarching goal of Quarto is to build bridges across working groups at Dornsife and the UHC by making the process of collaborating on problems and sharing technical expertise dramatically better. We hope to do this in several dimensions:\n\nA automated way for community members to submit issues/requests\nAn accessible website where we can share solutions. Analytic problems are often not unique and solutions may benefit others.\nProvide training for how to collaborative code.\n\nEverything here is open source software licensed under the MIT license. We believe that analytic problems are not unique and it’s better for everyone if the tools, issues and solutions used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science."
+  },
+  {
+    "objectID": "about.html#project",
+    "href": "about.html#project",
+    "title": "About UHC Analytics Corner",
+    "section": "Project",
+    "text": "Project\nThe core technologies that drive this project including:\n\nQuarto is an open-source scientific and technical publishing system built on Pandoc. It allows us to authoer documents as plain text mardkwon or Jupyter notebooks and render high-quality articles, reports, presentations, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.\nGitHub is a only developer platform which we utilize to open source our codebase, mangage projects, allow issue submissions, have discussions and host our website. The majority of GitHub features are free for academics.\nTidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. We use these packages and other packages within this ecosystem to do solve problems that involve data management, visualization, dashboards and build packages."
+  },
+  {
+    "objectID": "about.html#contribute",
+    "href": "about.html#contribute",
+    "title": "About UHC Analytics Corner",
+    "section": "Contribute",
+    "text": "Contribute\nYou can contribute in many ways. More details will come but the general idea is:\n\nBy opening issues to provide feedback and share ideas.\nBy submitting Pull Request (PR) to fix opened issues\nBy submitting Pull Request (PR) to suggest new features (it is considered good practice to open an issue for discussion before working on a pull request for a new feature)."
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "Open Source License",
     "section": "",
-    "text": "HR Database Information\n\nSchemaDepartmentsJobsEmployees\n\n\n\n\n\n\nerDiagram\n  departments ||--o{ employees : has\n  jobs ||--o{ employees : has\n  employees ||--o{ employees : manages \n\n  departments {\n    department_id INTEGER\n    department_name STRING\n    location_id INTEGER\n  }\n\n  jobs {\n    job_id INTEGER\n    job_title STRING\n    min_salary DOUBLE\n    max_salary DOUBLE\n  }\n\n  employees {\n    employee_id INTEGER\n    first_name STRING\n    last_name STRING\n    email STRING\n    phone_number STRING\n    hire_date STRING\n    job_id INTEGER\n    salary DOUBLE\n    manager_id INTEGER\n    department_id INTEGER\n  }\n\n\n\n\n\n\n\n\n\n\nselect * from departments ;\n\n\n\n\nselect * from jobs  ;\n\n\n\n\nselect * from employees ;\n\n\n\n\n\n\nSQL Queries\nExamples 1, 2, 3 are example SQL queries. Feel free to edit to play around!\n\nExample 1Example 2Example 3\n\n\nThis query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.\n\nSELECT first_name, last_name, salary\nFROM employees\nWHERE salary &gt; 10000;\n\n\n\nThis query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.\n\nSELECT e.first_name, e.last_name, e.salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nWHERE d.department_name = 'IT'\nORDER BY e.salary DESC;\n\n\n\nThis query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.\n\nSELECT d.department_name, SUM(e.salary) AS total_salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nGROUP BY d.department_name\nHAVING SUM(e.salary) &gt; 20000;"
+    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe language in this license page is adapted directly from Quarto’s license page. We admire the job that Quarto has done building an open-source community and hope that this policy will help us do the same.\n\n\nUHC Analytics Corner is open source software licensed under the MIT license. We believe that it’s better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science.\nThis project also makes use of several other open-source projects including:\n\n\n\nProject\nLicense\n\n\n\n\nQuarto\nGNU GPL v2\n\n\ntidyverse\nMIT"
   },
   {
-    "objectID": "pages/manuals/sql/introduction.html#relational-databases",
-    "href": "pages/manuals/sql/introduction.html#relational-databases",
-    "title": "Introduction to SQL",
-    "section": "Relational Databases",
-    "text": "Relational Databases\nAt it’s core a relational database is just a series of interconnected tables.\nWhile there is a lot of other functionality of databases, to grasp the basics of querying data you can think of it like a series of:\n\nexcel spreadsheets\nR/Python dataframes\nSAS datasets\n\nAll of the tables in a SQL database will connect to at least one other table in the database. It will be connected by a set of keys. These keys work similarly to ID columns that you might use when merging two datasets in your favorite analytic software.\n\n\n\nimage.png"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#advantages-of-relational-databases",
-    "href": "pages/manuals/sql/introduction.html#advantages-of-relational-databases",
-    "title": "Introduction to SQL",
-    "section": "Advantages of relational databases",
-    "text": "Advantages of relational databases\n\nData can be centrally stored\nData types and constraints are enforced\nData is consistent and available to everyone with access\nIf the data is relatively large, you can do a lot of the transformations on the database server\n\nThere are plenty of other advantages not discussed here, but they will mostly not come up in this workshop."
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#keywords-in-the-select-statement",
-    "href": "pages/manuals/sql/introduction.html#keywords-in-the-select-statement",
-    "title": "Introduction to SQL",
-    "section": "Keywords in the SELECT Statement",
-    "text": "Keywords in the SELECT Statement\nThere are plenty of keywords or functions you can use in the select statement to modify the output.\nFor example, the top keyword will let you pick the first N rows of a query\nSELECT TOP 5 GeoId, FIPS, PhiladelphiaTract\nFROM Tract\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n10003000100\n10003\n0\n\n\n1\n10003000200\n10003\n0\n\n\n2\n10003000300\n10003\n0\n\n\n3\n10003000400\n10003\n0\n\n\n4\n10003000500\n10003\n0"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#where-clauses",
-    "href": "pages/manuals/sql/introduction.html#where-clauses",
-    "title": "Introduction to SQL",
-    "section": "Where Clauses",
-    "text": "Where Clauses\nUsed for subsetting the table\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n42101000100\n42101\n1\n\n\n1\n42101000200\n42101\n1\n\n\n2\n42101000300\n42101\n1\n\n\n3\n42101000400\n42101\n1\n\n\n4\n42101000500\n42101\n1\n\n\n...\n...\n...\n...\n\n\n1168\n42101002802\n42101\n1\n\n\n1169\n42101002701\n42101\n1\n\n\n1170\n42101980600\n42101\n1\n\n\n1171\n42101036501\n42101\n1\n\n\n1172\n42101000801\n42101\n1\n\n\n\n\n1173 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#searching-for-strings",
-    "href": "pages/manuals/sql/introduction.html#searching-for-strings",
-    "title": "Introduction to SQL",
-    "section": "Searching for Strings",
-    "text": "Searching for Strings\nIn some database systems, string conditionals are case sensitive (but not in the database we are using today).\nSELECT *\nFROM Neighborhood\nWHERE Neighborhood='University City'\n\n\n\n\n\n\n\n\n\nNeighborhoodId\nNeighborhood\nShape_Leng\nShape_Area\n\n\n\n\n0\n10\nUniversity City\n11830.311523\n5777707.5"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#other-operators",
-    "href": "pages/manuals/sql/introduction.html#other-operators",
-    "title": "Introduction to SQL",
-    "section": "Other Operators",
-    "text": "Other Operators\nYou can also use other operators such as &gt;, &gt;=, &lt;, &lt;=, IS NULL, IS NOT NULL, BETWEEN, and LIKE to filter the results.\nSELECT *\nFROM Weather\nWHERE AvgTemp &gt; 10\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n4\n24709\n2005\nApril\n4\n12.572927\n19.015528\n6.131508\n127.517159\n0.807038\n14.233975\n3.769631\n\n\n1\n5\n24709\n2005\nMay\n5\n14.665885\n20.930977\n8.402382\n106.256607\n0.365076\n13.969968\n7.882780\n\n\n2\n6\n24709\n2005\nJune\n6\n22.697632\n28.167263\n17.229803\n95.863174\n0.336816\n17.135292\n17.337898\n\n\n3\n7\n24709\n2005\nJuly\n7\n25.349329\n30.702368\n19.997959\n128.219376\n0.125650\n18.210075\n20.690350\n\n\n4\n8\n24709\n2005\nAugust\n8\n25.118080\n30.377020\n19.860121\n80.542473\n0.119305\n17.822693\n20.596968\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n184960\n311754\n24553\n2019\nJune\n6\n23.078955\n28.078943\n18.079168\n153.255753\n3.321621\n21.594011\n14.780686\n\n\n184961\n311755\n24553\n2019\nJuly\n7\n26.948427\n31.952065\n21.944790\n141.174179\n3.665261\n26.108957\n19.386669\n\n\n184962\n311756\n24553\n2019\nAugust\n8\n25.102762\n29.906923\n20.298605\n153.159454\n3.060116\n22.294205\n18.023926\n\n\n184963\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n184964\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n\n\n184965 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE NumMonth BETWEEN 4 AND 7\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n4\n24709\n2005\nApril\n4\n12.572927\n19.015528\n6.131508\n127.517159\n0.807038\n14.233975\n3.769631\n\n\n1\n5\n24709\n2005\nMay\n5\n14.665885\n20.930977\n8.402382\n106.256607\n0.365076\n13.969968\n7.882780\n\n\n2\n6\n24709\n2005\nJune\n6\n22.697632\n28.167263\n17.229803\n95.863174\n0.336816\n17.135292\n17.337898\n\n\n3\n7\n24709\n2005\nJuly\n7\n25.349329\n30.702368\n19.997959\n128.219376\n0.125650\n18.210075\n20.690350\n\n\n4\n16\n24704\n2005\nApril\n4\n12.661152\n18.981770\n6.341870\n117.991402\n0.956501\n14.247961\n3.695716\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311743\n24468\n2019\nJuly\n7\n26.938503\n31.664860\n22.212286\n153.382187\n3.600305\n24.800777\n19.531960\n\n\n103916\n311752\n24553\n2019\nApril\n4\n14.466883\n19.849751\n9.084216\n111.233406\n2.333102\n13.814125\n5.315979\n\n\n103917\n311753\n24553\n2019\nMay\n5\n18.673878\n23.456200\n13.891560\n199.818741\n2.292322\n15.252146\n11.842346\n\n\n103918\n311754\n24553\n2019\nJune\n6\n23.078955\n28.078943\n18.079168\n153.255753\n3.321621\n21.594011\n14.780686\n\n\n103919\n311755\n24553\n2019\nJuly\n7\n26.948427\n31.952065\n21.944790\n141.174179\n3.665261\n26.108957\n19.386669\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE Month LIKE '%ber'\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n9\n24709\n2005\nSeptember\n9\n21.901575\n28.985405\n14.819284\n12.058510\n0.418603\n21.757061\n15.548416\n\n\n1\n10\n24709\n2005\nOctober\n10\n14.305144\n19.338591\n9.272705\n194.581848\n0.259238\n9.357236\n9.816828\n\n\n2\n11\n24709\n2005\nNovember\n11\n9.382105\n15.985790\n2.779873\n92.569778\n0.383877\n10.237570\n3.132024\n\n\n3\n12\n24709\n2005\nDecember\n12\n1.201546\n6.182182\n-3.778183\n89.817223\n0.303204\n4.526224\n-4.469576\n\n\n4\n21\n24704\n2005\nSeptember\n9\n22.105551\n28.798840\n15.413923\n11.901628\n0.840519\n21.380234\n15.392494\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311748\n24468\n2019\nDecember\n12\n3.495770\n7.363856\n-0.372222\n144.789124\n1.022133\n4.719750\n-2.270247\n\n\n103916\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n103917\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n103918\n311759\n24553\n2019\nNovember\n11\n6.222103\n11.659143\n0.785063\n46.920822\n1.280842\n7.820876\n-1.232803\n\n\n103919\n311760\n24553\n2019\nDecember\n12\n3.497163\n7.653925\n-0.659598\n141.996704\n0.966673\n4.818423\n-2.022106\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE Month IN ('September', 'October', 'November', 'December')\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n9\n24709\n2005\nSeptember\n9\n21.901575\n28.985405\n14.819284\n12.058510\n0.418603\n21.757061\n15.548416\n\n\n1\n10\n24709\n2005\nOctober\n10\n14.305144\n19.338591\n9.272705\n194.581848\n0.259238\n9.357236\n9.816828\n\n\n2\n11\n24709\n2005\nNovember\n11\n9.382105\n15.985790\n2.779873\n92.569778\n0.383877\n10.237570\n3.132024\n\n\n3\n12\n24709\n2005\nDecember\n12\n1.201546\n6.182182\n-3.778183\n89.817223\n0.303204\n4.526224\n-4.469576\n\n\n4\n21\n24704\n2005\nSeptember\n9\n22.105551\n28.798840\n15.413923\n11.901628\n0.840519\n21.380234\n15.392494\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311748\n24468\n2019\nDecember\n12\n3.495770\n7.363856\n-0.372222\n144.789124\n1.022133\n4.719750\n-2.270247\n\n\n103916\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n103917\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n103918\n311759\n24553\n2019\nNovember\n11\n6.222103\n11.659143\n0.785063\n46.920822\n1.280842\n7.820876\n-1.232803\n\n\n103919\n311760\n24553\n2019\nDecember\n12\n3.497163\n7.653925\n-0.659598\n141.996704\n0.966673\n4.818423\n-2.022106\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT TractId, CTVNOORA\nFROM Crime\nWHERE CTVNOORA IS NULL\n\n\n\n\n\n\n\n\n\nTractId\nCTVNOORA\n\n\n\n\n0\n24287\nNone\n\n\n1\n24287\nNone\n\n\n2\n24287\nNone\n\n\n3\n24287\nNone\n\n\n4\n24287\nNone\n\n\n...\n...\n...\n\n\n136\n24468\nNone\n\n\n137\n24468\nNone\n\n\n138\n24468\nNone\n\n\n139\n24468\nNone\n\n\n140\n24468\nNone\n\n\n\n\n141 rows × 2 columns\n\n\n\nSELECT TractId, CTVNOORA\nFROM Crime\nWHERE CTVNOORA IS NOT NULL\n\n\n\n\n\n\n\n\n\nTractId\nCTVNOORA\n\n\n\n\n0\n24203\n166.196228\n\n\n1\n24203\n123.891731\n\n\n2\n24203\n177.514786\n\n\n3\n24203\n155.269241\n\n\n4\n24203\n106.817467\n\n\n...\n...\n...\n\n\n5998\n24553\n193.263397\n\n\n5999\n24553\n193.263397\n\n\n6000\n24553\n143.567093\n\n\n6001\n24553\n226.394257\n\n\n6002\n24553\n353.395905\n\n\n\n\n6003 rows × 2 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#combining-multiple-conditions",
-    "href": "pages/manuals/sql/introduction.html#combining-multiple-conditions",
-    "title": "Introduction to SQL",
-    "section": "Combining Multiple Conditions",
-    "text": "Combining Multiple Conditions\nUse AND and OR operators to combine conditionals together\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1 AND LowPop=0\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n42101000100\n42101\n1\n\n\n1\n42101000200\n42101\n1\n\n\n2\n42101000300\n42101\n1\n\n\n3\n42101000400\n42101\n1\n\n\n4\n42101000500\n42101\n1\n\n\n...\n...\n...\n...\n\n\n1114\n42101003001\n42101\n1\n\n\n1115\n42101002802\n42101\n1\n\n\n1116\n42101002701\n42101\n1\n\n\n1117\n42101036501\n42101\n1\n\n\n1118\n42101000801\n42101\n1\n\n\n\n\n1119 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#be-careful-with-ors",
-    "href": "pages/manuals/sql/introduction.html#be-careful-with-ors",
-    "title": "Introduction to SQL",
-    "section": "Be careful with ORs",
-    "text": "Be careful with ORs\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1 OR StateFP='34' AND LowPop=0\n\nIS NOT equivalent to\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE (PhiladelphiaTract=1 OR StateFP='34') AND LowPop=0\n\n\n\nThe first query returns 2627 rows but the second returns 2573. Why?\n\n\n\nHint\nThe number of New Jersey tracts stays the same in the results, but the number of Pennsylvania census tracts goes down in the second query.\n\n\n\n\n\n\n\n\n\nStateFP\nPhiladelphiaTract\nCount\n\n\n\n\n0\n34\n0\n1454\n\n\n1\n42\n1\n1173\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStateFP\nPhiladelphiaTract\nCount\n\n\n\n\n0\n34\n0\n1454\n\n\n1\n42\n1\n1119\n\n\n\n\n\n\n\n\n\nAnswer\nThis conditional pulls all Philadelphia census tracts and only New Jersey census tracts that are not low population.\nWHERE PhiladelphiaTract=1 OR StateFP='34' AND LowPop=0\nThis conditional pulls all low population census tracts in Philadelphia and New Jersey. The second query removes the low population Philadelphia tracts that were included in the first query.\nWHERE (PhiladelphiaTract=1 OR StateFP='34') AND LowPop=0"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#chaining-joins",
-    "href": "pages/manuals/sql/introduction.html#chaining-joins",
-    "title": "Introduction to SQL",
-    "section": "Chaining Joins",
-    "text": "Chaining Joins\nYou can join tables on other tables that have been joined in the query to chain tables together.\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n21474\n34005700104\nRichmond - Bridesburg\n\n\n1\n21475\n34005700200\nWissinoming - Tacony\n\n\n2\n21492\n34005700603\nTorresdale S. - Pennypack Park\n\n\n3\n21497\n34005700800\nTorresdale S. - Pennypack Park\n\n\n4\n21595\n34007600500\nCenter City E\n\n\n...\n...\n...\n...\n\n\n2746\n26338\n34007610800\nRichmond - Bridesburg\n\n\n2747\n26378\n34005700800\nTorresdale S. - Pennypack Park\n\n\n2748\n26528\n34007600700\nCenter City E\n\n\n2749\n26528\n34007600700\nLower Kensington\n\n\n2750\n26528\n34007600700\nNorthern Liberties - West Kensington\n\n\n\n\n2751 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#order-by",
-    "href": "pages/manuals/sql/introduction.html#order-by",
-    "title": "Introduction to SQL",
-    "section": "Order By",
-    "text": "Order By\nSort the result of a query by a column or columns\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n24997\n42101034502\nBustleton\n\n\n1\n25034\n42101034501\nBustleton\n\n\n2\n25176\n42101980300\nBustleton\n\n\n3\n25177\n42101035500\nBustleton\n\n\n4\n25179\n42101035900\nBustleton\n\n\n...\n...\n...\n...\n\n\n996\n26022\n42101031501\nWissinoming - Tacony\n\n\n997\n26154\n34005700303\nWissinoming - Tacony\n\n\n998\n26156\n34005700104\nWissinoming - Tacony\n\n\n999\n26246\n34005700103\nWissinoming - Tacony\n\n\n1000\n26324\n34005700200\nWissinoming - Tacony\n\n\n\n\n1001 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#order-by-multiple-columns",
-    "href": "pages/manuals/sql/introduction.html#order-by-multiple-columns",
-    "title": "Introduction to SQL",
-    "section": "Order By Multiple Columns",
-    "text": "Order By Multiple Columns\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood, t.GeoId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n25699\n42091200105\nBustleton\n\n\n1\n26103\n42091201501\nBustleton\n\n\n2\n25975\n42101034200\nBustleton\n\n\n3\n25976\n42101034400\nBustleton\n\n\n4\n25034\n42101034501\nBustleton\n\n\n...\n...\n...\n...\n\n\n996\n25111\n42101033000\nWissinoming - Tacony\n\n\n997\n26020\n42101033101\nWissinoming - Tacony\n\n\n998\n25259\n42101038000\nWissinoming - Tacony\n\n\n999\n25597\n42101038100\nWissinoming - Tacony\n\n\n1000\n25109\n42101989100\nWissinoming - Tacony\n\n\n\n\n1001 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#change-the-sort-direction",
-    "href": "pages/manuals/sql/introduction.html#change-the-sort-direction",
-    "title": "Introduction to SQL",
-    "section": "Change the Sort Direction",
-    "text": "Change the Sort Direction\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood DESC, t.GeoId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n26246\n34005700103\nWissinoming - Tacony\n\n\n1\n26156\n34005700104\nWissinoming - Tacony\n\n\n2\n26324\n34005700200\nWissinoming - Tacony\n\n\n3\n26154\n34005700303\nWissinoming - Tacony\n\n\n4\n25278\n42101018400\nWissinoming - Tacony\n\n\n...\n...\n...\n...\n\n\n996\n26011\n42101035702\nBustleton\n\n\n997\n25179\n42101035900\nBustleton\n\n\n998\n25180\n42101036000\nBustleton\n\n\n999\n25569\n42101980200\nBustleton\n\n\n1000\n25176\n42101980300\nBustleton\n\n\n\n\n1001 rows × 3 columns"
-  },
-  {
-    "objectID": "pages/manuals/sql/introduction.html#importing-directly-into-statistical-software",
-    "href": "pages/manuals/sql/introduction.html#importing-directly-into-statistical-software",
-    "title": "Introduction to SQL",
-    "section": "Importing Directly into Statistical Software",
-    "text": "Importing Directly into Statistical Software\nA lot of the software we use for data analysis can interact directly with SQL databases using the Open Database Connectivity (ODBC) protocol. You can pull directly from the database into an object in the piece of software of your choice. Here are a few examples.\n\nPython\nThere are several options for connecting to a database in python. The below example uses pyodbc, but another common library is SQLAlchemy\nimport pyodbc\n\n# must have the correct ODBC driver installed, this should have been installed automatically when you installed SQL Server Management Studio\ncnxn = pyodbc.connect('{ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\ncn = cnxn.cursor()\n\ncn.execute(\"SELECT * FROM Tract\")\n\nresults = cn.fetchall()\n\n\nR\nlibrary('RODBC')\n\ncnxn &lt;- odbcDriverConnect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\nsqlQuery(cnxn, \"SELECT * FROM Tract\")\n\n\nSAS\nhttps://support.sas.com/en/software/sas-odbc-drivers.html#c1d85777-acb8-4b35-a4cd-0a97a8060229\n\n\nArcGIS Pro\n\nOpen the catalog pane\nRight click databases and select “New Database Connection”\nFill in the dialog box and sign-in when prompted\n\nNow you can add geographic data to a map or export to an attribute table for use in your project."
-  },
-  {
-    "objectID": "pages/manuals/git-github/why-summary.html",
-    "href": "pages/manuals/git-github/why-summary.html",
-    "title": "Why Git/GitHub?",
+    "objectID": "pages/blog/index.html",
+    "href": "pages/blog/index.html",
+    "title": "Blog",
     "section": "",
-    "text": "Using a well established Git and Git platform (GitHub) is better than tracking versions/files manually because:\n\nNothing that is committed/saved to version control is ever lost. Its possible to go back in time time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.\nAs we have this record of who made what changes when, we know who to ask if we have questions later on, and, if needed, revert to a previous version, much like the “undo” feature in an editor.\nWhen several people collaborate in the same project, it’s possible to accidentally overlook or overwrite someone’s changes. The version control system automatically detects potential conflicts between one person’s work and another’s and notifies users.\nGitHub issues/projects/branches provide ergonomic solutions to common project management challenges.\n\nGit/GitHub can help us bring software engineering best practices to public health to enable us to better respond to complex public health problems in a manner that is timely, organized, transparent and reproducible."
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nWorking with Geo database\n\n\n\n\n\n\n\nspatial\n\n\nboundaries\n\n\n\n\nThis post will introduce geodatabases and a basic workflow to work with this format within R.\n\n\n\n\n\n\nNov 20, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nWorking with .XML in R\n\n\n\n\n\n\n\ntidy data\n\n\nXML\n\n\n\n\nThis post discusses how to use R programming language to read, parse, and manipulate XML files, covering two R packages and techniques for accessing elements and converting XML files to R data structures like tibbles and data.frames. In this post we will with two packages xml2 and XML.\n\n\n\n\n\n\nAug 31, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nData Science Working Group: Hello\n\n\nIntroduction to group vision, tooling and next steps.\n\n\n\n\n\n\n\n\n\nJul 6, 2023\n\n\nUsama Bilal, Ran Li\n\n\n\n\n\n\n  \n\n\n\n\nWebR: Running R in the Browser!\n\n\n\n\n\n\n\nWebR\n\n\n\n\nState of WebAssembly (Wasm) based R in 2023; testing out this new development!\n\n\n\n\n\n\nJun 1, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nChatGPT and AI: use-cases and potential\n\n\n\n\n\n\n\nChatGPT\n\n\n\n\nAI generate text describing how AI could potentially be used in research at the UHC…\n\n\n\n\n\n\nMay 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nDigital Journalism ideas for UHC\n\n\n\n\n\n\n\nShiny\n\n\n\n\nIntroduction to types of digital journalism content and potential uses for the UHC.\n\n\n\n\n\n\nFeb 10, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nShinyappsio Usage and projected needs\n\n\n\n\n\n\n\nShiny\n\n\n\n\nLooking at pas 90 days of Shinyappsio consumption to inform 2023 renewal.\n\n\n\n\n\n\nFeb 6, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nHow to get Philadelphia zcta boundaries with TIGRIS\n\n\n\n\n\n\n\nvisualization\n\n\ngeography\n\n\ncensus\n\n\nboundaries\n\n\ntigris\n\n\n\n\nUsing the TIGRIS package it is very easy to get shape files and use them quickly for analysis.\n\n\n\n\n\n\nJan 4, 2023\n\n\nRan Li\n\n\n\n\n\n\n  \n\n\n\n\nVisualization faceted by state\n\n\n\n\n\n\n\nvisualization\n\n\ninfographic\n\n\n\n\nPrototype a Abortion and Paid Family Leave Figure using geofacet\n\n\n\n\n\n\nAug 10, 2022\n\n\nRan Li\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "pages/manuals/git-github/teaching-thoughts.html",
-    "href": "pages/manuals/git-github/teaching-thoughts.html",
-    "title": "Overview",
+    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
+    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
+    "title": "Visualization faceted by state",
     "section": "",
-    "text": "A comprehensive Git and GitHub could take days. We are approaching this workshop with the two following ideas\n\n80/20 rule Focus on teaching a fundamental git workflow modify-add-commit that provides 80% of what you will need without touching on more advanced topics.\nGraphical interface over command line Teaching Git/GitHub has a steep enough learning curve. Teaching to an audience that doesn’t use command line we will teach using GitHub Desktop (a graphical user interface to do Git).\n\nDisclaimer: There are many ways to use and teach Git and and many Git platforms available. This course not meant to be comprehensive. It is just one person sharing how they learned to use version control.\n\n\n\n\nMost git workshops"
+    "text": "https://github.com/Drexel-UHC/analytics-corner/issues/7\n\nI’m hoping to make a figure that shows different policy statuses of states (abortion ban, proposed abortion ban, no abortion ban; Paid family leave, no paid family leave; paid family leave preemption, no preemption), with the states in the location of the US map…\nI think geofacet mightttt get us close to the figure I’m hoping to make, but not quitee there."
   },
   {
-    "objectID": "pages/manuals/git-github/precedent.html",
-    "href": "pages/manuals/git-github/precedent.html",
-    "title": "Who else uses Git/GitHub",
+    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#plot",
+    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#plot",
+    "title": "Visualization faceted by state",
+    "section": "Plot",
+    "text": "Plot\n\n\nCode\n## Set coordinates\nheight = 10 \npadding_x = 1\nwidth = 8\nrect_xmin = padding_x\nrect_xmax = width + padding_x\nrect_x_mean = mean(c(rect_xmin,rect_xmax))\nrect_ymin = height/3\nrect_ymax = rect_ymin*2\n\n## Manual colors for data features\nabortion_colors = c(\"0\" = \"#e7e8e9\",\n                    \"1\" = \"#A6A7AA\", \n                    \"2\" = \"#757679\",\n                    \"3\" = \"#000000\")\n\nxwalk_colors = c(abortion_colors,\n                 \"white\" = \"white\",\n                 \"black\" = \"black\",\n                 \"0_family_leave\" = \"white\",\n                 \"1_family_leave\" = \"#00aeef\",\n                 \"0_preemption\" = \"white\",\n                 \"1_preemption\" = \"#f1592a\")     \n\n## Operationalize data for plot\ndata_processed = data %&gt;% \n  ## Append coordinates to data for geom_polygon\n  mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),\n         top_triangle_y = list(c(rect_ymax,rect_ymax,height)),\n         bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),\n         bottom_triangle_y = list(c(rect_ymin,rect_ymin,0))\n  ) %&gt;% \n  unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) %&gt;% \n  ## operationalize colors\n  mutate(\n    state_text = ifelse(as.numeric(abortion_ban_risk)&gt;1, \"white\",\"black\"),\n    family_leave = paste0(family_leave,\"_family_leave\"),\n    preemption = paste0(preemption,\"_preemption\"))\n\n\n## create a function to make basic shapes\ngeom_hex_for_alina = function(gg){\n  gg +\n    ## add rectangle\n    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,   \n                  ymin = rect_ymin, ymax = rect_ymax, \n                  fill = abortion_ban_risk)) +\n    ## Add state abbrv text\n    geom_text(aes(label = state, color = state_text),\n              x = height/2, y = height/2,\n              size = 3)+\n    ## Top triangle (family leave)\n    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y, fill = family_leave)) + \n    ## Bottom triangle (preemption)\n    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y, fill = preemption)) +   \n    ## Manual colors\n    scale_fill_manual(values = xwalk_colors) +\n    scale_color_manual(name = \"state_text\", values = xwalk_colors) +\n    theme_void()+ \n    theme(\n      ## Completely remove facet labels\n      strip.background = element_blank(),\n      strip.text.x = element_blank(),\n      ## Remove legend\n      legend.position = 'none'\n    )\n}\n\n## Test facet\nplot = data_processed %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_for_alina() +\n  facet_geo(~ state, grid = \"us_state_grid2\") +\n  theme(plot.margin = margin(1, 1, 1, 1, \"cm\"))\nplot"
+  },
+  {
+    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-1-rectangle",
+    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-1-rectangle",
+    "title": "Visualization faceted by state",
+    "section": "Legend 1: Rectangle",
+    "text": "Legend 1: Rectangle\n\n\nCode\nside = 12\npadding = 0.5 \nrect_width =  (side - 2*padding)/4\nlegend_y = 5\nlegend_height = 3.25\nlegend_mid = legend_y + legend_height/2\n\ndfa = tibble(xmin = padding + 0:3*rect_width,\n             xmax = padding + 1:4*rect_width,\n             ymin = legend_y,\n             ymax = legend_y + legend_height,\n             fill = unname(abortion_colors)) %&gt;% \n  mutate(xmid =(xmin +xmax)/2)\nlegend_risk = ggplot() + \n  ## Container (10 by 10)\n  geom_rect(aes(xmin = 0, xmax = 10, \n                ymin = 0, ymax = 10),\n            fill = \"white\") + \n  ## Legend for rectangles\n  geom_rect(dfa, mapping = \n              aes(xmin = xmin, xmax = xmax, \n                  ymin = ymin, ymax = ymax),\n            fill = dfa$fill) + \n  ## Left label\n  geom_text(aes(label = \"Accessible\\n(Protected)\", x = xmid),\n            x = dfa[1,]$xmid, y = legend_mid,\n            size = 2.9) +\n  ## Center label\n  geom_text(aes(label = \"Accessible\\n(Not protected)\"),\n            x = dfa[2,]$xmid, y = legend_mid ,\n            size = 2.9) +\n  ## Rigth label\n  geom_text(aes(label = \"Hostile\"),\n            x = dfa[3,]$xmid, y = legend_mid ,\n            size = 3,\n            color = 'white') +\n  ## Rigth label\n  geom_text(aes(label = \"Illegal\"),\n            x = dfa[4,]$xmid, y = legend_mid,\n            size = 3,\n            color = \"white\") +\n  theme_void()\n\ntitle_rect &lt;- ggdraw() + \n  draw_label(\n    \"Rectangle show state\\nattitude towards abortion\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme(\n    # add margin on the left of the drawing canvas,\n    # so title is aligned with left edge of first plot\n    plot.margin = margin(6, 0, 0, 0)\n  )\nrect_legend = plot_grid(\n  title_rect, legend_risk,\n  ncol = 1,\n  rel_heights = c(2, 8)\n)\n\nrect_legend"
+  },
+  {
+    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-2-paid-family-leave",
+    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-2-paid-family-leave",
+    "title": "Visualization faceted by state",
+    "section": "Legend 2: Paid family leave",
+    "text": "Legend 2: Paid family leave\n\n\nCode\n## Create funciton to layout for legend\ngeom_hex_legend_for_alina = function(gg){\n  gg +\n    geom_rect(aes(xmin =  0 - 1*height*1.4, xmax = height + 1*height*1.4,   \n                  ymin = 0 - 1*height, ymax = height + 1*height),\n              fill = \"white\") \n}\n\n## Legend 2: Blue triangle\ntitle_hex_blue &lt;- ggdraw() + \n  draw_label(\n    \"Blue Triangles show \\n paid family policy\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme( plot.margin = margin(5, 0, 0, 0))\nlegend_hex_blue = data_processed %&gt;% \n  filter(state == \"WA\") %&gt;% \n  mutate(state = \"\") %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_legend_for_alina() %&gt;% \n  geom_hex_for_alina()\nhex_legend_blue = plot_grid(\n  title_hex_blue, legend_hex_blue,\n  ncol = 1,\n  rel_heights = c(2, 8)\n)\n\nhex_legend_blue"
+  },
+  {
+    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-3-preemption",
+    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-3-preemption",
+    "title": "Visualization faceted by state",
+    "section": "Legend 3: Preemption",
+    "text": "Legend 3: Preemption\n\n\nCode\n## Legend 3: Red triangle \ntitle_hex_red &lt;- ggdraw() + \n  draw_label(\n    \"Red triangles show state\\npreemption of paid\\nfamily policies\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme(\n    plot.margin = margin(5, 0, 0, 0)\n  )\nlegend_hex_red = data_processed %&gt;% \n  filter(state == \"FL\") %&gt;% \n  mutate(state = \"\") %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_legend_for_alina() %&gt;% \n  geom_hex_for_alina()\nhex_legend_red = plot_grid(\n  title_hex_red, legend_hex_red,\n  ncol = 1,\n  rel_heights = c(3, 8)\n)\nhex_legend_red"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html",
+    "title": "ChatGPT and AI: use-cases and potential",
     "section": "",
-    "text": "Many of our friends use Git and GitHub to share data and software. Here are some examples."
+    "text": "The advent of artificial intelligence (AI) has significantly impacted various fields, including public health research. One of the most promising AI technologies in this context is ChatGPT, developed by OpenAI. This powerful language model, based on the GPT-4 architecture, offers a wide range of potential applications, especially for institutions like the Drexel Urban Health Collaborative (UHC). In this blog post, we will delve into what ChatGPT is and explore its potential use cases for public health research at the UHC."
   },
   {
-    "objectID": "pages/manuals/git-github/precedent.html#nyc-public-health-department",
-    "href": "pages/manuals/git-github/precedent.html#nyc-public-health-department",
-    "title": "Who else uses Git/GitHub",
-    "section": "3.1 NYC Public Health Department",
-    "text": "3.1 NYC Public Health Department\nThrough the COVID pandemic the NYC health departments was one of the best sources of city level COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/nychealth"
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Understanding ChatGPT",
+    "text": "Understanding ChatGPT\nChatGPT is an AI-powered language model that excels in understanding and generating human-like text. It can analyze and respond to text inputs, offering contextual understanding and relevant responses. Built on the GPT-4 architecture, it has been trained on vast amounts of data, which enables it to provide insightful and accurate information on various topics. Its impressive capabilities make it a valuable resource in numerous fields, including public health research."
   },
   {
-    "objectID": "pages/manuals/git-github/precedent.html#johns-hopkins-covid-data",
-    "href": "pages/manuals/git-github/precedent.html#johns-hopkins-covid-data",
-    "title": "Who else uses Git/GitHub",
-    "section": "3.2 Johns Hopkins Covid data",
-    "text": "3.2 Johns Hopkins Covid data\nJohns Hopkins was one of the best national level data sources for COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/CSSEGISandData"
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Potential Use Cases for Public Health Research at the Drexel UHC",
+    "text": "Potential Use Cases for Public Health Research at the Drexel UHC\n\n1. Rapid Data Analysis and Interpretation\nPublic health researchers often deal with large datasets that require significant time and effort to analyze. ChatGPT can assist researchers in rapidly interpreting and processing these datasets, providing valuable insights and identifying patterns. By streamlining data analysis, ChatGPT allows researchers to focus more on formulating and implementing data-driven interventions.\n\n\n2. Automated Coding of Qualitative Data\nQualitative data is a vital component of public health research, offering nuanced perspectives on people’s experiences and behaviors. However, coding and analyzing qualitative data can be labor-intensive. ChatGPT can automate the coding process, reducing the time and resources required for this task while maintaining high-quality results. Researchers can leverage ChatGPT’s natural language understanding capabilities to identify themes and patterns in qualitative data quickly and accurately.\n\n\n3. Enhancing Health Communication\nEffective health communication is essential for promoting public health awareness and encouraging positive behavior change. ChatGPT can be used to create tailored, engaging, and easy-to-understand health messages for diverse audiences. By utilizing AI-generated content, public health organizations can improve their outreach efforts and better connect with communities.\n\n\n4. Identifying Emerging Trends and Sentiments\nSocial media platforms and online forums are valuable sources of information on public opinions and concerns related to health. ChatGPT can be employed to analyze and monitor these online spaces, identifying emerging trends, and gauging public sentiment on specific health issues. This information can help public health researchers to understand and address community concerns more effectively.\n\n\n5. Assisting in Grant Proposal Writing\nSecuring funding is an integral aspect of public health research. ChatGPT can support researchers in writing persuasive grant proposals by offering suggestions and improving the overall quality of the text. This assistance can increase researchers’ chances of obtaining the necessary funds for their projects."
   },
   {
-    "objectID": "pages/manuals/git-github/precedent.html#esri",
-    "href": "pages/manuals/git-github/precedent.html#esri",
-    "title": "Who else uses Git/GitHub",
-    "section": "3.3 ESRI",
-    "text": "3.3 ESRI\nSome of our favorite GIS software is developed with GitHub.\nhttps://github.com/Esri"
-  },
-  {
-    "objectID": "pages/manuals/git-github/precedent.html#tidyverse",
-    "href": "pages/manuals/git-github/precedent.html#tidyverse",
-    "title": "Who else uses Git/GitHub",
-    "section": "3.4 Tidyverse",
-    "text": "3.4 Tidyverse\nSome of our favorite data packages is utilizes GitHub to open-sourced developement.\nhttps://github.com/tidyverse/tidyverse/releases"
-  },
-  {
-    "objectID": "pages/manuals/git-github/precedent.html#nasa",
-    "href": "pages/manuals/git-github/precedent.html#nasa",
-    "title": "Who else uses Git/GitHub",
-    "section": "3.5 NASA",
-    "text": "3.5 NASA\n🚀🚀🚀🚀🚀🚀\nhttps://github.com/tidyverse/nasa"
-  },
-  {
-    "objectID": "pages/manuals/git-github/learning-objectives.html",
-    "href": "pages/manuals/git-github/learning-objectives.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Learn key terms:\n\nGit is a version control software that tracks file changes.\nRepository (repo) is a folder that contains files tracked by git.\nGitHub online platform for syncing git repos and project management.\nGitHub Desktop local software to do git via a graphical user interface.\nmodify-add-commit-push-pull a basic git workflow that can get you 80% of the benefits of version control.\n\nGit actions we will learn to do via GitHub Desktop\n\ninit Create a repo\nclone Make a clone/copy of an existing remote repo to local machine\nstatus list of files changes relative previous version.\nlog entire history\ndiff show changes in a file compared to previous version.\nadd stage selected changes for next commit\ncommit save selected changes as a version\npull sync local repo with remote repo\npush push local repo changes to remote repo\n\nGitHub features\n\nIssues a GitHub feature for organizing commits."
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html",
-    "href": "pages/manuals/git-github/init.html",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "",
-    "text": "Key Terms"
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#sign-into-github-website",
-    "href": "pages/manuals/git-github/init.html#sign-into-github-website",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "1 Sign into GitHub website",
-    "text": "1 Sign into GitHub website\n\nOpen a browser.\nVisit https://github.com/\nSign in"
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#click-new-repository",
-    "href": "pages/manuals/git-github/init.html#click-new-repository",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "2 Click New Repository",
-    "text": "2 Click New Repository"
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#fill-out-repository-name",
-    "href": "pages/manuals/git-github/init.html#fill-out-repository-name",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "3. Fill out repository name",
-    "text": "3. Fill out repository name\nCreate a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be my-first-repo"
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#select-visibility-setting",
-    "href": "pages/manuals/git-github/init.html#select-visibility-setting",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "3. Select Visibility Setting",
-    "text": "3. Select Visibility Setting\nBy default I recommend private; unless your goal is to share data or code publicly.\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#add-a-readme-file",
-    "href": "pages/manuals/git-github/init.html#add-a-readme-file",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "4. Add a README file",
-    "text": "4. Add a README file\nREADME.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project."
-  },
-  {
-    "objectID": "pages/manuals/git-github/init.html#click-create-repository",
-    "href": "pages/manuals/git-github/init.html#click-create-repository",
-    "title": "Create a new repo on GitHub (init)",
-    "section": "5. Click Create Repository",
-    "text": "5. Click Create Repository\nNow that we have configured our settings we can click Create Repository to make the repo.\n\n\n\n\n\nYou should now be routed to your new repo on GitHub. 👏👏👏\n\n\n\n\n\nA few observations\n\nWe have only one file the README.md file\nWe only have one version/commit which is project initialization; this commit is identified by a hash key d4ff056.\n\nNow lets move on to clone or pull this repo from the cloud onto our local computer to make some changes with GitHub Desktop"
-  },
-  {
-    "objectID": "pages/manuals/git-github/git-vs-github-desktop.html",
-    "href": "pages/manuals/git-github/git-vs-github-desktop.html",
-    "title": "Git vs GitHub",
-    "section": "",
-    "text": "(a) Git\n\n\n\n\n\n\n\n(b) Github desktop\n\n\n\n\nFigure 1: Git vs GitHub Desktop\n\n\n\nGit Figure 1 (a) is a command line interface (CLI) tool which require you to interact by typing commands. It is harder to learn for users without CLI experience and the outputs are not as accessible.\nGitHub Desktop Figure 1 (a) a graphical user interface (GUI) tool that allows you to us Git without using the command line. We do Git actions by interacting with a user interface that is designed to be ergonomic and accessible. You can’t do all the things you can with CLI but again 80% of features are here!\n\n\n\n\n\n\n\nImportant\n\n\n\nFor this workshop. We will use GitHub Desktop to do Git."
-  },
-  {
-    "objectID": "pages/manuals/git-github/git-github.html",
-    "href": "pages/manuals/git-github/git-github.html",
-    "title": "GitHub Desktop",
-    "section": "",
-    "text": "Hello\n\n\nWorld"
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html",
-    "href": "pages/manuals/git-github/clone.html",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "",
-    "text": "Key Terms"
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html#open-github-desktop",
-    "href": "pages/manuals/git-github/clone.html#open-github-desktop",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "2.1 Open GitHub Desktop",
-    "text": "2.1 Open GitHub Desktop\nOpen the GitHub desktop app and click Clone a repository from the internet\n\nNote if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File &gt; Clone repository"
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
-    "href": "pages/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "2.2 Search for the repo you want to clone",
-    "text": "2.2 Search for the repo you want to clone\nSearch in the highlight input box for the name of your repo. For example, we are can start typing hello-my-first-repo which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices."
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
-    "href": "pages/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "2.3 Choose a local folder where to copy the repo",
-    "text": "2.3 Choose a local folder where to copy the repo\nYou should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!."
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html#click-clone",
-    "href": "pages/manuals/git-github/clone.html#click-clone",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "2.4 Click clone",
-    "text": "2.4 Click clone\nOnce you have your online repo and local folder selected then you can click Clone to start the cloning process."
-  },
-  {
-    "objectID": "pages/manuals/git-github/clone.html#ready-to-make-local-changes",
-    "href": "pages/manuals/git-github/clone.html#ready-to-make-local-changes",
-    "title": "2. Clone - copy online repo to local computer",
-    "section": "2.5 Ready to make local changes!",
-    "text": "2.5 Ready to make local changes!\nAfter the cloning process. Your GitHub desktop should now show the status of your newly cloned repository."
-  },
-  {
-    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html",
-    "href": "pages/manuals/git-github/case-study-project-transition-management.html",
-    "title": "Project managment",
-    "section": "",
-    "text": "There are many challenges aspects to building a collaborative coding project\n\nHow to communicate about code changes?\nHow to keep record of small details in a complex project?\nHow to have longer technical back and forth conversations while maintaining context throughout?\nHow to handle project transitions between staff changes?\n\nBelow we will use a private repository which cleans and synthesizes research from sensitive line level mortality data. A graduate research assistant wrote code to clean years 1990-2018 then graduate and is handed off to another RA to extend not only data range 1960-2020 but also to start synthesizing research. It is a great case study to show how Git/GitHub can help address the challenges above. It is a private repository so I will just show snippets."
-  },
-  {
-    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#project-challenges",
-    "href": "pages/manuals/git-github/case-study-project-transition-management.html#project-challenges",
-    "title": "Project managment",
-    "section": "",
-    "text": "There are many challenges aspects to building a collaborative coding project\n\nHow to communicate about code changes?\nHow to keep record of small details in a complex project?\nHow to have longer technical back and forth conversations while maintaining context throughout?\nHow to handle project transitions between staff changes?\n\nBelow we will use a private repository which cleans and synthesizes research from sensitive line level mortality data. A graduate research assistant wrote code to clean years 1990-2018 then graduate and is handed off to another RA to extend not only data range 1960-2020 but also to start synthesizing research. It is a great case study to show how Git/GitHub can help address the challenges above. It is a private repository so I will just show snippets."
-  },
-  {
-    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#github-issues-to-track-changes-and-details",
-    "href": "pages/manuals/git-github/case-study-project-transition-management.html#github-issues-to-track-changes-and-details",
-    "title": "Project managment",
-    "section": "2.2 GitHub Issues to track changes and details",
-    "text": "2.2 GitHub Issues to track changes and details\nScenario: @isabelderamos has a question about a specific part of the project.\n\nHow can @isabelderamos communicate this?\nHow can collaborators reply in a way which clearly communicates how and why the codebase was updated?\n\n✨GitHub issues\n\n\n\nFigure 1: @isabelderamos can notify the team of a thing that needs to be done by creating a GitHub issue. She error she is getting and provides some context to the source of the problem. GitHub will notify teamates Figure 2\n\n\n\n\n\n\n\n\n\n\nFigure 2: GitHub will notify all teammates (@usamabilal and @ran-codes) of a new issue via email. @ran-codes has an idea of what the issue is and pushes some changes to the code, see Figure 3\n\n\n\n\n\n\n\n\n\n\nFigure 3: @ran-codes makes two changes saved as commits with messages detailing progress. Importantly these changes/commits are linked to this issue and @isabelderamos can click each commit to see exact code changes, see Figure 4.\n\n\n\n\n\n\n\n\n\n\nFigure 4: Clicking the commit shows code differences compared to the previous version. We can see that icd10 code U02 was manually added to three GHE tiers by modifying the highlighted lines of code. Going back to the issue, see Figure 5\n\n\n\n\n\n\n\n\n\n\nFigure 5: Right after the commits (Figure 4), @ran-codes describes the changes he made to provide context for the code updates above.\n\n\n\n\n\n\n\n\n\n\nFigure 6: @isabelderamos pulls the changes from GitHub to her local computer. After checking code changes resolved error are fixed, @isabelderamos notifies the team everything is okay and closes the issue!\n\n\n\n\n\n\n\n\nImportant\n\n\n\nGitHub issues are a feature designed to describe problems, track code changes related to those problems, stay up to date through email notifications, and facilitate efficient communication through feature rich markdown.\nEvery project can be broken down many smaller problems. GitHub issues is a workflow that allows us to focus, collaborate and document how we solve these small problems. This really helps keep organized in the context a of a large project which could have hundreds of issues and multiple collaborators."
-  },
-  {
-    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#branches-to-manage-role-transitions",
-    "href": "pages/manuals/git-github/case-study-project-transition-management.html#branches-to-manage-role-transitions",
-    "title": "Project managment",
-    "section": "2.2 Branches to manage role transitions",
-    "text": "2.2 Branches to manage role transitions\nScenario: @usamabilal is PI. @ran-codes is an RA that wrote code to clean mortality data but is graduating. @isabelderamos is an incoming RA that is tasked with extending the functionality of the existing codebase.\n\n@usamabilal: mmm how to transition between two RA’s. I hope we can make these new changes without breaking the existing project.\n@isabelderamos 😰 omg… I am kind of new to R. What if I break something?\n@ran-codes: how can I share my code and remain in touch to answer any questions?\n\n✨Git Branches allow you to safely experiment with new ideas in a contained area of your repository.\n\n\n\nJul 15, 2021 @ran-codes creates a git repository with to track the main codebase (black line) and a branch within the repository aka duplicate codebase (green line) for @isabelderamos to work on without effecting the main codebase.\n\n\n\n\n\n\n\n\n\n\nJul 15, 2021 - Jul 20, 2022 @isabelderamos works on the duplicate branch (green-line).\n\n\n\n\n\n\n\n\n\n\nJan, 2 2022 Periodically we will test and validate @isabelderamos contributions and merge changes (green) to the main codebase (black).\n\n\n\n\n\n\n\n\n\n\nJul 20, 2022 @isabelderamos is graduating and is wrapping up her portion of work. @usamabilal validates merges changes (green) into main codebase (black) and culls/ends the branch.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nGit branches allow you to develop features, fix bugs, or safely experiment with new ideas in a contained area of your repository. GitHub allow us to implement branches within the context of issues and commits to smooth document project evolution and allow for smooth transitions between collaborators.\nBranches may not be require when working alone. They are particularly useful when entry level RA enter a project to relieve pressure on the RA and protect the project from any regressive code changes."
-  },
-  {
-    "objectID": "pages/manuals/dbt/summary.html",
-    "href": "pages/manuals/dbt/summary.html",
-    "title": "Course Summary",
-    "section": "",
-    "text": "We want to move from raw data to research outputs.\n\n\n\n\nFor each manuscript we can individually ETL (aka data wrangling) then store it where ever we want.\nThis results in a lot of repeated work across projects and a lot of repeated work.\n\n\n\n*ETL\n\nMany organization have faced this issue and the industry solution is datawahousing.\n\n\n\nWe can organize our work so that data wrangling (including complex methods such as model-based imputations) are done by individual groups. But once data is structured we can deposit into data warehouse as primary data aka Seeds.\n\nWe can then centralize the transformations of primary/seed data into what ever downstream outputs we want. All under the best practices frame work of DBT which provides a very mature workflow for organizing queries, generating documentation, version control and collaborative environment management."
-  },
-  {
-    "objectID": "pages/manuals/dbt/summary.html#big-picture",
-    "href": "pages/manuals/dbt/summary.html#big-picture",
-    "title": "Course Summary",
-    "section": "",
-    "text": "We want to move from raw data to research outputs.\n\n\n\n\nFor each manuscript we can individually ETL (aka data wrangling) then store it where ever we want.\nThis results in a lot of repeated work across projects and a lot of repeated work.\n\n\n\n*ETL\n\nMany organization have faced this issue and the industry solution is datawahousing.\n\n\n\nWe can organize our work so that data wrangling (including complex methods such as model-based imputations) are done by individual groups. But once data is structured we can deposit into data warehouse as primary data aka Seeds.\n\nWe can then centralize the transformations of primary/seed data into what ever downstream outputs we want. All under the best practices frame work of DBT which provides a very mature workflow for organizing queries, generating documentation, version control and collaborative environment management."
-  },
-  {
-    "objectID": "pages/manuals/dbt/summary.html#course-content",
-    "href": "pages/manuals/dbt/summary.html#course-content",
-    "title": "Course Summary",
-    "section": "Course Content",
-    "text": "Course Content\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Modeling Fundamentals\n\nData Modeling\nMacros\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nStand-ups\nWorking on the cloud\n\nCloud storage\nCloud database example\n\nSummary"
-  },
-  {
-    "objectID": "pages/manuals/dbt/summary.html#moving-forward",
-    "href": "pages/manuals/dbt/summary.html#moving-forward",
-    "title": "Course Summary",
-    "section": "Moving Forward",
-    "text": "Moving Forward\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter\nDBT Slack Community (&gt;50k members)"
-  },
-  {
-    "objectID": "pages/manuals/dbt/load-data.html",
-    "href": "pages/manuals/dbt/load-data.html",
-    "title": "2. Load data",
-    "section": "",
-    "text": "This course does not teach data cleaning so we have simulated some cleaned data which we will load. Also DBT is a highly flexible system that allows us to work either locally or on the cloud. Today’s course will work locally so we can focus on data loading and basics of DBT; working on the cloud will be a topic for the next session."
-  },
-  {
-    "objectID": "pages/manuals/dbt/load-data.html#examine-our-data-sources",
-    "href": "pages/manuals/dbt/load-data.html#examine-our-data-sources",
-    "title": "2. Load data",
-    "section": "1.1 Examine our data sources",
-    "text": "1.1 Examine our data sources\nWe have simulated some fake data that align with some of the data that is commonly used at the UHC. The code for simulating this can be found in the .etl folder of the repository. The outputs can be found in the .etl/clean/ folder. There are several formats available, lets examine the .CSV formats just because they are more accessible.\nOur ETL pipeline has produced a few tables for us to start modeling with. These include:\n\nxwalk_spatial: simulated zcta, county, city relationship file for two fictional states PA/NY\nDEATH_PA_YYYY: simulate line level mortality data for the state of PA\nHCUP_SID_STATE_YYYY: simulated in patient hospital records for PA/NY\nNETS: simulated business data for PA/NY\nacs_zcta: simulated zcta level indicators\n\nOur ETL pipeline has produced a few tables in several formats (.csv and .parquet).\n\n\n\n\n\n\n.parquet\n\n\n\nYou can think of .parquet as the next generation of .csv; where it is quickly becoming the gold standard data storage format within the data science world. It has several benefits including storage of metadata (descriptions, column-types), columnar-storage for efficient storage and queries and is highly inter operable with modern analytics workflows.\n\n\n\nDuckDB-DBT can read or write in a variety of formats including .csv, .parquet or .json. So the next step is to just copy our source tables into our DuckDB project."
-  },
-  {
-    "objectID": "pages/manuals/dbt/load-data.html#load-data-sources-into-dbt",
-    "href": "pages/manuals/dbt/load-data.html#load-data-sources-into-dbt",
-    "title": "2. Load data",
-    "section": "1.2 Load Data Sources into DBT",
-    "text": "1.2 Load Data Sources into DBT\nTo load data all we do is copy and paste our files (.csv or .parquet) into a folder and tell DBT where to look. This could be locally on your computer, on the UHC server, or on a cloud storage (S3 bucket) or in a database. We have found a lot of success in using the UHC server as its free and works well across multiple people collaborating; but today we will just focus on working locally to focus on basics of DBT. We will touch on working in the cloud in a future session.\nSo to work locally we\n\ncreated a folder ./external-dev/sources/ where we can upload our source tables.\ncopy our source tables from our ETL pipeline. So it should look like this.\n\nThat’s it! Now we can move on to telling DBT about these source tables!"
-  },
-  {
-    "objectID": "pages/manuals/dbt/load-data.html#tell-dbt-about-our-source-tables",
-    "href": "pages/manuals/dbt/load-data.html#tell-dbt-about-our-source-tables",
-    "title": "2. Load data",
-    "section": "1.3 Tell DBT about our source tables",
-    "text": "1.3 Tell DBT about our source tables\nIn DBT the most important folder is ./models. The DBT (Data Build Tool) ./models folder is like a recipe book for your data: it contains instructions on how to combine and transform raw ingredients (your raw data) into finished dishes (more useful, organized, and analyzed data). Think of each file within the folder as a different recipe, each defining a specific way to cook your data.\nLets add a group of recipes that tell DBT about our starting ingredients. We do this by making a folder ./models/sources. then creating a file in .yml format that tells DBT about each source.\nThe source folder now looks like this\n\nAn example of an individual source .yml that uses .csv is like this (click here)\n\nAn example of an individual source .yml that uses .csv is like this (click here)"
-  },
-  {
-    "objectID": "pages/manuals/dbt/load-data.html#generate-documentation",
-    "href": "pages/manuals/dbt/load-data.html#generate-documentation",
-    "title": "2. Load data",
-    "section": "1.3 Generate documentation",
-    "text": "1.3 Generate documentation\n\n\n\n\n\n\nIntro to DBT Documentation\n\n\n\nDocumentation within a data warehouse is crucial because it ensures transparency, maintainability, and trustworthiness of your data. It’s like a roadmap, explaining how your data is structured, where it comes from, and how it’s been processed and transformed, which is vital when data professionals need to understand or modify data workflows. DBT’s “work as you go” out-of-the-box documentation is incredibly valuable because it auto-generates this roadmap. As you build and transform your data, DBT automatically creates accompanying documentation, ensuring that no step is undocumented and that the whole process is continually up-to-date and ready for team collaboration or audits.\n\n\nBefore we go any farther lets introduce documentation in DBT and make sure everything looks as expected To generate documentation in DBT you run two commands sequentially. First to generate documentation\ndbt docs generate\nThen to serve the documentation\ndbt docs serve\nThe log after running these two should look like:\n(.venv) PS D:\\git\\duckdb-dbt-template&gt; dbt docs generate\n16:17:18  Running with dbt=1.3.2\n16:17:19  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.\nThere are 1 unused configuration paths:\n- models.hello.example\n\n16:17:19  Found 1 model, 0 tests, 0 snapshots, 0 analyses, 292 macros, 0 operations, 0 seed files, 9 sources, 0 exposures, 0 metrics\n16:17:19  \n16:17:19  Concurrency: 1 threads (target='dev-local')\n16:17:19\n16:17:19  Done.\n16:17:19  Building catalog\n16:17:19  Catalog written to D:\\git\\duckdb-dbt-template\\target\\catalog.json\n(.venv) PS D:\\git\\duckdb-dbt-template&gt; dbt docs serve\n16:17:26  Running with dbt=1.3.2\n16:17:26  Serving docs at 0.0.0.0:8080\n16:17:26  To access from your browser, navigate to:  http://localhost:8080\n16:17:26\n16:17:26\n16:17:26  Press Ctrl+C to exit.\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET /manifest.json?cb=1684945047414 HTTP/1.1\" 200 -\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET /catalog.json?cb=1684945047414 HTTP/1.1\" 200 -\nYou should now see the documentation site pop up in your browser and it looks like the following:\n\nLooks about right! we have told DBT that we have of bunch of ingredients/sources and it shows up in the documentation."
-  },
-  {
-    "objectID": "pages/manuals/dbt/functional-programming.html",
-    "href": "pages/manuals/dbt/functional-programming.html",
-    "title": "5. Macros: DBT functional programming",
-    "section": "",
-    "text": "The specific learning goals for today’s session are:\n\n\n\n\nNon-macro implementation\nCreate Macro\nUtilize Macro\nMacros documentation"
-  },
-  {
-    "objectID": "pages/manuals/dbt/data-modeling.html",
-    "href": "pages/manuals/dbt/data-modeling.html",
-    "title": "4. Basic Modeling",
-    "section": "",
-    "text": "Given our end goal of generating datasets to produce a analytic table ready for analysis on trends of deaths/hospitaliations of hufflepox. We will go through one way of using data layering to apply modularity to our transformations.\n\n\n\n\n\n\nThe specific learning goals for today’s session are:\n\n\n\n\nIntermediate tables\n\nCompile base tables\nRecode Diagnosis Codes\nSummarize by ZCTA\n\nCompile into a final table\nAssign practice to volunteers. Maybe brainstorm new tables."
-  },
-  {
-    "objectID": "pages/get-started/index.html",
-    "href": "pages/get-started/index.html",
-    "title": "Get Started",
-    "section": "",
-    "text": "Note\n\n\n\nCOMING SOON"
-  },
-  {
-    "objectID": "pages/faq/index.html",
-    "href": "pages/faq/index.html",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.\n\n\n\nWhat is the Analytics Corner?\nBuild bridges at the UHC by open sourcing your analytic problems.\n\n\nHow do I submit an issue?\nPlease click on the button below to start a intake form which will generate a GitHub issue for you. Don’t forget to enter a title in your issue. Also all form inputs that have red asterisks require answers before the issue can be submitted. Please email rl627@drexel.edu if you have any questions or trouble submitting an issue.\n\n\nWhat is GitHub?\nGitHub is a online host for version control, project management and collaborative development. We have found it extremely useful in managing complex projects, sharing reproducible work/data and building bridges while working remotely. For academics it’s premium features are completely free. You can sign up at https://github.com/join; note, try to use your real name if you can and it is encouraged to upload a profile pic.\n\n\nHow can I contribute?\nYou can contribute by participating in discussions, opening issues or submiting Pull Requests to address open issues."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#basic-read-and-parse-xml-files",
-    "href": "pages/blog/issues/888 - working with xml/quarto.html#basic-read-and-parse-xml-files",
-    "title": "Working with .XML in R",
-    "section": "Basic: Read and Parse XML Files",
-    "text": "Basic: Read and Parse XML Files\n\nlibrary(xml2)\nlibrary(XML)\nlibrary(dplyr)\n\n## Load \nemployee_data &lt;- read_xml(\"data.xml\")\nemployee_data\n\n{xml_document}\n&lt;records&gt;\n[1] &lt;employee&gt;\\n  &lt;id&gt;1&lt;/id&gt;\\n  &lt;first_name&gt;John&lt;/first_name&gt;\\n  &lt;last_name&gt;S ...\n[2] &lt;employee&gt;\\n  &lt;id&gt;2&lt;/id&gt;\\n  &lt;first_name&gt;Jane&lt;/first_name&gt;\\n  &lt;last_name&gt;S ...\n[3] &lt;employee&gt;\\n  &lt;id&gt;3&lt;/id&gt;\\n  &lt;first_name&gt;Frank&lt;/first_name&gt;\\n  &lt;last_name&gt; ...\n[4] &lt;employee&gt;\\n  &lt;id&gt;4&lt;/id&gt;\\n  &lt;first_name&gt;Judith&lt;/first_name&gt;\\n  &lt;last_name ...\n[5] &lt;employee&gt;\\n  &lt;id&gt;5&lt;/id&gt;\\n  &lt;first_name&gt;Karen&lt;/first_name&gt;\\n  &lt;last_name&gt; ...\n\n\nLet’s first get a sense of the loaded data whats in it and what we want to parse. We can just see structure with xml_structure().\n\n## Get a sense of structure\nxml_structure(employee_data)  \n\n&lt;records&gt;\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n\n\nWe can see that within this XML data there are many employees each with several features such as first_name or position. If we want to just explore values within a specific feature we can use xml_find_all. For exemple all values for the position tag.\n\nxml_find_all(employee_data, \".//position\")\n\n{xml_nodeset (5)}\n[1] &lt;position&gt;CEO&lt;/position&gt;\n[2] &lt;position&gt;Marketing Associate&lt;/position&gt;\n[3] &lt;position&gt;R Developer&lt;/position&gt;\n[4] &lt;position&gt;Data Scientist&lt;/position&gt;\n[5] &lt;position&gt;Accountant&lt;/position&gt;\n\n\ntaking it one step farther we can start pulling these values into R data objects. For example to get a vector of string of all positions.\n\nxml_find_all(employee_data, \".//position\") %&gt;% xml_text()\n\n[1] \"CEO\"                 \"Marketing Associate\" \"R Developer\"        \n[4] \"Data Scientist\"      \"Accountant\"         \n\n\nWhile you can work with vectors. Its best to import XML and convert to dataframes to be able to utilize dplyr for data manipulation and access."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#convert-xml-data-to-tibble",
-    "href": "pages/blog/issues/888 - working with xml/quarto.html#convert-xml-data-to-tibble",
-    "title": "Working with .XML in R",
-    "section": "Convert XML Data to tibble",
-    "text": "Convert XML Data to tibble\nHere we will build ontop of the logic above. And extract three features of the XML data into a tibble.\n\n# Extract department and salary info\nid &lt;- xml_text(xml_find_all(employee_data, \".//id\"))\ndept &lt;- xml_text(xml_find_all(employee_data, \".//department\"))\nsalary &lt;- xml_integer(xml_find_all(employee_data, \".//salary\"))\n\n# Format as a tibble\ndf_dept_salary &lt;- tibble(id = id, department = dept, salary = salary)\ndf_dept_salary\n\n\n\n  \n\n\n\nNow we have a dataframe we can start analyzing, for example to calculate the average salary by deparement.\n\ndf_dept_salary %&gt;% \n  group_by(department) %&gt;% \n  summarise(salary = mean(salary))\n\n\n\n  \n\n\n\nAnother approach to converting the entire XML document into an R data.frame, we can utilize the xmlToDataFrame() method from the XML package.\n\n## parse\nemployee_xml &lt;- xmlParse(employee_data)\nemployee_xml\n\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;records&gt;\n  &lt;employee&gt;\n    &lt;id&gt;1&lt;/id&gt;\n    &lt;first_name&gt;John&lt;/first_name&gt;\n    &lt;last_name&gt;Smith&lt;/last_name&gt;\n    &lt;position&gt;CEO&lt;/position&gt;\n    &lt;salary&gt;10000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-1&lt;/hire_date&gt;\n    &lt;department&gt;Management&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;2&lt;/id&gt;\n    &lt;first_name&gt;Jane&lt;/first_name&gt;\n    &lt;last_name&gt;Sense&lt;/last_name&gt;\n    &lt;position&gt;Marketing Associate&lt;/position&gt;\n    &lt;salary&gt;3500&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;\n    &lt;department&gt;Marketing&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;3&lt;/id&gt;\n    &lt;first_name&gt;Frank&lt;/first_name&gt;\n    &lt;last_name&gt;Brown&lt;/last_name&gt;\n    &lt;position&gt;R Developer&lt;/position&gt;\n    &lt;salary&gt;6000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;\n    &lt;department&gt;IT&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;4&lt;/id&gt;\n    &lt;first_name&gt;Judith&lt;/first_name&gt;\n    &lt;last_name&gt;Rollers&lt;/last_name&gt;\n    &lt;position&gt;Data Scientist&lt;/position&gt;\n    &lt;salary&gt;6500&lt;/salary&gt;\n    &lt;hire_date&gt;2022-3-1&lt;/hire_date&gt;\n    &lt;department&gt;IT&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;5&lt;/id&gt;\n    &lt;first_name&gt;Karen&lt;/first_name&gt;\n    &lt;last_name&gt;Switch&lt;/last_name&gt;\n    &lt;position&gt;Accountant&lt;/position&gt;\n    &lt;salary&gt;4000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-10&lt;/hire_date&gt;\n    &lt;department&gt;Accounting&lt;/department&gt;\n  &lt;/employee&gt;\n&lt;/records&gt;\n \n\n## convert to df\ndf_employees &lt;- xmlToDataFrame(nodes = getNodeSet(employee_xml, \"//employee\")) %&gt;%\n  as_tibble()\ndf_employees"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#summary",
-    "href": "pages/blog/issues/888 - working with xml/quarto.html#summary",
-    "title": "Working with .XML in R",
-    "section": "Summary",
-    "text": "Summary\nIn conclusion, XML files are increasingly popular as a FAIR (especially interoperable) data format for the exhchange of data/metadata between systems. As a data professional, mastering the manipulation and analysis of XML files is not just an optional skill but a necessity. XML files are pervasive in various sectors, serving as a standard for data exchange. The article highlights that most tasks you’ll encounter in R related to XML boil down to three core activities: loading the XML document, parsing its content, and converting it into a more analysis-friendly format like a tibble or data.frame.\nThe article introduces two R packages that facilitate these tasks, although it doesn’t specify their names. These packages are likely equipped with a range of functionalities—from basic XML reading and writing to more advanced operations like XPath querying and namespace management. By leveraging these packages, data professionals can significantly simplify and optimize their workflow when dealing with XML files, making the process more efficient and accurate."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html",
-    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html",
-    "title": "Shinyappsio Usage and projected needs",
-    "section": "",
-    "text": "High consumption for bchc_covid19 app\n\nWe are still seeing quite a bit of traffic here (see supplemntal figure below)\nBut consumption is driven primarily by some residual settings that were not turned off.\nWe removed the 24/7 on-time but…\n\nI forgot there were some app settings tweaked for persistence that was causing high consumption. e.g. Instance Idle Timeout Time after which your idle application will be stopped. The min is 15 minutes but it was set to 60 minutes.\nWe set all settings to default… so we should expect much lower consumption from this app\n\nOverall consumption is ~500 hours per month\nTaking into account the projected decrease in bchc_covid19, we expect much less than 500 hours per month of usage with our current apps\nA basic plan ($440/year) with 500 hours per month would cover our needs.\n\nSee below for supporting materials."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#executive-take-aways",
-    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#executive-take-aways",
-    "title": "Shinyappsio Usage and projected needs",
-    "section": "",
-    "text": "High consumption for bchc_covid19 app\n\nWe are still seeing quite a bit of traffic here (see supplemntal figure below)\nBut consumption is driven primarily by some residual settings that were not turned off.\nWe removed the 24/7 on-time but…\n\nI forgot there were some app settings tweaked for persistence that was causing high consumption. e.g. Instance Idle Timeout Time after which your idle application will be stopped. The min is 15 minutes but it was set to 60 minutes.\nWe set all settings to default… so we should expect much lower consumption from this app\n\nOverall consumption is ~500 hours per month\nTaking into account the projected decrease in bchc_covid19, we expect much less than 500 hours per month of usage with our current apps\nA basic plan ($440/year) with 500 hours per month would cover our needs.\n\nSee below for supporting materials."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#plots",
-    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#plots",
-    "title": "Shinyappsio Usage and projected needs",
-    "section": "Plots",
-    "text": "Plots\nQuick EDA on ShinyAppsio usage to inform plan renewal for 2023. We’ll look at by app daily vs monthly consumption as well as account level monthly consumption.\nLets first pull in some usage data!\n\n\nCode\n## Dependencies\nlibrary(rsconnect)\nlibrary(tidyverse)\nlibrary(purrr)\nlibrary(lubridate)\nlibrary(highcharter)\n\n## Get App names\napps = applications(account = \"drexel-uhc\",\n                    server=\"shinyapps.io\") %&gt;% \n  as_tibble() %&gt;% \n  select(id, name) %&gt;% \n  mutate(id = as.character(id))\n\n### Pull Data\nstart_date = \"2022-10-03\"\nend_date = Sys.Date()\n\napi_result = rsconnect::accountUsage(\n  account = \"drexel-uhc\",\n  server=\"shinyapps.io\",\n  usageType = \"hours\",\n  from = start_date,\n  until  = end_date,\n  interval = \"1d\"\n)\n.x = api_result$points[[1]]\nlist_result = api_result$points %&gt;% \n  map(  ~{\n    hours_tmp = map(.x,2)%&gt;% \n      unlist() \n    tibble(date = seq(ymd(start_date),\n                      ymd(end_date)-1,\n                      by = \"day\") )  %&gt;% \n      mutate(day = row_number()) %&gt;% \n      mutate(hours = hours_tmp)\n  }) \ndf_result = map2_df(list_result,names(list_result),\n                    ~{.x %&gt;% mutate(id_chr = .y)}) %&gt;% \n  mutate(id  = str_remove(id_chr,\"application-\")) %&gt;% \n  left_join(apps) %&gt;% \n  select(name, date, day, hours) %&gt;% \n  arrange(name,date) #%&gt;% \n  # group_by(name) %&gt;% \n  # group_modify(~.x %&gt;% mutate(hours_cum = cumsum(hours))) %&gt;% \n  # ungroup()  %&gt;%\n# mutate(month = month) %&gt;% \n# select(month, everything())\n\ndf_usage_daily = df_result %&gt;% \n  filter(!is.na(name)) %&gt;% \n  rename(app = name) %&gt;% \n  mutate(month = month(date),\n         year = year(date)) %&gt;% \n\n  arrange(app, year, month)\n\n\ndf_useage_monthly = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(app, month, year) %&gt;% \n  summarise(hours = sum(hours)) %&gt;% \n  ungroup()%&gt;% \n  arrange(app, year, month) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\ndf_usage_monthly_overall = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(month, year) %&gt;% \n  summarize(hours = sum(hours)) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\n\n\nBy app\nNote that in highcharted you can click the legend to remove or add back specific lines. or exmaple you can click bchc_covid19 to remove it and rescale the plot.\n\n\nCode\ndf_usage_daily %&gt;%\n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Daily trends over last 90 days by app')\n\n\n\n\n\n\n\n\n\nCode\ndf_useage_monthly %&gt;%\n  filter(month != \"2\") %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Monthly trends over last 90 days by app') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month. ')\n\n\n\n\n\n\n\n\n\nOverall\n\n\nCode\ndf_usage_monthly_overall %&gt;%\n  arrange(date) %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours)) %&gt;% \n  hc_title(text = 'Overall usage over 3 months') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month.') %&gt;% \n  hc_yAxis(min = 0)"
+    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
+    "href": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
+    "title": "ChatGPT and AI: use-cases and potential",
+    "section": "Conclusion",
+    "text": "Conclusion\nChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole."
   },
   {
     "objectID": "pages/blog/issues/888 - DSWG intro 1/index.html#overview",
@@ -616,104 +287,6 @@
     "text": "Appendix: Rollout"
   },
   {
-    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
-    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html",
-    "title": "Visualization faceted by state",
-    "section": "",
-    "text": "https://github.com/Drexel-UHC/analytics-corner/issues/7\n\nI’m hoping to make a figure that shows different policy statuses of states (abortion ban, proposed abortion ban, no abortion ban; Paid family leave, no paid family leave; paid family leave preemption, no preemption), with the states in the location of the US map…\nI think geofacet mightttt get us close to the figure I’m hoping to make, but not quitee there."
-  },
-  {
-    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#plot",
-    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#plot",
-    "title": "Visualization faceted by state",
-    "section": "Plot",
-    "text": "Plot\n\n\nCode\n## Set coordinates\nheight = 10 \npadding_x = 1\nwidth = 8\nrect_xmin = padding_x\nrect_xmax = width + padding_x\nrect_x_mean = mean(c(rect_xmin,rect_xmax))\nrect_ymin = height/3\nrect_ymax = rect_ymin*2\n\n## Manual colors for data features\nabortion_colors = c(\"0\" = \"#e7e8e9\",\n                    \"1\" = \"#A6A7AA\", \n                    \"2\" = \"#757679\",\n                    \"3\" = \"#000000\")\n\nxwalk_colors = c(abortion_colors,\n                 \"white\" = \"white\",\n                 \"black\" = \"black\",\n                 \"0_family_leave\" = \"white\",\n                 \"1_family_leave\" = \"#00aeef\",\n                 \"0_preemption\" = \"white\",\n                 \"1_preemption\" = \"#f1592a\")     \n\n## Operationalize data for plot\ndata_processed = data %&gt;% \n  ## Append coordinates to data for geom_polygon\n  mutate(top_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),\n         top_triangle_y = list(c(rect_ymax,rect_ymax,height)),\n         bottom_triangle_x = list(c(rect_xmin,rect_xmax,rect_x_mean)),\n         bottom_triangle_y = list(c(rect_ymin,rect_ymin,0))\n  ) %&gt;% \n  unnest(cols = c(top_triangle_x, top_triangle_y, bottom_triangle_x, bottom_triangle_y)) %&gt;% \n  ## operationalize colors\n  mutate(\n    state_text = ifelse(as.numeric(abortion_ban_risk)&gt;1, \"white\",\"black\"),\n    family_leave = paste0(family_leave,\"_family_leave\"),\n    preemption = paste0(preemption,\"_preemption\"))\n\n\n## create a function to make basic shapes\ngeom_hex_for_alina = function(gg){\n  gg +\n    ## add rectangle\n    geom_rect(aes(xmin = rect_xmin, xmax = rect_xmax,   \n                  ymin = rect_ymin, ymax = rect_ymax, \n                  fill = abortion_ban_risk)) +\n    ## Add state abbrv text\n    geom_text(aes(label = state, color = state_text),\n              x = height/2, y = height/2,\n              size = 3)+\n    ## Top triangle (family leave)\n    geom_polygon(aes(x=top_triangle_x,y=top_triangle_y, fill = family_leave)) + \n    ## Bottom triangle (preemption)\n    geom_polygon(aes(x = bottom_triangle_x, y = bottom_triangle_y, fill = preemption)) +   \n    ## Manual colors\n    scale_fill_manual(values = xwalk_colors) +\n    scale_color_manual(name = \"state_text\", values = xwalk_colors) +\n    theme_void()+ \n    theme(\n      ## Completely remove facet labels\n      strip.background = element_blank(),\n      strip.text.x = element_blank(),\n      ## Remove legend\n      legend.position = 'none'\n    )\n}\n\n## Test facet\nplot = data_processed %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_for_alina() +\n  facet_geo(~ state, grid = \"us_state_grid2\") +\n  theme(plot.margin = margin(1, 1, 1, 1, \"cm\"))\nplot"
-  },
-  {
-    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-1-rectangle",
-    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-1-rectangle",
-    "title": "Visualization faceted by state",
-    "section": "Legend 1: Rectangle",
-    "text": "Legend 1: Rectangle\n\n\nCode\nside = 12\npadding = 0.5 \nrect_width =  (side - 2*padding)/4\nlegend_y = 5\nlegend_height = 3.25\nlegend_mid = legend_y + legend_height/2\n\ndfa = tibble(xmin = padding + 0:3*rect_width,\n             xmax = padding + 1:4*rect_width,\n             ymin = legend_y,\n             ymax = legend_y + legend_height,\n             fill = unname(abortion_colors)) %&gt;% \n  mutate(xmid =(xmin +xmax)/2)\nlegend_risk = ggplot() + \n  ## Container (10 by 10)\n  geom_rect(aes(xmin = 0, xmax = 10, \n                ymin = 0, ymax = 10),\n            fill = \"white\") + \n  ## Legend for rectangles\n  geom_rect(dfa, mapping = \n              aes(xmin = xmin, xmax = xmax, \n                  ymin = ymin, ymax = ymax),\n            fill = dfa$fill) + \n  ## Left label\n  geom_text(aes(label = \"Accessible\\n(Protected)\", x = xmid),\n            x = dfa[1,]$xmid, y = legend_mid,\n            size = 2.9) +\n  ## Center label\n  geom_text(aes(label = \"Accessible\\n(Not protected)\"),\n            x = dfa[2,]$xmid, y = legend_mid ,\n            size = 2.9) +\n  ## Rigth label\n  geom_text(aes(label = \"Hostile\"),\n            x = dfa[3,]$xmid, y = legend_mid ,\n            size = 3,\n            color = 'white') +\n  ## Rigth label\n  geom_text(aes(label = \"Illegal\"),\n            x = dfa[4,]$xmid, y = legend_mid,\n            size = 3,\n            color = \"white\") +\n  theme_void()\n\ntitle_rect &lt;- ggdraw() + \n  draw_label(\n    \"Rectangle show state\\nattitude towards abortion\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme(\n    # add margin on the left of the drawing canvas,\n    # so title is aligned with left edge of first plot\n    plot.margin = margin(6, 0, 0, 0)\n  )\nrect_legend = plot_grid(\n  title_rect, legend_risk,\n  ncol = 1,\n  rel_heights = c(2, 8)\n)\n\nrect_legend"
-  },
-  {
-    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-2-paid-family-leave",
-    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-2-paid-family-leave",
-    "title": "Visualization faceted by state",
-    "section": "Legend 2: Paid family leave",
-    "text": "Legend 2: Paid family leave\n\n\nCode\n## Create funciton to layout for legend\ngeom_hex_legend_for_alina = function(gg){\n  gg +\n    geom_rect(aes(xmin =  0 - 1*height*1.4, xmax = height + 1*height*1.4,   \n                  ymin = 0 - 1*height, ymax = height + 1*height),\n              fill = \"white\") \n}\n\n## Legend 2: Blue triangle\ntitle_hex_blue &lt;- ggdraw() + \n  draw_label(\n    \"Blue Triangles show \\n paid family policy\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme( plot.margin = margin(5, 0, 0, 0))\nlegend_hex_blue = data_processed %&gt;% \n  filter(state == \"WA\") %&gt;% \n  mutate(state = \"\") %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_legend_for_alina() %&gt;% \n  geom_hex_for_alina()\nhex_legend_blue = plot_grid(\n  title_hex_blue, legend_hex_blue,\n  ncol = 1,\n  rel_heights = c(2, 8)\n)\n\nhex_legend_blue"
-  },
-  {
-    "objectID": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-3-preemption",
-    "href": "pages/blog/issues/7 - Abortion and Paid Family Leave figure/quarto.html#legend-3-preemption",
-    "title": "Visualization faceted by state",
-    "section": "Legend 3: Preemption",
-    "text": "Legend 3: Preemption\n\n\nCode\n## Legend 3: Red triangle \ntitle_hex_red &lt;- ggdraw() + \n  draw_label(\n    \"Red triangles show state\\npreemption of paid\\nfamily policies\",\n    fontface = 'bold',\n    x = 0.5,\n    hjust = 0.5,\n    size = 10\n  ) +\n  theme(\n    plot.margin = margin(5, 0, 0, 0)\n  )\nlegend_hex_red = data_processed %&gt;% \n  filter(state == \"FL\") %&gt;% \n  mutate(state = \"\") %&gt;% \n  ggplot()  %&gt;% \n  geom_hex_legend_for_alina() %&gt;% \n  geom_hex_for_alina()\nhex_legend_red = plot_grid(\n  title_hex_red, legend_hex_red,\n  ncol = 1,\n  rel_heights = c(3, 8)\n)\nhex_legend_red"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About UHC Analytics Corner",
-    "section": "",
-    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue."
-  },
-  {
-    "objectID": "about.html#goals",
-    "href": "about.html#goals",
-    "title": "About UHC Analytics Corner",
-    "section": "Goals",
-    "text": "Goals\nThe overarching goal of Quarto is to build bridges across working groups at Dornsife and the UHC by making the process of collaborating on problems and sharing technical expertise dramatically better. We hope to do this in several dimensions:\n\nA automated way for community members to submit issues/requests\nAn accessible website where we can share solutions. Analytic problems are often not unique and solutions may benefit others.\nProvide training for how to collaborative code.\n\nEverything here is open source software licensed under the MIT license. We believe that analytic problems are not unique and it’s better for everyone if the tools, issues and solutions used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science."
-  },
-  {
-    "objectID": "about.html#project",
-    "href": "about.html#project",
-    "title": "About UHC Analytics Corner",
-    "section": "Project",
-    "text": "Project\nThe core technologies that drive this project including:\n\nQuarto is an open-source scientific and technical publishing system built on Pandoc. It allows us to authoer documents as plain text mardkwon or Jupyter notebooks and render high-quality articles, reports, presentations, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.\nGitHub is a only developer platform which we utilize to open source our codebase, mangage projects, allow issue submissions, have discussions and host our website. The majority of GitHub features are free for academics.\nTidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. We use these packages and other packages within this ecosystem to do solve problems that involve data management, visualization, dashboards and build packages."
-  },
-  {
-    "objectID": "about.html#contribute",
-    "href": "about.html#contribute",
-    "title": "About UHC Analytics Corner",
-    "section": "Contribute",
-    "text": "Contribute\nYou can contribute in many ways. More details will come but the general idea is:\n\nBy opening issues to provide feedback and share ideas.\nBy submitting Pull Request (PR) to fix opened issues\nBy submitting Pull Request (PR) to suggest new features (it is considered good practice to open an issue for discussion before working on a pull request for a new feature)."
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "Open Source License",
-    "section": "",
-    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe language in this license page is adapted directly from Quarto’s license page. We admire the job that Quarto has done building an open-source community and hope that this policy will help us do the same.\n\n\nUHC Analytics Corner is open source software licensed under the MIT license. We believe that it’s better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science.\nThis project also makes use of several other open-source projects including:\n\n\n\nProject\nLicense\n\n\n\n\nQuarto\nGNU GPL v2\n\n\ntidyverse\nMIT"
-  },
-  {
-    "objectID": "pages/blog/issues/888 - ChatGPT/index.html",
-    "href": "pages/blog/issues/888 - ChatGPT/index.html",
-    "title": "ChatGPT and AI: use-cases and potential",
-    "section": "",
-    "text": "The advent of artificial intelligence (AI) has significantly impacted various fields, including public health research. One of the most promising AI technologies in this context is ChatGPT, developed by OpenAI. This powerful language model, based on the GPT-4 architecture, offers a wide range of potential applications, especially for institutions like the Drexel Urban Health Collaborative (UHC). In this blog post, we will delve into what ChatGPT is and explore its potential use cases for public health research at the UHC."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
-    "href": "pages/blog/issues/888 - ChatGPT/index.html#understanding-chatgpt",
-    "title": "ChatGPT and AI: use-cases and potential",
-    "section": "Understanding ChatGPT",
-    "text": "Understanding ChatGPT\nChatGPT is an AI-powered language model that excels in understanding and generating human-like text. It can analyze and respond to text inputs, offering contextual understanding and relevant responses. Built on the GPT-4 architecture, it has been trained on vast amounts of data, which enables it to provide insightful and accurate information on various topics. Its impressive capabilities make it a valuable resource in numerous fields, including public health research."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
-    "href": "pages/blog/issues/888 - ChatGPT/index.html#potential-use-cases-for-public-health-research-at-the-drexel-uhc",
-    "title": "ChatGPT and AI: use-cases and potential",
-    "section": "Potential Use Cases for Public Health Research at the Drexel UHC",
-    "text": "Potential Use Cases for Public Health Research at the Drexel UHC\n\n1. Rapid Data Analysis and Interpretation\nPublic health researchers often deal with large datasets that require significant time and effort to analyze. ChatGPT can assist researchers in rapidly interpreting and processing these datasets, providing valuable insights and identifying patterns. By streamlining data analysis, ChatGPT allows researchers to focus more on formulating and implementing data-driven interventions.\n\n\n2. Automated Coding of Qualitative Data\nQualitative data is a vital component of public health research, offering nuanced perspectives on people’s experiences and behaviors. However, coding and analyzing qualitative data can be labor-intensive. ChatGPT can automate the coding process, reducing the time and resources required for this task while maintaining high-quality results. Researchers can leverage ChatGPT’s natural language understanding capabilities to identify themes and patterns in qualitative data quickly and accurately.\n\n\n3. Enhancing Health Communication\nEffective health communication is essential for promoting public health awareness and encouraging positive behavior change. ChatGPT can be used to create tailored, engaging, and easy-to-understand health messages for diverse audiences. By utilizing AI-generated content, public health organizations can improve their outreach efforts and better connect with communities.\n\n\n4. Identifying Emerging Trends and Sentiments\nSocial media platforms and online forums are valuable sources of information on public opinions and concerns related to health. ChatGPT can be employed to analyze and monitor these online spaces, identifying emerging trends, and gauging public sentiment on specific health issues. This information can help public health researchers to understand and address community concerns more effectively.\n\n\n5. Assisting in Grant Proposal Writing\nSecuring funding is an integral aspect of public health research. ChatGPT can support researchers in writing persuasive grant proposals by offering suggestions and improving the overall quality of the text. This assistance can increase researchers’ chances of obtaining the necessary funds for their projects."
-  },
-  {
-    "objectID": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
-    "href": "pages/blog/issues/888 - ChatGPT/index.html#conclusion",
-    "title": "ChatGPT and AI: use-cases and potential",
-    "section": "Conclusion",
-    "text": "Conclusion\nChatGPT has enormous potential to revolutionize public health research, particularly at institutions like the Drexel Urban Health Collaborative. By automating and enhancing various research processes, from data analysis to health communication, ChatGPT promises to improve the overall efficiency and effectiveness of public health research. Its powerful capabilities are expected to yield significant benefits for researchers, communities, and public health as a whole."
-  },
-  {
     "objectID": "pages/blog/issues/888 - Scrollies/index.html",
     "href": "pages/blog/issues/888 - Scrollies/index.html",
     "title": "Digital Journalism ideas for UHC",
@@ -763,11 +336,53 @@
     "text": "City Access Map\n\nhttps://www.cityaccessmap.com/"
   },
   {
+    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html",
+    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html",
+    "title": "Shinyappsio Usage and projected needs",
+    "section": "",
+    "text": "High consumption for bchc_covid19 app\n\nWe are still seeing quite a bit of traffic here (see supplemntal figure below)\nBut consumption is driven primarily by some residual settings that were not turned off.\nWe removed the 24/7 on-time but…\n\nI forgot there were some app settings tweaked for persistence that was causing high consumption. e.g. Instance Idle Timeout Time after which your idle application will be stopped. The min is 15 minutes but it was set to 60 minutes.\nWe set all settings to default… so we should expect much lower consumption from this app\n\nOverall consumption is ~500 hours per month\nTaking into account the projected decrease in bchc_covid19, we expect much less than 500 hours per month of usage with our current apps\nA basic plan ($440/year) with 500 hours per month would cover our needs.\n\nSee below for supporting materials."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#executive-take-aways",
+    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#executive-take-aways",
+    "title": "Shinyappsio Usage and projected needs",
+    "section": "",
+    "text": "High consumption for bchc_covid19 app\n\nWe are still seeing quite a bit of traffic here (see supplemntal figure below)\nBut consumption is driven primarily by some residual settings that were not turned off.\nWe removed the 24/7 on-time but…\n\nI forgot there were some app settings tweaked for persistence that was causing high consumption. e.g. Instance Idle Timeout Time after which your idle application will be stopped. The min is 15 minutes but it was set to 60 minutes.\nWe set all settings to default… so we should expect much lower consumption from this app\n\nOverall consumption is ~500 hours per month\nTaking into account the projected decrease in bchc_covid19, we expect much less than 500 hours per month of usage with our current apps\nA basic plan ($440/year) with 500 hours per month would cover our needs.\n\nSee below for supporting materials."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#plots",
+    "href": "pages/blog/issues/888 - Shiny usage Feb 2023/index.html#plots",
+    "title": "Shinyappsio Usage and projected needs",
+    "section": "Plots",
+    "text": "Plots\nQuick EDA on ShinyAppsio usage to inform plan renewal for 2023. We’ll look at by app daily vs monthly consumption as well as account level monthly consumption.\nLets first pull in some usage data!\n\n\nCode\n## Dependencies\nlibrary(rsconnect)\nlibrary(tidyverse)\nlibrary(purrr)\nlibrary(lubridate)\nlibrary(highcharter)\n\n## Get App names\napps = applications(account = \"drexel-uhc\",\n                    server=\"shinyapps.io\") %&gt;% \n  as_tibble() %&gt;% \n  select(id, name) %&gt;% \n  mutate(id = as.character(id))\n\n### Pull Data\nstart_date = \"2022-10-03\"\nend_date = Sys.Date()\n\napi_result = rsconnect::accountUsage(\n  account = \"drexel-uhc\",\n  server=\"shinyapps.io\",\n  usageType = \"hours\",\n  from = start_date,\n  until  = end_date,\n  interval = \"1d\"\n)\n.x = api_result$points[[1]]\nlist_result = api_result$points %&gt;% \n  map(  ~{\n    hours_tmp = map(.x,2)%&gt;% \n      unlist() \n    tibble(date = seq(ymd(start_date),\n                      ymd(end_date)-1,\n                      by = \"day\") )  %&gt;% \n      mutate(day = row_number()) %&gt;% \n      mutate(hours = hours_tmp)\n  }) \ndf_result = map2_df(list_result,names(list_result),\n                    ~{.x %&gt;% mutate(id_chr = .y)}) %&gt;% \n  mutate(id  = str_remove(id_chr,\"application-\")) %&gt;% \n  left_join(apps) %&gt;% \n  select(name, date, day, hours) %&gt;% \n  arrange(name,date) #%&gt;% \n  # group_by(name) %&gt;% \n  # group_modify(~.x %&gt;% mutate(hours_cum = cumsum(hours))) %&gt;% \n  # ungroup()  %&gt;%\n# mutate(month = month) %&gt;% \n# select(month, everything())\n\ndf_usage_daily = df_result %&gt;% \n  filter(!is.na(name)) %&gt;% \n  rename(app = name) %&gt;% \n  mutate(month = month(date),\n         year = year(date)) %&gt;% \n\n  arrange(app, year, month)\n\n\ndf_useage_monthly = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(app, month, year) %&gt;% \n  summarise(hours = sum(hours)) %&gt;% \n  ungroup()%&gt;% \n  arrange(app, year, month) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\ndf_usage_monthly_overall = df_usage_daily %&gt;% \n  filter(month != \"2\") %&gt;% \n  group_by(month, year) %&gt;% \n  summarize(hours = sum(hours)) %&gt;% \n  mutate(date = ymd(paste0(year,\"/\",month,'/15')))\n\n\n\nBy app\nNote that in highcharted you can click the legend to remove or add back specific lines. or exmaple you can click bchc_covid19 to remove it and rescale the plot.\n\n\nCode\ndf_usage_daily %&gt;%\n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Daily trends over last 90 days by app')\n\n\n\n\n\n\n\n\n\nCode\ndf_useage_monthly %&gt;%\n  filter(month != \"2\") %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours, group = app)) %&gt;% \n  hc_title(text = 'Monthly trends over last 90 days by app') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month. ')\n\n\n\n\n\n\n\n\n\nOverall\n\n\nCode\ndf_usage_monthly_overall %&gt;%\n  arrange(date) %&gt;% \n  hchart(\"line\",\n         hcaes(x = date, y = hours)) %&gt;% \n  hc_title(text = 'Overall usage over 3 months') %&gt;% \n  hc_subtitle(text = 'Monthly cumulative hours used is displayed at the midpoint of each month.') %&gt;% \n  hc_yAxis(min = 0)"
+  },
+  {
     "objectID": "pages/blog/issues/888 - webR test/index.html",
     "href": "pages/blog/issues/888 - webR test/index.html",
     "title": "WebR: Running R in the Browser!",
     "section": "",
     "text": "Load Dependencies\nLoading\n  webR...\n\n\n  \n\n\nLoading\n  webR..."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#basic-read-and-parse-xml-files",
+    "href": "pages/blog/issues/888 - working with xml/quarto.html#basic-read-and-parse-xml-files",
+    "title": "Working with .XML in R",
+    "section": "Basic: Read and Parse XML Files",
+    "text": "Basic: Read and Parse XML Files\n\nlibrary(xml2)\nlibrary(XML)\nlibrary(dplyr)\n\n## Load \nemployee_data &lt;- read_xml(\"data.xml\")\nemployee_data\n\n{xml_document}\n&lt;records&gt;\n[1] &lt;employee&gt;\\n  &lt;id&gt;1&lt;/id&gt;\\n  &lt;first_name&gt;John&lt;/first_name&gt;\\n  &lt;last_name&gt;S ...\n[2] &lt;employee&gt;\\n  &lt;id&gt;2&lt;/id&gt;\\n  &lt;first_name&gt;Jane&lt;/first_name&gt;\\n  &lt;last_name&gt;S ...\n[3] &lt;employee&gt;\\n  &lt;id&gt;3&lt;/id&gt;\\n  &lt;first_name&gt;Frank&lt;/first_name&gt;\\n  &lt;last_name&gt; ...\n[4] &lt;employee&gt;\\n  &lt;id&gt;4&lt;/id&gt;\\n  &lt;first_name&gt;Judith&lt;/first_name&gt;\\n  &lt;last_name ...\n[5] &lt;employee&gt;\\n  &lt;id&gt;5&lt;/id&gt;\\n  &lt;first_name&gt;Karen&lt;/first_name&gt;\\n  &lt;last_name&gt; ...\n\n\nLet’s first get a sense of the loaded data whats in it and what we want to parse. We can just see structure with xml_structure().\n\n## Get a sense of structure\nxml_structure(employee_data)  \n\n&lt;records&gt;\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n  &lt;employee&gt;\n    &lt;id&gt;\n      {text}\n    &lt;first_name&gt;\n      {text}\n    &lt;last_name&gt;\n      {text}\n    &lt;position&gt;\n      {text}\n    &lt;salary&gt;\n      {text}\n    &lt;hire_date&gt;\n      {text}\n    &lt;department&gt;\n      {text}\n\n\nWe can see that within this XML data there are many employees each with several features such as first_name or position. If we want to just explore values within a specific feature we can use xml_find_all. For exemple all values for the position tag.\n\nxml_find_all(employee_data, \".//position\")\n\n{xml_nodeset (5)}\n[1] &lt;position&gt;CEO&lt;/position&gt;\n[2] &lt;position&gt;Marketing Associate&lt;/position&gt;\n[3] &lt;position&gt;R Developer&lt;/position&gt;\n[4] &lt;position&gt;Data Scientist&lt;/position&gt;\n[5] &lt;position&gt;Accountant&lt;/position&gt;\n\n\ntaking it one step farther we can start pulling these values into R data objects. For example to get a vector of string of all positions.\n\nxml_find_all(employee_data, \".//position\") %&gt;% xml_text()\n\n[1] \"CEO\"                 \"Marketing Associate\" \"R Developer\"        \n[4] \"Data Scientist\"      \"Accountant\"         \n\n\nWhile you can work with vectors. Its best to import XML and convert to dataframes to be able to utilize dplyr for data manipulation and access."
+  },
+  {
+    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#convert-xml-data-to-tibble",
+    "href": "pages/blog/issues/888 - working with xml/quarto.html#convert-xml-data-to-tibble",
+    "title": "Working with .XML in R",
+    "section": "Convert XML Data to tibble",
+    "text": "Convert XML Data to tibble\nHere we will build ontop of the logic above. And extract three features of the XML data into a tibble.\n\n# Extract department and salary info\nid &lt;- xml_text(xml_find_all(employee_data, \".//id\"))\ndept &lt;- xml_text(xml_find_all(employee_data, \".//department\"))\nsalary &lt;- xml_integer(xml_find_all(employee_data, \".//salary\"))\n\n# Format as a tibble\ndf_dept_salary &lt;- tibble(id = id, department = dept, salary = salary)\ndf_dept_salary\n\n\n\n  \n\n\n\nNow we have a dataframe we can start analyzing, for example to calculate the average salary by deparement.\n\ndf_dept_salary %&gt;% \n  group_by(department) %&gt;% \n  summarise(salary = mean(salary))\n\n\n\n  \n\n\n\nAnother approach to converting the entire XML document into an R data.frame, we can utilize the xmlToDataFrame() method from the XML package.\n\n## parse\nemployee_xml &lt;- xmlParse(employee_data)\nemployee_xml\n\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;records&gt;\n  &lt;employee&gt;\n    &lt;id&gt;1&lt;/id&gt;\n    &lt;first_name&gt;John&lt;/first_name&gt;\n    &lt;last_name&gt;Smith&lt;/last_name&gt;\n    &lt;position&gt;CEO&lt;/position&gt;\n    &lt;salary&gt;10000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-1&lt;/hire_date&gt;\n    &lt;department&gt;Management&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;2&lt;/id&gt;\n    &lt;first_name&gt;Jane&lt;/first_name&gt;\n    &lt;last_name&gt;Sense&lt;/last_name&gt;\n    &lt;position&gt;Marketing Associate&lt;/position&gt;\n    &lt;salary&gt;3500&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;\n    &lt;department&gt;Marketing&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;3&lt;/id&gt;\n    &lt;first_name&gt;Frank&lt;/first_name&gt;\n    &lt;last_name&gt;Brown&lt;/last_name&gt;\n    &lt;position&gt;R Developer&lt;/position&gt;\n    &lt;salary&gt;6000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-15&lt;/hire_date&gt;\n    &lt;department&gt;IT&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;4&lt;/id&gt;\n    &lt;first_name&gt;Judith&lt;/first_name&gt;\n    &lt;last_name&gt;Rollers&lt;/last_name&gt;\n    &lt;position&gt;Data Scientist&lt;/position&gt;\n    &lt;salary&gt;6500&lt;/salary&gt;\n    &lt;hire_date&gt;2022-3-1&lt;/hire_date&gt;\n    &lt;department&gt;IT&lt;/department&gt;\n  &lt;/employee&gt;\n  &lt;employee&gt;\n    &lt;id&gt;5&lt;/id&gt;\n    &lt;first_name&gt;Karen&lt;/first_name&gt;\n    &lt;last_name&gt;Switch&lt;/last_name&gt;\n    &lt;position&gt;Accountant&lt;/position&gt;\n    &lt;salary&gt;4000&lt;/salary&gt;\n    &lt;hire_date&gt;2022-1-10&lt;/hire_date&gt;\n    &lt;department&gt;Accounting&lt;/department&gt;\n  &lt;/employee&gt;\n&lt;/records&gt;\n \n\n## convert to df\ndf_employees &lt;- xmlToDataFrame(nodes = getNodeSet(employee_xml, \"//employee\")) %&gt;%\n  as_tibble()\ndf_employees"
+  },
+  {
+    "objectID": "pages/blog/issues/888 - working with xml/quarto.html#summary",
+    "href": "pages/blog/issues/888 - working with xml/quarto.html#summary",
+    "title": "Working with .XML in R",
+    "section": "Summary",
+    "text": "Summary\nIn conclusion, XML files are increasingly popular as a FAIR (especially interoperable) data format for the exhchange of data/metadata between systems. As a data professional, mastering the manipulation and analysis of XML files is not just an optional skill but a necessity. XML files are pervasive in various sectors, serving as a standard for data exchange. The article highlights that most tasks you’ll encounter in R related to XML boil down to three core activities: loading the XML document, parsing its content, and converting it into a more analysis-friendly format like a tibble or data.frame.\nThe article introduces two R packages that facilitate these tasks, although it doesn’t specify their names. These packages are likely equipped with a range of functionalities—from basic XML reading and writing to more advanced operations like XPath querying and namespace management. By leveraging these packages, data professionals can significantly simplify and optimize their workflow when dealing with XML files, making the process more efficient and accurate."
   },
   {
     "objectID": "pages/blog/issues/999 - Tigris shape files/quarto.html",
@@ -777,9 +392,44 @@
     "text": "Issue\n\ndo you have acces to the shape files for the philly neighborhoods? and would you be able to share?\n\n\n\nTigris package\ntigris is an R package that allows users to directly download and use TIGER/Line shapefiles (https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) from the US Census Bureau. Below are some useful links:\n\nPackage repository: https://github.com/walkerke/tigris\nBook chapter from Analyzing US Data book: https://walker-data.com/census-r/census-geographic-data-and-applications-in-r.html\nPython version of tigris: https://walker-data.com/pygris/\n\nBelow we will go through how to use the tigris package to get ZIP Code Tabulation Areas (ZCTA) boundaries for Philadelphia County (42101).\n\n\nWorkflow\nWe will be using three packages\n\nlibrary(tigris)    ## to get shape files\nlibrary(leaflet)   ## making maps\nlibrary(sf)        ## spatial wrangling\nlibrary(tidyverse) ## general utilities\n\nLets first get two boundaries: 1) Philadelphia county and 2) All zcta in Philadelphia county.\n\nphiladelphia_county_sf = counties(\"Pennsylvania\", \n                                  cb = TRUE,\n                                  class = \"sf\") %&gt;% \n  filter(NAME == \"Philadelphia\") %&gt;% \n  select(GEOID, NAME, geometry)\n  \nstg_philadelphia_zcta_sf = zctas(filter_by = philadelphia_county_sf ) %&gt;% \n  select(ZCTA5CE20, geometry)\n\nLets map our results to make sure we have the correct things.\n\nleaflet() %&gt;% \n  addTiles() %&gt;%\n  addPolygons(data = stg_philadelphia_zcta_sf,\n              fillOpacity = 0,\n              weight = 1,\n              color = \"blue\",\n              opacity = 1) %&gt;% \n  addPolygons(data = philadelphia_county_sf,\n              fillOpacity = 0,\n              weight = 3,\n              color = 'black',\n              opacity = 1) \n\n\n\n\n\nThe map above shows Philadelphia County boundaries as black bold line. The CTA boundaries are the blue lines. We are almost there, it seems TIGRIS returned any zcta that is even touching Philadelphia county boundaries including zctas that are just on the edge. Lets get rid of those with some basic spatial wrangling below.\n\n## Calculate overlap between each zcta and philadelphia county\nxwalk_overlap = st_intersection(stg_philadelphia_zcta_sf,\n                                philadelphia_county_sf) %&gt;% \n  mutate(area_overlap = st_area(geometry)) %&gt;% \n  as_tibble() %&gt;% \n  select(ZCTA5CE20,area_overlap )\n\n\n## calculate the proportion of each zcta that is in philadelphia\nint_philadelphia_zcta_sf = stg_philadelphia_zcta_sf %&gt;% \n  left_join(xwalk_overlap, by = \"ZCTA5CE20\") %&gt;% \n  mutate(zcta_area = st_area(geometry),\n         overlap = as.numeric(area_overlap/zcta_area)) \n\n## We only want to remove those that have very little overlap. Lets keep anything with \n## greater than 25% overlap\nphiladelphia_zcta_sf = int_philadelphia_zcta_sf %&gt;% \n  filter(overlap &gt; 0.25)\n\nLet check our spatial wrangling worked.\n\nleaflet() %&gt;% \n  addTiles() %&gt;%\n    addPolygons(data = philadelphia_county_sf,\n              fillOpacity = 0,\n              weight = 5,\n              color = 'black',\n              opacity = 0.4) %&gt;% \naddPolygons(data = philadelphia_zcta_sf,\n              fillOpacity = 0,\n              weight = 1,\n              color = \"blue\",\n              opacity = 1) \n\n\n\n\n\nLooks great! Now we have boundaries for both the Philadelphia Country as well as all zcta within Philadelphia."
   },
   {
+    "objectID": "pages/blog/issues/999 - working with gdb/index.html#step-1-see-what-layers-are-in-the-.gdb",
+    "href": "pages/blog/issues/999 - working with gdb/index.html#step-1-see-what-layers-are-in-the-.gdb",
+    "title": "Working with Geo database",
+    "section": "Step 1: See what layers are in the .gdb",
+    "text": "Step 1: See what layers are in the .gdb\nA geodatabase (.gdb) is not just a file, but a collection of various types of data like feature classes (points, lines, polygons), raster data, tables, and more. It’s a robust and scalable way to store spatial data, offering advantages like spatial indexing, topologies, and network datasets for complex spatial analysis.\nThe first step is to see what ‘layers’ are available in the .gdb.\n\n## Declare path to .gdb\npath_gdb = 'cb_2022_us_all_20m.gdb'\n\n## Examine layers\nsf::st_layers(path_gdb)\n\nDriver: OpenFileGDB \nAvailable layers:\n               layer_name geometry_type features fields crs_name\n1    cb_2022_us_cd118_20m Multi Polygon      437      9    NAD83\n2   cb_2022_us_county_20m Multi Polygon     3222     12    NAD83\n3 cb_2022_us_division_20m Multi Polygon        9      8    NAD83\n4   cb_2022_us_nation_20m Multi Polygon        1      3    NAD83\n5   cb_2022_us_region_20m Multi Polygon        4      8    NAD83\n6    cb_2022_us_state_20m Multi Polygon       52      9    NAD83\n\n\nWe can see that this geo-database contains six layers; let just work with two of then county and state focusing on Pennsylvania."
+  },
+  {
+    "objectID": "pages/blog/issues/999 - working with gdb/index.html#step-2-import-state-and-county-boundaries-pa",
+    "href": "pages/blog/issues/999 - working with gdb/index.html#step-2-import-state-and-county-boundaries-pa",
+    "title": "Working with Geo database",
+    "section": "Step 2: Import State and County boundaries (PA)",
+    "text": "Step 2: Import State and County boundaries (PA)\nThe sf package in R is a versatile tool for anyone working with spatial data. It simplifies the management and analysis of geospatial information, supporting common formats like shapefiles and geodatabases. With sf, users can seamlessly integrate spatial data with R’s powerful data analysis capabilities, making complex spatial tasks both accessible and efficient.\nLets import the boundaries as sf objects.\n\n## Import state\nsf_state = sf::st_read(path_gdb,\"cb_2022_us_state_20m\")  %&gt;%  \n      sf::st_transform(\"+proj=longlat +datum=NAD83\") \n\nReading layer `cb_2022_us_state_20m' from data source \n  `D:\\git\\analytics-corner\\pages\\blog\\issues\\999 - working with gdb\\cb_2022_us_all_20m.gdb' \n  using driver `OpenFileGDB'\nSimple feature collection with 52 features and 9 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -179.1743 ymin: 17.91377 xmax: 179.7739 ymax: 71.35256\nGeodetic CRS:  NAD83\n\n## Check data structure\nglimpse(sf_state)\n\nRows: 52\nColumns: 10\n$ STATEFP  &lt;chr&gt; \"48\", \"06\", \"21\", \"13\", \"55\", \"41\", \"29\", \"51\", \"47\", \"22\", \"~\n$ STATENS  &lt;chr&gt; \"01779801\", \"01779778\", \"01779786\", \"01705317\", \"01779806\", \"~\n$ AFFGEOID &lt;chr&gt; \"0400000US48\", \"0400000US06\", \"0400000US21\", \"0400000US13\", \"~\n$ GEOID    &lt;chr&gt; \"48\", \"06\", \"21\", \"13\", \"55\", \"41\", \"29\", \"51\", \"47\", \"22\", \"~\n$ STUSPS   &lt;chr&gt; \"TX\", \"CA\", \"KY\", \"GA\", \"WI\", \"OR\", \"MO\", \"VA\", \"TN\", \"LA\", \"~\n$ NAME     &lt;chr&gt; \"Texas\", \"California\", \"Kentucky\", \"Georgia\", \"Wisconsin\", \"O~\n$ LSAD     &lt;chr&gt; \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"~\n$ ALAND    &lt;dbl&gt; 676685555821, 403673617862, 102266581101, 149486268417, 14029~\n$ AWATER   &lt;dbl&gt; 18974391187, 20291712025, 2384240769, 4418716153, 29343193162~\n$ SHAPE    &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-106.6234 3..., MULTIPOLYGON (((~\n\n## Map to check\nsf_state %&gt;% \n  leaflet() %&gt;% \n  addTiles()   %&gt;%\n  addPolygons(\n    label = ~NAME,  # Custom label with multiple details\n    labelOptions = labelOptions(\n      html = T,\n      style = list(\"font-weight\" = \"normal\", padding = \"3px 8px\"),\n      textsize = \"13px\",\n      direction = \"auto\"\n    )\n  )\n\n\n\n\n\n\n## Import county\nsf_county = sf::st_read(path_gdb,\"cb_2022_us_county_20m\")  %&gt;%  \n      sf::st_transform(\"+proj=longlat +datum=NAD83\") \n\nReading layer `cb_2022_us_county_20m' from data source \n  `D:\\git\\analytics-corner\\pages\\blog\\issues\\999 - working with gdb\\cb_2022_us_all_20m.gdb' \n  using driver `OpenFileGDB'\nSimple feature collection with 3222 features and 12 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -179.1743 ymin: 17.91377 xmax: 179.7739 ymax: 71.35256\nGeodetic CRS:  NAD83\n\n## Check data structure\nglimpse(sf_county)\n\nRows: 3,222\nColumns: 13\n$ STATEFP    &lt;chr&gt; \"17\", \"27\", \"37\", \"47\", \"06\", \"17\", \"19\", \"22\", \"18\", \"33\",~\n$ COUNTYFP   &lt;chr&gt; \"127\", \"017\", \"181\", \"079\", \"021\", \"093\", \"095\", \"003\", \"05~\n$ COUNTYNS   &lt;chr&gt; \"01784730\", \"00659454\", \"01008591\", \"01639755\", \"00277275\",~\n$ AFFGEOID   &lt;chr&gt; \"0500000US17127\", \"0500000US27017\", \"0500000US37181\", \"0500~\n$ GEOID      &lt;chr&gt; \"17127\", \"27017\", \"37181\", \"47079\", \"06021\", \"17093\", \"1909~\n$ NAME       &lt;chr&gt; \"Massac\", \"Carlton\", \"Vance\", \"Henry\", \"Glenn\", \"Kendall\", ~\n$ NAMELSAD   &lt;chr&gt; \"Massac County\", \"Carlton County\", \"Vance County\", \"Henry C~\n$ STUSPS     &lt;chr&gt; \"IL\", \"MN\", \"NC\", \"TN\", \"CA\", \"IL\", \"IA\", \"LA\", \"IN\", \"NH\",~\n$ STATE_NAME &lt;chr&gt; \"Illinois\", \"Minnesota\", \"North Carolina\", \"Tennessee\", \"Ca~\n$ LSAD       &lt;chr&gt; \"06\", \"06\", \"06\", \"06\", \"06\", \"06\", \"06\", \"15\", \"06\", \"06\",~\n$ ALAND      &lt;dbl&gt; 614218330, 2230473967, 653701481, 1455320362, 3403160299, 8~\n$ AWATER     &lt;dbl&gt; 12784614, 36173451, 42190675, 81582236, 33693344, 5136525, ~\n$ SHAPE      &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-88.92876 3..., MULTIPOLYGON (~\n\n## Map to check\nsf_county %&gt;% \n  leaflet() %&gt;% \n  addTiles()   %&gt;%\n  addPolygons(\n    label = ~NAME,  # Custom label with multiple details\n    labelOptions = labelOptions(\n      html = T,\n      style = list(\"font-weight\" = \"normal\", padding = \"3px 8px\"),\n      textsize = \"13px\",\n      direction = \"auto\"\n    )\n  )"
+  },
+  {
+    "objectID": "pages/blog/issues/999 - working with gdb/index.html#step-3-wrangling-to-focus-on-pa",
+    "href": "pages/blog/issues/999 - working with gdb/index.html#step-3-wrangling-to-focus-on-pa",
+    "title": "Working with Geo database",
+    "section": "Step 3: Wrangling to focus on PA",
+    "text": "Step 3: Wrangling to focus on PA\nOnce we have imported the boundaries as sf objects we can start to leverage tidyverse tools to do wrangling or analysis. As a simple walkthrough lets do the following:\n\nfilter boundaries for PA\noperationalize some nicer labels for counties\nappend some data for mapping\n\n\n## Filter for PA and op. labels\nsf_county_pa = sf_county %&gt;% \n  filter(STUSPS == 'PA')\n\n\n## Add some data\nlibrary(arrow)\ndf_demographics = arrow::read_parquet(\"df_demographics.parquet\") %&gt;% \n  filter(geo == 'county',\n         year == 2020) %&gt;%\n  select(GEOID = geoid, median_age)\nsf_county_pa = sf_county_pa %&gt;% \n  left_join(df_demographics, by = 'GEOID') \n\n## Op. labels\nsf_county_pa = sf_county_pa %&gt;% \n  rowwise() %&gt;% \n  mutate(\n    county_age_label =  paste0(NAME, '&lt;br&gt;', \n                               'Median Age: ', median_age) %&gt;% \n      htmltools::HTML()\n  ) %&gt;% \n  ungroup()"
+  },
+  {
+    "objectID": "pages/faq/index.html",
+    "href": "pages/faq/index.html",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "Note\n\n\n\nThe analytics corner is not official in any capacity and is just a proof of concept. The language language is still being drafted and a work in progress. Feel free to Edit this page or report an issue.\n\n\n\nWhat is the Analytics Corner?\nBuild bridges at the UHC by open sourcing your analytic problems.\n\n\nHow do I submit an issue?\nPlease click on the button below to start a intake form which will generate a GitHub issue for you. Don’t forget to enter a title in your issue. Also all form inputs that have red asterisks require answers before the issue can be submitted. Please email rl627@drexel.edu if you have any questions or trouble submitting an issue.\n\n\nWhat is GitHub?\nGitHub is a online host for version control, project management and collaborative development. We have found it extremely useful in managing complex projects, sharing reproducible work/data and building bridges while working remotely. For academics it’s premium features are completely free. You can sign up at https://github.com/join; note, try to use your real name if you can and it is encouraged to upload a profile pic.\n\n\nHow can I contribute?\nYou can contribute by participating in discussions, opening issues or submiting Pull Requests to address open issues."
+  },
+  {
     "objectID": "pages/gallery/index.html",
     "href": "pages/gallery/index.html",
     "title": "Gallery",
+    "section": "",
+    "text": "Note\n\n\n\nCOMING SOON"
+  },
+  {
+    "objectID": "pages/get-started/index.html",
+    "href": "pages/get-started/index.html",
+    "title": "Get Started",
     "section": "",
     "text": "Note\n\n\n\nCOMING SOON"
   },
@@ -812,11 +462,25 @@
     "text": "3.3 Interactive with DBT via VS-code\nSo far we have used DBT like a compiler. But in reality, it takes a lot of interactive development to get your models where you want them. There are two ways to use DBT as an interactive tool: DBT cloud which is the pricier and fancier option and DBT PowerUser on VS code which works and is free!\nSo lets try the basics of DBT Poweruser to use DBT interactively in VS-Code.\n\n3.3.1 Navigate to a .sql model in VS-Code\nHere we navigate to ./models/base/MORTALITY/DEATH_PA_2010.sql\n\n\n\n3.3.2 Click anywhere on you .sql file then hit cntr enter\n\nHere DBT will give you a preview of what this model looks like! Being able to iterative write your SQL without having to compile and work within your IDE will streamline the data model process greatly and makes for a happier developer experience."
   },
   {
+    "objectID": "pages/manuals/dbt/data-modeling.html",
+    "href": "pages/manuals/dbt/data-modeling.html",
+    "title": "4. Basic Modeling",
+    "section": "",
+    "text": "Given our end goal of generating datasets to produce a analytic table ready for analysis on trends of deaths/hospitaliations of hufflepox. We will go through one way of using data layering to apply modularity to our transformations.\n\n\n\n\n\n\nThe specific learning goals for today’s session are:\n\n\n\n\nIntermediate tables\n\nCompile base tables\nRecode Diagnosis Codes\nSummarize by ZCTA\n\nCompile into a final table\nAssign practice to volunteers. Maybe brainstorm new tables."
+  },
+  {
     "objectID": "pages/manuals/dbt/documentation.html",
     "href": "pages/manuals/dbt/documentation.html",
     "title": "3. Documentation",
     "section": "",
     "text": "To increase the value of our data resoruce it is key to provide clear documentation for columns, tests, tables and any useful information your user may need.\n\n\n\n\n\n\nThe specific learning goals for today’s session are:\n\n\n\n\nExamine basic documentation structure for a DBT model\nExtent basic documentatino with doc blocks to not repeat metadata\nLearn how to deploy documentation"
+  },
+  {
+    "objectID": "pages/manuals/dbt/functional-programming.html",
+    "href": "pages/manuals/dbt/functional-programming.html",
+    "title": "5. Macros: DBT functional programming",
+    "section": "",
+    "text": "The specific learning goals for today’s session are:\n\n\n\n\nNon-macro implementation\nCreate Macro\nUtilize Macro\nMacros documentation"
   },
   {
     "objectID": "pages/manuals/dbt/get-started-install.html",
@@ -882,6 +546,41 @@
     "text": "1.8 Setup DBT\nActivate Python Environment: type .\\.venv\\Scripts\\activate in the terminal and hit enter\n\nCheck dbt is installed and version by entering dbt --version in terminal\n\nCheck that DBT can compile models\n\nIf you see done (as shown above) you are ready to start data modeling!! 😄"
   },
   {
+    "objectID": "pages/manuals/dbt/load-data.html",
+    "href": "pages/manuals/dbt/load-data.html",
+    "title": "2. Load data",
+    "section": "",
+    "text": "This course does not teach data cleaning so we have simulated some cleaned data which we will load. Also DBT is a highly flexible system that allows us to work either locally or on the cloud. Today’s course will work locally so we can focus on data loading and basics of DBT; working on the cloud will be a topic for the next session."
+  },
+  {
+    "objectID": "pages/manuals/dbt/load-data.html#examine-our-data-sources",
+    "href": "pages/manuals/dbt/load-data.html#examine-our-data-sources",
+    "title": "2. Load data",
+    "section": "1.1 Examine our data sources",
+    "text": "1.1 Examine our data sources\nWe have simulated some fake data that align with some of the data that is commonly used at the UHC. The code for simulating this can be found in the .etl folder of the repository. The outputs can be found in the .etl/clean/ folder. There are several formats available, lets examine the .CSV formats just because they are more accessible.\nOur ETL pipeline has produced a few tables for us to start modeling with. These include:\n\nxwalk_spatial: simulated zcta, county, city relationship file for two fictional states PA/NY\nDEATH_PA_YYYY: simulate line level mortality data for the state of PA\nHCUP_SID_STATE_YYYY: simulated in patient hospital records for PA/NY\nNETS: simulated business data for PA/NY\nacs_zcta: simulated zcta level indicators\n\nOur ETL pipeline has produced a few tables in several formats (.csv and .parquet).\n\n\n\n\n\n\n.parquet\n\n\n\nYou can think of .parquet as the next generation of .csv; where it is quickly becoming the gold standard data storage format within the data science world. It has several benefits including storage of metadata (descriptions, column-types), columnar-storage for efficient storage and queries and is highly inter operable with modern analytics workflows.\n\n\n\nDuckDB-DBT can read or write in a variety of formats including .csv, .parquet or .json. So the next step is to just copy our source tables into our DuckDB project."
+  },
+  {
+    "objectID": "pages/manuals/dbt/load-data.html#load-data-sources-into-dbt",
+    "href": "pages/manuals/dbt/load-data.html#load-data-sources-into-dbt",
+    "title": "2. Load data",
+    "section": "1.2 Load Data Sources into DBT",
+    "text": "1.2 Load Data Sources into DBT\nTo load data all we do is copy and paste our files (.csv or .parquet) into a folder and tell DBT where to look. This could be locally on your computer, on the UHC server, or on a cloud storage (S3 bucket) or in a database. We have found a lot of success in using the UHC server as its free and works well across multiple people collaborating; but today we will just focus on working locally to focus on basics of DBT. We will touch on working in the cloud in a future session.\nSo to work locally we\n\ncreated a folder ./external-dev/sources/ where we can upload our source tables.\ncopy our source tables from our ETL pipeline. So it should look like this.\n\nThat’s it! Now we can move on to telling DBT about these source tables!"
+  },
+  {
+    "objectID": "pages/manuals/dbt/load-data.html#tell-dbt-about-our-source-tables",
+    "href": "pages/manuals/dbt/load-data.html#tell-dbt-about-our-source-tables",
+    "title": "2. Load data",
+    "section": "1.3 Tell DBT about our source tables",
+    "text": "1.3 Tell DBT about our source tables\nIn DBT the most important folder is ./models. The DBT (Data Build Tool) ./models folder is like a recipe book for your data: it contains instructions on how to combine and transform raw ingredients (your raw data) into finished dishes (more useful, organized, and analyzed data). Think of each file within the folder as a different recipe, each defining a specific way to cook your data.\nLets add a group of recipes that tell DBT about our starting ingredients. We do this by making a folder ./models/sources. then creating a file in .yml format that tells DBT about each source.\nThe source folder now looks like this\n\nAn example of an individual source .yml that uses .csv is like this (click here)\n\nAn example of an individual source .yml that uses .csv is like this (click here)"
+  },
+  {
+    "objectID": "pages/manuals/dbt/load-data.html#generate-documentation",
+    "href": "pages/manuals/dbt/load-data.html#generate-documentation",
+    "title": "2. Load data",
+    "section": "1.3 Generate documentation",
+    "text": "1.3 Generate documentation\n\n\n\n\n\n\nIntro to DBT Documentation\n\n\n\nDocumentation within a data warehouse is crucial because it ensures transparency, maintainability, and trustworthiness of your data. It’s like a roadmap, explaining how your data is structured, where it comes from, and how it’s been processed and transformed, which is vital when data professionals need to understand or modify data workflows. DBT’s “work as you go” out-of-the-box documentation is incredibly valuable because it auto-generates this roadmap. As you build and transform your data, DBT automatically creates accompanying documentation, ensuring that no step is undocumented and that the whole process is continually up-to-date and ready for team collaboration or audits.\n\n\nBefore we go any farther lets introduce documentation in DBT and make sure everything looks as expected To generate documentation in DBT you run two commands sequentially. First to generate documentation\ndbt docs generate\nThen to serve the documentation\ndbt docs serve\nThe log after running these two should look like:\n(.venv) PS D:\\git\\duckdb-dbt-template&gt; dbt docs generate\n16:17:18  Running with dbt=1.3.2\n16:17:19  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.\nThere are 1 unused configuration paths:\n- models.hello.example\n\n16:17:19  Found 1 model, 0 tests, 0 snapshots, 0 analyses, 292 macros, 0 operations, 0 seed files, 9 sources, 0 exposures, 0 metrics\n16:17:19  \n16:17:19  Concurrency: 1 threads (target='dev-local')\n16:17:19\n16:17:19  Done.\n16:17:19  Building catalog\n16:17:19  Catalog written to D:\\git\\duckdb-dbt-template\\target\\catalog.json\n(.venv) PS D:\\git\\duckdb-dbt-template&gt; dbt docs serve\n16:17:26  Running with dbt=1.3.2\n16:17:26  Serving docs at 0.0.0.0:8080\n16:17:26  To access from your browser, navigate to:  http://localhost:8080\n16:17:26\n16:17:26\n16:17:26  Press Ctrl+C to exit.\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET /manifest.json?cb=1684945047414 HTTP/1.1\" 200 -\n127.0.0.1 - - [24/May/2023 12:17:27] \"GET /catalog.json?cb=1684945047414 HTTP/1.1\" 200 -\nYou should now see the documentation site pop up in your browser and it looks like the following:\n\nLooks about right! we have told DBT that we have of bunch of ingredients/sources and it shows up in the documentation."
+  },
+  {
     "objectID": "pages/manuals/dbt/overview.html",
     "href": "pages/manuals/dbt/overview.html",
     "title": "Datawarehousing with DBT",
@@ -889,11 +588,67 @@
     "text": "This will be a series of 1 hour collaborative coding sessions where we will learn to use DBT to build a data warehouse. This will be extremely informal and will be a safe space to ask questions and learn together. The rough outline of the series is as follows:\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Modeling Fundamentals\n\nData Modeling\nMacros\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nStand-ups\nWorking on the cloud\n\nCloud storage\nCloud database example\n\nSummary\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter\nDBT Slack Community (very active)"
   },
   {
+    "objectID": "pages/manuals/dbt/summary.html",
+    "href": "pages/manuals/dbt/summary.html",
+    "title": "Course Summary",
+    "section": "",
+    "text": "We want to move from raw data to research outputs.\n\n\n\n\nFor each manuscript we can individually ETL (aka data wrangling) then store it where ever we want.\nThis results in a lot of repeated work across projects and a lot of repeated work.\n\n\n\n*ETL\n\nMany organization have faced this issue and the industry solution is datawahousing.\n\n\n\nWe can organize our work so that data wrangling (including complex methods such as model-based imputations) are done by individual groups. But once data is structured we can deposit into data warehouse as primary data aka Seeds.\n\nWe can then centralize the transformations of primary/seed data into what ever downstream outputs we want. All under the best practices frame work of DBT which provides a very mature workflow for organizing queries, generating documentation, version control and collaborative environment management."
+  },
+  {
+    "objectID": "pages/manuals/dbt/summary.html#big-picture",
+    "href": "pages/manuals/dbt/summary.html#big-picture",
+    "title": "Course Summary",
+    "section": "",
+    "text": "We want to move from raw data to research outputs.\n\n\n\n\nFor each manuscript we can individually ETL (aka data wrangling) then store it where ever we want.\nThis results in a lot of repeated work across projects and a lot of repeated work.\n\n\n\n*ETL\n\nMany organization have faced this issue and the industry solution is datawahousing.\n\n\n\nWe can organize our work so that data wrangling (including complex methods such as model-based imputations) are done by individual groups. But once data is structured we can deposit into data warehouse as primary data aka Seeds.\n\nWe can then centralize the transformations of primary/seed data into what ever downstream outputs we want. All under the best practices frame work of DBT which provides a very mature workflow for organizing queries, generating documentation, version control and collaborative environment management."
+  },
+  {
+    "objectID": "pages/manuals/dbt/summary.html#course-content",
+    "href": "pages/manuals/dbt/summary.html#course-content",
+    "title": "Course Summary",
+    "section": "Course Content",
+    "text": "Course Content\n\nSession 1 (5/10/23): Get Started + Setup\n\nsetup software required for DBT\n\nSession 2 (5/24/23): Loading data into DBT\n\nStart with source data (.csv or .parquet or .json)\nLoad source data into DBT\nGenerate documentation\n\nSession 3 (5/31/23): Intro to Modeling\n\nIntro to structure\nBase models\nInteractive modeling\n\nSession 4 (6/7/23): Modeling Fundamentals\n\nData Modeling\nMacros\nDocumentation\n\nSession 5 (6/14/23): Standups + Intermediate Features\n\nStand-ups\nWorking on the cloud\n\nCloud storage\nCloud database example\n\nSummary"
+  },
+  {
+    "objectID": "pages/manuals/dbt/summary.html#moving-forward",
+    "href": "pages/manuals/dbt/summary.html#moving-forward",
+    "title": "Course Summary",
+    "section": "Moving Forward",
+    "text": "Moving Forward\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nThis course is not a comprehensive guide to data warehousing with DBT but rather meant to get you started in terms of software and introduce basic concepts. Please see the following for more resources to help you learn.\n\nDBT Courses (All)\n\ndbt fundamentals\ndbt Jinja, Macros, Packages\nNote, these courses DBT cloud but you can use the set up we introduce to practice\n\nAnalytics Engineering with DBT (Book)\nData Modeling Techniques chapter\nDBT Slack Community (&gt;50k members)"
+  },
+  {
     "objectID": "pages/manuals/dbt/work-in-cloud.html",
     "href": "pages/manuals/dbt/work-in-cloud.html",
     "title": "6. Work in cloud",
     "section": "",
     "text": "The specific learning goals for today’s session are:\n\n\n\n\nStandups\nIntroduce profiles.yml\nCloud options:\n\nOption 1: Work with UHC cloud storage\nOption 2: Work with other (Azure, AWS, GCP) cloud storage\nOption 3: Work with cloud database (GCP BigQuery, Azure Synapse, Azure SQL)\n\nCollaborative workflow:\n\nGitHub branches\nBranch protection\nIssues/discussion\ndeployment of DBT documentation\nETL pipeline"
+  },
+  {
+    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html",
+    "href": "pages/manuals/git-github/case-study-project-transition-management.html",
+    "title": "Project managment",
+    "section": "",
+    "text": "There are many challenges aspects to building a collaborative coding project\n\nHow to communicate about code changes?\nHow to keep record of small details in a complex project?\nHow to have longer technical back and forth conversations while maintaining context throughout?\nHow to handle project transitions between staff changes?\n\nBelow we will use a private repository which cleans and synthesizes research from sensitive line level mortality data. A graduate research assistant wrote code to clean years 1990-2018 then graduate and is handed off to another RA to extend not only data range 1960-2020 but also to start synthesizing research. It is a great case study to show how Git/GitHub can help address the challenges above. It is a private repository so I will just show snippets."
+  },
+  {
+    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#project-challenges",
+    "href": "pages/manuals/git-github/case-study-project-transition-management.html#project-challenges",
+    "title": "Project managment",
+    "section": "",
+    "text": "There are many challenges aspects to building a collaborative coding project\n\nHow to communicate about code changes?\nHow to keep record of small details in a complex project?\nHow to have longer technical back and forth conversations while maintaining context throughout?\nHow to handle project transitions between staff changes?\n\nBelow we will use a private repository which cleans and synthesizes research from sensitive line level mortality data. A graduate research assistant wrote code to clean years 1990-2018 then graduate and is handed off to another RA to extend not only data range 1960-2020 but also to start synthesizing research. It is a great case study to show how Git/GitHub can help address the challenges above. It is a private repository so I will just show snippets."
+  },
+  {
+    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#github-issues-to-track-changes-and-details",
+    "href": "pages/manuals/git-github/case-study-project-transition-management.html#github-issues-to-track-changes-and-details",
+    "title": "Project managment",
+    "section": "2.2 GitHub Issues to track changes and details",
+    "text": "2.2 GitHub Issues to track changes and details\nScenario: @isabelderamos has a question about a specific part of the project.\n\nHow can @isabelderamos communicate this?\nHow can collaborators reply in a way which clearly communicates how and why the codebase was updated?\n\n✨GitHub issues\n\n\n\nFigure 1: @isabelderamos can notify the team of a thing that needs to be done by creating a GitHub issue. She error she is getting and provides some context to the source of the problem. GitHub will notify teamates Figure 2\n\n\n\n\n\n\n\n\n\n\nFigure 2: GitHub will notify all teammates (@usamabilal and @ran-codes) of a new issue via email. @ran-codes has an idea of what the issue is and pushes some changes to the code, see Figure 3\n\n\n\n\n\n\n\n\n\n\nFigure 3: @ran-codes makes two changes saved as commits with messages detailing progress. Importantly these changes/commits are linked to this issue and @isabelderamos can click each commit to see exact code changes, see Figure 4.\n\n\n\n\n\n\n\n\n\n\nFigure 4: Clicking the commit shows code differences compared to the previous version. We can see that icd10 code U02 was manually added to three GHE tiers by modifying the highlighted lines of code. Going back to the issue, see Figure 5\n\n\n\n\n\n\n\n\n\n\nFigure 5: Right after the commits (Figure 4), @ran-codes describes the changes he made to provide context for the code updates above.\n\n\n\n\n\n\n\n\n\n\nFigure 6: @isabelderamos pulls the changes from GitHub to her local computer. After checking code changes resolved error are fixed, @isabelderamos notifies the team everything is okay and closes the issue!\n\n\n\n\n\n\n\n\nImportant\n\n\n\nGitHub issues are a feature designed to describe problems, track code changes related to those problems, stay up to date through email notifications, and facilitate efficient communication through feature rich markdown.\nEvery project can be broken down many smaller problems. GitHub issues is a workflow that allows us to focus, collaborate and document how we solve these small problems. This really helps keep organized in the context a of a large project which could have hundreds of issues and multiple collaborators."
+  },
+  {
+    "objectID": "pages/manuals/git-github/case-study-project-transition-management.html#branches-to-manage-role-transitions",
+    "href": "pages/manuals/git-github/case-study-project-transition-management.html#branches-to-manage-role-transitions",
+    "title": "Project managment",
+    "section": "2.2 Branches to manage role transitions",
+    "text": "2.2 Branches to manage role transitions\nScenario: @usamabilal is PI. @ran-codes is an RA that wrote code to clean mortality data but is graduating. @isabelderamos is an incoming RA that is tasked with extending the functionality of the existing codebase.\n\n@usamabilal: mmm how to transition between two RA’s. I hope we can make these new changes without breaking the existing project.\n@isabelderamos 😰 omg… I am kind of new to R. What if I break something?\n@ran-codes: how can I share my code and remain in touch to answer any questions?\n\n✨Git Branches allow you to safely experiment with new ideas in a contained area of your repository.\n\n\n\nJul 15, 2021 @ran-codes creates a git repository with to track the main codebase (black line) and a branch within the repository aka duplicate codebase (green line) for @isabelderamos to work on without effecting the main codebase.\n\n\n\n\n\n\n\n\n\n\nJul 15, 2021 - Jul 20, 2022 @isabelderamos works on the duplicate branch (green-line).\n\n\n\n\n\n\n\n\n\n\nJan, 2 2022 Periodically we will test and validate @isabelderamos contributions and merge changes (green) to the main codebase (black).\n\n\n\n\n\n\n\n\n\n\nJul 20, 2022 @isabelderamos is graduating and is wrapping up her portion of work. @usamabilal validates merges changes (green) into main codebase (black) and culls/ends the branch.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nGit branches allow you to develop features, fix bugs, or safely experiment with new ideas in a contained area of your repository. GitHub allow us to implement branches within the context of issues and commits to smooth document project evolution and allow for smooth transitions between collaborators.\nBranches may not be require when working alone. They are particularly useful when entry level RA enter a project to relieve pressure on the RA and protect the project from any regressive code changes."
   },
   {
     "objectID": "pages/manuals/git-github/case-study-version-control.html",
@@ -924,11 +679,60 @@
     "text": "1.3 Takeaway\n\n\n\n\n\n\nImportant\n\n\n\nThis approach of using a version control system (VCS) (Blischak, Davenport, and Wilson 2016) is an industry and academic (Ram 2013) best practice. It is much more ergonomic and reliable than manualy tracking versions."
   },
   {
+    "objectID": "pages/manuals/git-github/clone.html",
+    "href": "pages/manuals/git-github/clone.html",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "pages/manuals/git-github/clone.html#open-github-desktop",
+    "href": "pages/manuals/git-github/clone.html#open-github-desktop",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.1 Open GitHub Desktop",
+    "text": "2.1 Open GitHub Desktop\nOpen the GitHub desktop app and click Clone a repository from the internet\n\nNote if you have already used GitHub desktop before. You will see a different UI. You can clone by going to File &gt; Clone repository"
+  },
+  {
+    "objectID": "pages/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
+    "href": "pages/manuals/git-github/clone.html#search-for-the-repo-you-want-to-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.2 Search for the repo you want to clone",
+    "text": "2.2 Search for the repo you want to clone\nSearch in the highlight input box for the name of your repo. For example, we are can start typing hello-my-first-repo which we created in the previous module. We can see that GitHub Desktop found it; make sure to click the repository you want to clone if there are multiple choices."
+  },
+  {
+    "objectID": "pages/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
+    "href": "pages/manuals/git-github/clone.html#choose-a-local-folder-where-to-copy-the-repo",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.3 Choose a local folder where to copy the repo",
+    "text": "2.3 Choose a local folder where to copy the repo\nYou should specify where on your local computer you want to create a clone/copy of the online repo. In general it is a good idea to have all your git repository in the same folder to organize things!."
+  },
+  {
+    "objectID": "pages/manuals/git-github/clone.html#click-clone",
+    "href": "pages/manuals/git-github/clone.html#click-clone",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.4 Click clone",
+    "text": "2.4 Click clone\nOnce you have your online repo and local folder selected then you can click Clone to start the cloning process."
+  },
+  {
+    "objectID": "pages/manuals/git-github/clone.html#ready-to-make-local-changes",
+    "href": "pages/manuals/git-github/clone.html#ready-to-make-local-changes",
+    "title": "2. Clone - copy online repo to local computer",
+    "section": "2.5 Ready to make local changes!",
+    "text": "2.5 Ready to make local changes!\nAfter the cloning process. Your GitHub desktop should now show the status of your newly cloned repository."
+  },
+  {
     "objectID": "pages/manuals/git-github/git-basics.html",
     "href": "pages/manuals/git-github/git-basics.html",
     "title": "Fundamental Git workflow",
     "section": "",
     "text": "Key Terms\n\nmodify-add-commit-push-pull a basic git workflow that can get you 80% of the benefits of version control.\n\n\n\n\n\n\n\nmodify aka change files in the working directory (local computer)\nadd changes to a staging area which allows us to control what files to track with Git\ncommit save selected changes as a version onto our local repo (local history)\npush our new local version to a remote repo (GitHub)\npull sync local git repo with a remote repo"
+  },
+  {
+    "objectID": "pages/manuals/git-github/git-github.html",
+    "href": "pages/manuals/git-github/git-github.html",
+    "title": "GitHub Desktop",
+    "section": "",
+    "text": "Hello\n\n\nWorld"
   },
   {
     "objectID": "pages/manuals/git-github/git-intro.html",
@@ -952,11 +756,67 @@
     "text": "3.2 Git synchronizes code across collaborators\nThis is an example of two poeple can make changes to a piece of code at the same time. You can you partner pull the current version from online to own computers. Then each mach changes that same file. Git allows oyu to easily take those changes that you have made independently and merge them back to when you push them back online. And then pull those back down to your own computers so you both have the latest changes; not only what you have changed but also what your partner has change. Ensuring both have the most recent up to date versions."
   },
   {
+    "objectID": "pages/manuals/git-github/git-vs-github-desktop.html",
+    "href": "pages/manuals/git-github/git-vs-github-desktop.html",
+    "title": "Git vs GitHub",
+    "section": "",
+    "text": "(a) Git\n\n\n\n\n\n\n\n(b) Github desktop\n\n\n\n\nFigure 1: Git vs GitHub Desktop\n\n\n\nGit Figure 1 (a) is a command line interface (CLI) tool which require you to interact by typing commands. It is harder to learn for users without CLI experience and the outputs are not as accessible.\nGitHub Desktop Figure 1 (a) a graphical user interface (GUI) tool that allows you to us Git without using the command line. We do Git actions by interacting with a user interface that is designed to be ergonomic and accessible. You can’t do all the things you can with CLI but again 80% of features are here!\n\n\n\n\n\n\n\nImportant\n\n\n\nFor this workshop. We will use GitHub Desktop to do Git."
+  },
+  {
     "objectID": "pages/manuals/git-github/git-vs-github.html",
     "href": "pages/manuals/git-github/git-vs-github.html",
     "title": "Git vs GitHub",
     "section": "",
     "text": "Git is a version control system that lets you manage and keep track of your source code history.\nGitHub is a hosting service that is 1 part a cloud backup for git repositories and 1 part social media platform for collaboration."
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html",
+    "href": "pages/manuals/git-github/init.html",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "",
+    "text": "Key Terms"
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#sign-into-github-website",
+    "href": "pages/manuals/git-github/init.html#sign-into-github-website",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "1 Sign into GitHub website",
+    "text": "1 Sign into GitHub website\n\nOpen a browser.\nVisit https://github.com/\nSign in"
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#click-new-repository",
+    "href": "pages/manuals/git-github/init.html#click-new-repository",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "2 Click New Repository",
+    "text": "2 Click New Repository"
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#fill-out-repository-name",
+    "href": "pages/manuals/git-github/init.html#fill-out-repository-name",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "3. Fill out repository name",
+    "text": "3. Fill out repository name\nCreate a name to describe what this repository will do. Use lower case and dashes; no spaces allowed. For example a name could be my-first-repo"
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#select-visibility-setting",
+    "href": "pages/manuals/git-github/init.html#select-visibility-setting",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "3. Select Visibility Setting",
+    "text": "3. Select Visibility Setting\nBy default I recommend private; unless your goal is to share data or code publicly.\n\nPublic means everyone can see the contents of your repo. They can copy/fork but not make direct changes to your repo.\nPrivate only you and selected teammates can see the contents of your repo. Only these select teammates can make direct changes to your repo."
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#add-a-readme-file",
+    "href": "pages/manuals/git-github/init.html#add-a-readme-file",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "4. Add a README file",
+    "text": "4. Add a README file\nREADME.md files are special txt files that GitHub uses to document each folder in your repository. Generally always want one to start out to help you or other navigate your project."
+  },
+  {
+    "objectID": "pages/manuals/git-github/init.html#click-create-repository",
+    "href": "pages/manuals/git-github/init.html#click-create-repository",
+    "title": "Create a new repo on GitHub (init)",
+    "section": "5. Click Create Repository",
+    "text": "5. Click Create Repository\nNow that we have configured our settings we can click Create Repository to make the repo.\n\n\n\n\n\nYou should now be routed to your new repo on GitHub. 👏👏👏\n\n\n\n\n\nA few observations\n\nWe have only one file the README.md file\nWe only have one version/commit which is project initialization; this commit is identified by a hash key d4ff056.\n\nNow lets move on to clone or pull this repo from the cloud onto our local computer to make some changes with GitHub Desktop"
   },
   {
     "objectID": "pages/manuals/git-github/install-github-desktop.html",
@@ -987,11 +847,60 @@
     "text": "5.3 Sign in\nWhen you open GitHub desktop click “Sign in to GitHub.com” to sign in.\n\nYour browser should open and after you signed in. You should see the below snip and you are ready to go!"
   },
   {
+    "objectID": "pages/manuals/git-github/learning-objectives.html",
+    "href": "pages/manuals/git-github/learning-objectives.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Learn key terms:\n\nGit is a version control software that tracks file changes.\nRepository (repo) is a folder that contains files tracked by git.\nGitHub online platform for syncing git repos and project management.\nGitHub Desktop local software to do git via a graphical user interface.\nmodify-add-commit-push-pull a basic git workflow that can get you 80% of the benefits of version control.\n\nGit actions we will learn to do via GitHub Desktop\n\ninit Create a repo\nclone Make a clone/copy of an existing remote repo to local machine\nstatus list of files changes relative previous version.\nlog entire history\ndiff show changes in a file compared to previous version.\nadd stage selected changes for next commit\ncommit save selected changes as a version\npull sync local repo with remote repo\npush push local repo changes to remote repo\n\nGitHub features\n\nIssues a GitHub feature for organizing commits."
+  },
+  {
     "objectID": "pages/manuals/git-github/overview.html",
     "href": "pages/manuals/git-github/overview.html",
     "title": "Overview",
     "section": "",
     "text": "Why learn Git/GitHub: Explains the motivation for learning version control by presenting some previous use cases.\nHow to Git/GitHub Teach basics of the three technologies will learn (git, GitHub desktop, GitHub) and some fundamental workflows.\nLets try Git/GitHub Live demo where two people collaborate together to finish a R&R.\n\n\n\n\n\n\n\n\nNote\n\n\n\nSomethings to keep in mind before we start\n\nGit is notoriously hard to pick up and also notoriously hard to teach.\nThe learning/teaching process may be difficult so don’t feel like you aren’t picking things up quickly enough; this is normal. Be patient with yourself and the instructor.\nLearning this workflow is a case of slowing down to really really speed up. Thanks for being here!"
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html",
+    "href": "pages/manuals/git-github/precedent.html",
+    "title": "Who else uses Git/GitHub",
+    "section": "",
+    "text": "Many of our friends use Git and GitHub to share data and software. Here are some examples."
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html#nyc-public-health-department",
+    "href": "pages/manuals/git-github/precedent.html#nyc-public-health-department",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.1 NYC Public Health Department",
+    "text": "3.1 NYC Public Health Department\nThrough the COVID pandemic the NYC health departments was one of the best sources of city level COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/nychealth"
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html#johns-hopkins-covid-data",
+    "href": "pages/manuals/git-github/precedent.html#johns-hopkins-covid-data",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.2 Johns Hopkins Covid data",
+    "text": "3.2 Johns Hopkins Covid data\nJohns Hopkins was one of the best national level data sources for COVID data (breadth of availability, well documented, easily accessible). Their use of GitHub to rapid share important public health data really inspired us to start using GitHub.\nhttps://github.com/CSSEGISandData"
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html#esri",
+    "href": "pages/manuals/git-github/precedent.html#esri",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.3 ESRI",
+    "text": "3.3 ESRI\nSome of our favorite GIS software is developed with GitHub.\nhttps://github.com/Esri"
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html#tidyverse",
+    "href": "pages/manuals/git-github/precedent.html#tidyverse",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.4 Tidyverse",
+    "text": "3.4 Tidyverse\nSome of our favorite data packages is utilizes GitHub to open-sourced developement.\nhttps://github.com/tidyverse/tidyverse/releases"
+  },
+  {
+    "objectID": "pages/manuals/git-github/precedent.html#nasa",
+    "href": "pages/manuals/git-github/precedent.html#nasa",
+    "title": "Who else uses Git/GitHub",
+    "section": "3.5 NASA",
+    "text": "3.5 NASA\n🚀🚀🚀🚀🚀🚀\nhttps://github.com/tidyverse/nasa"
   },
   {
     "objectID": "pages/manuals/git-github/status.html",
@@ -1036,11 +945,25 @@
     "text": "3.5 UI - Change status\ngit status is a list of tracked files that are different than the previous version/commit. We can click the Change tab of GitHub Desktop to see the git status.\n\nAfter clicking the Change tab. We can view the results on the right.\nWe can see that there are no local changes relative to the previous version. This makes complete sense as we have not made any code changes after cloning the remote repository."
   },
   {
+    "objectID": "pages/manuals/git-github/teaching-thoughts.html",
+    "href": "pages/manuals/git-github/teaching-thoughts.html",
+    "title": "Overview",
+    "section": "",
+    "text": "A comprehensive Git and GitHub could take days. We are approaching this workshop with the two following ideas\n\n80/20 rule Focus on teaching a fundamental git workflow modify-add-commit that provides 80% of what you will need without touching on more advanced topics.\nGraphical interface over command line Teaching Git/GitHub has a steep enough learning curve. Teaching to an audience that doesn’t use command line we will teach using GitHub Desktop (a graphical user interface to do Git).\n\nDisclaimer: There are many ways to use and teach Git and and many Git platforms available. This course not meant to be comprehensive. It is just one person sharing how they learned to use version control.\n\n\n\n\nMost git workshops"
+  },
+  {
     "objectID": "pages/manuals/git-github/what-is-version-control.html",
     "href": "pages/manuals/git-github/what-is-version-control.html",
     "title": "What is version control",
     "section": "",
     "text": "Hello\n\n\n\n\n\n\nPay Attention\n\n\n\n\n\nUsing callouts is an effective way to highlight content that your reader give special consideration or attention."
+  },
+  {
+    "objectID": "pages/manuals/git-github/why-summary.html",
+    "href": "pages/manuals/git-github/why-summary.html",
+    "title": "Why Git/GitHub?",
+    "section": "",
+    "text": "Using a well established Git and Git platform (GitHub) is better than tracking versions/files manually because:\n\nNothing that is committed/saved to version control is ever lost. Its possible to go back in time time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.\nAs we have this record of who made what changes when, we know who to ask if we have questions later on, and, if needed, revert to a previous version, much like the “undo” feature in an editor.\nWhen several people collaborate in the same project, it’s possible to accidentally overlook or overwrite someone’s changes. The version control system automatically detects potential conflicts between one person’s work and another’s and notifies users.\nGitHub issues/projects/branches provide ergonomic solutions to common project management challenges.\n\nGit/GitHub can help us bring software engineering best practices to public health to enable us to better respond to complex public health problems in a manner that is timely, organized, transparent and reproducible."
   },
   {
     "objectID": "pages/manuals/sql/basics_database_design.html",
@@ -1092,9 +1015,114 @@
     "text": "DML\nAdds, edits, or deletes rows of data within tables\nThe most common commands are INSERT, UPDATE, and DELETE.\nINSERT reads data into a database table:\nINSERT INTO Tract (GeoId, LowPop, PhiladelphiaTract)\nVALUES ('42101000100', 0, 1)\nDELETE removes data from a table:\nDELETE FROM tract\nWHERE GeoId='42101000100'\nUPDATE edits data in a table\nUPDATE Tract\nSET LowPop=0\nWHERE GeoId='42101000100'"
   },
   {
+    "objectID": "pages/manuals/sql/introduction.html#relational-databases",
+    "href": "pages/manuals/sql/introduction.html#relational-databases",
+    "title": "Introduction to SQL",
+    "section": "Relational Databases",
+    "text": "Relational Databases\nAt it’s core a relational database is just a series of interconnected tables.\nWhile there is a lot of other functionality of databases, to grasp the basics of querying data you can think of it like a series of:\n\nexcel spreadsheets\nR/Python dataframes\nSAS datasets\n\nAll of the tables in a SQL database will connect to at least one other table in the database. It will be connected by a set of keys. These keys work similarly to ID columns that you might use when merging two datasets in your favorite analytic software.\n\n\n\nimage.png"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#advantages-of-relational-databases",
+    "href": "pages/manuals/sql/introduction.html#advantages-of-relational-databases",
+    "title": "Introduction to SQL",
+    "section": "Advantages of relational databases",
+    "text": "Advantages of relational databases\n\nData can be centrally stored\nData types and constraints are enforced\nData is consistent and available to everyone with access\nIf the data is relatively large, you can do a lot of the transformations on the database server\n\nThere are plenty of other advantages not discussed here, but they will mostly not come up in this workshop."
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#keywords-in-the-select-statement",
+    "href": "pages/manuals/sql/introduction.html#keywords-in-the-select-statement",
+    "title": "Introduction to SQL",
+    "section": "Keywords in the SELECT Statement",
+    "text": "Keywords in the SELECT Statement\nThere are plenty of keywords or functions you can use in the select statement to modify the output.\nFor example, the top keyword will let you pick the first N rows of a query\nSELECT TOP 5 GeoId, FIPS, PhiladelphiaTract\nFROM Tract\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n10003000100\n10003\n0\n\n\n1\n10003000200\n10003\n0\n\n\n2\n10003000300\n10003\n0\n\n\n3\n10003000400\n10003\n0\n\n\n4\n10003000500\n10003\n0"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#where-clauses",
+    "href": "pages/manuals/sql/introduction.html#where-clauses",
+    "title": "Introduction to SQL",
+    "section": "Where Clauses",
+    "text": "Where Clauses\nUsed for subsetting the table\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n42101000100\n42101\n1\n\n\n1\n42101000200\n42101\n1\n\n\n2\n42101000300\n42101\n1\n\n\n3\n42101000400\n42101\n1\n\n\n4\n42101000500\n42101\n1\n\n\n...\n...\n...\n...\n\n\n1168\n42101002802\n42101\n1\n\n\n1169\n42101002701\n42101\n1\n\n\n1170\n42101980600\n42101\n1\n\n\n1171\n42101036501\n42101\n1\n\n\n1172\n42101000801\n42101\n1\n\n\n\n\n1173 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#searching-for-strings",
+    "href": "pages/manuals/sql/introduction.html#searching-for-strings",
+    "title": "Introduction to SQL",
+    "section": "Searching for Strings",
+    "text": "Searching for Strings\nIn some database systems, string conditionals are case sensitive (but not in the database we are using today).\nSELECT *\nFROM Neighborhood\nWHERE Neighborhood='University City'\n\n\n\n\n\n\n\n\n\nNeighborhoodId\nNeighborhood\nShape_Leng\nShape_Area\n\n\n\n\n0\n10\nUniversity City\n11830.311523\n5777707.5"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#other-operators",
+    "href": "pages/manuals/sql/introduction.html#other-operators",
+    "title": "Introduction to SQL",
+    "section": "Other Operators",
+    "text": "Other Operators\nYou can also use other operators such as &gt;, &gt;=, &lt;, &lt;=, IS NULL, IS NOT NULL, BETWEEN, and LIKE to filter the results.\nSELECT *\nFROM Weather\nWHERE AvgTemp &gt; 10\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n4\n24709\n2005\nApril\n4\n12.572927\n19.015528\n6.131508\n127.517159\n0.807038\n14.233975\n3.769631\n\n\n1\n5\n24709\n2005\nMay\n5\n14.665885\n20.930977\n8.402382\n106.256607\n0.365076\n13.969968\n7.882780\n\n\n2\n6\n24709\n2005\nJune\n6\n22.697632\n28.167263\n17.229803\n95.863174\n0.336816\n17.135292\n17.337898\n\n\n3\n7\n24709\n2005\nJuly\n7\n25.349329\n30.702368\n19.997959\n128.219376\n0.125650\n18.210075\n20.690350\n\n\n4\n8\n24709\n2005\nAugust\n8\n25.118080\n30.377020\n19.860121\n80.542473\n0.119305\n17.822693\n20.596968\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n184960\n311754\n24553\n2019\nJune\n6\n23.078955\n28.078943\n18.079168\n153.255753\n3.321621\n21.594011\n14.780686\n\n\n184961\n311755\n24553\n2019\nJuly\n7\n26.948427\n31.952065\n21.944790\n141.174179\n3.665261\n26.108957\n19.386669\n\n\n184962\n311756\n24553\n2019\nAugust\n8\n25.102762\n29.906923\n20.298605\n153.159454\n3.060116\n22.294205\n18.023926\n\n\n184963\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n184964\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n\n\n184965 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE NumMonth BETWEEN 4 AND 7\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n4\n24709\n2005\nApril\n4\n12.572927\n19.015528\n6.131508\n127.517159\n0.807038\n14.233975\n3.769631\n\n\n1\n5\n24709\n2005\nMay\n5\n14.665885\n20.930977\n8.402382\n106.256607\n0.365076\n13.969968\n7.882780\n\n\n2\n6\n24709\n2005\nJune\n6\n22.697632\n28.167263\n17.229803\n95.863174\n0.336816\n17.135292\n17.337898\n\n\n3\n7\n24709\n2005\nJuly\n7\n25.349329\n30.702368\n19.997959\n128.219376\n0.125650\n18.210075\n20.690350\n\n\n4\n16\n24704\n2005\nApril\n4\n12.661152\n18.981770\n6.341870\n117.991402\n0.956501\n14.247961\n3.695716\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311743\n24468\n2019\nJuly\n7\n26.938503\n31.664860\n22.212286\n153.382187\n3.600305\n24.800777\n19.531960\n\n\n103916\n311752\n24553\n2019\nApril\n4\n14.466883\n19.849751\n9.084216\n111.233406\n2.333102\n13.814125\n5.315979\n\n\n103917\n311753\n24553\n2019\nMay\n5\n18.673878\n23.456200\n13.891560\n199.818741\n2.292322\n15.252146\n11.842346\n\n\n103918\n311754\n24553\n2019\nJune\n6\n23.078955\n28.078943\n18.079168\n153.255753\n3.321621\n21.594011\n14.780686\n\n\n103919\n311755\n24553\n2019\nJuly\n7\n26.948427\n31.952065\n21.944790\n141.174179\n3.665261\n26.108957\n19.386669\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE Month LIKE '%ber'\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n9\n24709\n2005\nSeptember\n9\n21.901575\n28.985405\n14.819284\n12.058510\n0.418603\n21.757061\n15.548416\n\n\n1\n10\n24709\n2005\nOctober\n10\n14.305144\n19.338591\n9.272705\n194.581848\n0.259238\n9.357236\n9.816828\n\n\n2\n11\n24709\n2005\nNovember\n11\n9.382105\n15.985790\n2.779873\n92.569778\n0.383877\n10.237570\n3.132024\n\n\n3\n12\n24709\n2005\nDecember\n12\n1.201546\n6.182182\n-3.778183\n89.817223\n0.303204\n4.526224\n-4.469576\n\n\n4\n21\n24704\n2005\nSeptember\n9\n22.105551\n28.798840\n15.413923\n11.901628\n0.840519\n21.380234\n15.392494\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311748\n24468\n2019\nDecember\n12\n3.495770\n7.363856\n-0.372222\n144.789124\n1.022133\n4.719750\n-2.270247\n\n\n103916\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n103917\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n103918\n311759\n24553\n2019\nNovember\n11\n6.222103\n11.659143\n0.785063\n46.920822\n1.280842\n7.820876\n-1.232803\n\n\n103919\n311760\n24553\n2019\nDecember\n12\n3.497163\n7.653925\n-0.659598\n141.996704\n0.966673\n4.818423\n-2.022106\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT *\nFROM Weather\nWHERE Month IN ('September', 'October', 'November', 'December')\n\n\n\n\n\n\n\n\n\nWeatherId\nTractId\nYear\nMonth\nNumMonth\nAvgTemp\nMaxTemp\nMinTemp\nTotPpt\nMinVP\nMaxVP\nAvgDPTemp\n\n\n\n\n0\n9\n24709\n2005\nSeptember\n9\n21.901575\n28.985405\n14.819284\n12.058510\n0.418603\n21.757061\n15.548416\n\n\n1\n10\n24709\n2005\nOctober\n10\n14.305144\n19.338591\n9.272705\n194.581848\n0.259238\n9.357236\n9.816828\n\n\n2\n11\n24709\n2005\nNovember\n11\n9.382105\n15.985790\n2.779873\n92.569778\n0.383877\n10.237570\n3.132024\n\n\n3\n12\n24709\n2005\nDecember\n12\n1.201546\n6.182182\n-3.778183\n89.817223\n0.303204\n4.526224\n-4.469576\n\n\n4\n21\n24704\n2005\nSeptember\n9\n22.105551\n28.798840\n15.413923\n11.901628\n0.840519\n21.380234\n15.392494\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n103915\n311748\n24468\n2019\nDecember\n12\n3.495770\n7.363856\n-0.372222\n144.789124\n1.022133\n4.719750\n-2.270247\n\n\n103916\n311757\n24553\n2019\nSeptember\n9\n22.068762\n27.830681\n16.307043\n44.442844\n2.469159\n21.502031\n14.588995\n\n\n103917\n311758\n24553\n2019\nOctober\n10\n15.712886\n20.478088\n10.947883\n118.172073\n1.799570\n12.500401\n9.558785\n\n\n103918\n311759\n24553\n2019\nNovember\n11\n6.222103\n11.659143\n0.785063\n46.920822\n1.280842\n7.820876\n-1.232803\n\n\n103919\n311760\n24553\n2019\nDecember\n12\n3.497163\n7.653925\n-0.659598\n141.996704\n0.966673\n4.818423\n-2.022106\n\n\n\n\n103920 rows × 12 columns\n\n\n\nSELECT TractId, CTVNOORA\nFROM Crime\nWHERE CTVNOORA IS NULL\n\n\n\n\n\n\n\n\n\nTractId\nCTVNOORA\n\n\n\n\n0\n24287\nNone\n\n\n1\n24287\nNone\n\n\n2\n24287\nNone\n\n\n3\n24287\nNone\n\n\n4\n24287\nNone\n\n\n...\n...\n...\n\n\n136\n24468\nNone\n\n\n137\n24468\nNone\n\n\n138\n24468\nNone\n\n\n139\n24468\nNone\n\n\n140\n24468\nNone\n\n\n\n\n141 rows × 2 columns\n\n\n\nSELECT TractId, CTVNOORA\nFROM Crime\nWHERE CTVNOORA IS NOT NULL\n\n\n\n\n\n\n\n\n\nTractId\nCTVNOORA\n\n\n\n\n0\n24203\n166.196228\n\n\n1\n24203\n123.891731\n\n\n2\n24203\n177.514786\n\n\n3\n24203\n155.269241\n\n\n4\n24203\n106.817467\n\n\n...\n...\n...\n\n\n5998\n24553\n193.263397\n\n\n5999\n24553\n193.263397\n\n\n6000\n24553\n143.567093\n\n\n6001\n24553\n226.394257\n\n\n6002\n24553\n353.395905\n\n\n\n\n6003 rows × 2 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#combining-multiple-conditions",
+    "href": "pages/manuals/sql/introduction.html#combining-multiple-conditions",
+    "title": "Introduction to SQL",
+    "section": "Combining Multiple Conditions",
+    "text": "Combining Multiple Conditions\nUse AND and OR operators to combine conditionals together\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1 AND LowPop=0\n\n\n\n\n\n\n\n\n\nGeoId\nFIPS\nPhiladelphiaTract\n\n\n\n\n0\n42101000100\n42101\n1\n\n\n1\n42101000200\n42101\n1\n\n\n2\n42101000300\n42101\n1\n\n\n3\n42101000400\n42101\n1\n\n\n4\n42101000500\n42101\n1\n\n\n...\n...\n...\n...\n\n\n1114\n42101003001\n42101\n1\n\n\n1115\n42101002802\n42101\n1\n\n\n1116\n42101002701\n42101\n1\n\n\n1117\n42101036501\n42101\n1\n\n\n1118\n42101000801\n42101\n1\n\n\n\n\n1119 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#be-careful-with-ors",
+    "href": "pages/manuals/sql/introduction.html#be-careful-with-ors",
+    "title": "Introduction to SQL",
+    "section": "Be careful with ORs",
+    "text": "Be careful with ORs\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE PhiladelphiaTract=1 OR StateFP='34' AND LowPop=0\n\nIS NOT equivalent to\nSELECT GeoId, FIPS, PhiladelphiaTract\nFROM Tract\nWHERE (PhiladelphiaTract=1 OR StateFP='34') AND LowPop=0\n\n\n\nThe first query returns 2627 rows but the second returns 2573. Why?\n\n\n\nHint\nThe number of New Jersey tracts stays the same in the results, but the number of Pennsylvania census tracts goes down in the second query.\n\n\n\n\n\n\n\n\n\nStateFP\nPhiladelphiaTract\nCount\n\n\n\n\n0\n34\n0\n1454\n\n\n1\n42\n1\n1173\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStateFP\nPhiladelphiaTract\nCount\n\n\n\n\n0\n34\n0\n1454\n\n\n1\n42\n1\n1119\n\n\n\n\n\n\n\n\n\nAnswer\nThis conditional pulls all Philadelphia census tracts and only New Jersey census tracts that are not low population.\nWHERE PhiladelphiaTract=1 OR StateFP='34' AND LowPop=0\nThis conditional pulls all low population census tracts in Philadelphia and New Jersey. The second query removes the low population Philadelphia tracts that were included in the first query.\nWHERE (PhiladelphiaTract=1 OR StateFP='34') AND LowPop=0"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#chaining-joins",
+    "href": "pages/manuals/sql/introduction.html#chaining-joins",
+    "title": "Introduction to SQL",
+    "section": "Chaining Joins",
+    "text": "Chaining Joins\nYou can join tables on other tables that have been joined in the query to chain tables together.\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n21474\n34005700104\nRichmond - Bridesburg\n\n\n1\n21475\n34005700200\nWissinoming - Tacony\n\n\n2\n21492\n34005700603\nTorresdale S. - Pennypack Park\n\n\n3\n21497\n34005700800\nTorresdale S. - Pennypack Park\n\n\n4\n21595\n34007600500\nCenter City E\n\n\n...\n...\n...\n...\n\n\n2746\n26338\n34007610800\nRichmond - Bridesburg\n\n\n2747\n26378\n34005700800\nTorresdale S. - Pennypack Park\n\n\n2748\n26528\n34007600700\nCenter City E\n\n\n2749\n26528\n34007600700\nLower Kensington\n\n\n2750\n26528\n34007600700\nNorthern Liberties - West Kensington\n\n\n\n\n2751 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#order-by",
+    "href": "pages/manuals/sql/introduction.html#order-by",
+    "title": "Introduction to SQL",
+    "section": "Order By",
+    "text": "Order By\nSort the result of a query by a column or columns\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n24997\n42101034502\nBustleton\n\n\n1\n25034\n42101034501\nBustleton\n\n\n2\n25176\n42101980300\nBustleton\n\n\n3\n25177\n42101035500\nBustleton\n\n\n4\n25179\n42101035900\nBustleton\n\n\n...\n...\n...\n...\n\n\n996\n26022\n42101031501\nWissinoming - Tacony\n\n\n997\n26154\n34005700303\nWissinoming - Tacony\n\n\n998\n26156\n34005700104\nWissinoming - Tacony\n\n\n999\n26246\n34005700103\nWissinoming - Tacony\n\n\n1000\n26324\n34005700200\nWissinoming - Tacony\n\n\n\n\n1001 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#order-by-multiple-columns",
+    "href": "pages/manuals/sql/introduction.html#order-by-multiple-columns",
+    "title": "Introduction to SQL",
+    "section": "Order By Multiple Columns",
+    "text": "Order By Multiple Columns\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood, t.GeoId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n25699\n42091200105\nBustleton\n\n\n1\n26103\n42091201501\nBustleton\n\n\n2\n25975\n42101034200\nBustleton\n\n\n3\n25976\n42101034400\nBustleton\n\n\n4\n25034\n42101034501\nBustleton\n\n\n...\n...\n...\n...\n\n\n996\n25111\n42101033000\nWissinoming - Tacony\n\n\n997\n26020\n42101033101\nWissinoming - Tacony\n\n\n998\n25259\n42101038000\nWissinoming - Tacony\n\n\n999\n25597\n42101038100\nWissinoming - Tacony\n\n\n1000\n25109\n42101989100\nWissinoming - Tacony\n\n\n\n\n1001 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#change-the-sort-direction",
+    "href": "pages/manuals/sql/introduction.html#change-the-sort-direction",
+    "title": "Introduction to SQL",
+    "section": "Change the Sort Direction",
+    "text": "Change the Sort Direction\nSELECT t.TractId, t.GeoId, n.Neighborhood\nFROM Tract t\nINNER JOIN CensusTractNeighborhoodMapping ctn ON ctn.TractId=t.TractId\nINNER JOIN Neighborhood n ON n.NeighborhoodId=ctn.NeighborhoodId\nWHERE t.Year=2020\nORDER BY n.Neighborhood DESC, t.GeoId\n\n\n\n\n\n\n\n\n\nTractId\nGeoId\nNeighborhood\n\n\n\n\n0\n26246\n34005700103\nWissinoming - Tacony\n\n\n1\n26156\n34005700104\nWissinoming - Tacony\n\n\n2\n26324\n34005700200\nWissinoming - Tacony\n\n\n3\n26154\n34005700303\nWissinoming - Tacony\n\n\n4\n25278\n42101018400\nWissinoming - Tacony\n\n\n...\n...\n...\n...\n\n\n996\n26011\n42101035702\nBustleton\n\n\n997\n25179\n42101035900\nBustleton\n\n\n998\n25180\n42101036000\nBustleton\n\n\n999\n25569\n42101980200\nBustleton\n\n\n1000\n25176\n42101980300\nBustleton\n\n\n\n\n1001 rows × 3 columns"
+  },
+  {
+    "objectID": "pages/manuals/sql/introduction.html#importing-directly-into-statistical-software",
+    "href": "pages/manuals/sql/introduction.html#importing-directly-into-statistical-software",
+    "title": "Introduction to SQL",
+    "section": "Importing Directly into Statistical Software",
+    "text": "Importing Directly into Statistical Software\nA lot of the software we use for data analysis can interact directly with SQL databases using the Open Database Connectivity (ODBC) protocol. You can pull directly from the database into an object in the piece of software of your choice. Here are a few examples.\n\nPython\nThere are several options for connecting to a database in python. The below example uses pyodbc, but another common library is SQLAlchemy\nimport pyodbc\n\n# must have the correct ODBC driver installed, this should have been installed automatically when you installed SQL Server Management Studio\ncnxn = pyodbc.connect('{ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\ncn = cnxn.cursor()\n\ncn.execute(\"SELECT * FROM Tract\")\n\nresults = cn.fetchall()\n\n\nR\nlibrary('RODBC')\n\ncnxn &lt;- odbcDriverConnect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:uhcdata.database.windows.net,1433;Database=SQLWorkshop;UID=maj353@drexel.edu;MultipleActiveResultSets=False;Authentication=ActiveDirectoryInteractive;')\nsqlQuery(cnxn, \"SELECT * FROM Tract\")\n\n\nSAS\nhttps://support.sas.com/en/software/sas-odbc-drivers.html#c1d85777-acb8-4b35-a4cd-0a97a8060229\n\n\nArcGIS Pro\n\nOpen the catalog pane\nRight click databases and select “New Database Connection”\nFill in the dialog box and sign-in when prompted\n\nNow you can add geographic data to a map or export to an attribute table for use in your project."
+  },
+  {
+    "objectID": "pages/manuals/sql/playground.html",
+    "href": "pages/manuals/sql/playground.html",
+    "title": "SQL playground",
+    "section": "",
+    "text": "HR Database Information\n\nSchemaDepartmentsJobsEmployees\n\n\n\n\n\n\nerDiagram\n  departments ||--o{ employees : has\n  jobs ||--o{ employees : has\n  employees ||--o{ employees : manages \n\n  departments {\n    department_id INTEGER\n    department_name STRING\n    location_id INTEGER\n  }\n\n  jobs {\n    job_id INTEGER\n    job_title STRING\n    min_salary DOUBLE\n    max_salary DOUBLE\n  }\n\n  employees {\n    employee_id INTEGER\n    first_name STRING\n    last_name STRING\n    email STRING\n    phone_number STRING\n    hire_date STRING\n    job_id INTEGER\n    salary DOUBLE\n    manager_id INTEGER\n    department_id INTEGER\n  }\n\n\n\n\n\n\n\n\n\n\nselect * from departments ;\n\n\n\n\nselect * from jobs  ;\n\n\n\n\nselect * from employees ;\n\n\n\n\n\n\nSQL Queries\nExamples 1, 2, 3 are example SQL queries. Feel free to edit to play around!\n\nExample 1Example 2Example 3\n\n\nThis query would return a result set containing the first name, last name, and salary of all employees in the employees table who meet the specified condition.\n\nSELECT first_name, last_name, salary\nFROM employees\nWHERE salary &gt; 10000;\n\n\n\nThis query retrieves the first name, last name, and salary of all employees who work in the “IT” department, ordered by salary in descending order.\n\nSELECT e.first_name, e.last_name, e.salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nWHERE d.department_name = 'IT'\nORDER BY e.salary DESC;\n\n\n\nThis query retrieves the first name, last name, department name, and total salary of all employees, grouped by department, and includes only those departments with a total salary greater than 20,000.\n\nSELECT d.department_name, SUM(e.salary) AS total_salary\nFROM employees e\nJOIN departments d ON e.department_id = d.department_id\nGROUP BY d.department_name\nHAVING SUM(e.salary) &gt; 20000;"
+  },
+  {
     "objectID": "pages/manuals/welcome/1-about.html",
     "href": "pages/manuals/welcome/1-about.html",
     "title": "About",
+    "section": "",
+    "text": "Note\n\n\n\nComing soon!"
+  },
+  {
+    "objectID": "pages/manuals/welcome/2-core-values.html",
+    "href": "pages/manuals/welcome/2-core-values.html",
+    "title": "Core values",
     "section": "",
     "text": "Note\n\n\n\nComing soon!"
   }
