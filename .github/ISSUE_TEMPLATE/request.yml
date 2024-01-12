@@ -50,7 +50,8 @@ body:
         - Image (jpeg, png)
         - Document
         - Training
-        - Technical consultation       
+        - Technical consultation   
+        - UHC ShinyAppsIo API key
         - Other
     validations:
       required: true
