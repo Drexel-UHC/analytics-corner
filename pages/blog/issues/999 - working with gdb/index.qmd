@@ -1,0 +1,200 @@
+---
+author: Ran Li
+date: "11/20/2023"
+title: "Working with Geo database"
+description: "This post will introduce geodatabases and a basic workflow to work with this format within R."
+categories:
+  - spatial
+  - boundaries
+format: 
+  html:
+    toc: true
+    toc-location: left
+    df-print: paged
+    code-tools: true
+execute: 
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+![](images/gdb.png){fig-align="center"}
+
+
+# What is in a .gdb?
+
+Geodatabase (.gdb) is a modern spatial storage format developed by ESRI. It is a folder that contains many files and subfolders. A geodatabase (.gdb) is not just a file, but a collection of various types of data like feature classes (points, lines, polygons), raster data, tables, and more. It's a robust and scalable way to store spatial data, offering advantages like spatial indexing, topologies, and network datasets for complex spatial analysis.
+
+As a an example lets use the US Census Beureau's [2022 Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2022.html#list-tab-1883739534). We've downloaded the geodatabse file and now lets do a quick EDA!
+
+
+
+# Working with Geodatabase (.gdb) in R
+
+Before we start working we'll load our libraries: We'll use just three packages `sf` for spatial data, `dplyr` for data manipulation and `leaflet` for visualization. 
+
+```{r}
+library(sf)
+library(dplyr)
+library(leaflet)
+```
+
+## Step 1: See what layers are in the .gdb
+
+A geodatabase (.gdb) is not just a file, but a collection of various types of data like feature classes (points, lines, polygons), raster data, tables, and more. It's a robust and scalable way to store spatial data, offering advantages like spatial indexing, topologies, and network datasets for complex spatial analysis. 
+
+The first step is to see what 'layers' are available in the .gdb. 
+
+```{r}
+## Declare path to .gdb
+path_gdb = 'cb_2022_us_all_20m.gdb'
+
+## Examine layers
+sf::st_layers(path_gdb)
+```
+
+We can see that this geo-database contains six layers; let just work with two of then county and state focusing on Pennsylvania.
+
+## Step 2: Import State and County boundaries (PA)
+
+The sf package in R is a versatile tool for anyone working with spatial data. It simplifies the management and analysis of geospatial information, supporting common formats like shapefiles and geodatabases. With sf, users can seamlessly integrate spatial data with R's powerful data analysis capabilities, making complex spatial tasks both accessible and efficient.
+
+Lets import the boundaries as `sf` objects.
+
+
+```{r}
+## Import state
+sf_state = sf::st_read(path_gdb,"cb_2022_us_state_20m")  %>%  
+      sf::st_transform("+proj=longlat +datum=NAD83") 
+
+## Check data structure
+glimpse(sf_state)
+
+## Map to check
+sf_state %>% 
+  leaflet() %>% 
+  addTiles()   %>%
+  addPolygons(
+    label = ~NAME,  # Custom label with multiple details
+    labelOptions = labelOptions(
+      html = T,
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "13px",
+      direction = "auto"
+    )
+  )
+```
+
+
+
+```{r}
+## Import county
+sf_county = sf::st_read(path_gdb,"cb_2022_us_county_20m")  %>%  
+      sf::st_transform("+proj=longlat +datum=NAD83") 
+
+## Check data structure
+glimpse(sf_county)
+
+## Map to check
+sf_county %>% 
+  leaflet() %>% 
+  addTiles()   %>%
+  addPolygons(
+    label = ~NAME,  # Custom label with multiple details
+    labelOptions = labelOptions(
+      html = T,
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "13px",
+      direction = "auto"
+    )
+  )
+```
+
+
+## Step 3: Wrangling to focus on PA
+
+Once we have imported the boundaries as `sf` objects we can start to leverage tidyverse tools to do wrangling or analysis. As a simple walkthrough lets do the following:
+
+- [x] filter boundaries for PA
+- [x] operationalize some nicer labels for counties
+- [x] append some data for mapping
+
+```{r}
+
+## Filter for PA and op. labels
+sf_county_pa = sf_county %>% 
+  filter(STUSPS == 'PA')
+
+
+## Add some data
+library(arrow)
+df_demographics = arrow::read_parquet("df_demographics.parquet") %>% 
+  filter(geo == 'county',
+         year == 2020) %>%
+  select(GEOID = geoid, median_age)
+sf_county_pa = sf_county_pa %>% 
+  left_join(df_demographics, by = 'GEOID') 
+
+## Op. labels
+sf_county_pa = sf_county_pa %>% 
+  rowwise() %>% 
+  mutate(
+    county_age_label =  paste0(NAME, '<br>', 
+                               'Median Age: ', median_age) %>% 
+      htmltools::HTML()
+  ) %>% 
+  ungroup()
+
+
+```
+
+
+ 
+
+
+```{r}
+#| echo=FALSE
+library(htmltools)
+pal <- colorNumeric(
+  palette = "viridis",  # You can choose other palettes like "Blues", "Greens", etc.
+  domain = sf_county_pa$median_age,
+  reverse = TRUE
+)
+
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(
+    data = sf_county_pa,
+    fillColor = ~pal(median_age),  # Apply the color palette based on median_age
+    weight = 1,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 2,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+    ),
+    label = ~ county_age_label,  # Custom label with multiple details
+    labelOptions = labelOptions(
+      html = TRUE,
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "13px",
+      direction = "auto"
+    )
+  ) %>% 
+  addLegend(
+    pal = pal, 
+    data = sf_county_pa,
+    values = ~median_age,
+    title = "Median Age",
+    opacity = 0.7
+  )
+```
+
+# Summary
+
+In this post we learned how to work with geodatabases in R. We used the `sf` package to import the boundaries and then used `leaflet` to visualize the data. 
